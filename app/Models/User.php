@@ -11,14 +11,24 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
+    public static $genders = [
+        0       =>  '未设定',
+        1       =>  '男',
+        2       =>  '女',
+    ];
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name',
+        'nickname',
+        'realname',
+        'gender',
+        'phone',
         'email',
+        'bio',
         'password',
     ];
 
