@@ -11,3 +11,12 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
+
+
+.idea
+.DS_Store
+_ide_helper.php
+.phpstorm.meta.php
+
+public/uploads
+public/node_modules
