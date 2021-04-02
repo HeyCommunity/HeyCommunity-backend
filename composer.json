@@ -33,6 +33,7 @@
         },
         "files": [
             "app/Helpers/utility.php",
+            "app/Helpers/util.php",
             "app/Helpers/develop.php",
             "app/Helpers/faker.php"
         ]

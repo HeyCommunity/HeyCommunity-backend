@@ -50,4 +50,12 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Get avatar attribute
+     */
+    public function getAvatarAttribute($value)
+    {
+        return getAssetFullPath($value);
+    }
 }
