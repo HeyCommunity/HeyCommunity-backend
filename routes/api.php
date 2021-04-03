@@ -19,3 +19,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('timelines', [\App\Http\Controllers\Api\TimelineController::class, 'index']);
+Route::post('timelines', [\App\Http\Controllers\Api\TimelineController::class, 'store']);
+Route::post('timeline-images', [\App\Http\Controllers\Api\TimelineImageController::class, 'store']);
