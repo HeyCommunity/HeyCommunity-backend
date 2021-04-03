@@ -25,6 +25,7 @@ class TimelineResource extends JsonResource
         $data['user_nickname'] = $this->user->nickname;
         $data['user_avatar'] = $this->user->avatar;
         $data['comments'] = CommentResource::collection($this->comments);
+        $data['images'] = CommonResource::collection($this->images);
 
         return $data;
     }
