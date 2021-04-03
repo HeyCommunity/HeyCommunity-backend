@@ -14,7 +14,7 @@ function getAssetFullPath($path, $params = '?imageView2/2/w/1000')
             return env('QINIU_DOMAIN') . '/' . $path . $params;
         }
 
-        return asset('storage/' . $path);
+        return asset($path);
     }
 
     return $path;

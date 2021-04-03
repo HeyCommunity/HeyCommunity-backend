@@ -19,7 +19,7 @@ class TimelineImageController extends Controller
 
         $timelineImage = TimelineImage::create([
             'user_id'       =>  null,               // Todo
-            'file_path'     =>  $request->file('file')->store('timelines/images', 'public'),
+            'file_path'     =>  $request->file('file')->store('uploads/timelines/images'),
         ]);
 
         return new \App\Http\Resources\CommonResource($timelineImage);

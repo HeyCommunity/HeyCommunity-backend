@@ -28,7 +28,7 @@ class TimelineController extends Controller
     {
         $this->validate($request, [
             'content'       =>  'required|string',
-            'image_ids'     =>  'required|array',
+            'image_ids'     =>  'nullable|array',
         ]);
 
         $user = User::first();
