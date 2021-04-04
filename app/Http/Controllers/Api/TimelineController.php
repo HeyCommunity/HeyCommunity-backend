@@ -31,7 +31,7 @@ class TimelineController extends Controller
             'image_ids'     =>  'nullable|array',
         ]);
 
-        $user = User::first();
+        $user = $request->user();
 
         $timeline = Timeline::create([
             'user_id'   =>  $user->id,

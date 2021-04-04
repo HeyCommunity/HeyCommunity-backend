@@ -27,5 +27,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
 });
 
 Route::get('timelines', [\App\Http\Controllers\Api\TimelineController::class, 'index']);
-Route::post('timelines', [\App\Http\Controllers\Api\TimelineController::class, 'store']);
-Route::post('timeline-images', [\App\Http\Controllers\Api\TimelineImageController::class, 'store']);
+Route::middleware(['auth:sanctum'])->group(function () {
+    Route::post('timelines', [\App\Http\Controllers\Api\TimelineController::class, 'store']);
+    Route::post('timeline-images', [\App\Http\Controllers\Api\TimelineImageController::class, 'store']);
+});

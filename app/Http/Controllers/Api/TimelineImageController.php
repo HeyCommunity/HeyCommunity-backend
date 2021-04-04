@@ -17,8 +17,10 @@ class TimelineImageController extends Controller
             'file'      =>  'required|image',
         ]);
 
+        $user = $request->user();
+
         $timelineImage = TimelineImage::create([
-            'user_id'       =>  null,               // Todo
+            'user_id'       =>  $user->id,
             'file_path'     =>  $request->file('file')->store('uploads/timelines/images'),
         ]);
 
