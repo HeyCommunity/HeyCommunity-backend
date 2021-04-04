@@ -10,7 +10,9 @@
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.12",
-        "laravel/tinker": "^2.5"
+        "laravel/sanctum": "^2.9",
+        "laravel/tinker": "^2.5",
+        "overtrue/laravel-wechat": "^6.0"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

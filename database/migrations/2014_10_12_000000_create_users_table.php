@@ -19,12 +19,12 @@ class CreateUsersTable extends Migration
             $table->string('wx_open_id')->nullable()->comment('Wechat Open ID');
             $table->string('wx_union_id')->nullable()->comment('Wechat Union ID');
 
-            $table->string('nickname')->comment('Nickname');
+            $table->string('nickname')->nullable()->comment('Nickname');
             $table->string('realname')->nullable()->comment('Realname');
             $table->string('gender')->nullable()->comment('Gender');
             $table->string('bio')->nullable()->comment('Bio');
             $table->string('avatar')->default('images/users/avatar/default.jpg')->comment('Avatar');
-            $table->string('profile_bg_img')->default('images/users/profile_bg_imgs/default.jpg')->comment('Avatar');
+            $table->string('cover')->default('images/users/profile_bg_imgs/default.jpg')->comment('Cover');
 
             $table->string('phone')->nullable()->comment('Phone');
             $table->string('email')->nullable()->comment('Email');

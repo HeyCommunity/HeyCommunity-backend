@@ -41,7 +41,7 @@ class UserSeeder extends Seeder
                 'bio'           =>      $faker->catchPhrase(),
                 'phone'         =>      $faker->phoneNumber(),
                 'email'         =>      $faker->email(),
-                'profile_bg_img'    =>  $profileBgImgUrl,
+                'cover'         =>      $profileBgImgUrl,
                 'password'      =>      Hash::make('hey community'),
 
                 'created_at'    =>      $faker->dateTimeThisMonth(),
