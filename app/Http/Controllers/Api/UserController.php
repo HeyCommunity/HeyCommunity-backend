@@ -21,13 +21,9 @@ class UserController extends Controller
         $res = $miniProgram->auth->session($request->code);
 
         $user = User::where('wx_open_id', $res['openid'])->firstOrCreate(['wx_open_id' => $res['openid']]);
-        $token = $user->createToken('token');
-
-        return response()->json([
-            'data'  =>  [
-                'token' => $token->plainTextToken
-            ],
-        ]);
+        $user->token = $user->createToken('token')->plainTextToken;
+        
+        return new \App\Http\Resources\CommonResource($user);
     }
 
     /**
