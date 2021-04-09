@@ -9,9 +9,9 @@ use Illuminate\Http\Request;
 class UserController extends Controller
 {
     /**
-     * 获取 Token
+     * User login
      */
-    public function mineToken(Request $request)
+    public function login(Request $request)
     {
         $this->validate($request, [
             'code'      =>  'required|string',
@@ -22,8 +22,19 @@ class UserController extends Controller
 
         $user = User::where('wx_open_id', $res['openid'])->firstOrCreate(['wx_open_id' => $res['openid']]);
         $user->token = $user->createToken('token')->plainTextToken;
-        
+
         return new \App\Http\Resources\CommonResource($user);
+    }
+
+    /**
+     * User logout
+     */
+    public function logout(Request $request)
+    {
+        $user = $request->user();
+        $user->tokens()->where('name', 'token')->delete();
+
+        return response()->noContent();
     }
 
     /**
