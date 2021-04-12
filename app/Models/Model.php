@@ -72,4 +72,16 @@ class Model extends EloquentModel
 
         return 0;
     }
+
+    /**
+     * Get created_at_for_humans attr
+     */
+    public function getCreatedAtForHumansAttribute()
+    {
+        if (now()->diffInDays($this->created_at) <= 7) {
+            return $this->created_at->diffForHumans();
+        }
+
+        return $this->created_at->format('Y-m-d H:s:i');
+    }
 }

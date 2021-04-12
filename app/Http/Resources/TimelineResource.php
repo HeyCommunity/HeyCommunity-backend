@@ -27,6 +27,8 @@ class TimelineResource extends JsonResource
         $data['comments'] = CommentResource::collection($this->comments);
         $data['images'] = CommonResource::collection($this->images);
 
+        $data['created_at_for_humans'] = $this->created_at_for_humans;
+
         return $data;
     }
 }
