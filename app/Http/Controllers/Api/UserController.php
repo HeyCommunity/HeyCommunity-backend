@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -23,7 +24,7 @@ class UserController extends Controller
         $user = User::where('wx_open_id', $res['openid'])->firstOrCreate(['wx_open_id' => $res['openid']]);
         $user->token = $user->createToken('token')->plainTextToken;
 
-        return new \App\Http\Resources\CommonResource($user);
+        return new UserResource($user);
     }
 
     /**
@@ -46,7 +47,7 @@ class UserController extends Controller
 
         // $this->timProfileUpdate($patient);
 
-        return new \App\Http\Resources\CommonResource($user);
+        return new UserResource($user);
     }
 
     /**
@@ -72,6 +73,6 @@ class UserController extends Controller
 
         // $this->timProfileUpdate($user);
 
-        return new \App\Http\Resources\CommonResource($user);
+        return new UserResource($user);
     }
 }
