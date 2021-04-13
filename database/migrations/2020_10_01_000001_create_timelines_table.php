@@ -26,6 +26,8 @@ class CreateTimelinesTable extends Migration
             $table->integer('thumb_up_num')->default(0)->comment('Thumb Up Number');
             $table->integer('thumb_down_num')->default(0)->comment('Thumb Down Number');
 
+            $table->tinyInteger('status')->default(0)->comment('Status');
+
             $table->timestamps();
             $table->softDeletes();
         });

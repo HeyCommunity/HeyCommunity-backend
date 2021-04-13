@@ -16,7 +16,7 @@ class TimelineController extends Controller
      */
     public function index(Request $request)
     {
-        $timelines = Timeline::latest()->paginate();
+        $timelines = Timeline::where('status', '1')->latest()->paginate();
 
         return TimelineResource::collection($timelines);
     }
@@ -33,9 +33,13 @@ class TimelineController extends Controller
 
         $user = $request->user();
 
+        $timelineStatus = 0;
+        if (! env('WXAPP_SETTINGS_POST_AUDIT', true)) $timelineStatus = 1;              // TODO: use config('key')
+
         $timeline = Timeline::create([
             'user_id'   =>  $user->id,
             'content'   =>  $request->get('content'),
+            'status'    =>  $timelineStatus,
         ]);
 
         if ($request->get('image_ids')) {
