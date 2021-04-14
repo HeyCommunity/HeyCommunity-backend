@@ -35,6 +35,7 @@ class TimelineController extends Controller
 
         $timelineStatus = 0;
         if (! env('WXAPP_SETTINGS_POST_AUDIT', true)) $timelineStatus = 1;              // TODO: use config('key')
+        if ($user->is_admin || $user->ugc_safety_level) $timelineStatus = 1;
 
         $timeline = Timeline::create([
             'user_id'   =>  $user->id,
