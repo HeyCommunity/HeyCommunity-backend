@@ -3,13 +3,12 @@
 namespace App\Models\Timeline;
 
 use App\Models\Common\Comment;
+use App\Models\Common\Thumb;
 use App\Models\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Timeline extends Model
 {
-    use HasFactory;
-
     /**
      * Statuses
      */
@@ -33,5 +32,14 @@ class Timeline extends Model
     public function images()
     {
         return $this->hasMany(TimelineImage::class);
+    }
+
+    /**
+     * Related Thumb
+     */
+    public function thumbs()
+    {
+        return $this->hasMany(Thumb::class, 'entity_id', 'id')
+            ->where('entity_type', self::class);
     }
 }

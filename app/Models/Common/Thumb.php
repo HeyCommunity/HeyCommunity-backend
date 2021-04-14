@@ -2,10 +2,8 @@
 
 namespace App\Models\Common;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use App\Models\Model;
 
 class Thumb extends Model
 {
-    use HasFactory;
 }

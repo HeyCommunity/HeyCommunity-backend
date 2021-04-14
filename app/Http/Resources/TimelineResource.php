@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Common\Thumb;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Arr;
 
@@ -15,6 +16,8 @@ class TimelineResource extends JsonResource
      */
     public function toArray($request)
     {
+        $user = $request->user();
+
         $data = parent::toArray($request);
         $data = Arr::only($data, [
             'id', 'user_id', 'content',
@@ -28,6 +31,13 @@ class TimelineResource extends JsonResource
         $data['images'] = CommonResource::collection($this->images);
 
         $data['created_at_for_humans'] = $this->created_at_for_humans;
+
+        $data['i_have_thumb_up'] = 0;
+        $data['i_have_comment'] = 0;
+        if ($user) {
+            $data['i_have_thumb_up'] = $this->thumbs()->where('type', 'thumb_up')->where('user_id', $user->id)->exists();
+            $data['i_have_comment'] = random_int(0, 1);
+        }
 
         return $data;
     }
