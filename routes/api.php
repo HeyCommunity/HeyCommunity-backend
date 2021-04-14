@@ -34,4 +34,5 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('posts', [\App\Http\Controllers\Api\TimelineController::class, 'store']);
     Route::post('post-images', [\App\Http\Controllers\Api\TimelineImageController::class, 'store']);
     Route::post('post-thumbs', [\App\Http\Controllers\Api\PostThumbController::class, 'store']);
+    Route::post('post-comments', [\App\Http\Controllers\Api\PostCommentController::class, 'store']);
 });

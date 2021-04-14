@@ -18,15 +18,6 @@ class Timeline extends Model
     ];
 
     /**
-     * Related Comment
-     */
-    public function comments()
-    {
-        return $this->hasMany(Comment::class, 'entity_id', 'id')
-            ->where('entity_type', Timeline::class);
-    }
-
-    /**
      * Related TimelineImage
      */
     public function images()
@@ -40,6 +31,15 @@ class Timeline extends Model
     public function thumbs()
     {
         return $this->hasMany(Thumb::class, 'entity_id', 'id')
+            ->where('entity_type', self::class);
+    }
+
+    /**
+     * Related Comment
+     */
+    public function comments()
+    {
+        return $this->hasMany(Comment::class, 'entity_id', 'id')
             ->where('entity_type', self::class);
     }
 }
