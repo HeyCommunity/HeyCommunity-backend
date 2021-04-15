@@ -10,6 +10,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Timeline extends Model
 {
     /**
+     * Appends
+     */
+    protected $appends = ['image_num'];
+
+    /**
      * Statuses
      */
     public static $statuses = [
@@ -41,5 +46,13 @@ class Timeline extends Model
     {
         return $this->hasMany(Comment::class, 'entity_id', 'id')
             ->where('entity_type', self::class);
+    }
+
+    /**
+     * Get image_num attr
+     */
+    public function getImageNumAttribute()
+    {
+        return $this->images()->count();
     }
 }
