@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\Common\Thumb;
+use App\Models\Timeline\Timeline as Post;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -11,6 +13,8 @@ use Laravel\Sanctum\HasApiTokens;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
+
+    protected $appends = ['post_num', 'comment_num', 'thumb_up_num'];
 
     public static $genders = [
         0       =>  '未设定',
@@ -60,5 +64,61 @@ class User extends Authenticatable
     public function getAvatarAttribute($value)
     {
         return getAssetFullPath($value);
+    }
+
+    /**
+     * Related Post
+     */
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
+
+    /**
+     * Related ThumbUp
+     */
+    public function upThumbs()
+    {
+        return $this->hasMany(Thumb::class)->where('type', 'thumb_up');
+    }
+
+    /**
+     * Related ThumbDown
+     */
+    public function downThumbs()
+    {
+        return $this->hasMany(Thumb::class)->where('type', 'thumb_down');
+    }
+
+    /**
+     * Related Comments
+     */
+    public function comments()
+    {
+        return $this->hasMany(Post::class);
+    }
+
+    /**
+     * Get post_num attr
+     */
+    public function getPostNumAttribute()
+    {
+        return $this->posts()->count();
+    }
+
+    /**
+     * Get comment_num attr
+     */
+    public function getCommentNumAttribute()
+    {
+        return $this->comments()->count();
+    }
+
+    /**
+     * Get post_num attr
+     */
+    public function getThumbUpNumAttribute()
+    {
+        return $this->upThumbs()->count();
     }
 }
