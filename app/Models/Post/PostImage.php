@@ -1,14 +1,11 @@
 <?php
 
-namespace App\Models\Timeline;
+namespace App\Models\Post;
 
 use App\Models\Model;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class TimelineImage extends Model
+class PostImage extends Model
 {
-    use HasFactory;
-
     /**
      * Get file_path attribute
      */

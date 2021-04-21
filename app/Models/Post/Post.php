@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Models\Timeline;
+namespace App\Models\Post;
 
 use App\Models\Common\Comment;
 use App\Models\Common\Thumb;
 use App\Models\Model;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Timeline extends Model
+class Post extends Model
 {
     /**
      * Appends
@@ -23,11 +22,11 @@ class Timeline extends Model
     ];
 
     /**
-     * Related TimelineImage
+     * Related PostImage
      */
     public function images()
     {
-        return $this->hasMany(TimelineImage::class);
+        return $this->hasMany(PostImage::class);
     }
 
     /**

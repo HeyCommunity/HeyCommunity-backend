@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Api\Post;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\TimelineResource;
-use App\Models\Timeline\Timeline;
+use App\Http\Resources\PostResource;
+use App\Models\Post\Post;
 use Illuminate\Http\Request;
 
 class PostThumbController extends Controller
@@ -23,13 +23,13 @@ class PostThumbController extends Controller
         $user = $request->user();
         $thumbFieldName = $request->get('type') . '_num';
 
-        $post = Timeline::findOrFail($request->get('post_id'));
+        $post = Post::findOrFail($request->get('post_id'));
 
         if ($request->get('value')) {
             // 创建 Thumb
             $thumb = $post->thumbs()->firstOrCreate([
                 'user_id'       =>  $user->id,
-                'entity_type'   =>  Timeline::class,
+                'entity_type'   =>  Post::class,
                 'type'          =>  $request->get('type'),
             ]);
             if ($thumb->wasRecentlyCreated) $post->increment($thumbFieldName);
@@ -47,6 +47,6 @@ class PostThumbController extends Controller
             }
         }
 
-        return new TimelineResource($post);
+        return new PostResource($post);
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTimelinesTable extends Migration
+class CreatePostsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateTimelinesTable extends Migration
      */
     public function up()
     {
-        Schema::create('timelines', function (Blueprint $table) {
+        Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('user_id')->index()->unsigned()->comment('User ID');
             $table->foreign('user_id')->references('id')->on('users');
 
-            $table->text('content')->comment('Timeline Content');
+            $table->text('content')->comment('Post Content');
 
             $table->integer('read_num')->default(0)->comment('Read Number');
             $table->integer('favorite_num')->default(0)->comment('Favorite Number');
@@ -40,6 +40,6 @@ class CreateTimelinesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('timelines');
+        Schema::dropIfExists('posts');
     }
 }

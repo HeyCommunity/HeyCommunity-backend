@@ -2,11 +2,10 @@
 
 namespace App\Http\Resources;
 
-use App\Models\Common\Thumb;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Arr;
 
-class TimelineResource extends JsonResource
+class PostResource extends JsonResource
 {
     /**
      * Transform the resource into an array.

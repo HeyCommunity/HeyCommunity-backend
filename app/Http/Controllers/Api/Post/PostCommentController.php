@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Api\Post;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\TimelineResource;
-use App\Models\Timeline\Timeline;
+use App\Http\Resources\PostResource;
+use App\Models\Post\Post;
 use Illuminate\Http\Request;
 
 class PostCommentController extends Controller
@@ -21,18 +21,18 @@ class PostCommentController extends Controller
 
         $user = $request->user();
 
-        $post = Timeline::findOrFail($request->get('post_id'));
+        $post = Post::findOrFail($request->get('post_id'));
 
         $floorNumber = $post->comments()->withTrashed()->count() + 1;
         $comment = $post->comments()->create([
             'user_id'       =>  $user->id,
-            'entity_type'   =>  Timeline::class,
+            'entity_type'   =>  Post::class,
             'content'       =>  $request->get('content'),
             'floor_number'  =>  $floorNumber,
         ]);
 
         if ($comment) $post->increment('comment_num');
 
-        return new TimelineResource($post);
+        return new PostResource($post);
     }
 }

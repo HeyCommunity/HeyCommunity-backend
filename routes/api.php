@@ -29,10 +29,10 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/users/mine', [UserController::class, 'mineUpdate']);
 });
 
-Route::get('posts', [\App\Http\Controllers\Api\TimelineController::class, 'index']);
+Route::get('posts', [\App\Http\Controllers\Api\Post\PostController::class, 'index']);
 Route::middleware(['auth:sanctum'])->group(function () {
-    Route::post('posts', [\App\Http\Controllers\Api\TimelineController::class, 'store']);
-    Route::post('post-images', [\App\Http\Controllers\Api\TimelineImageController::class, 'store']);
-    Route::post('post-thumbs', [\App\Http\Controllers\Api\PostThumbController::class, 'store']);
-    Route::post('post-comments', [\App\Http\Controllers\Api\PostCommentController::class, 'store']);
+    Route::post('posts', [\App\Http\Controllers\Api\Post\PostController::class, 'store']);
+    Route::post('post-images', [\App\Http\Controllers\Api\Post\PostImageController::class, 'store']);
+    Route::post('post-thumbs', [\App\Http\Controllers\Api\Post\PostThumbController::class, 'store']);
+    Route::post('post-comments', [\App\Http\Controllers\Api\Post\PostCommentController::class, 'store']);
 });
