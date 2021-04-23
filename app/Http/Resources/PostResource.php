@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Auth;
 
 class PostResource extends JsonResource
 {
@@ -15,7 +16,7 @@ class PostResource extends JsonResource
      */
     public function toArray($request)
     {
-        $user = $request->user();
+        $user = Auth::guard('sanctum')->user();
 
         $data = parent::toArray($request);
         $data = Arr::only($data, [
