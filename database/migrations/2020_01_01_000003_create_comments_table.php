@@ -31,6 +31,8 @@ class CreateCommentsTable extends Migration
             $table->integer('thumb_down_num')->default(0)->comment('Thumb Up Num');
             $table->integer('comment_num')->default(0)->comment('Comment Num');
 
+            $table->tinyInteger('status')->default(0)->comment('Status');
+
             $table->timestamps();
             $table->softDeletes();
         });
