@@ -24,7 +24,7 @@ class PostCommentController extends Controller
         $post = Post::findOrFail($request->get('post_id'));
 
         $commentStatus = 0;
-        if (! config('SYSTEM_UGC_AUDIT', true)) $commentStatus = 1;
+        if (! config('system.ugc_audit', true)) $commentStatus = 1;
         if ($user->is_admin || $user->ugc_safety_level) $commentStatus = 1;
 
         $floorNumber = $post->comments()->withTrashed()->count() + 1;

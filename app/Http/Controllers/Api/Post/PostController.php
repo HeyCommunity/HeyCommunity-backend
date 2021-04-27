@@ -33,7 +33,7 @@ class PostController extends Controller
         $user = $request->user();
 
         $postStatus = 0;
-        if (! config('SYSTEM_UGC_AUDIT', true)) $postStatus = 1;
+        if (! config('system.ugc_audit', true)) $postStatus = 1;
         if ($user->is_admin || $user->ugc_safety_level) $postStatus = 1;
 
         $post = Post::create([
