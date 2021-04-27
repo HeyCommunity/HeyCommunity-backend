@@ -19,11 +19,7 @@ class PostResource extends JsonResource
         $user = Auth::guard('sanctum')->user();
 
         $data = parent::toArray($request);
-        $data = Arr::only($data, [
-            'id', 'user_id', 'content',
-            'read_num', 'favorite_num', 'comment_num', 'thumb_up_num', 'thumb_down_num',
-            'created_at', 'updated_at',
-        ]);
+        $data = Arr::except($data, []);
 
         $data['user_nickname'] = $this->user->nickname;
         $data['user_avatar'] = $this->user->avatar;

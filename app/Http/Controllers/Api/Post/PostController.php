@@ -15,7 +15,7 @@ class PostController extends Controller
      */
     public function index(Request $request)
     {
-        $posts = Post::where('status', '1')->latest()->paginate();
+        $posts = Post::where('status', '!=', '0')->latest()->paginate();
 
         return PostResource::collection($posts);
     }

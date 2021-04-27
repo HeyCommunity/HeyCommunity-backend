@@ -16,9 +16,7 @@ use App\Http\Controllers\Api\UserController;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::get('/system/settings', [\App\Http\Controllers\API\SystemController::class, 'settings']);
 
 Route::get('/users/login', [UserController::class, 'login']);
 Route::middleware(['auth:sanctum'])->group(function () {

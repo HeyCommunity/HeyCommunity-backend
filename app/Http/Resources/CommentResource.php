@@ -16,6 +16,7 @@ class CommentResource extends JsonResource
     public function toArray($request)
     {
         $data = parent::toArray($request);
+        $data = Arr::except($data, []);
 
         $data['user_nickname'] = $this->user->nickname;
         $data['user_avatar'] = $this->user->avatar;
