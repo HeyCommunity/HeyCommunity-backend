@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.23, for osx10.15 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.23, for Linux (x86_64)
 --
 -- Host: localhost    Database: dev_heycommunity
 -- ------------------------------------------------------
--- Server version	8.0.23
+-- Server version	8.0.23-0ubuntu0.20.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -26,14 +26,14 @@ CREATE TABLE `admin_menu` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `parent_id` int NOT NULL DEFAULT '0',
   `order` int NOT NULL DEFAULT '0',
-  `title` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `icon` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `uri` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `permission` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `title` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `icon` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `uri` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `permission` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -42,7 +42,7 @@ CREATE TABLE `admin_menu` (
 
 LOCK TABLES `admin_menu` WRITE;
 /*!40000 ALTER TABLE `admin_menu` DISABLE KEYS */;
-INSERT INTO `admin_menu` VALUES (1,0,3,'Dashboard','fa-bar-chart','/',NULL,NULL,'2021-04-15 06:49:09'),(2,0,4,'Admin','fa-tasks','',NULL,NULL,'2021-04-15 06:49:09'),(3,2,5,'Users','fa-users','auth/users',NULL,NULL,'2021-04-15 06:49:09'),(4,2,6,'Roles','fa-user','auth/roles',NULL,NULL,'2021-04-15 06:49:09'),(5,2,7,'Permission','fa-ban','auth/permissions',NULL,NULL,'2021-04-15 06:49:09'),(6,2,8,'Menu','fa-bars','auth/menu',NULL,NULL,'2021-04-15 06:49:09'),(7,2,9,'Operation log','fa-history','auth/logs',NULL,NULL,'2021-04-15 06:49:09'),(8,0,1,'用户管理','fa-users','/users',NULL,'2021-04-15 06:48:03','2021-04-15 06:48:09'),(9,0,2,'动态管理','fa-rss','/posts',NULL,'2021-04-15 06:49:03','2021-04-15 06:49:09');
+INSERT INTO `admin_menu` VALUES (1,0,3,'Dashboard','fa-bar-chart','/',NULL,NULL,'2021-04-15 06:49:09'),(2,0,5,'Admin','fa-tasks','',NULL,NULL,'2021-04-27 08:42:00'),(3,2,6,'Users','fa-users','auth/users',NULL,NULL,'2021-04-27 08:42:00'),(4,2,7,'Roles','fa-user','auth/roles',NULL,NULL,'2021-04-27 08:42:00'),(5,2,8,'Permission','fa-ban','auth/permissions',NULL,NULL,'2021-04-27 08:42:00'),(6,2,9,'Menu','fa-bars','auth/menu',NULL,NULL,'2021-04-27 08:42:00'),(7,2,10,'Operation log','fa-history','auth/logs',NULL,NULL,'2021-04-27 08:42:00'),(8,0,1,'用户管理','fa-users','/users',NULL,'2021-04-15 06:48:03','2021-04-15 06:48:09'),(9,0,2,'动态管理','fa-rss','/posts',NULL,'2021-04-15 06:49:03','2021-04-15 06:49:09'),(10,0,4,'系统配置','fa-cog','/system',NULL,'2021-04-27 08:41:53','2021-04-27 08:42:00');
 /*!40000 ALTER TABLE `admin_menu` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -55,11 +55,11 @@ DROP TABLE IF EXISTS `admin_users`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `admin_users` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
-  `username` varchar(190) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `password` varchar(60) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `avatar` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `username` varchar(190) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `avatar` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `remember_token` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -73,7 +73,7 @@ CREATE TABLE `admin_users` (
 
 LOCK TABLES `admin_users` WRITE;
 /*!40000 ALTER TABLE `admin_users` DISABLE KEYS */;
-INSERT INTO `admin_users` VALUES (1,'admin','$2y$10$Bo2zRodl0Vsm/l2tbtloUOYVuv4WInCs.yFL0jyjBFaCc3zksOg8y','Administrator',NULL,NULL,'2021-04-15 06:47:26','2021-04-15 06:47:26');
+INSERT INTO `admin_users` VALUES (1,'admin','$2y$10$Bo2zRodl0Vsm/l2tbtloUOYVuv4WInCs.yFL0jyjBFaCc3zksOg8y','Administrator',NULL,'JYCAsugaZNgFWIG87YJEsVQOK7hvp1NZUuy6nkd2uhAPJiCBWpyqn5RJluqF','2021-04-15 06:47:26','2021-04-15 06:47:26');
 /*!40000 ALTER TABLE `admin_users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -86,10 +86,10 @@ DROP TABLE IF EXISTS `admin_permissions`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `admin_permissions` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `slug` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `http_method` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `http_path` text COLLATE utf8mb4_unicode_ci,
+  `name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `slug` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `http_method` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `http_path` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -117,8 +117,8 @@ DROP TABLE IF EXISTS `admin_roles`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `admin_roles` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `slug` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `slug` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -249,4 +249,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-04-15 14:49:53
+-- Dump completed on 2021-04-27 17:14:05
