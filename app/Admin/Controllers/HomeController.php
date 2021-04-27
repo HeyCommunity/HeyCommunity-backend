@@ -2,6 +2,7 @@
 
 namespace App\Admin\Controllers;
 
+use App\Admin\Forms\SystemForm;
 use App\Http\Controllers\Controller;
 use Encore\Admin\Controllers\Dashboard;
 use Encore\Admin\Layout\Column;
@@ -30,5 +31,11 @@ class HomeController extends Controller
                     $column->append(Dashboard::dependencies());
                 });
             });
+    }
+
+    public function system(Content $content)
+    {
+        return $content->title('系统')->description('System')
+            ->body(new SystemForm());
     }
 }

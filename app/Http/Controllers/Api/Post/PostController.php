@@ -33,7 +33,7 @@ class PostController extends Controller
         $user = $request->user();
 
         $postStatus = 0;
-        if (! env('WXAPP_SETTINGS_POST_AUDIT', true)) $postStatus = 1;              // TODO: use config('key')
+        if (! config('SYSTEM_UGC_AUDIT', true)) $postStatus = 1;
         if ($user->is_admin || $user->ugc_safety_level) $postStatus = 1;
 
         $post = Post::create([

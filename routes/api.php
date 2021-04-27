@@ -20,8 +20,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/wxapp-settings', [\App\Http\Controllers\Api\WxAppController::class, 'settings']);
-
 Route::get('/users/login', [UserController::class, 'login']);
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/users/logout', [UserController::class, 'logout']);
