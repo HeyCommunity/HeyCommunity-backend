@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\PostResource;
 use App\Models\Post\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class PostThumbController extends Controller
 {
@@ -32,7 +33,30 @@ class PostThumbController extends Controller
                 'entity_type'   =>  Post::class,
                 'type'          =>  $request->get('type'),
             ]);
-            if ($thumb->wasRecentlyCreated) $post->increment($thumbFieldName);
+
+            if ($thumb->wasRecentlyCreated) {
+                $post->increment($thumbFieldName);
+
+                // 发送微信订阅消息
+                // TODO: 加入队列
+                // TODO: 如果用户在线则不发送
+                if ($tmplId = config('system.wxapp.subscribe_message.post_thumb_up')) {
+                    try {
+                        $app = app('wechat.mini_program');
+                        $res = $app->subscribe_message->send([
+                            'touser'        =>  $post->user->wx_open_id,
+                            'template_id'   =>  $tmplId,
+                            'page'          =>  '/pages/posts/index/index',
+                            'data' => [
+                                'thing1'    =>  ['value' => Str::limit($post->content, 20)],
+                                'thing2'    =>  ['value' => Str::limit($user->nickname, 20)],
+                                'time3'     =>  ['value' => date('Y年m月d日 H:i:s')],
+                            ],
+                        ]);
+                    } catch (\Exception $exception) {
+                    }
+                }
+            }
 
             // 删除相反的 Thumb
             if ($request->get('type') === 'thumb_up') $reverseType = 'thumb_down';
