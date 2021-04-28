@@ -8,6 +8,7 @@ use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
 use Encore\Admin\Widgets\Table;
+use Illuminate\Support\Str;
 
 class PostController extends AdminController
 {
@@ -27,10 +28,14 @@ class PostController extends AdminController
     {
         $grid = new Grid(new Post());
 
-        $grid->column('id', 'ID');
+        $grid->model()->latest();
+
+        $grid->column('id', 'ID')->sortable();
         $grid->column('status', '状态')->select(Post::$statuses);
         $grid->column('user.nickname', '作者');
-        $grid->column('content', '内容')->expand(function ($model) {
+        $grid->column('content', '内容')->display(function ($value) {
+            return Str::limit($value, 20 * 2);
+        })->expand(function ($model) {
             $comments = $model->comments()->take(10)->latest()->get()->map(function ($comment) {
                 return $comment->only('id', 'user.nickname', 'content', 'created_at');
             });

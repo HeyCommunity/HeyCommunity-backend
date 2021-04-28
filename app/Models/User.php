@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
+use App\Models\Common\Comment;
 use App\Models\Common\Thumb;
-use App\Models\Post\Post as Post;
+use App\Models\Post\Post;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -95,7 +96,15 @@ class User extends Authenticatable
      */
     public function comments()
     {
-        return $this->hasMany(Post::class);
+        return $this->hasMany(Comment::class);
+    }
+
+    /**
+     * Related Comments
+     */
+    public function postComments()
+    {
+        return $this->hasMany(Comment::class)->where('entity_type', Post::class);
     }
 
     /**

@@ -7,6 +7,7 @@ use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
+use Encore\Admin\Widgets\Table;
 
 class UserController extends AdminController
 {
@@ -26,13 +27,27 @@ class UserController extends AdminController
     {
         $grid = new Grid(new User());
 
-        $grid->column('id', 'ID');
+        $grid->model()->latest();
+
+        $grid->column('id', 'ID')->sortable();
         $grid->column('avatar', '头像')->image(null, 20, 20);
         $grid->column('nickname', '昵称');
         $grid->column('bio', '一句话简介');
-        $grid->column('post_num', '动态数');
+        $grid->column('post_num', '动态数')->expand(function ($model) {
+            $posts = $model->posts()->latest()->get()->map(function ($post) {
+                return $post->only('id', 'content', 'created_at');
+            });
+            return new Table(['id', 'content', 'created_at'], $posts->toArray());
+        });
         $grid->column('thumb_up_num', '点赞数');
-        $grid->column('comment_num', '评论数');
+        $grid->column('comment_num', '评论数')->expand(function ($model) {
+            $posts = $model->postComments()->latest()->get()->map(function ($post) {
+                return $post->only('id', 'content', 'created_at');
+            });
+
+            return new Table(['id', 'content', 'created_at'], $posts->toArray());
+        });
+
         $grid->column('ugc_safety_level', 'UGC 安全等级')->editable('select', [
             0   =>  '未设定',
             1   =>  '等级 1',
