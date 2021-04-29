@@ -40,7 +40,7 @@ class PostThumbController extends Controller
                 // 发送微信订阅消息
                 // TODO: 加入队列
                 // TODO: 如果用户在线则不发送
-                if ($tmplId = config('system.wxapp.subscribe_message.post_thumb_up')) {
+                if ($post->user_id != $user->id && $tmplId = config('system.wxapp.subscribe_message.post_thumb_up')) {
                     try {
                         $app = app('wechat.mini_program');
                         $res = $app->subscribe_message->send([

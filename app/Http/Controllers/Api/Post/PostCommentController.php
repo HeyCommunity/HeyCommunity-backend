@@ -42,7 +42,7 @@ class PostCommentController extends Controller
         // 发送微信订阅消息
         // TODO: 如果用户在线则不发送
         // TODO: 加入队列
-        if ($tmplId = config('system.wxapp.subscribe_message.post_comment')) {
+        if ($post->user_id != $user->id && $tmplId = config('system.wxapp.subscribe_message.post_comment')) {
             try {
                 $app = app('wechat.mini_program');
                 $res = $app->subscribe_message->send([
