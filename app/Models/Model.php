@@ -80,10 +80,14 @@ class Model extends EloquentModel
      */
     public function getCreatedAtForHumansAttribute()
     {
-        if (now()->diffInDays($this->created_at) <= 7) {
+        if (now()->diffInDays($this->created_at) <= 3) {
             return $this->created_at->diffForHumans();
         }
 
-        return $this->created_at->format('Y-m-d H:s:i');
+        if ($this->created_at->isCurrentYear()) {
+            return $this->created_at->format('m/d H:s');
+        } else {
+            return $this->created_at->format('Y/m/d');
+        }
     }
 }
