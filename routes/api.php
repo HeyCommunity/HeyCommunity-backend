@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\NoticeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +25,12 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/users/mine', [UserController::class, 'mineShow']);
     Route::post('/users/mine', [UserController::class, 'mineUpdate']);
 });
+
+
+Route::middleware(['auth:sanctum'])->group(function () {
+    Route::get('/notices', [NoticeController::class, 'index']);
+});
+
 
 Route::get('posts', [\App\Http\Controllers\Api\Post\PostController::class, 'index']);
 Route::middleware(['auth:sanctum'])->group(function () {
