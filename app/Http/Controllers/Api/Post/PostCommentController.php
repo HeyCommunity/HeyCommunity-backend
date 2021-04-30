@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\Post;
 
+use App\Events\Notices\MakeNoticeEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\CommentResource;
 use App\Http\Resources\PostResource;
@@ -38,6 +39,11 @@ class PostCommentController extends Controller
         ]);
 
         $post->increment('comment_num');
+
+        // notice
+        if ($post->user_id != $user->id) {
+            event(new MakeNoticeEvent('post_comment', $post->user, $user, $comment));
+        }
 
         // 发送微信订阅消息
         // TODO: 如果用户在线则不发送

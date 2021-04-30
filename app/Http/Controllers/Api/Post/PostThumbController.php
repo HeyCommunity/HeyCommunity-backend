@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\Post;
 
+use App\Events\Notices\MakeNoticeEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\PostResource;
 use App\Models\Post\Post;
@@ -36,6 +37,11 @@ class PostThumbController extends Controller
 
             if ($thumb->wasRecentlyCreated) {
                 $post->increment($thumbFieldName);
+
+                // notice
+                if ($post->user_id != $user->id) {
+                    event(new MakeNoticeEvent('post_thumb_up', $post->user, $user, $thumb));
+                }
 
                 // 发送微信订阅消息
                 // TODO: 加入队列
