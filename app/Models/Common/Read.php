@@ -2,10 +2,15 @@
 
 namespace App\Models\Common;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use App\Models\Model;
 
 class Read extends Model
 {
-    use HasFactory;
+    /**
+     * Related EntityModel
+     */
+    public function entity()
+    {
+        return $this->belongsTo($this->entity_type, 'entity_id')->withTrashed();
+    }
 }

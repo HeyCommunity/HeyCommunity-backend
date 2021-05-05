@@ -17,6 +17,6 @@ class Notice extends Model
      */
     public function entity()
     {
-        return $this->belongsTo($this->entity_class, 'entity_id');
+        return $this->belongsTo($this->entity_class, 'entity_id')->withTrashed();
     }
 }
