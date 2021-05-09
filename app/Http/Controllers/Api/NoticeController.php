@@ -21,4 +21,68 @@ class NoticeController extends Controller
 
         return NoticeResource::collection($notices);
     }
+
+    /**
+     * 设为已读
+     */
+    public function setIsReadHandler(Request $request)
+    {
+        $request->validate([
+            'id'        =>  'required|integer',
+        ]);
+
+        $notice = Notice::findOrFail($request->get('id'));
+        $user = $request->user();
+
+        // 权限校验
+        if ($notice->user_id !== $user->id) return response(['message' => '非法请求'], 403);
+
+        $notice->update([
+            'is_read'   =>  true,
+        ]);
+
+        return new NoticeResource($notice);
+    }
+
+    /**
+     * 设为未读
+     */
+    public function setUnReadHandler(Request $request)
+    {
+        $request->validate([
+            'id'        =>  'required|integer',
+        ]);
+
+        $notice = Notice::findOrFail($request->get('id'));
+        $user = $request->user();
+
+        // 权限校验
+        if ($notice->user_id !== $user->id) return response(['message' => '非法请求'], 403);
+
+        $notice->update([
+            'is_read'   =>  false,
+        ]);
+
+        return new NoticeResource($notice);
+    }
+
+    /**
+     * 删除
+     */
+    public function deleteHandler(Request $request)
+    {
+        $request->validate([
+            'id'        =>  'required|integer',
+        ]);
+
+        $notice = Notice::findOrFail($request->get('id'));
+        $user = $request->user();
+
+        // 权限校验
+        if ($notice->user_id !== $user->id) return response(['message' => '非法请求'], 403);
+
+        $notice->delete();
+
+        return null;
+    }
 }
