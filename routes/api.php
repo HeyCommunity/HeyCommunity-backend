@@ -30,6 +30,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/notices', [NoticeController::class, 'index']);
+    Route::post('/notices/set-isread', [NoticeController::class, 'setIsReadHandler']);
+    Route::post('/notices/set-unread', [NoticeController::class, 'setUnReadHandler']);
+    Route::post('/notices/delete', [NoticeController::class, 'deleteHandler']);
 });
 
 
