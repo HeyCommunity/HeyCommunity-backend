@@ -21,7 +21,7 @@ class UserController extends Controller
         $miniProgram = \EasyWeChat::miniProgram();
         $res = $miniProgram->auth->session($request->code);
 
-        $user = User::where('wx_open_id', $res['openid'])->firstOrCreate(['wx_open_id' => $res['openid']]);
+        $user = User::firstOrCreate(['wx_open_id' => $res['openid']]);
         $user->token = $user->createToken('token')->plainTextToken;
 
         return new UserResource($user);
@@ -66,9 +66,10 @@ class UserController extends Controller
         $user = $request->user();
 
         $user->update([
-            'nickname'          =>  $request->get('nickName'),
             'avatar'            =>  $request->get('avatarUrl'),
-            'wx_province_city'  =>  $request->get('province') . ' ' . $request->get('city'),
+            'nickname'          =>  $request->get('nickName'),
+            'gender'            =>  $request->get('gender'),
+            'wx_user_info'      =>  $request->all(),
         ]);
 
         // $this->timProfileUpdate($user);

@@ -24,21 +24,11 @@ class User extends Authenticatable
     ];
 
     /**
-     * The attributes that are mass assignable.
+     * The guarded column
      *
      * @var array
      */
-    protected $fillable = [
-        'wx_open_id',
-        'avatar',
-        'nickname',
-        'realname',
-        'gender',
-        'phone',
-        'email',
-        'bio',
-        'password',
-    ];
+    protected $guarded = [];
 
     /**
      * The attributes that should be hidden for arrays.
