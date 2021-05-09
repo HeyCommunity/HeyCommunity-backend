@@ -10,6 +10,14 @@ use Illuminate\Http\Request;
 class UserController extends Controller
 {
     /**
+     * User ping
+     */
+    public function ping(Request $request)
+    {
+        return 'OK';
+    }
+
+    /**
      * User login
      */
     public function login(Request $request)

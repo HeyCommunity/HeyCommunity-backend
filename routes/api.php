@@ -20,6 +20,7 @@ use App\Http\Controllers\Api\NoticeController;
 Route::get('/system/settings', [\App\Http\Controllers\API\SystemController::class, 'settings']);
 
 Route::get('/users/login', [UserController::class, 'login']);
+Route::get('/users/ping', [UserController::class, 'ping']);
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/users/logout', [UserController::class, 'logout']);
     Route::get('/users/mine', [UserController::class, 'mineShow']);
