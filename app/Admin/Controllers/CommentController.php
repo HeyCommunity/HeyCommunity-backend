@@ -42,9 +42,14 @@ class CommentController extends AdminController
         $grid->disableCreateButton();
 
         $grid->actions(function ($actions) {
-            $actions->disableDelete();
             $actions->disableEdit();
             $actions->disableView();
+        });
+
+        $grid->filter(function($filter){
+            $filter->equal('status', '状态')->select(Comment::$statuses);
+            $filter->like('user.nickname', '作者');
+            $filter->like('content', '内容');
         });
 
         return $grid;

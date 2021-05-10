@@ -30,10 +30,7 @@ class UserController extends AdminController
         $grid->model()->latest();
 
         $grid->column('id', 'ID')->sortable();
-        $grid->column('ugc_safety_level', 'UGC 安全等级')->editable('select', [
-            0   =>  '未设定',
-            1   =>  '等级 1',
-        ]);
+        $grid->column('ugc_safety_level', 'UGC 等级')->editable('select', User::$ugcSafetyLevel);
         $grid->column('avatar', '头像')->image(null, 20, 20);
         $grid->column('nickname', '昵称');
         $grid->column('bio', '一句话简介');
@@ -51,6 +48,7 @@ class UserController extends AdminController
 
             return new Table(['ID', '内容', '创建时间'], $posts->toArray());
         });
+        $grid->column('last_active_at', '最后活跃时间');
         $grid->column('created_at', '注册时间');
 
         $grid->disableCreateButton();
@@ -59,6 +57,11 @@ class UserController extends AdminController
             $actions->disableDelete();
             $actions->disableEdit();
             $actions->disableView();
+        });
+
+        $grid->filter(function($filter){
+            $filter->like('nickname', '昵称');
+            $filter->equal('ugc_safety_level', 'UGC 等级')->select(User::$ugcSafetyLevel);
         });
 
         return $grid;

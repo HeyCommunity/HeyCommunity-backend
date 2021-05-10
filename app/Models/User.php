@@ -25,6 +25,11 @@ class User extends Authenticatable
         2       =>  '女',
     ];
 
+    public static $ugcSafetyLevel = [
+        0   =>  '未设定',
+        1   =>  '等级 1',
+    ];
+
     /**
      * The guarded column
      *
