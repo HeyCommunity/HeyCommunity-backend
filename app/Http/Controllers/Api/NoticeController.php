@@ -39,6 +39,7 @@ class NoticeController extends Controller
 
         $notice->update([
             'is_read'   =>  true,
+            'read_at'   =>  now(),
         ]);
 
         return new NoticeResource($notice);
@@ -61,6 +62,7 @@ class NoticeController extends Controller
 
         $notice->update([
             'is_read'   =>  false,
+            'read_at'   =>  null,
         ]);
 
         return new NoticeResource($notice);

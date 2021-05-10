@@ -30,6 +30,8 @@ class UserController extends Controller
         $res = $miniProgram->auth->session($request->code);
 
         $user = User::firstOrCreate(['wx_open_id' => $res['openid']]);
+        $user->update(['last_active_at' => now()]);
+
         $user->token = $user->createToken('token')->plainTextToken;
 
         return new UserResource($user);
