@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Common\Comment;
 use App\Models\Common\Thumb;
 use App\Models\Post\Post;
+use Encore\Admin\Traits\DefaultDatetimeFormat;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -13,6 +14,7 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
+    use DefaultDatetimeFormat;
     use HasApiTokens, HasFactory, Notifiable;
 
     protected $appends = ['post_num', 'comment_num', 'thumb_up_num'];
