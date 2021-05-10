@@ -33,7 +33,11 @@ class UserController extends AdminController
         $grid->column('ugc_safety_level', 'UGC 等级')->editable('select', User::$ugcSafetyLevel);
         $grid->column('avatar', '头像')->image(null, 20, 20);
         $grid->column('nickname', '昵称');
-        $grid->column('bio', '一句话简介');
+        $grid->column('gender', '性别')->using(User::$genders);
+        $grid->column('province_city', '省市')->display(function () {
+            if ($this->wx_user_info) return $this->wx_user_info['province'] . $this->wx_user_info['city'];
+        })->default('-');
+        $grid->column('bio', '一句话简介')->hide();
         $grid->column('post_num', '动态数')->expand(function ($model) {
             $posts = $model->posts()->latest()->get()->map(function ($post) {
                 return $post->only('id', 'content', 'created_at');
