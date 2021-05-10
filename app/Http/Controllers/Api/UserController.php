@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -14,7 +15,17 @@ class UserController extends Controller
      */
     public function ping(Request $request)
     {
-        return 'OK';
+        $user = Auth::guard('sanctum')->user();
+
+        if ($user) {
+            return [
+                'data'  =>  [
+                    'unread_notice_num'     =>  $user->unread_notice_num,
+                ],
+            ];
+        }
+
+        return ['message' => 'OK'];
     }
 
     /**

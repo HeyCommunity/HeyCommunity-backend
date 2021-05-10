@@ -128,4 +128,12 @@ class User extends Authenticatable
     {
         return $this->upThumbs()->count();
     }
+
+    /**
+     * Get unread_notice_num attr
+     */
+    public function getUnreadNoticeNumAttribute()
+    {
+        return Notice::where(['user_id' => $this->id, 'is_read' => false])->count();
+    }
 }
