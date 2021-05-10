@@ -33,7 +33,7 @@ CREATE TABLE `admin_menu` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -42,7 +42,7 @@ CREATE TABLE `admin_menu` (
 
 LOCK TABLES `admin_menu` WRITE;
 /*!40000 ALTER TABLE `admin_menu` DISABLE KEYS */;
-INSERT INTO `admin_menu` VALUES (1,0,3,'Dashboard','fa-bar-chart','/',NULL,NULL,'2021-04-15 06:49:09'),(2,0,5,'Admin','fa-tasks','',NULL,NULL,'2021-04-27 08:42:00'),(3,2,6,'Users','fa-users','auth/users',NULL,NULL,'2021-04-27 08:42:00'),(4,2,7,'Roles','fa-user','auth/roles',NULL,NULL,'2021-04-27 08:42:00'),(5,2,8,'Permission','fa-ban','auth/permissions',NULL,NULL,'2021-04-27 08:42:00'),(6,2,9,'Menu','fa-bars','auth/menu',NULL,NULL,'2021-04-27 08:42:00'),(7,2,10,'Operation log','fa-history','auth/logs',NULL,NULL,'2021-04-27 08:42:00'),(8,0,1,'用户管理','fa-users','/users',NULL,'2021-04-15 06:48:03','2021-04-15 06:48:09'),(9,0,2,'动态管理','fa-rss','/posts',NULL,'2021-04-15 06:49:03','2021-04-15 06:49:09'),(10,0,4,'系统配置','fa-cog','/system',NULL,'2021-04-27 08:41:53','2021-04-27 08:42:00');
+INSERT INTO `admin_menu` VALUES (1,0,6,'Dashboard','fa-bar-chart','/',NULL,NULL,'2021-05-10 04:59:05'),(2,0,8,'Admin','fa-tasks','',NULL,NULL,'2021-05-10 04:58:19'),(3,2,9,'Users','fa-users','auth/users',NULL,NULL,'2021-05-10 04:58:19'),(4,2,10,'Roles','fa-user','auth/roles',NULL,NULL,'2021-05-10 04:58:19'),(5,2,11,'Permission','fa-ban','auth/permissions',NULL,NULL,'2021-05-10 04:58:19'),(6,2,12,'Menu','fa-bars','auth/menu',NULL,NULL,'2021-05-10 04:58:19'),(7,2,13,'Operation log','fa-history','auth/logs',NULL,NULL,'2021-05-10 04:58:19'),(8,0,1,'用户管理','fa-users','/users',NULL,'2021-04-15 06:48:03','2021-04-15 06:48:09'),(9,0,2,'动态管理','fa-rss','/posts',NULL,'2021-04-15 06:49:03','2021-04-15 06:49:09'),(10,0,7,'系统配置','fa-cog','/system',NULL,'2021-04-27 08:41:53','2021-05-10 04:59:05'),(11,0,5,'TeleScope','fa-bug','/telescope',NULL,'2021-05-10 04:54:37','2021-05-10 04:59:05'),(12,0,3,'评论管理','fa-comments','/comments',NULL,'2021-05-10 04:55:15','2021-05-10 04:59:05'),(13,0,4,'通知管理','fa-pied-piper-alt','/notices',NULL,'2021-05-10 04:58:14','2021-05-10 04:59:05');
 /*!40000 ALTER TABLE `admin_menu` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -249,4 +249,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-04-27 17:14:05
+-- Dump completed on 2021-05-10 12:59:08
