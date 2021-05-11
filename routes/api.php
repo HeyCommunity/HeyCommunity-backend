@@ -37,6 +37,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
 
 Route::get('posts', [\App\Http\Controllers\Api\Post\PostController::class, 'index']);
+Route::get('posts/{post}', [\App\Http\Controllers\Api\Post\PostController::class, 'show'])->where('post', '[0-9]+');
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('posts', [\App\Http\Controllers\Api\Post\PostController::class, 'store']);
     Route::post('post-images', [\App\Http\Controllers\Api\Post\PostImageController::class, 'store']);

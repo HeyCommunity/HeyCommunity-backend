@@ -21,6 +21,14 @@ class PostController extends Controller
     }
 
     /**
+     * Show
+     */
+    public function show(Request $request, Post $post)
+    {
+        return new PostResource($post);
+    }
+
+    /**
      * Store
      */
     public function store(Request $request)

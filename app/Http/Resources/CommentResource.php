@@ -20,6 +20,7 @@ class CommentResource extends JsonResource
 
         $data['user_nickname'] = $this->user->nickname;
         $data['user_avatar'] = $this->user->avatar;
+        $data['parent'] = $this->parent;
 
         $data['created_at_for_humans'] = $this->created_at_for_humans;
 
