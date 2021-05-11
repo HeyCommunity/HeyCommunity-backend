@@ -41,6 +41,9 @@ Route::get('posts/{post}', [\App\Http\Controllers\Api\Post\PostController::class
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('posts', [\App\Http\Controllers\Api\Post\PostController::class, 'store']);
     Route::post('post-images', [\App\Http\Controllers\Api\Post\PostImageController::class, 'store']);
-    Route::post('post-thumbs', [\App\Http\Controllers\Api\Post\PostThumbController::class, 'store']);
+
+    Route::post('post-thumbs', [\App\Http\Controllers\Api\Common\ThumbController::class, 'postThumbHandler']);
+    Route::post('post-comment-thumbs', [\App\Http\Controllers\Api\Common\ThumbController::class, 'postCommentThumbHandler']);
+
     Route::post('post-comments', [\App\Http\Controllers\Api\Post\PostCommentController::class, 'store']);
 });

@@ -29,4 +29,12 @@ class Comment extends Model
     {
         return $this->belongsTo(get_class($this), 'parent_id')->with('user');
     }
+
+    /**
+     * Related Thumb
+     */
+    public function thumbs()
+    {
+        return $this->hasMany(Thumb::class, 'entity_id')->where('entity_type', get_class($this));
+    }
 }

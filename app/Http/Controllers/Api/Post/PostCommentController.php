@@ -66,6 +66,7 @@ class PostCommentController extends Controller
             }
         }
 
+        $comment->refresh();
         return new CommentResource($comment);
     }
 }

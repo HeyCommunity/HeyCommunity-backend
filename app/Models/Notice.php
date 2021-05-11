@@ -5,8 +5,10 @@ namespace App\Models;
 class Notice extends Model
 {
     public static $types = [
-        'post_comment'      =>  '评论动态',
-        'post_thumb_up'     =>  '点赞动态',
+        'post_comment'              =>  '评论动态',
+
+        'post_thumb_up'             =>  '点赞动态',
+        'post_comment_thumb_up'     =>  '点赞动态评论',
     ];
 
     /**
