@@ -37,4 +37,12 @@ class Comment extends Model
     {
         return $this->hasMany(Thumb::class, 'entity_id')->where('entity_type', get_class($this));
     }
+
+    /**
+     * Related Comment
+     */
+    public function comments()
+    {
+        return $this->hasMany(get_class($this), 'parent_id', 'id');
+    }
 }

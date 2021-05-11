@@ -31,7 +31,7 @@ class CommentResource extends JsonResource
         $data['i_have_comment'] = 0;
         if ($user) {
             $data['i_have_thumb_up'] = $this->thumbs()->where('type', 'thumb_up')->where('user_id', $user->id)->exists();
-            // $data['i_have_comment'] = $this->comments()->where('user_id', $user->id)->exists();
+            $data['i_have_comment'] = $this->comments()->where('user_id', $user->id)->exists();
         }
 
         return $data;

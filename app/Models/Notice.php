@@ -6,6 +6,7 @@ class Notice extends Model
 {
     public static $types = [
         'post_comment'              =>  '评论动态',
+        'replay_post_comment'       =>  '回复动态评论',
 
         'post_thumb_up'             =>  '点赞动态',
         'post_comment_thumb_up'     =>  '点赞动态评论',
