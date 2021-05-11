@@ -56,6 +56,7 @@ class PostController extends Controller
             ]);
         }
 
+        $post->refresh();
         return new PostResource($post);
     }
 }
