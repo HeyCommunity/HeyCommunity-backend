@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api\Post;
 
 use App\Events\Notices\MakeNoticeEvent;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\PostResource;
+use App\Http\Resources\CommonResource;
 use App\Models\Post\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -70,13 +70,15 @@ class PostThumbController extends Controller
             if ($count = $post->thumbs()->where('type', $reverseType)->delete()) {
                 $post->decrement(($reverseType . '_num'), $count);
             }
+
+            return new CommonResource($thumb);
         } else {
             // 删除 Thumb
             if ($count = $post->thumbs()->where('type', $request->get('type'))->delete()) {
                 $post->decrement($thumbFieldName, $count);
             }
-        }
 
-        return new PostResource($post);
+            return response()->json(['message' => '取消点赞成功'], 202);
+        }
     }
 }
