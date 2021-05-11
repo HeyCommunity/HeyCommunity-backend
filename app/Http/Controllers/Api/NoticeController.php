@@ -19,7 +19,7 @@ class NoticeController extends Controller
         $notices = Notice::where('user_id', $user->id)
             ->latest()->paginate();
 
-        return NoticeResource::collection($notices);
+        return NoticeResource::collection($notices)->additional(['meta' => ['unread_notice_num' => $user->unread_notice_num]]);
     }
 
     /**
