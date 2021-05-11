@@ -38,7 +38,7 @@ class NoticeResource extends JsonResource
             case 'post_comment':
                 $content = $this->entity->content;
                 break;
-            case 'replay_post_comment':
+            case 'reply_post_comment':
                 $content = $this->entity->content;
                 break;
             default:
