@@ -87,4 +87,32 @@ class CommentController extends Controller
 
         return $this->handler($post, $request->get('content'), $noticeType, $comment);
     }
+
+    /**
+     * PostComment destroy handler
+     */
+    public function postCommentDestroyHandler(Request $request)
+    {
+        $request->validate([
+            'id'    =>  'required|integer',
+        ]);
+
+        $user = $request->user();
+        $comment = Comment::findOrFail($request->get('id'));
+
+        //  判断是作者或管理员
+        if ($comment->user_id === $user->id || $user->is_admin) {
+            $entity = $comment->entity;
+            $parent = $comment->parent;
+
+            if ($comment->delete()) {
+                if ($entity) $entity->decrement('comment_num');
+                if ($parent) $parent->decrement('comment_num');
+
+                return response()->json(['message' => '操作成功'], 202);
+            }
+        } else {
+            return response()->json(['message' => '无权执行此操作'], 403);
+        }
+    }
 }
