@@ -51,7 +51,12 @@ class CommentController extends Controller
         if (($parentComment && $parentComment->user_id != $user->id)
             || (!$parentComment && $entity->user_id != $user->id)
         ) {
-            event(new MakeNoticeEvent($noticeType, $entity->user, $user, $comment));
+            event(new MakeNoticeEvent(
+                $noticeType,
+                $parentComment ? $parentComment->user : $entity->user,
+                $user,
+                $comment
+            ));
         }
 
 
