@@ -15,7 +15,7 @@ class PostController extends Controller
      */
     public function index(Request $request)
     {
-        $posts = Post::where('status', '!=', '0')->latest()->paginate();
+        $posts = Post::where('status', '1')->latest()->paginate();
 
         return PostResource::collection($posts);
     }
@@ -58,5 +58,49 @@ class PostController extends Controller
 
         $post->refresh();
         return new PostResource($post);
+    }
+
+    /**
+     * Hidden
+     */
+    public function hidden(Request $request)
+    {
+        $request->validate([
+            'id'        =>  'required|integer',
+        ]);
+
+        $user = $request->user();
+        $post = Post::findOrFail($request->get('id'));
+
+        //  判断是作者或管理员
+        if ($user->is_admin) {
+            $post->update(['status' => 2]);
+
+            return new PostResource($post);
+        } else {
+            return response()->json(['message' => '无权执行此操作'], 403);
+        }
+    }
+
+    /**
+     * Destroy
+     */
+    public function destroy(Request $request)
+    {
+        $request->validate([
+            'id'        =>  'required|integer',
+        ]);
+
+        $user = $request->user();
+        $post = Post::findOrFail($request->get('id'));
+
+        //  判断是作者或管理员
+        if ($post->user_id === $user->id || $user->is_admin) {
+            $post->delete();
+
+            return response()->json(['message' => '操作成功'], 202);
+        } else {
+            return response()->json(['message' => '无权执行此操作'], 403);
+        }
     }
 }
