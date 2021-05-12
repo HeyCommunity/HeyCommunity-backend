@@ -71,7 +71,7 @@ class CommentController extends Controller
         ]);
 
         if ($request->get('comment_id')) {
-            $noticeType = 'reply_post_comment';
+            $noticeType = 'post_comment_reply';
             $comment = Comment::findOrFail($request->get('comment_id'));
             $post = $comment->entity;
         } else {
