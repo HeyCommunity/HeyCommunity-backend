@@ -21,8 +21,10 @@ class CreatePostVideosTable extends Migration
             $table->foreign('post_id')->references('id')->on('posts');
 
             $table->string('file_path')->comment('File Path');
-            $table->time('duration')->nullable()->comment('Video duration');
+            $table->integer('duration')->nullable()->comment('Video duration');
             $table->integer('size')->nullable()->comment('Video size');
+            $table->integer('height')->nullable()->comment('Video height');
+            $table->integer('width')->nullable()->comment('Video width');
 
             $table->timestamps();
             $table->softDeletes();

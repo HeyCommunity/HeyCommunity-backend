@@ -42,7 +42,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('posts', [\App\Http\Controllers\Api\Post\PostController::class, 'store']);
     Route::post('posts/delete', [\App\Http\Controllers\Api\Post\PostController::class, 'destroy']);
     Route::post('posts/hidden', [\App\Http\Controllers\Api\Post\PostController::class, 'hidden']);
+
     Route::post('post-images', [\App\Http\Controllers\Api\Post\PostImageController::class, 'store']);
+    Route::post('post-video', [\App\Http\Controllers\Api\Post\PostController::class, 'uploadVideo']);
 
     Route::post('post-thumbs', [\App\Http\Controllers\Api\Common\ThumbController::class, 'postThumbHandler']);
     Route::post('post-comment-thumbs', [\App\Http\Controllers\Api\Common\ThumbController::class, 'postCommentThumbHandler']);

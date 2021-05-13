@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\PostResource;
 use App\Models\Post\Post;
 use App\Models\Post\PostImage;
+use App\Models\Post\PostVideo;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -36,6 +37,7 @@ class PostController extends Controller
         $this->validate($request, [
             'content'       =>  'required|string',
             'image_ids'     =>  'nullable|array',
+            'video_id'      =>  'nullable|integer',
         ]);
 
         $user = $request->user();
@@ -52,6 +54,12 @@ class PostController extends Controller
 
         if ($request->get('image_ids')) {
             PostImage::whereIn('id', $request->get('image_ids'))->update([
+                'post_id'   =>  $post->id,
+            ]);
+        }
+
+        if ($request->get('video_id')) {
+            PostVideo::where('id', $request->get('video_id'))->update([
                 'post_id'   =>  $post->id,
             ]);
         }
@@ -102,5 +110,32 @@ class PostController extends Controller
         } else {
             return response()->json(['message' => '无权执行此操作'], 403);
         }
+    }
+
+    /**
+     *
+     */
+    public function uploadVideo(Request $request)
+    {
+        $request->validate([
+            'file'      =>  'required|mimetypes:video/*',
+            'duration'  =>  'required|numeric',
+            'size'      =>  'required|integer',
+            'width'     =>  'required|integer',
+            'height'    =>  'required|integer',
+        ]);
+
+        $user = $request->user();
+
+        $postVideo = PostVideo::create([
+            'user_id'       =>  $user->id,
+            'duration'      =>  round($request->get('duration')),
+            'size'          =>  $request->get('size'),
+            'height'        =>  $request->get('height'),
+            'width'         =>  $request->get('width'),
+            'file_path'     =>  $request->file('file')->store('uploads/posts/videos'),
+        ]);
+
+        return new \App\Http\Resources\CommonResource($postVideo);
     }
 }
