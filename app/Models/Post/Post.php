@@ -31,6 +31,14 @@ class Post extends Model
     }
 
     /**
+     * Related VideoImage
+     */
+    public function video()
+    {
+        return $this->hasOne(PostVideo::class);
+    }
+
+    /**
      * Related Thumb
      */
     public function thumbs()

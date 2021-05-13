@@ -25,6 +25,7 @@ class PostResource extends JsonResource
         $data['user_avatar'] = $this->user->avatar;
         $data['comments'] = CommentResource::collection($this->comments()->where('status', '!=', 0)->limit(3)->latest()->get());
         $data['images'] = CommonResource::collection($this->images);
+        $data['video'] = new CommonResource($this->video);
 
         $data['created_at_for_humans'] = $this->created_at_for_humans;
 
