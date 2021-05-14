@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use Encore\Admin\Facades\Admin;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Laravel\Telescope\IncomingEntry;
 use Laravel\Telescope\Telescope;
@@ -54,18 +56,16 @@ class TelescopeServiceProvider extends TelescopeApplicationServiceProvider
     }
 
     /**
-     * Register the Telescope gate.
-     *
-     * This gate determines who can access Telescope in non-local environments.
+     * Configure the Telescope authorization services.
      *
      * @return void
      */
-    protected function gate()
+    protected function authorization()
     {
-        Gate::define('viewTelescope', function ($user) {
-            return in_array($user->email, [
-                //
-            ]);
+        Telescope::auth(function ($request) {
+            $admin = Auth::guard('admin')->user();
+
+            return app()->environment('local') || $admin;
         });
     }
 }
