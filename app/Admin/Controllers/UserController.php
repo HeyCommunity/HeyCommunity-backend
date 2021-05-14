@@ -43,15 +43,15 @@ class UserController extends AdminController
                 return $post->only('id', 'content', 'created_at');
             });
             return new Table(['ID', '内容', '创建时间'], $posts->toArray());
-        })->sortable();
-        $grid->column('thumb_up_num', '点赞数')->sortable();
+        });
+        $grid->column('thumb_up_num', '点赞数');
         $grid->column('comment_num', '评论数')->expand(function ($model) {
             $posts = $model->postComments()->latest()->get()->map(function ($post) {
                 return $post->only('id', 'content', 'created_at');
             });
 
             return new Table(['ID', '内容', '创建时间'], $posts->toArray());
-        })->sortable();
+        });
         $grid->column('last_active_at', '最后活跃时间')->sortable();
         $grid->column('created_at', '注册时间')->sortable();
 
