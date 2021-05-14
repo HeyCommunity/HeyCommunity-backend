@@ -43,17 +43,17 @@ class UserController extends AdminController
                 return $post->only('id', 'content', 'created_at');
             });
             return new Table(['ID', '内容', '创建时间'], $posts->toArray());
-        });
-        $grid->column('thumb_up_num', '点赞数');
+        })->sortable();
+        $grid->column('thumb_up_num', '点赞数')->sortable();
         $grid->column('comment_num', '评论数')->expand(function ($model) {
             $posts = $model->postComments()->latest()->get()->map(function ($post) {
                 return $post->only('id', 'content', 'created_at');
             });
 
             return new Table(['ID', '内容', '创建时间'], $posts->toArray());
-        });
-        $grid->column('last_active_at', '最后活跃时间');
-        $grid->column('created_at', '注册时间');
+        })->sortable();
+        $grid->column('last_active_at', '最后活跃时间')->sortable();
+        $grid->column('created_at', '注册时间')->sortable();
 
         $grid->disableCreateButton();
 
@@ -66,6 +66,10 @@ class UserController extends AdminController
         $grid->filter(function($filter){
             $filter->like('nickname', '昵称');
             $filter->equal('ugc_safety_level', 'UGC 等级')->select(User::$ugcSafetyLevel);
+
+            $filter->scope('has_wx_user_info', '有微信资料')->whereNotNull('wx_user_info');
+            $filter->scope('today_active', '今日活跃')->whereDate('last_active_at', date('Y-m-d'));
+
         });
 
         return $grid;
