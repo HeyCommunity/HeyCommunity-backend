@@ -11,17 +11,13 @@ Route::group([
     'as'            => config('admin.route.prefix') . '.',
 ], function (Router $router) {
     // $router->get('/', 'HomeController@index')->name('home');
-    $router->get('/', function () {
-        return redirect()->to('/admin/posts');
-    });
-    $router->get('/telescope', function () {
-        return redirect()->to('/telescope');
-    });
-
-    $router->get('system', 'HomeController@system')->name('admin.system');
+    $router->get('/', function () { return redirect()->to('/admin/posts'); });
 
     $router->resource('users', UserController::class);
     $router->resource('posts', PostController::class);
     $router->resource('comments', CommentController::class);
     $router->resource('notices', NoticeController::class);
+
+    $router->get('system', 'HomeController@system')->name('admin.system');
+    $router->get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
 });

@@ -14,7 +14,8 @@
         "laravel/sanctum": "^2.9",
         "laravel/telescope": "^4.4",
         "laravel/tinker": "^2.5",
-        "overtrue/laravel-wechat": "^6.0"
+        "overtrue/laravel-wechat": "^6.0",
+        "rap2hpoutre/laravel-log-viewer": "^1.7"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.10",

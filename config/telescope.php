@@ -29,7 +29,7 @@ return [
     |
     */
 
-    'path' => env('TELESCOPE_PATH', 'telescope'),
+    'path' => env('TELESCOPE_PATH', '/admin/telescope'),
 
     /*
     |--------------------------------------------------------------------------
@@ -97,6 +97,7 @@ return [
 
     'ignore_paths' => [
         'nova-api*',
+        'admin/*',
     ],
 
     'ignore_commands' => [
