@@ -33,19 +33,23 @@ class UserController extends Controller
      */
     public function login(Request $request)
     {
-        $this->validate($request, [
+        $request->validate([
             'code'      =>  'required|string',
         ]);
 
         $miniProgram = \EasyWeChat::miniProgram();
-        $res = $miniProgram->auth->session($request->code);
+        $wxRes = $miniProgram->auth->session($request->code);
 
-        $user = User::firstOrCreate(['wx_open_id' => $res['openid']]);
-        $user->update(['last_active_at' => now()]);
+        if (isset($wxRes['openid'])) {
+            $user = User::firstOrCreate(['wx_open_id' => $wxRes['openid']]);
+            $user->update(['last_active_at' => now()]);
 
-        $user->token = $user->createToken('token')->plainTextToken;
+            $user->token = $user->createToken('token')->plainTextToken;
 
-        return new UserResource($user);
+            return new UserResource($user);
+        } else {
+            return response()->json(['message' => $wxRes['errmsg']], 500);
+        }
     }
 
     /**
