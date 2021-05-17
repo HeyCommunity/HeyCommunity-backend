@@ -16,6 +16,8 @@ class MakeNoticeEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
+    public $notice;
+
     public $type;
     public $user;
     public $sender;

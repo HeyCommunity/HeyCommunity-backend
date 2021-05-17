@@ -27,7 +27,7 @@ class writeNoticeTableHandler
      */
     public function handle(MakeNoticeEvent $event)
     {
-        Notice::create([
+        $notice = Notice::create([
             'type'      =>  $event->type,
             'user_id'   =>  $event->user->id,
             'sender_id' =>  $event->sender->id,
@@ -35,5 +35,7 @@ class writeNoticeTableHandler
             'entity_class'  => get_class($event->entity),
             'entity_id'  => class_basename($event->entity->id),
         ]);
+
+        $event->notice = $notice;
     }
 }
