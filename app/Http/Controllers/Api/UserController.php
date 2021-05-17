@@ -97,14 +97,14 @@ class UserController extends Controller
 
         $user = $request->user();
 
-        $user->update([
-            'avatar'            =>  $request->get('avatarUrl'),
-            'nickname'          =>  $request->get('nickName'),
-            'gender'            =>  $request->get('gender'),
-            'wx_user_info'      =>  $request->all(),
-        ]);
+        $data = ['wx_user_info' => $request->all()];
+        if ($request->get('avatarUrl')) $data['avatar'] = $request->get('avatarUrl');
+        if ($request->get('nickName')) $data['nickname'] = $request->get('nickName');
+        if ($request->get('gender')) $data['gender'] = $request->get('gender');
 
-        // $this->timProfileUpdate($user);
+        if ($data) {
+            $user->update($data);
+        }
 
         return new UserResource($user);
     }
