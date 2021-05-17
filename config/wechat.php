@@ -33,17 +33,18 @@ return [
          */
         'log' => [
             'default' => env('APP_DEBUG', false) ? 'dev' : 'prod', // 默认使用的 channel，生产环境可以改为下面的 prod
+            // 'default' => 'prod',
             'channels' => [
                 // 测试环境
                 'dev' => [
                     'driver' => 'single',
-                    'path' => '/tmp/easywechat.log',
+                    'path' => storage_path('logs/wechat/wechat.log'),
                     'level' => 'debug',
                 ],
                 // 生产环境
                 'prod' => [
                     'driver' => 'daily',
-                    'path' => '/tmp/easywechat.log',
+                    'path' => storage_path('logs/wechat/wechat.log'),
                     'level' => 'info',
                 ],
             ],
