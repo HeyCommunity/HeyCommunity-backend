@@ -31,7 +31,7 @@ class PostThumbController extends Controller
             // 创建 Thumb
             $thumb = $post->thumbs()->firstOrCreate([
                 'user_id'       =>  $user->id,
-                'entity_type'   =>  Post::class,
+                'entity_class'  =>  Post::class,
                 'type'          =>  $request->get('type'),
             ]);
 

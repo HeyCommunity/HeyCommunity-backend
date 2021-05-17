@@ -102,7 +102,7 @@ class User extends Authenticatable
      */
     public function postComments()
     {
-        return $this->hasMany(Comment::class)->where('entity_type', Post::class);
+        return $this->hasMany(Comment::class)->where('entity_class', Post::class);
     }
 
     /**

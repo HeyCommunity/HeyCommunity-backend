@@ -35,7 +35,7 @@ class CommentController extends Controller
 
         $comment = Comment::create([
             'user_id'       =>  $user->id,
-            'entity_type'   =>  get_class($entity),
+            'entity_class'  =>  get_class($entity),
             'entity_id'     =>  $entity->id,
             'content'       =>  $content,
             'root_id'       =>  $rootId,

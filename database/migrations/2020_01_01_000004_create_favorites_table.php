@@ -18,7 +18,7 @@ class CreateFavoritesTable extends Migration
 
             $table->bigInteger('user_id')->index()->unsigned()->nullable()->comment('User ID');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->string('entity_type')->index()->comment('Entity Type');
+            $table->string('entity_class')->index()->comment('Entity Class');
             $table->integer('entity_id')->index()->unsigned()->comment('Entity ID');
 
             $table->timestamps();

@@ -25,7 +25,7 @@ class PostCommentSeeder extends Seeder
                 'floor_number'  =>  1,
 
                 'user_id'       =>  $faker->randomElement($userIds),
-                'entity_type'   =>  Post::class,
+                'entity_class'  =>  Post::class,
                 'entity_id'     =>  $faker->randomElement($postIds),
 
                 'content'       =>  implode('', $faker->paragraphs(random_int(1, 3))),

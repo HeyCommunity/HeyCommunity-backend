@@ -32,7 +32,7 @@ class PostCommentController extends Controller
         $floorNumber = $post->comments()->withTrashed()->count() + 1;
         $comment = $post->comments()->create([
             'user_id'       =>  $user->id,
-            'entity_type'   =>  Post::class,
+            'entity_class'  =>  Post::class,
             'content'       =>  $request->get('content'),
             'floor_number'  =>  $floorNumber,
             'status'        =>  $commentStatus,

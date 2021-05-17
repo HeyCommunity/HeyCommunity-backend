@@ -12,7 +12,7 @@ class Thumb extends Model
      */
     public function entity()
     {
-        return $this->belongsTo($this->entity_type, 'entity_id')->withTrashed();
+        return $this->belongsTo($this->entity_class, 'entity_id')->withTrashed();
     }
 
     /**
@@ -21,7 +21,7 @@ class Thumb extends Model
     public static function deleteThumbHandler($entity, $type)
     {
         $count = Thumb::where([
-                'entity_type'   =>  get_class($entity),
+                'entity_class'  =>  get_class($entity),
                 'entity_id'     =>  $entity->id,
                 'type'          =>  $type
         ])->delete();
@@ -42,7 +42,7 @@ class Thumb extends Model
 
         $thumb = Thumb::firstOrCreate([
             'user_id'       =>  $user->id,
-            'entity_type'   =>  get_class($entity),
+            'entity_class'  =>  get_class($entity),
             'entity_id'     =>  $entity->id,
             'type'          =>  $type,
         ]);
@@ -57,7 +57,7 @@ class Thumb extends Model
         if ($type === 'thumb_up')  $reverseType = 'thumb_down';
         if ($type === 'thumb_down') $reverseType = 'thumb_up';
         if ($reverseType && $count = Thumb::where([
-            'entity_type'   =>  get_class($entity),
+            'entity_class'  =>  get_class($entity),
             'entity_id'     =>  $entity->id,
             'type'          =>  $reverseType
         ])->delete()) {

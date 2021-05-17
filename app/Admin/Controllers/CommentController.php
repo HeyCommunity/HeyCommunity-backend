@@ -32,7 +32,7 @@ class CommentController extends AdminController
         $grid->column('status', '状态')->select(Comment::$statuses);
         $grid->column('user.nickname', '发布者');
         $grid->column('content', '内容');
-        $grid->column('entity_type', '实体');
+        $grid->column('entity_class', '实体');
 
         $grid->column('thumb_up_num', '点赞数');
         $grid->column('comment_num', '评论数');
@@ -70,7 +70,7 @@ class CommentController extends AdminController
         $show->field('parent_id', 'Parent id');
         $show->field('floor_number', 'Floor number');
         $show->field('user_id', 'User id');
-        $show->field('entity_type', 'Entity type');
+        $show->field('entity_class', 'Entity type');
         $show->field('entity_id', 'Entity id');
         $show->field('content', 'Content');
         $show->field('thumb_up_num', 'Thumb up num');
@@ -97,7 +97,7 @@ class CommentController extends AdminController
         $form->number('parent_id', 'Parent id');
         $form->number('floor_number', 'Floor number');
         $form->number('user_id', 'User id');
-        $form->text('entity_type', 'Entity type');
+        $form->text('entity_class', 'Entity type');
         $form->number('entity_id', 'Entity id');
         $form->textarea('content', 'Content');
         $form->number('thumb_up_num', 'Thumb up num');

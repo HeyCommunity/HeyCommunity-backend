@@ -19,7 +19,7 @@ class Comment extends Model
      */
     public function entity()
     {
-        return $this->belongsTo($this->entity_type, 'entity_id')->withTrashed();
+        return $this->belongsTo($this->entity_class, 'entity_id')->withTrashed();
     }
 
     /**
@@ -35,7 +35,7 @@ class Comment extends Model
      */
     public function thumbs()
     {
-        return $this->hasMany(Thumb::class, 'entity_id')->where('entity_type', get_class($this));
+        return $this->hasMany(Thumb::class, 'entity_id')->where('entity_class', get_class($this));
     }
 
     /**
