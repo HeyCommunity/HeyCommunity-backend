@@ -7,6 +7,7 @@ use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
 {
@@ -46,8 +47,14 @@ class UserController extends Controller
 
             $user->token = $user->createToken('token')->plainTextToken;
 
+            // logging
+            Log::channel('hc')->info('[UserLogin-success] 用户登录成功', ['wxRes' => $wxRes, 'user' => $user->getAttributes(), 'headers' => $request->server]);
+
             return new UserResource($user);
         } else {
+            // logging
+            Log::channel('hc')->warning('[UserLogin-fail] 用户登录失败', ['wxRes' => $wxRes, 'headers' => $request->server]);
+
             return response()->json(['message' => $wxRes['errmsg']], 500);
         }
     }

@@ -41,6 +41,13 @@ return [
             'ignore_exceptions' => false,
         ],
 
+        'hc' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/hc/hc.log'),
+            'level' => env('LOG_LEVEL', 'debug'),
+            'days' => 14,
+        ],
+
         'single' => [
             'driver' => 'single',
             'path' => storage_path('logs/laravel.log'),
