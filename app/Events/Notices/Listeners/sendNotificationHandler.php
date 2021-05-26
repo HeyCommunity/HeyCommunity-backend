@@ -10,8 +10,13 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
-class sendNotificationHandler
+class sendNotificationHandler implements ShouldQueue
 {
+    protected $enable = false;
+    protected $thumbUpTempId;
+    protected $commentTempId;
+    protected $replyTempId;
+
     /**
      * Create the event listener.
      *
@@ -19,7 +24,10 @@ class sendNotificationHandler
      */
     public function __construct()
     {
-        //
+        $this->enable = config('system.wxapp.subscribe_message.enable');
+        $this->thumbUpTempId = config('system.wxapp.subscribe_message.thumb_up_temp_id');
+        $this->commentTempId = config('system.wxapp.subscribe_message.comment_temp_id');
+        $this->replyTempId = config('system.wxapp.subscribe_message.reply_temp_id');
     }
 
     /**
@@ -33,7 +41,6 @@ class sendNotificationHandler
         $notice = $event->notice;
 
         // 发送微信订阅消息
-        // TODO: 加入队列
         // TODO: 如果用户在线则不发送
         if ($notice->entity_class === Thumb::class) {
             $this->sendThumbUpNotice($notice);
@@ -47,7 +54,7 @@ class sendNotificationHandler
      */
     protected function sendThumbUpNotice($notice)
     {
-        if ($tmplId = config('system.wxapp.subscribe_message.post_thumb_up')) {
+        if ($tmplId = $this->thumbUpTempId) {
             try {
                 $post = $notice->entity->entity;
                 $sender = $notice->sender;
@@ -80,7 +87,7 @@ class sendNotificationHandler
      */
     protected function commentNoticeHandler($notice)
     {
-        if ($tmplId = config('system.wxapp.subscribe_message.post_comment')) {
+        if ($tmplId = $this->commentTempId) {
             $post = $notice->entity->entity;
             $comment = $notice->entity;
             $sender = $notice->sender;
