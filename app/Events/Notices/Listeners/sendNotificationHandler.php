@@ -57,6 +57,7 @@ class sendNotificationHandler implements ShouldQueue
                     break;
                 case 'post_comment':
                     $this->sendPostCommentNotice($notice);
+                    break;
                 case 'post_comment_reply':
                     $this->sendPostCommentReplyNotice($notice);
                     break;
