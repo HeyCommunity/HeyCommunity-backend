@@ -25,6 +25,7 @@ class Notice extends Model
      */
     public function entity()
     {
-        return $this->belongsTo($this->entity_class, 'entity_id')->withTrashed();
+        return $this->morphTo('entity', 'entity_class', 'entity_id')->withTrashed();
+        // return $this->belongsTo($this->entity_class, 'entity_id')->withTrashed();
     }
 }
