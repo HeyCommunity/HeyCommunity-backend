@@ -40,6 +40,17 @@ class PostController extends Controller
             'video_id'      =>  'nullable|integer',
         ]);
 
+        // 小程序 内容安全检测
+        $app = app('wechat.mini_program');
+        $result = $app->content_security->checkText($request->get('content'));
+        if ($result['errcode'] === 87014) {
+            return response([
+                'errcode'   =>  $result['errcode'],
+                'errmsg'    =>  $result['errmsg'],
+                'message'   =>  '动态内容包含违规敏感信息',
+            ], 403);
+        }
+
         $user = $request->user();
 
         $postStatus = 0;
@@ -113,7 +124,7 @@ class PostController extends Controller
     }
 
     /**
-     *
+     * Upload video
      */
     public function uploadVideo(Request $request)
     {
@@ -137,5 +148,35 @@ class PostController extends Controller
         ]);
 
         return new \App\Http\Resources\CommonResource($postVideo);
+    }
+
+    /**
+     * Upload image
+     */
+    public function uploadImage(Request $request)
+    {
+        $this->validate($request , [
+            'file'      =>  'required|image',
+        ]);
+
+        // 小程序 内容安全检测
+        $app = app('wechat.mini_program');
+        $result = $app->content_security->checkImage($request->file('file'));
+        if ($result['errcode'] === 87014) {
+            return response([
+                'errcode'   =>  $result['errcode'],
+                'errmsg'    =>  $result['errmsg'],
+                'message'   =>  '图片涉及违规敏感信息',
+            ], 403);
+        }
+
+        $user = $request->user();
+
+        $postImage = PostImage::create([
+            'user_id'       =>  $user->id,
+            'file_path'     =>  $request->file('file')->store('uploads/posts/images'),
+        ]);
+
+        return new \App\Http\Resources\CommonResource($postImage);
     }
 }

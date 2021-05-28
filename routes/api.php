@@ -5,7 +5,6 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Api\SystemController;
 use App\Http\Controllers\Api\Post\PostController;
-use App\Http\Controllers\Api\Post\PostImageController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\NoticeController;
 use App\Http\Controllers\Api\Common\ThumbController;
@@ -48,12 +47,12 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('posts/delete', [PostController::class, 'destroy']);
     Route::post('posts/hidden', [PostController::class, 'hidden']);
 
-    Route::post('post-images', [PostImageController::class, 'store']);
-    Route::post('post-video', [PostController::class, 'uploadVideo']);
+    Route::post('posts/upload-image', [PostController::class, 'uploadImage']);
+    Route::post('posts/upload-video', [PostController::class, 'uploadVideo']);
 
-    Route::post('post-thumbs', [ThumbController::class, 'postThumbHandler']);
-    Route::post('post-comment-thumbs', [ThumbController::class, 'postCommentThumbHandler']);
+    Route::post('posts/thumbs', [ThumbController::class, 'postThumbHandler']);
+    Route::post('posts/comments/thumbs', [ThumbController::class, 'postCommentThumbHandler']);
 
-    Route::post('post-comments', [CommentController::class, 'postCommentHandler']);
-    Route::post('post-comments/delete', [CommentController::class, 'postCommentDestroyHandler']);
+    Route::post('posts/comments', [CommentController::class, 'postCommentHandler']);
+    Route::post('posts/comments/delete', [CommentController::class, 'postCommentDestroyHandler']);
 });
