@@ -23,7 +23,7 @@ class PostResource extends JsonResource
 
         $data['user_nickname'] = $this->user->nickname;
         $data['user_avatar'] = $this->user->avatar;
-        $data['comments'] = CommentResource::collection($this->comments()->where('status', '!=', 0)->limit(3)->latest()->get());
+        $data['comments'] = $this->getComments();
         $data['images'] = CommonResource::collection($this->images);
         $data['video'] = new CommonResource($this->video);
 
@@ -37,5 +37,21 @@ class PostResource extends JsonResource
         }
 
         return $data;
+    }
+
+    /**
+     * getComments
+     */
+    protected function getComments()
+    {
+        $query = $this->comments()->where('status', '!=', 0)->latest();
+
+        if (request()->is('*posts/*')) {
+            $comments = $query->get();
+        } else {
+            $comments = $query->limit(3)->get();
+        }
+
+        return CommentResource::collection($comments);
     }
 }
