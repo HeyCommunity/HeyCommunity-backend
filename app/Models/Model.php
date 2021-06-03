@@ -16,6 +16,8 @@ class Model extends EloquentModel
     use HasFactory;
     use SoftDeletes;
 
+    protected $perPage = 10;
+
     // guarded
     protected $guarded = [];
 
