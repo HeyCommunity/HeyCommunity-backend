@@ -18,9 +18,10 @@ class ThumbController extends Controller
      */
     public function handler($entity, $type, $value, $eventType)
     {
+        $user = Auth::guard('sanctum')->user();
+
         if ($value) {
             $thumb = Thumb::createThumbHandler($entity, $type);
-            $user = Auth::guard('sanctum')->user();
 
             // 创建 Notice
             if ($entity->user_id != $user->id) {
@@ -29,7 +30,7 @@ class ThumbController extends Controller
 
             return new CommonResource($thumb);
         } else {
-            Thumb::deleteThumbHandler($entity, $type);
+            Thumb::deleteThumbHandler($entity, $type, $user);
 
             return response()->json(['message' => '取消点赞成功'], 202);
         }

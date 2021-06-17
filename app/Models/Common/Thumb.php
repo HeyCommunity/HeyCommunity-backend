@@ -19,12 +19,13 @@ class Thumb extends Model
     /**
      * Delete thumb Handler
      */
-    public static function deleteThumbHandler($entity, $type)
+    public static function deleteThumbHandler($entity, $type, $user)
     {
         $count = Thumb::where([
-                'entity_class'  =>  get_class($entity),
-                'entity_id'     =>  $entity->id,
-                'type'          =>  $type
+            'user_id'       =>  $user->id,
+            'entity_class'  =>  get_class($entity),
+            'entity_id'     =>  $entity->id,
+            'type'          =>  $type
         ])->delete();
 
         if ($count) {
