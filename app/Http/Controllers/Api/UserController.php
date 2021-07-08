@@ -5,9 +5,12 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
 use App\Models\User;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
@@ -98,7 +101,13 @@ class UserController extends Controller
         $user = $request->user();
 
         $data = ['wx_user_info' => $request->all()];
-        if ($request->get('avatarUrl')) $data['avatar'] = $request->get('avatarUrl');
+        if ($request->get('avatarUrl')) {
+            $client = new Client();
+            $avatarData = $client->request('get', $request->get('avatarUrl'))->getBody()->getContents();
+            $avatarPath = 'uploads/users/avatars/' . Str::random(40) . '.jpg';
+            Storage::put($avatarPath, $avatarData);
+            $data['avatar'] = $avatarPath;
+        }
         if ($request->get('nickName')) $data['nickname'] = $request->get('nickName');
         if ($request->get('gender')) $data['gender'] = $request->get('gender');
 

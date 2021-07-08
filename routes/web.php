@@ -15,5 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return redirect()->to('/admin');
-    return view('welcome');
+});
+
+Route::get('/dev', function() {
 });
