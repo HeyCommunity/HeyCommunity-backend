@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\SystemController;
 use App\Http\Controllers\Api\Post\PostController;
 use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\API\UserReportController;
 use App\Http\Controllers\Api\NoticeController;
 use App\Http\Controllers\Api\Common\ThumbController;
 use App\Http\Controllers\Api\Common\CommentController;
@@ -23,6 +24,8 @@ use App\Http\Controllers\Api\Common\CommentController;
 
 Route::get('/system/settings', [SystemController::class, 'settings']);
 
+##
+## User API
 Route::get('/users/login', [UserController::class, 'login']);
 Route::get('/users/ping', [UserController::class, 'ping']);
 Route::middleware(['auth:sanctum'])->group(function () {
@@ -32,6 +35,13 @@ Route::middleware(['auth:sanctum'])->group(function () {
 });
 
 
+##
+## UserReport API
+Route::post('user-reports', [UserReportController::class, 'store']);
+
+
+##
+## Notice API
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/notices', [NoticeController::class, 'index']);
     Route::post('/notices/set-isread', [NoticeController::class, 'setIsReadHandler']);
@@ -40,6 +50,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
 });
 
 
+##
+## Post API
 Route::get('posts', [PostController::class, 'index']);
 Route::get('posts/{post}', [PostController::class, 'show'])->where('post', '[0-9]+');
 Route::middleware(['auth:sanctum'])->group(function () {
