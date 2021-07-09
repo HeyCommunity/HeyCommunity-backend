@@ -3,6 +3,7 @@
 namespace App\Admin\Controllers;
 
 use App\Models\Common\Comment;
+use App\Models\Post\Post;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
@@ -32,7 +33,13 @@ class CommentController extends AdminController
         $grid->column('status', '状态')->select(Comment::$statuses);
         $grid->column('user.nickname', '发布者');
         $grid->column('content', '内容');
-        $grid->column('entity_class', '实体');
+        $grid->column('entity_class', '实体')->display(function () {
+            $maps = [
+                Post::class => '动态',
+                Comment::class => '评论',
+            ];
+            return "{$maps[$this->entity_class]} ({$this->entity_id})";
+        });
 
         $grid->column('thumb_up_num', '点赞数');
         $grid->column('comment_num', '评论数');
