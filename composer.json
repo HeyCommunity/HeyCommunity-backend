@@ -38,6 +38,7 @@
             "Tests\\": "tests/"
         },
         "files": [
+            "app/Helpers/system.php",
             "app/Helpers/utility.php",
             "app/Helpers/util.php",
             "app/Helpers/develop.php",

@@ -18,6 +18,6 @@ Route::group([
     $router->resource('comments', CommentController::class);
     $router->resource('notices', NoticeController::class);
 
-    $router->get('system', 'HomeController@system')->name('admin.system');
+    $router->get('system', 'SystemController@index')->name('admin.system');
     $router->get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
 });
