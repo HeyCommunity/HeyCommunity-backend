@@ -33,12 +33,8 @@ class CommentController extends AdminController
         $grid->column('status', '状态')->select(Comment::$statuses);
         $grid->column('user.nickname', '发布者');
         $grid->column('content', '内容');
-        $grid->column('entity_class', '实体')->display(function () {
-            $maps = [
-                Post::class => '动态',
-                Comment::class => '评论',
-            ];
-            return "{$maps[$this->entity_class]} ({$this->entity_id})";
+        $grid->column('entity_text', '目标实体')->display(function () {
+            return $this->getEntityTextForAdmin();
         });
 
         $grid->column('thumb_up_num', '点赞数');

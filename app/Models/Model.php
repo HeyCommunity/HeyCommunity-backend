@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
+use App\Models\Common\Comment;
 use App\Models\Common\Thumb;
+use App\Models\Post\Post;
 use Carbon\Carbon;
 use Encore\Admin\Traits\DefaultDatetimeFormat;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -21,6 +23,13 @@ class Model extends EloquentModel
     // guarded
     protected $guarded = [];
 
+    // entity maps
+    public $entityMaps = [
+        Post::class => '动态',
+        Thumb::class => '点赞',
+        Comment::class => '评论',
+    ];
+
     /**
      * Relation User
      */
@@ -35,6 +44,16 @@ class Model extends EloquentModel
     public function author()
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    /**
+     * Get entity text for admin
+     *
+     * @return string
+     */
+    public function getEntityTextForAdmin()
+    {
+        return $this->entityMaps[$this->entity_class] . " ($this->entity_id)";
     }
 
     /**

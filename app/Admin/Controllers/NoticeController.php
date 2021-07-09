@@ -32,7 +32,9 @@ class NoticeController extends AdminController
         $grid->column('user.nickname', '接收者');
         $grid->column('sender.nickname', '发送者');
         $grid->column('type', '类型')->using(Notice::$types);
-        $grid->column('entity_class', '实体');
+        $grid->column('entity_text', '实体')->display(function () {
+            return $this->getEntityTextForAdmin();
+        });
 
         $grid->column('read_at', '阅读时间')->default('-');
 

@@ -16,6 +16,7 @@ Route::group([
     $router->resource('users', UserController::class);
     $router->resource('posts', PostController::class);
     $router->resource('comments', CommentController::class);
+    $router->resource('thumbs', ThumbController::class);
     $router->resource('notices', NoticeController::class);
     $router->resource('user-reports', UserReportController::class);
 

@@ -33,7 +33,7 @@ CREATE TABLE `admin_menu` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -42,7 +42,7 @@ CREATE TABLE `admin_menu` (
 
 LOCK TABLES `admin_menu` WRITE;
 /*!40000 ALTER TABLE `admin_menu` DISABLE KEYS */;
-INSERT INTO `admin_menu` VALUES (1,2,15,'Dashboard','fa-bar-chart','/',NULL,NULL,'2021-05-14 06:09:18'),(2,0,9,'Admin','fa-tasks','',NULL,NULL,'2021-05-14 06:09:18'),(3,2,10,'Users','fa-users','auth/users',NULL,NULL,'2021-05-14 06:09:18'),(4,2,11,'Roles','fa-user','auth/roles',NULL,NULL,'2021-05-14 06:09:18'),(5,2,12,'Permission','fa-ban','auth/permissions',NULL,NULL,'2021-05-14 06:09:18'),(6,2,13,'Menu','fa-bars','auth/menu',NULL,NULL,'2021-05-14 06:09:18'),(7,2,14,'Operation log','fa-history','auth/logs',NULL,NULL,'2021-05-14 06:09:18'),(8,0,1,'用户管理','fa-users','/users',NULL,'2021-04-15 06:48:03','2021-04-15 06:48:09'),(9,0,2,'动态管理','fa-rss','/posts',NULL,'2021-04-15 06:49:03','2021-04-15 06:49:09'),(10,0,5,'系统配置','fa-cog','/system',NULL,'2021-04-27 08:41:53','2021-05-14 06:09:18'),(11,15,8,'TeleScope','fa-bug','/telescope',NULL,'2021-05-10 04:54:37','2021-05-14 06:09:18'),(12,0,3,'评论管理','fa-comments','/comments',NULL,'2021-05-10 04:55:15','2021-05-10 04:59:05'),(13,0,4,'通知管理','fa-pied-piper-alt','/notices',NULL,'2021-05-10 04:58:14','2021-05-10 04:59:05'),(14,15,7,'Logs','fa-file-text-o','/logs',NULL,'2021-05-14 05:01:22','2021-05-14 06:09:18'),(15,0,6,'运维管理','fa-ship',NULL,NULL,'2021-05-14 06:09:03','2021-05-14 06:09:18');
+INSERT INTO `admin_menu` VALUES (1,2,17,'Dashboard','fa-bar-chart','/',NULL,NULL,'2021-07-09 16:19:35'),(2,0,11,'Admin','fa-tasks','',NULL,NULL,'2021-07-09 16:19:35'),(3,2,12,'Users','fa-users','auth/users',NULL,NULL,'2021-07-09 16:19:35'),(4,2,13,'Roles','fa-user','auth/roles',NULL,NULL,'2021-07-09 16:19:35'),(5,2,14,'Permission','fa-ban','auth/permissions',NULL,NULL,'2021-07-09 16:19:35'),(6,2,15,'Menu','fa-bars','auth/menu',NULL,NULL,'2021-07-09 16:19:35'),(7,2,16,'Operation log','fa-history','auth/logs',NULL,NULL,'2021-07-09 16:19:35'),(8,0,1,'用户管理','fa-users','/users',NULL,'2021-04-15 06:48:03','2021-04-15 06:48:09'),(9,0,2,'动态管理','fa-rss','/posts',NULL,'2021-04-15 06:49:03','2021-04-15 06:49:09'),(10,0,7,'系统配置','fa-cog','/system',NULL,'2021-04-27 08:41:53','2021-07-09 16:19:35'),(11,15,10,'TeleScope','fa-bug','/telescope',NULL,'2021-05-10 04:54:37','2021-07-09 16:19:35'),(12,0,4,'评论管理','fa-comments','/comments',NULL,'2021-05-10 04:55:15','2021-07-09 16:16:51'),(13,0,5,'通知管理','fa-pied-piper-alt','/notices',NULL,'2021-05-10 04:58:14','2021-07-09 16:16:51'),(14,15,9,'Logs','fa-file-text-o','/logs',NULL,'2021-05-14 05:01:22','2021-07-09 16:19:35'),(15,0,8,'运维管理','fa-ship',NULL,NULL,'2021-05-14 06:09:03','2021-07-09 16:19:35'),(16,0,3,'点赞管理','fa-thumbs-up','thumbs',NULL,'2021-07-09 16:16:19','2021-07-09 16:16:51'),(17,0,6,'用户报告','fa-bug','user-reports',NULL,'2021-07-09 16:19:29','2021-07-09 16:19:35');
 /*!40000 ALTER TABLE `admin_menu` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -249,4 +249,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-05-14 14:09:48
+-- Dump completed on 2021-07-10  0:38:01
