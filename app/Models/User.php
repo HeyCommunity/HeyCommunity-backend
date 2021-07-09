@@ -28,7 +28,8 @@ class User extends Authenticatable
 
     public static $ugcSafetyLevel = [
         0   =>  '未设定',
-        1   =>  '等级 1',
+        1   =>  '安全',
+        -1  =>  '不安全',
     ];
 
     /**
@@ -64,6 +65,20 @@ class User extends Authenticatable
     public function getAvatarAttribute($value)
     {
         return getAssetFullPath($value);
+    }
+
+    /**
+     * Get UGC Status
+     */
+    public function getUgcStatus()
+    {
+        $status = 0;
+
+        if (! config('system.ugc_audit', true)) $status = 1;
+        if ($this->is_admin || $this->ugc_safety_level > 0) $status = 1;
+        if ($this->ugc_safety_level < 0) $status = 0;
+
+        return $status;
     }
 
     /**

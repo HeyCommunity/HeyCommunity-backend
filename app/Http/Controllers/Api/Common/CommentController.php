@@ -31,10 +31,6 @@ class CommentController extends Controller
 
         $user = Auth::guard('sanctum')->user();
 
-        $commentStatus = 0;
-        if (! config('system.ugc_audit', true)) $commentStatus = 1;
-        if ($user->is_admin || $user->ugc_safety_level) $commentStatus = 1;
-
         $rootId = null;
         $parentId = null;
         $floorNumber = $entity->comments()->withTrashed()->count() + 1;
@@ -52,7 +48,7 @@ class CommentController extends Controller
             'root_id'       =>  $rootId,
             'parent_id'     =>  $parentId,
             'floor_number'  =>  $floorNumber,
-            'status'        =>  $commentStatus,
+            'status'        =>  $user->getUgcStatus(),
         ]);
 
         $entity->increment('comment_num');
