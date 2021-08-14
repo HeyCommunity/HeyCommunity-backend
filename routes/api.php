@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\SystemController;
 use App\Http\Controllers\Api\Post\PostController;
 use App\Http\Controllers\Api\UserController;
-use App\Http\Controllers\API\UserReportController;
+use App\Http\Controllers\Api\UserReportController;
 use App\Http\Controllers\Api\NoticeController;
 use App\Http\Controllers\Api\Common\ThumbController;
 use App\Http\Controllers\Api\Common\CommentController;
