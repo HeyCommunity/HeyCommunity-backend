@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\PostResource;
 use App\Http\Resources\UserResource;
+use App\Models\Post\Post;
 use App\Models\User;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
@@ -74,7 +76,25 @@ class UserController extends Controller
     }
 
     /**
-     * 获取信息
+     * 用户信息
+     */
+    public function show(Request $request, User $user)
+    {
+        return new UserResource($user);
+    }
+
+    /**
+     * 用户发布的动态
+     */
+    public function posts(Request $request, User $user)
+    {
+        $posts = Post::where('status', '1')->where('user_id', $user->id)->latest()->paginate();
+
+        return PostResource::collection($posts);
+    }
+
+    /**
+     * 我的信息
      */
     public function mineShow(Request $request)
     {

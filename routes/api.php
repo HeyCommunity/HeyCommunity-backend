@@ -28,6 +28,8 @@ Route::get('/system/settings', [SystemController::class, 'settings']);
 ## User API
 Route::get('/users/login', [UserController::class, 'login']);
 Route::get('/users/ping', [UserController::class, 'ping']);
+Route::get('/users/{user}', [UserController::class, 'show'])->where('user', '[0-9]+');
+Route::get('/users/{user}/posts', [UserController::class, 'posts'])->where('user', '[0-9]+');
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/users/logout', [UserController::class, 'logout']);
     Route::get('/users/mine', [UserController::class, 'mineShow']);
