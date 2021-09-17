@@ -144,7 +144,7 @@ class UserController extends Controller
     public function mineInfoUpdate(Request $request)
     {
         $request->validate([
-            'nickname'      =>  'nullable|string|min:2|max:10',
+            'nickname'      =>  'required|string|min:2|max:10',
             'bio'           =>  'nullable|string|max:20',
             'gender'        =>  'nullable|integer|in:0,1,2',
             'phone'         =>  'nullable|phone',
@@ -156,6 +156,60 @@ class UserController extends Controller
         $data = $request->only(['nickname', 'bio', 'gender', 'phone', 'email', 'intro']);
 
         $user->update($data);
+
+        return new UserResource($user);
+    }
+
+    /**
+     * 更新我的头像
+     */
+    public function mineAvatarUpdate(Request $request)
+    {
+        $request->validate([
+            'file'      =>  'required|image',
+        ]);
+
+        // 小程序 内容安全检测
+        $app = app('wechat.mini_program');
+        $result = $app->content_security->checkImage($request->file('file'));
+        if ($result['errcode'] === 87014) {
+            return response([
+                'errcode'   =>  $result['errcode'],
+                'errmsg'    =>  $result['errmsg'],
+                'message'   =>  '图片涉及违规敏感信息',
+            ], 403);
+        }
+
+        $user = $request->user();
+        $filePath = $request->file('file')->store('uploads/users/avatars');
+        $user->update(['avatar' => $filePath]);
+
+        return new UserResource($user);
+    }
+
+    /**
+     * 更新我的封面
+     */
+    public function mineCoverUpdate(Request $request)
+    {
+        $request->validate([
+            'file'      =>  'required|image',
+        ]);
+
+        // 小程序 内容安全检测
+        $app = app('wechat.mini_program');
+        $result = $app->content_security->checkImage($request->file('file'));
+        if ($result['errcode'] === 87014) {
+            return response([
+                'errcode'   =>  $result['errcode'],
+                'errmsg'    =>  $result['errmsg'],
+                'message'   =>  '图片涉及违规敏感信息',
+            ], 403);
+        }
+
+        $user = $request->user();
+        $filePath = $request->file('file')->store('uploads/users/cover');
+        $user->update(['cover' => $filePath]);
 
         return new UserResource($user);
     }

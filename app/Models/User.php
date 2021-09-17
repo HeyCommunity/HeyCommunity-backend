@@ -68,6 +68,14 @@ class User extends Authenticatable
     }
 
     /**
+     * Get cover attribute
+     */
+    public function getCoverAttribute($value)
+    {
+        return getAssetFullPath($value);
+    }
+
+    /**
      * Get UGC Status
      */
     public function getUgcStatus()
