@@ -1,6 +1,11 @@
 <?php
 
 return [
+    'cdn'   =>  [
+        'enable'    =>  env('CDN_ENABLE', false),
+        'domain'    =>  env('CDN_DOMAIN', 'https://your-cdn-domain.com')
+    ],
+
     'ugc_audit'     =>  env('SYSTEM_UGC_AUDIT', true),
 
     'wxapp'     =>  [
