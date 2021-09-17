@@ -137,4 +137,26 @@ class UserController extends Controller
 
         return new UserResource($user);
     }
+
+    /**
+     * 更新我的资料
+     */
+    public function mineInfoUpdate(Request $request)
+    {
+        $request->validate([
+            'nickname'      =>  'nullable|string|min:2|max:10',
+            'bio'           =>  'nullable|string|max:20',
+            'gender'        =>  'nullable|integer|in:0,1,2',
+            'phone'         =>  'nullable|phone',
+            'email'         =>  'nullable|email',
+            'intro'         =>  'nullable|string|max:300',
+        ]);
+
+        $user = $request->user();
+        $data = $request->only(['nickname', 'bio', 'gender', 'phone', 'email', 'intro']);
+
+        $user->update($data);
+
+        return new UserResource($user);
+    }
 }

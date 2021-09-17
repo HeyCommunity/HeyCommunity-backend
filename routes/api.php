@@ -34,6 +34,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/users/logout', [UserController::class, 'logout']);
     Route::get('/users/mine', [UserController::class, 'mineShow']);
     Route::post('/users/mine', [UserController::class, 'mineUpdate']);
+    Route::post('/users/mine-avatar', [UserController::class, 'mineAvatarUpdate']);
+    Route::post('/users/mine-cover', [UserController::class, 'mineCoverUpdate']);
+    Route::post('/users/mine-info', [UserController::class, 'mineInfoUpdate']);
 });
 
 
