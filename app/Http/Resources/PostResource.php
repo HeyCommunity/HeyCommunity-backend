@@ -23,7 +23,9 @@ class PostResource extends JsonResource
 
         $data['user_nickname'] = $this->user->nickname;
         $data['user_avatar'] = $this->user->avatar;
+        $data['user_bio'] = $this->user->bio;
         $data['comments'] = $this->getComments();
+        $data['thumbs'] = $this->getThumbs();
         $data['images'] = CommonResource::collection($this->images);
         $data['video'] = new CommonResource($this->video);
 
@@ -53,5 +55,26 @@ class PostResource extends JsonResource
         }
 
         return CommentResource::collection($comments);
+    }
+
+    /**
+     * getThumbs
+     */
+    protected function getThumbs()
+    {
+        $thumbs = $this->thumbs()->latest()->get();
+
+        $result = [];
+        foreach ($thumbs as $index => $thumb) {
+            $result[$index] = [
+                'id'            =>  $thumb->id,
+                'user_nickname' =>  $thumb->user->nickname,
+                'user_avatar'   =>  $thumb->user->avatar,
+                'user_bio'      =>  $thumb->user->bio,
+                'created_at'    =>  $thumb->created_at,
+            ];
+        }
+
+        return $result;
     }
 }
