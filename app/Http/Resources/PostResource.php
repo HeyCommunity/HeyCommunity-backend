@@ -5,6 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class PostResource extends JsonResource
 {
@@ -26,6 +27,7 @@ class PostResource extends JsonResource
         $data['user_bio'] = $this->user->bio;
         $data['comments'] = $this->getComments();
         $data['thumbs'] = $this->getThumbs();
+        $data['content_preview'] = $this->getContentPreview();
         $data['images'] = CommonResource::collection($this->images);
         $data['video'] = new CommonResource($this->video);
 
@@ -39,6 +41,14 @@ class PostResource extends JsonResource
         }
 
         return $data;
+    }
+
+    /**
+     * getContentPreview
+     */
+    protected function getContentPreview()
+    {
+        return Str::limit($this->content, 260);
     }
 
     /**
