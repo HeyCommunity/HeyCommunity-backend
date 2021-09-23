@@ -78,6 +78,7 @@ class PostResource extends JsonResource
         foreach ($thumbs as $index => $thumb) {
             $result[$index] = [
                 'id'            =>  $thumb->id,
+                'user_id'       =>  $thumb->user->id,
                 'user_nickname' =>  $thumb->user->nickname,
                 'user_avatar'   =>  $thumb->user->avatar,
                 'user_bio'      =>  $thumb->user->bio,
