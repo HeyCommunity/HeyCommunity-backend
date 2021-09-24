@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Setting;
+
 /**
  * Update env file
  *
@@ -66,4 +68,31 @@ function systemUpdateEnvironmentValue(array $values)
     $str = substr($str, 0, -1);
     if (!file_put_contents($envFile, $str)) return false;
     return true;
+}
+
+/**
+ * 获取 setting value
+ *
+ * @param $key
+ * @param $defaultValue
+ * @return string
+ */
+function getSettingValueByKey($key, $defaultValue)
+{
+    $setting = Setting::where('key', $key)->first();
+
+    if ($setting) return $setting->value;
+
+    return $defaultValue;
+}
+
+/**
+ * 更新 setting
+ *
+ * @param $key
+ * @param $value
+ */
+function updateSettingColumn($key, $value)
+{
+    Setting::where('key', $key)->update(['value' => $value]);
 }
