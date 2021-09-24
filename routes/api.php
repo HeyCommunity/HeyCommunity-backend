@@ -23,6 +23,7 @@ use App\Http\Controllers\Api\Common\CommentController;
 */
 
 Route::get('/system/settings', [SystemController::class, 'settings']);
+Route::get('/system/about', [SystemController::class, 'about']);
 
 ##
 ## User API

@@ -77,7 +77,7 @@ function systemUpdateEnvironmentValue(array $values)
  * @param $defaultValue
  * @return string
  */
-function getSettingValueByKey($key, $defaultValue)
+function getSettingValueByKey($key, $defaultValue = null)
 {
     $setting = Setting::where('key', $key)->first();
 
