@@ -56,7 +56,7 @@ class PostController extends Controller
         $post = Post::create([
             'user_id'   =>  $user->id,
             'content'   =>  $request->get('content'),
-            'status'    =>  $user->getUgcStatus(),
+            'status'    =>  1,
         ]);
 
         if ($request->get('image_ids')) {

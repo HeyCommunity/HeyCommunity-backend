@@ -6,21 +6,27 @@ use App\Events\Notices\MakeNoticeEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\CommentResource;
 use App\Models\Common\Comment;
-use App\Models\Post\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Str;
+use Modules\Post\Entities\Post;
 
 class CommentController extends Controller
 {
     /**
-     * Handler
+     * Store
      */
-    public function handler($entity, $content, $noticeType, $parentComment = null)
+    public function store(Request $request)
     {
+        $this->validate($request, [
+            'entity_type'   =>  'required|string',
+            'entity_id'     =>  'required_without:comment_id|integer',
+            'comment_id'    =>  'required_without:entity_id|integer',
+            'content'       =>  'required|string',
+        ]);
+
         // 小程序 内容安全检测
         $app = app('wechat.mini_program');
-        $result = $app->content_security->checkText($content);
+        $result = $app->content_security->checkText($request->get('content'));
         if ($result['errcode'] === 87014) {
             return response([
                 'errcode'   =>  $result['errcode'],
@@ -29,8 +35,17 @@ class CommentController extends Controller
             ], 403);
         }
 
-        $user = Auth::guard('sanctum')->user();
+        if ($request->get('comment_id')) {
+            $noticeType = $request->get('entity_type') . '_comment_reply';
+            $parentComment = Comment::findOrFail($request->get('comment_id'));
+            $entity = $parentComment->entity;
+        } else {
+            $noticeType = $request->get('entity_type') . '_comment';
+            $parentComment = null;
+            $entity = $this->getEntity($request);
+        }
 
+        $user = Auth::guard('sanctum')->user();
         $rootId = null;
         $parentId = null;
         $floorNumber = $entity->comments()->withTrashed()->count() + 1;
@@ -44,11 +59,11 @@ class CommentController extends Controller
             'user_id'       =>  $user->id,
             'entity_class'  =>  get_class($entity),
             'entity_id'     =>  $entity->id,
-            'content'       =>  $content,
+            'content'       =>  $request->get('content'),
             'root_id'       =>  $rootId,
             'parent_id'     =>  $parentId,
             'floor_number'  =>  $floorNumber,
-            'status'        =>  $user->getUgcStatus(),
+            'status'        =>  1,
         ]);
 
         $entity->increment('comment_num');
@@ -66,60 +81,28 @@ class CommentController extends Controller
             ));
         }
 
-
         $comment->refresh();
         return new CommentResource($comment);
     }
 
     /**
-     * PostCommentHandler
+     * getEntity
      */
-    public function postCommentHandler(Request $request)
-    {
-        $this->validate($request, [
-            'post_id'       =>  'required_without:comment_id|integer',
-            'comment_id'    =>  'required_without:post_id|integer',
-            'content'       =>  'required|string',
-        ]);
-
-        if ($request->get('comment_id')) {
-            $noticeType = 'post_comment_reply';
-            $comment = Comment::findOrFail($request->get('comment_id'));
-            $post = $comment->entity;
-        } else {
-            $noticeType = 'post_comment';
-            $comment = null;
-            $post = Post::findOrFail($request->get('post_id'));
-        }
-
-        return $this->handler($post, $request->get('content'), $noticeType, $comment);
-    }
-
-    /**
-     * PostComment destroy handler
-     */
-    public function postCommentDestroyHandler(Request $request)
+    protected function getEntity($request)
     {
         $request->validate([
-            'id'    =>  'required|integer',
+            'entity_type'   =>  'required|string',
         ]);
 
-        $user = $request->user();
-        $comment = Comment::findOrFail($request->get('id'));
-
-        //  判断是作者或管理员
-        if ($comment->user_id === $user->id || $user->is_admin) {
-            $entity = $comment->entity;
-            $parent = $comment->parent;
-
-            if ($comment->delete()) {
-                if ($entity) $entity->decrement('comment_num');
-                if ($parent) $parent->decrement('comment_num');
-
-                return response()->json(['message' => '操作成功'], 202);
-            }
-        } else {
-            return response()->json(['message' => '无权执行此操作'], 403);
+        switch ($request->get('entity_type')) {
+            case 'post':
+                $entityQuery = Post::query();
+                break;
+            default:
+                abort('entity_type does not exist');
+                break;
         }
+
+        return $entityQuery->findOrFail($request->get('entity_id'));
     }
 }
