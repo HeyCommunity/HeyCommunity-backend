@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Post;
+namespace Modules\Post\Entities;
 
 use App\Models\Common\Comment;
 use App\Models\Common\Thumb;
@@ -21,6 +21,14 @@ class Post extends Model
         1       =>  '已发布',
         2       =>  '已下架',
     ];
+
+    /**
+     * newFactory
+     */
+    protected static function newFactory()
+    {
+        return \Modules\Post\Database\factories\PostFactory::new();
+    }
 
     /**
      * Related PostImage

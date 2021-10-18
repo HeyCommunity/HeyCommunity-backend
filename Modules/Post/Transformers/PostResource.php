@@ -1,7 +1,9 @@
 <?php
 
-namespace App\Http\Resources;
+namespace Modules\Post\Transformers;
 
+use App\Http\Resources\CommentResource;
+use App\Http\Resources\CommonResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;

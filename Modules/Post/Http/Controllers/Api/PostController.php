@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Api\Post;
+namespace Modules\Post\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\PostResource;
-use App\Models\Post\Post;
-use App\Models\Post\PostImage;
-use App\Models\Post\PostVideo;
 use Illuminate\Http\Request;
+use Modules\Post\Entities\Post;
+use Modules\Post\Entities\PostImage;
+use Modules\Post\Entities\PostVideo;
+use Modules\Post\Transformers\PostResource;
 
 class PostController extends Controller
 {

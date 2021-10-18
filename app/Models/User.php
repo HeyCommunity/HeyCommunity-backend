@@ -4,7 +4,6 @@ namespace App\Models;
 
 use App\Models\Common\Comment;
 use App\Models\Common\Thumb;
-use App\Models\Post\Post;
 use Encore\Admin\Traits\DefaultDatetimeFormat;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -12,6 +11,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
 use Laravel\Sanctum\HasApiTokens;
+use Modules\Post\Entities\Post;
 
 class User extends Authenticatable
 {
@@ -87,14 +87,6 @@ class User extends Authenticatable
         if ($this->ugc_safety_level < 0) $status = 0;
 
         return $status;
-    }
-
-    /**
-     * Related Post
-     */
-    public function posts()
-    {
-        return $this->hasMany(Post::class);
     }
 
     /**

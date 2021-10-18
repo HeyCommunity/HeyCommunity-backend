@@ -4,12 +4,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Api\SystemController;
-use App\Http\Controllers\Api\Post\PostController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\UserReportController;
 use App\Http\Controllers\Api\NoticeController;
-use App\Http\Controllers\Api\Common\ThumbController;
-use App\Http\Controllers\Api\Common\CommentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,12 +37,6 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/users/mine-info', [UserController::class, 'mineInfoUpdate']);
 });
 
-
-##
-## UserReport API
-Route::post('user-reports', [UserReportController::class, 'store']);
-
-
 ##
 ## Notice API
 Route::middleware(['auth:sanctum'])->group(function () {
@@ -55,22 +46,6 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/notices/delete', [NoticeController::class, 'deleteHandler']);
 });
 
-
 ##
-## Post API
-Route::get('posts', [PostController::class, 'index']);
-Route::get('posts/{post}', [PostController::class, 'show'])->where('post', '[0-9]+');
-Route::middleware(['auth:sanctum'])->group(function () {
-    Route::post('posts', [PostController::class, 'store']);
-    Route::post('posts/delete', [PostController::class, 'destroy']);
-    Route::post('posts/hidden', [PostController::class, 'hidden']);
-
-    Route::post('posts/upload-image', [PostController::class, 'uploadImage']);
-    Route::post('posts/upload-video', [PostController::class, 'uploadVideo']);
-
-    Route::post('posts/thumbs', [ThumbController::class, 'postThumbHandler']);
-    Route::post('posts/comments/thumbs', [ThumbController::class, 'postCommentThumbHandler']);
-
-    Route::post('posts/comments', [CommentController::class, 'postCommentHandler']);
-    Route::post('posts/comments/delete', [CommentController::class, 'postCommentDestroyHandler']);
-});
+## UserReport API
+Route::post('user-reports', [UserReportController::class, 'store']);

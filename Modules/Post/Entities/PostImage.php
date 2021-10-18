@@ -1,11 +1,19 @@
 <?php
 
-namespace App\Models\Post;
+namespace Modules\Post\Entities;
 
 use App\Models\Model;
 
 class PostImage extends Model
 {
+    /**
+     * newFactory
+     */
+    protected static function newFactory()
+    {
+        return \Modules\Post\Database\factories\PostImageFactory::new();
+    }
+
     /**
      * Get file_path attribute
      */
