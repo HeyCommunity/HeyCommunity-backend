@@ -7,6 +7,8 @@ use App\Http\Controllers\Api\SystemController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\UserReportController;
 use App\Http\Controllers\Api\NoticeController;
+use App\Http\Controllers\Api\CommentController;
+use App\Http\Controllers\Api\ThumbController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +23,13 @@ use App\Http\Controllers\Api\NoticeController;
 
 Route::get('/system/settings', [SystemController::class, 'settings']);
 Route::get('/system/about', [SystemController::class, 'about']);
+
+##
+## Common API
+Route::middleware(['auth:sanctum'])->group(function () {
+    Route::post('comments', [CommentController::class, 'store']);
+    Route::post('thumbs', [ThumbController::class, 'store']);
+});
 
 ##
 ## User API
