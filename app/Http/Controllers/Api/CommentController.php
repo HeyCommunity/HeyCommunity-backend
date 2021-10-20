@@ -8,7 +8,6 @@ use App\Http\Resources\CommentResource;
 use App\Models\Common\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Modules\Post\Entities\Post;
 
 class CommentController extends Controller
 {
@@ -18,13 +17,14 @@ class CommentController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'entity_type'   =>  'required|string',
-            'entity_id'     =>  'required_without:comment_id|integer',
-            'comment_id'    =>  'required_without:entity_id|integer',
+            'entity_class'  =>  'required|string',
+            'entity_id'     =>  'required_without:parent_id|integer',
+            'parent_id'     =>  'required_without:entity_id|integer|nullable',
             'content'       =>  'required|string',
         ]);
 
         // 小程序 内容安全检测
+        // TODO: 封闭在工具函数中
         $app = app('wechat.mini_program');
         $result = $app->content_security->checkText($request->get('content'));
         if ($result['errcode'] === 87014) {
@@ -35,15 +35,17 @@ class CommentController extends Controller
             ], 403);
         }
 
-        if ($request->get('comment_id')) {
-            $noticeType = $request->get('entity_type') . '_comment_reply';
-            $parentComment = Comment::findOrFail($request->get('comment_id'));
-            $entity = $parentComment->entity;
-        } else {
-            $noticeType = $request->get('entity_type') . '_comment';
-            $parentComment = null;
-            $entity = $this->getEntity($request);
-        }
+        // 实体
+        $entityClass = $request->get('entity_class');
+        $entity = $entityClass::findOrFail($request->get('entity_id'));
+
+        // 实体类型和通知类型
+        $entityType = mb_strtolower(class_basename($entity));
+        $noticeType = $request->get('parent_id') ? $entityType . '_comment_reply' : $entityType . '_comment';
+
+        // 父评论
+        $parentComment = null;
+        if ($request->get('parent_id')) $parentComment = Comment::findOrFail($request->get('parent_id'));
 
         $user = Auth::guard('sanctum')->user();
         $rootId = null;
@@ -83,26 +85,5 @@ class CommentController extends Controller
 
         $comment->refresh();
         return new CommentResource($comment);
-    }
-
-    /**
-     * getEntity
-     */
-    protected function getEntity($request)
-    {
-        $request->validate([
-            'entity_type'   =>  'required|string',
-        ]);
-
-        switch ($request->get('entity_type')) {
-            case 'post':
-                $entityQuery = Post::query();
-                break;
-            default:
-                abort('entity_type does not exist');
-                break;
-        }
-
-        return $entityQuery->findOrFail($request->get('entity_id'));
     }
 }
