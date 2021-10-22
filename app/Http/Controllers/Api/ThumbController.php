@@ -19,17 +19,22 @@ class ThumbController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'entity_type'   =>  'required|string',
+            'entity_class'  =>  'required|string',
             'entity_id'     =>  'required|integer',
             'type'          =>  'required|string|in:thumb_up,thumb_down',
             'value'         =>  'required|boolean',
         ]);
 
         $user = Auth::guard('sanctum')->user();
-        $entity = $this->getEntity($request);
-        $entityType = $request->get('entity_type');
         $type = $request->get('type');
         $value = $request->get('value');
+
+        // 实体
+        $entityClass = $request->get('entity_class');
+        $entity = $entityClass::findOrFail($request->get('entity_id'));
+
+        // 实体类型和通知类型
+        $entityType = mb_strtolower(class_basename($entity));
         $noticeType = $entityType . '_thumb_up';
 
         if ($value) {
