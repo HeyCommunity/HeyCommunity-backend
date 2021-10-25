@@ -86,4 +86,27 @@ class CommentController extends Controller
         $comment->refresh();
         return new CommentResource($comment);
     }
+
+    /**
+     * Destory
+     */
+    public function destory(Request $request)
+    {
+        $request->validate([
+            'id'        =>  'required|integer',
+        ]);
+
+        $user = $request->user();
+        $comment = Comment::findOrFail($request->get('id'));
+
+        //  判断是作者或管理员
+        if ($comment->user_id === $user->id || $user->is_admin) {
+            $comment->delete();
+
+            return response()->json(['message' => '操作成功'], 202);
+        } else {
+            return response()->json(['message' => '无权执行此操作'], 403);
+        }
+
+    }
 }

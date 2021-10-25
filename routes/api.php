@@ -28,6 +28,7 @@ Route::get('/system/about', [SystemController::class, 'about']);
 ## Common API
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('comments', [CommentController::class, 'store']);
+    Route::post('comments/delete', [CommentController::class, 'destory']);
     Route::post('thumbs', [ThumbController::class, 'store']);
 });
 

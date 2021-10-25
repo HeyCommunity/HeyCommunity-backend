@@ -90,6 +90,7 @@ class PostDatabaseSeeder extends Seeder
 
                 'content'       =>  implode('', $faker->paragraphs(random_int(1, 3))),
 
+                'status'        =>  1,
                 'created_at'    =>  $faker->dateTimeThisMonth(),
                 'updated_at'    =>  $faker->dateTimeThisMonth(),
             ];

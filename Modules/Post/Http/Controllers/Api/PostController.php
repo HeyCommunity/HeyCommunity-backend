@@ -22,6 +22,18 @@ class PostController extends Controller
     }
 
     /**
+     * 用户的动态列表
+     */
+    public function userPosts(Request $request)
+    {
+        $request->validate(['user_id' => 'required|integer']);
+
+        $posts = Post::where('status', '1')->where('user_id', $request->get('user_id'))->latest()->paginate();
+
+        return PostResource::collection($posts);
+    }
+
+    /**
      * Show
      */
     public function show(Request $request, Post $post)

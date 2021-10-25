@@ -15,6 +15,7 @@ use Modules\Post\Http\Controllers\Api\PostController;
 */
 
 Route::get('posts', [PostController::class, 'index']);
+Route::get('posts/user-posts', [PostController::class, 'userPosts']);
 Route::get('posts/{post}', [PostController::class, 'show'])->where('post', '[0-9]+');
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('posts', [PostController::class, 'store']);
