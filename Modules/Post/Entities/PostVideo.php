@@ -19,6 +19,6 @@ class PostVideo extends Model
      */
     public function getFilePathAttribute($value)
     {
-        return getAssetFullPath($value);
+        return getVideoFullPath($value);
     }
 }
