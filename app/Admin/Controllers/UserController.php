@@ -30,7 +30,6 @@ class UserController extends AdminController
         $grid->model()->latest();
 
         $grid->column('id', 'ID')->sortable();
-        $grid->column('ugc_safety_level', 'UGC 等级')->editable('select', User::$ugcSafetyLevel);
         $grid->column('avatar', '头像')->image(null, 20, 20);
         $grid->column('nickname', '昵称');
         $grid->column('gender', '性别')->using(User::$genders);
@@ -65,7 +64,6 @@ class UserController extends AdminController
 
         $grid->filter(function($filter){
             $filter->like('nickname', '昵称');
-            $filter->equal('ugc_safety_level', 'UGC 等级')->select(User::$ugcSafetyLevel);
 
             $filter->scope('has_wx_user_info', '有微信资料')->whereNotNull('wx_user_info');
             $filter->scope('today_active', '今日活跃')->whereDate('last_active_at', date('Y-m-d'));
@@ -98,7 +96,6 @@ class UserController extends AdminController
         $show->field('email', 'Email');
         $show->field('password', 'Password');
         $show->field('is_admin', 'Is admin');
-        $show->field('ugc_safety_level', 'Ugc safety level');
         $show->field('remember_token', 'Remember token');
         $show->field('created_at', 'Created at');
         $show->field('updated_at', 'Updated at');
@@ -128,7 +125,6 @@ class UserController extends AdminController
         $form->email('email', 'Email');
         $form->password('password', 'Password');
         $form->switch('is_admin', 'Is admin');
-        $form->switch('ugc_safety_level', 'Ugc safety level');
         $form->text('remember_token', 'Remember token');
 
         return $form;

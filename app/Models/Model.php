@@ -37,6 +37,11 @@ class Model extends EloquentModel
         return $this->belongsTo(User::class, 'user_id');
     }
 
+    public function getEntityTextForAdmin()
+    {
+        return class_basename($this->entity) . '(' . $this->id . ')';
+    }
+
     /**
      * Sort Order
      */

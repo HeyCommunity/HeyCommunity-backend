@@ -9,7 +9,7 @@ class UserReport extends Model
      */
     public function entity()
     {
-        return $this->belongsTo($this->entity_class)->withTrasned();
+        return $this->belongsTo($this->entity_class)->withTrashed();
     }
 
     /**

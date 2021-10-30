@@ -2,13 +2,13 @@
 
 namespace App\Admin\Controllers;
 
-use App\Models\Post\Post as Post;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
 use Encore\Admin\Widgets\Table;
 use Illuminate\Support\Str;
+use Modules\Post\Entities\Post;
 
 class PostController extends AdminController
 {
