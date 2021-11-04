@@ -17,12 +17,22 @@ class NoticeResource extends JsonResource
     {
         $data = parent::toArray($request);
 
-        $data['sender']     =   $this->sender;
-        $data['type_name']  =   Notice::$types[$this->type];
-        $data['created_at_for_humans'] = $this->created_at_for_humans;
+        $data['sender']                     =   $this->sender;
+        $data['created_at_for_humans']      =   $this->created_at_for_humans;
+        $data['type_name']                  =   $this->getNoticeTypeName();
         list($data['content'], $data['wxapp_redirect_url']) = $this->getNoticeData();
 
         return $data;
+    }
+
+    /**
+     * Get notice type name
+     */
+    protected function getNoticeTypeName()
+    {
+        if (isset(Notice::$types[$this->type])) return Notice::$types[$this->type];
+
+        return '未知';
     }
 
     /**
@@ -45,10 +55,6 @@ class NoticeResource extends JsonResource
                 $wxappRedirectUrl = '/pages/posts/detail/index?id=' . $postId;
                 break;
             case 'post_comment':
-                $content = $this->entity->content;
-                $postId = $this->entity->entity->id;
-                $wxappRedirectUrl = '/pages/posts/detail/index?id=' . $postId;
-                break;
             case 'post_comment_reply':
                 $content = $this->entity->content;
                 $postId = $this->entity->entity->id;
@@ -62,13 +68,5 @@ class NoticeResource extends JsonResource
         if (! $content) $content = '未知消息内容';
 
         return [$content, $wxappRedirectUrl];
-    }
-
-    protected function getWxAppRedirectUrl()
-    {
-        $postId = null;
-
-
-        return '/pages/posts/detail/index?id=' + $postId;
     }
 }
