@@ -43,22 +43,24 @@ class NoticeResource extends JsonResource
         $content = null;
         $wxappRedirectUrl = null;
 
+        $postDetailPageUrl = '/modules/post/pages/detail/index';
+
         switch ($this->type) {
             case 'post_thumb_up':
                 $content = $this->entity->entity->content;
                 $postId = $this->entity->entity->id;
-                $wxappRedirectUrl = '/pages/posts/detail/index?id=' . $postId;
+                $wxappRedirectUrl = $postDetailPageUrl . '?id=' . $postId;
                 break;
             case 'post_comment_thumb_up':
                 $content = $this->entity->entity->content;
                 $postId = $this->entity->entity->entity->id;
-                $wxappRedirectUrl = '/pages/posts/detail/index?id=' . $postId;
+                $wxappRedirectUrl = $postDetailPageUrl . '?id=' . $postId;
                 break;
             case 'post_comment':
             case 'post_comment_reply':
                 $content = $this->entity->content;
                 $postId = $this->entity->entity->id;
-                $wxappRedirectUrl = '/pages/posts/detail/index?id=' . $postId;
+                $wxappRedirectUrl = $postDetailPageUrl . '?id=' . $postId;
                 break;
             default:
                 $content = '未知消息内容';
