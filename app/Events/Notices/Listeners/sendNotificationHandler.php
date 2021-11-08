@@ -18,9 +18,9 @@ class sendNotificationHandler implements ShouldQueue
     protected $commentTempId;
     protected $replyTempId;
 
-    protected $wxappHomePage = '/pages/posts/index/index';
-    protected $wxappNoticeIndexPage = '/pages/messages/index/index';
-    protected $wxappPostDetailPage = '/pages/posts/detail/index';
+    protected $wxappHomePage = '/modules/post/pages/index/index';
+    protected $wxappNoticeIndexPage = '/modules/notice/pages/index/index';
+    protected $wxappPostDetailPage = '/modules/post/pages/detail/index';
 
     /**
      * Create the event listener.
