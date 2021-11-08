@@ -33,9 +33,8 @@ class ThumbController extends Controller
         $entityClass = $request->get('entity_class');
         $entity = $entityClass::findOrFail($request->get('entity_id'));
 
-        // 实体类型和通知类型
-        $entityType = mb_strtolower(class_basename($entity));
-        $noticeType = $entityType . '_thumb_up';
+        // 通知类型
+        $noticeType = $this->getNoticeType($entity);
 
         if ($value) {
             $thumb = Thumb::createThumbHandler($entity, $type);
@@ -75,5 +74,17 @@ class ThumbController extends Controller
         }
 
         return $entityQuery->findOrFail($request->get('entity_id'));
+    }
+
+    /**
+     * getNoticeType
+     */
+    public function getNoticeType($entity)
+    {
+        $rootEntityTypePrefix = null;
+        if ($entity->entity) $rootEntityTypePrefix = mb_strtolower(class_basename($entity->entity)) . '_';
+
+        $entityType = mb_strtolower(class_basename($entity));
+        return $rootEntityTypePrefix . $entityType . '_thumb_up';
     }
 }
