@@ -102,6 +102,7 @@ class CommentController extends Controller
         //  判断是作者或管理员
         if ($comment->user_id === $user->id || $user->is_admin) {
             $comment->delete();
+            $comment->entity->decrement('comment_num');
 
             return response()->json(['message' => '操作成功'], 202);
         } else {
