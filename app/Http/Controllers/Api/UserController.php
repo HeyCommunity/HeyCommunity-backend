@@ -39,6 +39,7 @@ class UserController extends Controller
     {
         $request->validate([
             'code'      =>  'required|string',
+            'user_info' =>  'nullable|string',
         ]);
 
         $miniProgram = \EasyWeChat::miniProgram();
@@ -47,6 +48,23 @@ class UserController extends Controller
         if (isset($wxRes['openid'])) {
             $user = User::firstOrCreate(['wx_open_id' => $wxRes['openid']]);
             $user->update(['last_active_at' => now()]);
+
+            // 如果是新创建的用户，则更新头像昵称性别等资料
+            $wxUserInfo = json_decode($request->get('user_info'), true);
+            if ($wxUserInfo) {
+                $data['wx_user_info'] = $wxUserInfo;
+                if (isset($wxUserInfo['nickName']) && !$user->nickname) $data['nickname'] = $wxUserInfo['nickName'];
+                if (isset($wxUserInfo['gender']) && !$user->gender) $data['gender'] = $wxUserInfo['gender'];
+                if (isset($wxUserInfo['avatarUrl']) && !$user->avatar) {
+                    $client = new Client();
+                    $avatarData = $client->request('get', $wxUserInfo['avatarUrl'])->getBody()->getContents();
+                    $avatarPath = 'uploads/users/avatars/' . Str::random(40) . '.jpg';
+                    Storage::put($avatarPath, $avatarData);
+                    $data['avatar'] = $avatarPath;
+                }
+
+                $user->update($data);
+            }
 
             $user->token = $user->createToken('token')->plainTextToken;
 
@@ -94,42 +112,9 @@ class UserController extends Controller
     }
 
     /**
-     * 更新
-     */
-    public function mineUpdate(Request $request)
-    {
-        $this->validate($request, [
-            'nickName'      =>  'nullable|string',
-            'gender'        =>  'nullable|integer',
-            'avatarUrl'     =>  'nullable|string',
-            'province'      =>  'nullable|string',
-            'city'          =>  'nullable|string',
-        ]);
-
-        $user = $request->user();
-
-        $data = ['wx_user_info' => $request->all()];
-        if ($request->get('avatarUrl')) {
-            $client = new Client();
-            $avatarData = $client->request('get', $request->get('avatarUrl'))->getBody()->getContents();
-            $avatarPath = 'uploads/users/avatars/' . Str::random(40) . '.jpg';
-            Storage::put($avatarPath, $avatarData);
-            $data['avatar'] = $avatarPath;
-        }
-        if ($request->get('nickName')) $data['nickname'] = $request->get('nickName');
-        if ($request->get('gender')) $data['gender'] = $request->get('gender');
-
-        if ($data) {
-            $user->update($data);
-        }
-
-        return new UserResource($user);
-    }
-
-    /**
      * 更新我的资料
      */
-    public function mineInfoUpdate(Request $request)
+    public function mineUpdate(Request $request)
     {
         $request->validate([
             'nickname'      =>  'required|string|min:2|max:10',
@@ -198,6 +183,39 @@ class UserController extends Controller
         $user = $request->user();
         $filePath = $request->file('file')->store('uploads/users/cover');
         $user->update(['cover' => $filePath]);
+
+        return new UserResource($user);
+    }
+
+    /**
+     * 同步微信的用户资料
+     */
+    public function mineSyncWxProfile(Request $request)
+    {
+        $this->validate($request, [
+            'nickName'      =>  'nullable|string',
+            'gender'        =>  'nullable|integer',
+            'avatarUrl'     =>  'nullable|string',
+            'province'      =>  'nullable|string',
+            'city'          =>  'nullable|string',
+        ]);
+
+        $user = $request->user();
+
+        $data = ['wx_user_info' => $request->all()];
+        if ($request->get('avatarUrl')) {
+            $client = new Client();
+            $avatarData = $client->request('get', $request->get('avatarUrl'))->getBody()->getContents();
+            $avatarPath = 'uploads/users/avatars/' . Str::random(40) . '.jpg';
+            Storage::put($avatarPath, $avatarData);
+            $data['avatar'] = $avatarPath;
+        }
+        if ($request->get('nickName')) $data['nickname'] = $request->get('nickName');
+        if ($request->get('gender')) $data['gender'] = $request->get('gender');
+
+        if ($data) {
+            $user->update($data);
+        }
 
         return new UserResource($user);
     }
