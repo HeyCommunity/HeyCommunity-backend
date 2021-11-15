@@ -55,7 +55,7 @@ class UserController extends Controller
                 $data['wx_user_info'] = $wxUserInfo;
                 if (isset($wxUserInfo['nickName']) && !$user->nickname) $data['nickname'] = $wxUserInfo['nickName'];
                 if (isset($wxUserInfo['gender']) && !$user->gender) $data['gender'] = $wxUserInfo['gender'];
-                if (isset($wxUserInfo['avatarUrl']) && !$user->avatar) {
+                if (isset($wxUserInfo['avatarUrl']) && (!$user->avatar || $user->getRawOriginal('avatar') === 'images/users/default-avatar.jpg')) {
                     $client = new Client();
                     $avatarData = $client->request('get', $wxUserInfo['avatarUrl'])->getBody()->getContents();
                     $avatarPath = 'uploads/users/avatars/' . Str::random(40) . '.jpg';
