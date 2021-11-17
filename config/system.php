@@ -6,8 +6,6 @@ return [
         'domain'    =>  env('CDN_DOMAIN', 'https://your-cdn-domain.com')
     ],
 
-    'ugc_audit'     =>  env('SYSTEM_UGC_AUDIT', true),
-
     'wxapp'     =>  [
         'subscribe_message' =>  [
             'enable'                =>  env('WXAPP_SUBSCRIBE_MESSAGE_ENABLE', false),

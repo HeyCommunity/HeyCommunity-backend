@@ -47,7 +47,7 @@ class WechatSubscribeNoticeConfigForm extends Form
      */
     public function form()
     {
-        $this->radioButton('wxapp_subscribe_message_enable', '微信订阅消息')
+        $this->select('wxapp_subscribe_message_enable', '微信订阅消息')
             ->options([0 => '关闭', 1 => '开启'])->default(0)
             ->help("如开启，系统中的点赞、评论、回复等通知，将通过微信小程序一次性订阅消息发送给用户。<br>开启后请配置下方模板 ID");       // TODO: 补充模板说明
         $this->text('wxapp_subscribe_message_thumb_up_temp_id', '点赞消息模板 ID');

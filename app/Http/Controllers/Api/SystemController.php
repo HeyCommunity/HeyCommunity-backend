@@ -14,9 +14,6 @@ class SystemController extends Controller
     {
         return [
             'data' => [
-                // 用户生产内容 审核
-                'ugc_audit'     =>  config('system.ugc_audit'),
-
                 // 微信订阅消息
                 'wxapp_subscribe_message'  =>  [
                     'enable'                =>  config('system.wxapp.subscribe_message.enable'),
@@ -45,6 +42,19 @@ class SystemController extends Controller
                 'title'         =>  getSettingValueByKey('wxapp_about_title'),
                 'subtitle'      =>  getSettingValueByKey('wxapp_about_subtitle'),
                 'content'       =>  getSettingValueByKey('wxapp_about_content'),
+            ],
+        ];
+    }
+
+    /**
+     * 社区准则
+     */
+    public function regulation()
+    {
+        return [
+            'data' => [
+                'title'         =>  getSettingValueByKey('wxapp_regulation_title'),
+                'content'       =>  getSettingValueByKey('wxapp_regulation_content'),
             ],
         ];
     }

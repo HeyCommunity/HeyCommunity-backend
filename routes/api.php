@@ -57,4 +57,5 @@ Route::middleware(['auth:sanctum'])->group(function () {
 ## Other API
 Route::get('/system/settings', [SystemController::class, 'settings']);
 Route::get('/system/about', [SystemController::class, 'about']);
+Route::get('/system/regulation', [SystemController::class, 'regulation']);
 Route::post('user-reports', [UserReportController::class, 'store']);
