@@ -24,10 +24,4 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     Route::post('posts/upload-image', [PostController::class, 'uploadImage']);
     Route::post('posts/upload-video', [PostController::class, 'uploadVideo']);
-
-    Route::post('posts/thumbs', [ThumbController::class, 'postThumbHandler']);
-    Route::post('posts/comments/thumbs', [ThumbController::class, 'postCommentThumbHandler']);
-
-    Route::post('posts/comments', [CommentController::class, 'postCommentHandler']);
-    Route::post('posts/comments/delete', [CommentController::class, 'postCommentDestroyHandler']);
 });
