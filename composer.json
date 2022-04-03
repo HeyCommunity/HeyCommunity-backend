@@ -1,8 +1,8 @@
 {
-    "name": "HeyCommunity/backend",
+    "name": "heycommunity/backend",
     "type": "project",
     "description": "http://www.heycommunity.com/",
-    "keywords": ["HeyCommunity",
+    "keywords": ["HeyCommunity"],
     "license": "MIT",
     "require": {
         "php": "^7.4|^8.0",
