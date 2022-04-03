@@ -1,11 +1,11 @@
 {
-    "name": "laravel/laravel",
+    "name": "HeyCommunity/backend",
     "type": "project",
-    "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "description": "http://www.heycommunity.com/",
+    "keywords": ["HeyCommunity",
     "license": "MIT",
     "require": {
-        "php": "^7.3|^8.0",
+        "php": "^7.4|^8.0",
         "encore/laravel-admin": "^1.8",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
@@ -15,7 +15,7 @@
         "laravel/sanctum": "^2.9",
         "laravel/telescope": "^4.4",
         "laravel/tinker": "^2.5",
-        "nwidart/laravel-modules": "^8.2",
+        "nwidart/laravel-modules": "8.2.*",
         "overtrue/laravel-wechat": "^6.0",
         "rap2hpoutre/laravel-log-viewer": "^1.7"
     },
@@ -70,7 +70,10 @@
     "config": {
         "optimize-autoloader": true,
         "preferred-install": "dist",
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "easywechat-composer/easywechat-composer": true
+        }
     },
     "minimum-stability": "dev",
     "prefer-stable": true
