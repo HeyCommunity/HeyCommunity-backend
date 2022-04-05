@@ -46,7 +46,7 @@ jobs:
         touch database/database.sqlite
 
     - name: Database Migrate
-      run: php artisan migrate:refresh --seed
+      run: php artisan migrate:refresh --seed --no-interaction
 
     - name: Execute tests (Unit and Feature tests) via PHPUnit
       env:
