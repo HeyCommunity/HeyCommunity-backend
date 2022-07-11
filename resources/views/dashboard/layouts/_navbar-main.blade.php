@@ -23,6 +23,9 @@
     <a class="nav-link {{ request()->routeIs('dashboard.posts.index') ? 'active' : null }}" href="{{ route('dashboard.posts.index') }}"><i class="fe fe-rss"></i> 动态</a>
   </li>
   <li class="nav-item">
+    <a class="nav-link" href="#"><i class="fe fe-thumbs-up"></i> 点赞</a>
+  </li>
+  <li class="nav-item">
     <a class="nav-link {{ request()->routeIs('dashboard.comments.index') ? 'active' : null }}" href="{{ route('dashboard.comments.index') }}"><i class="fe fe-message-square"></i> 评论</a>
   </li>
 </ul>

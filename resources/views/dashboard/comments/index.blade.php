@@ -24,6 +24,7 @@
                 <tr>
                   <th>ID</th>
                   <th>作者</th>
+                  <th>目标实体</th>
                   <th>内容</th>
                   <th>发布时间</th>
                   <th>操作</th>
@@ -39,9 +40,10 @@
                       </a>
                       <span>{{ $comment->user->nickname ?: 'NULL' }}</span>
                     </td>
-                    <td>{{ \Illuminate\Support\Str::limit($comment->content, 50) }}</td>
-                    <td>{{ $comment->created_at }}</td>
-                    <td></td>
+                    <td><a>{{ $comment->entity_name }}({{ $comment->entity_id }})</a></td>
+                    <td><span data-bs-toggle="tooltip" title="{{ $comment->content }}">{{ \Illuminate\Support\Str::limit($comment->content, 50) }}</span></td>
+                    <td><span data-bs-toggle="tooltip" title="{{ $comment->created_at->diffForHumans() }}">{{ $comment->created_at }}</span></td>
+                    <td>/</td>
                   </tr>
                 @endforeach
               </tbody>

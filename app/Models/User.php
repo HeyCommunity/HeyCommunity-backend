@@ -18,6 +18,7 @@ class User extends Authenticatable
     use DefaultDatetimeFormat;
     use HasApiTokens, HasFactory, Notifiable;
 
+    // TODO: post_num, comment_num, thumb_up_num 字段添加到数据表中
     protected $appends = ['post_num', 'comment_num', 'thumb_up_num'];
 
     public static $genders = [

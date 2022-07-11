@@ -42,7 +42,7 @@
                       </a>
                       <span>{{ $post->user->nickname ?: 'NULL' }}</span>
                     </td>
-                    <td><span data-bs-toggle="tooltip" data-bs-placement="right" title="{{ $post->content }}">{{ \Illuminate\Support\Str::limit($post->content, 50) }}</span></td>
+                    <td><span data-bs-toggle="tooltip" title="{{ $post->content }}">{{ \Illuminate\Support\Str::limit($post->content, 50) }}</span></td>
                     <td>
                       @if ($post->video)
                         <video src="{{ $post->video->file_path }}" style="margin:-10px 0; height:60px;"></video>
