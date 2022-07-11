@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 class UserFactory extends Factory
@@ -22,12 +23,24 @@ class UserFactory extends Factory
      */
     public function definition()
     {
+        $this->faker = \Faker\Factory::create(config('app.faker_locale'));
+        $this->faker->addProvider(new \Bluemmb\Faker\PicsumPhotosProvider($this->faker));
+        $this->faker->addProvider(new \SupGeekRod\FakerZh\ZhCnDataProvider($this->faker));
+
         return [
-            'name' => $this->faker->name,
-            'email' => $this->faker->unique()->safeEmail,
-            'email_verified_at' => now(),
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-            'remember_token' => Str::random(10),
+            'nickname'      =>      $this->faker->name(),
+            'avatar'        =>      $this->faker->imageUrl(640, 640, true),
+            'gender'        =>      $this->faker->randomElement([1, 2]),
+            'bio'           =>      $this->faker->sentence(),
+            'intro'         =>      $this->faker->sentences(random_int(2, 5), true),
+            'phone'         =>      $this->faker->phoneNumber(),
+            'email'         =>      $this->faker->email(),
+            'cover'         =>      $this->faker->imageUrl(1528, 675, true),
+            'password'      =>      Hash::make('HeyCommunity'),
+
+            'last_active_at'    =>      $this->faker->dateTimeThisMonth(),
+            'created_at'        =>      $this->faker->dateTimeThisMonth(),
+            'updated_at'        =>      $this->faker->dateTimeThisMonth(),
         ];
     }
 

@@ -12,8 +12,11 @@ class DatabaseSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(\Faker\Generator $faker)
     {
+        $faker->addProvider(new \Bluemmb\Faker\PicsumPhotosProvider($faker));
+        $faker->addProvider(new \SupGeekRod\FakerZh\ZhCnDataProvider($faker));
+
         $this->call(UserSeeder::class);
         $this->call(PostDatabaseSeeder::class);
     }
