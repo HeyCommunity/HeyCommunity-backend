@@ -46,7 +46,7 @@
                     <td>{{ $user->post_num }}</td>
                     <td>{{ $user->thumb_up_num }} / {{ $user->comment_num }}</td>
                     <td><span data-bs-toggle="tooltip" title="{{ $user->last_active_at }}">
-                      {{ $user->last_active_at ? ($user->last_active_at->addDays(15)->gratherThan(now()) ? $user->last_active_at->diffForHumans() : $user->last_active_at) : '-' }}
+                      {{ $user->last_active_at ? ($user->last_active_at->addDays(15)->greaterThan(now()) ? $user->last_active_at->diffForHumans() : $user->last_active_at) : '-' }}
                     </span></td>
                     <td><span data-bs-toggle="tooltip" title="{{ $user->created_at }}">
                       {{ $user->created_at->addDays(15)->greaterThan(now()) ? $user->created_at->diffForHumans() : $user->created_at }}
