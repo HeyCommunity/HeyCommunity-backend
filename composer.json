@@ -6,6 +6,7 @@
     "license": "MIT",
     "require": {
         "php": "^7.4|^8.0",
+        "arcanedev/log-viewer": "^8.3",
         "encore/laravel-admin": "^1.8",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
@@ -16,17 +17,19 @@
         "laravel/telescope": "^4.4",
         "laravel/tinker": "^2.5",
         "nwidart/laravel-modules": "8.2.*",
-        "overtrue/laravel-wechat": "^6.0",
-        "rap2hpoutre/laravel-log-viewer": "^1.7"
+        "overtrue/laravel-wechat": "^6.0"
     },
     "require-dev": {
+        "barryvdh/laravel-debugbar": "^3.6",
         "barryvdh/laravel-ide-helper": "^2.10",
+        "bluemmb/faker-picsum-photos-provider": "^2.0",
         "facade/ignition": "^2.5",
         "fakerphp/faker": "^1.9.1",
         "laravel/sail": "^1.0.1",
-        "mockery/mockery": "^1.4.2",
-        "nunomaduro/collision": "^5.0",
-        "phpunit/phpunit": "^9.3.3"
+        "mockery/mockery": "^1.4.4",
+        "nunomaduro/collision": "^5.10",
+        "phpunit/phpunit": "^9.5.10",
+        "supgeek-rod/faker-zh": "^0.1.0"
     },
     "autoload": {
         "psr-4": {
