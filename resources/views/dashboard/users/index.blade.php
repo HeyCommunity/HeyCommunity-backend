@@ -26,8 +26,8 @@
                   <th>昵称</th>
                   <th>动态</th>
                   <th>点赞/评论</th>
-                  <th>最近活跃</th>
-                  <th>注册时间</th>
+                  @include('dashboard.layouts.utils._table-sort-th', ['name' => '最近活跃', 'orderBy' => 'last_active_at'])
+                  @include('dashboard.layouts.utils._table-sort-th', ['name' => '注册时间', 'orderBy' => 'created_at'])
                   <th>操作</th>
                 </tr>
               </thead>
