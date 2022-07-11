@@ -1,7 +1,7 @@
 @php
   $routeName = request()->route()->getName();
-  $requestOrderBy = request('order-by');
-  $requestOrderDirection = request('order-direction');
+  $requestOrderBy = request('order-by') ?: $requestOrderBy;
+  $requestOrderDirection = request('order-direction') ?: $requestOrderDirection;
 @endphp
 
 <th>

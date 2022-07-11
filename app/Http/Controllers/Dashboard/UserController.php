@@ -14,22 +14,27 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $request->validate([
-            'order-by'          =>  'string',
-            'order-direction'   =>  'string|in:DESC,ASC',
+            'order-by'          =>  'nullable|string',
+            'order-direction'   =>  'nullable|string|in:DESC,ASC',
         ]);
 
         $userQuery = User::query();
 
-        // orderBy last_active_at
-        if ($request->get('order-by') === 'last_active_at') {
-            $direction = $request->get('order-direction') ?: 'DESC';
-            $userQuery->orderBy('last_active_at', $direction);
-        }
-
-        // orderBy created_at
-        if ($request->get('order-by') === 'created_at') {
-            $direction = $request->get('order-direction') ?: 'DESC';
-            $userQuery->orderBy('created_at', $direction);
+        // OrderBy
+        $requestOrderBy = $request->get('order-by');
+        $requestOrderDirection = $request->get('order-direction');
+        switch ($requestOrderBy) {
+            case 'last_active_at':
+                $userQuery->orderBy('last_active_at', $requestOrderDirection ?: 'DESC');
+                break;
+            case 'created_at':
+                $userQuery->orderBy('created_at', $requestOrderDirection ?: 'DESC');
+                break;
+            default:
+                $userQuery->orderBy('last_active_at', $requestOrderDirection ?: 'DESC');
+                view()->share('requestOrderBy', 'last_active_at');
+                view()->share('requestOrderDirection', 'DESC');
+                break;
         }
 
         $users = $userQuery->paginate()->appends([
