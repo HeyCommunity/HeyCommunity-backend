@@ -126,7 +126,8 @@
 @endsection
 
 @section('pageScript')
-  <script>
+<script>
+  window.onload = function() {
     new Chart(document.getElementById('canvas-userChart'), {
       type: 'line',
       data: {!! json_encode($userChartConfigure) !!},
@@ -141,5 +142,6 @@
       type: 'line',
       data: {!! json_encode($commonChartConfigure) !!},
     });
-  </script>
+  }
+</script>
 @endsection

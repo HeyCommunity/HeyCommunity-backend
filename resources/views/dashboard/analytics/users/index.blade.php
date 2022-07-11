@@ -38,11 +38,13 @@
 @endsection
 
 @section('pageScript')
-  <script>
+<script>
+  window.onload = function() {
     const userChartCanvas = document.getElementById('userChart');
     new Chart(userChartCanvas, {
       type: 'line',
       data: {!! json_encode($chartData) !!},
     });
-  </script>
+  }
+</script>
 @endsection
