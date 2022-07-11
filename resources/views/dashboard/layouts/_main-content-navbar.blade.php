@@ -20,7 +20,7 @@
       <!-- User Dropdown -->
       <div class="dropdown">
         <a href="#" class="avatar avatar-sm avatar-online dropdown-toggle" data-bs-toggle="dropdown">
-          <img src="{{ asset('images/icon.png') }}" class="avatar-img rounded-circle">
+          <img src="{{ asset('images/logo.png') }}" class="avatar-img rounded-circle">
         </a>
 
         <div class="dropdown-menu dropdown-menu-end">

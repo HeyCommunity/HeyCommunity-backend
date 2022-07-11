@@ -51,6 +51,7 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
         'wx_user_info'      => 'array',
+        'last_active_at'    =>  'datetime',
     ];
 
     /**
