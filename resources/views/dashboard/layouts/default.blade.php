@@ -115,10 +115,10 @@
   <script src='https://api.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.js'></script>
 
   <!-- Vendor JS -->
-  <script src="{{ asset('assets/dashkit/js/vendor.bundle.js') }}"></script>
+  <script src="{{ asset('assets/dashkit/js/vendor.bundle.js') }}" defer></script>
 
   <!-- Theme JS -->
-  <script src="{{ asset('assets/dashkit/js/theme.bundle.js') }}"></script>
+  <script src="{{ asset('assets/dashkit/js/theme.bundle.js') }}" defer></script>
 
   <!-- Page Script -->
   @yield('pageScript')
