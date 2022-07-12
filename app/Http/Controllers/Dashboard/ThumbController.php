@@ -14,10 +14,10 @@ class ThumbController extends Controller
             'user' => function ($query) {
                 $query->select('id', 'avatar', 'nickname');
             },
-            'entity' => function ($query) {
+            'thumbable' => function ($query) {
                 $query->select('id', 'user_id');
             },
-            'entity.user' => function ($query) {
+            'thumbable.user' => function ($query) {
                 $query->select('id', 'avatar', 'nickname');
             },
         ])->latest()->paginate();

@@ -43,9 +43,9 @@
                     <td><a>{{ $thumb->entity_name }}({{ $thumb->entity_id }})</a></td>
                     <td>
                       <a href="#" class="avatar avatar-xs d-inline-block me-2">
-                        <img src="{{ asset($thumb->entity->user->avatar) }}" alt="{{ $thumb->entity->user->app_id }}" class="avatar-img rounded-circle">
+                        <img src="{{ asset($thumb->thumbable->user->avatar) }}" alt="{{ $thumb->thumbable->user->app_id }}" class="avatar-img rounded-circle">
                       </a>
-                      <span>{{ $thumb->entity->user->nickname ?: 'NULL' }}</span>
+                      <span>{{ $thumb->thumbable->user->nickname ?: 'NULL' }}</span>
                     </td>
                     <td><span data-bs-toggle="tooltip" title="{{ $thumb->created_at->diffForHumans() }}">{{ $thumb->created_at }}</span></td>
                     <td>/</td>
