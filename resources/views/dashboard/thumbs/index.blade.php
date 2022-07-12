@@ -24,8 +24,8 @@
                 <tr>
                   <th>ID</th>
                   <th>用户</th>
-                  <th>目标用户</th>
                   <th>目标实体</th>
+                  <th>目标用户</th>
                   <th>时间</th>
                   <th>操作</th>
                 </tr>
@@ -40,13 +40,13 @@
                       </a>
                       <span>{{ $thumb->user->nickname ?: 'NULL' }}</span>
                     </td>
+                    <td><a>{{ $thumb->entity_name }}({{ $thumb->entity_id }})</a></td>
                     <td>
                       <a href="#" class="avatar avatar-xs d-inline-block me-2">
                         <img src="{{ asset($thumb->entity->user->avatar) }}" alt="{{ $thumb->entity->user->app_id }}" class="avatar-img rounded-circle">
                       </a>
                       <span>{{ $thumb->entity->user->nickname ?: 'NULL' }}</span>
                     </td>
-                    <td><a>{{ $thumb->entity_name }}({{ $thumb->entity_id }})</a></td>
                     <td><span data-bs-toggle="tooltip" title="{{ $thumb->created_at->diffForHumans() }}">{{ $thumb->created_at }}</span></td>
                     <td>/</td>
                   </tr>

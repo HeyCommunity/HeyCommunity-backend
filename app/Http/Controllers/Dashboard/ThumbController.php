@@ -14,6 +14,9 @@ class ThumbController extends Controller
             'user' => function ($query) {
                 $query->select('id', 'avatar', 'nickname');
             },
+            'entity' => function ($query) {
+                $query->select('id', 'user_id');
+            },
             'entity.user' => function ($query) {
                 $query->select('id', 'avatar', 'nickname');
             },
