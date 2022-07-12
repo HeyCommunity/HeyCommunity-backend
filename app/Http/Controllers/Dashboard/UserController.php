@@ -44,4 +44,12 @@ class UserController extends Controller
 
         return view('dashboard.users.index', compact('users'));
     }
+
+    /**
+     * 详情页
+     */
+    public function show(User $user)
+    {
+        return view('dashboard.users.show', compact('user'));
+    }
 }

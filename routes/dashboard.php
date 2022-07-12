@@ -18,8 +18,9 @@ Route::prefix('dashboard')
     });
 
     // 用户
-    Route::middleware([])->group(function () {
-        Route::get('users', 'UserController@index')->name('dashboard.users.index');
+    Route::prefix('users')->group(function () {
+        Route::get('/', 'UserController@index')->name('dashboard.users.index');
+        Route::get('{user}', 'UserController@show')->name('dashboard.users.show')->where('user', '[0-9]+');
     });
 
     // 动态

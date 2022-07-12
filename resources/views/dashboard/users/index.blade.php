@@ -51,7 +51,16 @@
                       <td><span data-bs-toggle="tooltip" title="{{ $user->last_active_at->diffForHumans() }}">{{ $user->last_active_at }}</span></td>
                     @endif
                     <td><span data-bs-toggle="tooltip" title="{{ $user->created_at->diffForHumans() }}">{{ $user->created_at }}</span></td>
-                    <td>/</td>
+                    <td>
+                      <a href="{{ route('dashboard.users.show', $user) }}" class="btn btn-sm btn-light d-inline-block">详情</a>
+
+                      <div class="btn-group d-inline-block ms-2">
+                        <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-bs-toggle="dropdown"></button>
+                        <div class="dropdown-menu dropdown-menu-end dropdown-menu-sm">
+                          <a class="dropdown-item text-muted">No Operations</a>
+                        </div>
+                      </div>
+                    </td>
                   </tr>
                 @endforeach
               </tbody>
