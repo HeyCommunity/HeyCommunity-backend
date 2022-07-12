@@ -19,6 +19,14 @@ class Comment extends Model
     /**
      * Related EntityModel
      */
+    public function commentable()
+    {
+        return $this->morphTo('commentable', 'entity_class', 'entity_id');
+    }
+
+    /**
+     * Related EntityModel
+     */
     public function entity()
     {
         return $this->belongsTo($this->entity_class, 'entity_id')->withTrashed();

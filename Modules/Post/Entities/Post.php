@@ -60,8 +60,7 @@ class Post extends Model
      */
     public function comments()
     {
-        return $this->hasMany(Comment::class, 'entity_id', 'id')
-            ->where('entity_class', self::class);
+        return $this->morphMany(Comment::class, 'commentable', 'entity_class', 'entity_id');
     }
 
     /**
