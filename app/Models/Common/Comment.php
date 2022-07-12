@@ -21,7 +21,7 @@ class Comment extends Model
      */
     public function commentable()
     {
-        return $this->morphTo('commentable', 'entity_class', 'entity_id');
+        return $this->morphTo('commentable', 'entity_class', 'entity_id')->withTrashed();
     }
 
     /**
@@ -29,7 +29,8 @@ class Comment extends Model
      */
     public function entity()
     {
-        return $this->belongsTo($this->entity_class, 'entity_id')->withTrashed();
+        // return $this->belongsTo($this->entity_class, 'entity_id')->withTrashed();     // TODO: 测试新的关联写法，一段时间后删除
+        return $this->morphTo('commentable', 'entity_class', 'entity_id')->withTrashed();
     }
 
     /**
@@ -37,7 +38,7 @@ class Comment extends Model
      */
     public function parent()
     {
-        return $this->belongsTo(get_class($this), 'parent_id')->with('user');
+        return $this->belongsTo(self::class, 'parent_id')->with('user');
     }
 
     /**
@@ -53,6 +54,6 @@ class Comment extends Model
      */
     public function comments()
     {
-        return $this->hasMany(get_class($this), 'parent_id', 'id');
+        return $this->hasMany(self::class, 'parent_id', 'id');
     }
 }
