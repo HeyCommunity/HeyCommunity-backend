@@ -68,19 +68,16 @@
         </div>
 
         <div class="col-auto">
-          <a href="#!" class="btn btn-sm btn-white">
-            Share
-          </a>
-
+          <a href="#!" class="btn btn-sm btn-white">Share</a>
         </div>
-      </div> <!-- / .row -->
+      </div>
     </div>
     <hr>
 
     <!-- Comments -->
     <div>
       @foreach ($post->comments as $comment)
-        <div class="comment">
+        <div class="comment mb-0 mt-3">
           <div class="row">
             <div class="col-auto">
               <a class="avatar" href="{{ route('dashboard.users.show', $comment->user) }}">
@@ -104,9 +101,7 @@
         </div>
       @endforeach
       @unless ($post->comments->count())
-        <div class="comment">
-          <div class="small text-muted">无评论</div>
-        </div>
+        <div class="small text-muted">无评论</div>
       @endunless
     </div>
   </div>
