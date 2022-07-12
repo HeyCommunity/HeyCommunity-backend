@@ -6,6 +6,7 @@ use App\Models\VisitorLog;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class VisitorLogging
 {
@@ -20,16 +21,19 @@ class VisitorLogging
     {
         $response = $next($request);
 
+        // dashboard not logging
+        if ($request->routeIs('dashboard.*')) return $response;
+
         $logData = [
             'type'              =>  $this->getType($request),
-            'route_name'        =>  $request->route()->getName(),
+            'route_name'        =>  $request->route() ? $request->route()->getName() : null,
 
             'request_path'      =>  $request->path(),
-            'request_uri'       =>  $request->server('REQUEST_URI'),
-            'request_url'       =>  $request->url(),
+            'request_uri'       =>  Str::limit($request->server('REQUEST_URI'), 990),
+            'request_url'       =>  Str::limit($request->url(), 990),
 
             'visitor_ip'        =>  $request->ip(),
-            'visitor_terminal'  =>  null,       // TODO 用户终端，如 safari / chrome / wxapp ..
+            'visitor_terminal'  =>  $this->getVisitorTerminal($request),
 
             'http_host'         =>  $request->server('HTTP_HOST'),
             'http_user_agent'   =>  $request->server('HTTP_USER_AGENT'),
@@ -48,13 +52,32 @@ class VisitorLogging
         return $response;
     }
 
-    // TODO: 如 API / WEB / DASHBOARD ..
+    /**
+     * getType
+     *
+     * @param Request $request
+     * @return string|null
+     */
     protected function getType(Request $request)
     {
-        if ($request->routeIs('dashboard.*')) return 'dashboard';
-        if ($request->routeIs('api.*')) return 'api';
+        if ($request->is('api/*')) return 'api';
         if ($request->routeIs('web.*')) return 'web';
+        if ($request->routeIs('dashboard.*')) return 'dashboard';
 
+        return null;
+    }
+
+
+
+    /**
+     * getVisitorTerminal
+     * TODO: 用户终端，如 safari / chrome / wxapp ..
+     *
+     * @param Request $request
+     * @return null
+     */
+    protected function getVisitorTerminal(Request $request)
+    {
         return null;
     }
 }

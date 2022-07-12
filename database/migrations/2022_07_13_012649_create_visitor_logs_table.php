@@ -22,8 +22,8 @@ class CreateVisitorLogsTable extends Migration
             $table->string('route_name')->nullable();
 
             $table->string('request_path');
-            $table->string('request_uri');
-            $table->string('request_url');
+            $table->string('request_uri', 1000);
+            $table->string('request_url', 1000);
 
             $table->string('visitor_ip');
             $table->string('visitor_terminal')->nullable();
