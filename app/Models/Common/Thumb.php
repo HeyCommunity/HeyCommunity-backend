@@ -12,6 +12,14 @@ class Thumb extends Model
     /**
      * Related EntityModel
      */
+    public function thumbable()
+    {
+        return $this->morphTo('thumbable', 'entity_class', 'entity_id')->withTrashed();
+    }
+
+    /**
+     * Related EntityModel
+     */
     public function entity()
     {
         return $this->morphTo('entity', 'entity_class', 'entity_id')->withTrashed();

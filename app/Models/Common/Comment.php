@@ -45,7 +45,7 @@ class Comment extends Model
      */
     public function thumbs()
     {
-        return $this->hasMany(Thumb::class, 'entity_id')->where('entity_class', get_class($this));
+        return $this->morphMany(Thumb::class, 'thumbable', 'entity_class', 'entity_id');
     }
 
     /**

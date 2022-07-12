@@ -51,8 +51,7 @@ class Post extends Model
      */
     public function thumbs()
     {
-        return $this->hasMany(Thumb::class, 'entity_id', 'id')
-            ->where('entity_class', self::class);
+        return $this->morphMany(Thumb::class, 'thumbable', 'entity_class', 'entity_id');
     }
 
     /**
