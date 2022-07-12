@@ -58,9 +58,9 @@
                     @else
                       <td>
                         <a href="#" class="avatar avatar-xs d-inline-block me-2">
-                          <img src="{{ asset($comment->entity->user->avatar) }}" alt="{{ $comment->entity->user->app_id }}" class="avatar-img rounded-circle">
+                          <img src="{{ asset($comment->commentable->user->avatar) }}" alt="{{ $comment->commentable->user->app_id }}" class="avatar-img rounded-circle">
                         </a>
-                        <span>{{ $comment->entity->user->nickname ?: 'NULL' }}</span>
+                        <span>{{ $comment->commentable->user->nickname ?: 'NULL' }}</span>
                       </td>
                     @endif
                     <td><span data-bs-toggle="tooltip" title="{{ $comment->content }}">{{ \Illuminate\Support\Str::limit($comment->content, 50) }}</span></td>
