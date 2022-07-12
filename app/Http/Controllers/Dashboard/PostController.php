@@ -8,6 +8,9 @@ use Modules\Post\Entities\Post;
 
 class PostController extends Controller
 {
+    /**
+     * 列表页
+     */
     public function index()
     {
         $posts = Post::with([
@@ -23,5 +26,13 @@ class PostController extends Controller
         ])->latest()->paginate();
 
         return view('dashboard.posts.index', compact('posts'));
+    }
+
+    /**
+     * 详情页
+     */
+    public function show(Post $post)
+    {
+        return view('dashboard.posts.show', compact('post'));
     }
 }

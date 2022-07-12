@@ -56,7 +56,17 @@
                     <td>{{ $post->thumb_up_num }} / {{ $post->comment_num }}</td>
                     <td><span data-bs-toggle="tooltip" title="{{ $post->updated_at->diffForHumans() }}">{{ $post->updated_at }}</span></td>
                     <td><span data-bs-toggle="tooltip" title="{{ $post->created_at->diffForHumans() }}">{{ $post->created_at }}</span></td>
-                    <td>/</td>
+                    <!-- 操作 -->
+                    <td>
+                      <a href="{{ route('dashboard.posts.show', $post) }}" class="btn btn-sm btn-light d-inline-block">详情</a>
+
+                      <div class="btn-group d-inline-block ms-2">
+                        <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-bs-toggle="dropdown"></button>
+                        <div class="dropdown-menu dropdown-menu-end dropdown-menu-sm">
+                          <a class="dropdown-item text-muted">No Operations</a>
+                        </div>
+                      </div>
+                    </td>
                   </tr>
                 @endforeach
               </tbody>

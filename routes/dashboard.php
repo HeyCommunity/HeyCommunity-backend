@@ -24,8 +24,9 @@ Route::prefix('dashboard')
     });
 
     // 动态
-    Route::middleware([])->group(function () {
-        Route::get('posts', 'PostController@index')->name('dashboard.posts.index');
+    Route::prefix('posts')->group(function () {
+        Route::get('/', 'PostController@index')->name('dashboard.posts.index');
+        Route::get('{post}', 'PostController@show')->name('dashboard.posts.show');
     });
 
     // 评论
