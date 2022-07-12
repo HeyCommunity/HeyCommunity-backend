@@ -23,9 +23,11 @@
               <thead>
                 <tr>
                   <th>ID</th>
-                  <th>作者</th>
+                  <th>用户</th>
                   <th>目标实体</th>
+                  <th>目标用户</th>
                   <th>内容</th>
+                  <th>点赞/评论</th>
                   <th>发布时间</th>
                   <th>操作</th>
                 </tr>
@@ -40,8 +42,29 @@
                       </a>
                       <span>{{ $comment->user->nickname ?: 'NULL' }}</span>
                     </td>
-                    <td><a>{{ $comment->entity_name }}({{ $comment->entity_id }})</a></td>
+                    <td>
+                      <a class="d-block" href="#">{{ $comment->entity_name }}({{ $comment->entity_id }})</a>
+                      @if ($comment->parent)
+                        <a class="d-block mt-1" href="#">评论({{ $comment->parent->id }})</a>
+                      @endif
+                    </td>
+                    @if ($comment->parent)
+                      <td>
+                        <a href="#" class="avatar avatar-xs d-inline-block me-2">
+                          <img src="{{ asset($comment->parent->user->avatar) }}" alt="{{ $comment->parent->user->app_id }}" class="avatar-img rounded-circle">
+                        </a>
+                        <span>{{ $comment->parent->user->nickname ?: 'NULL' }}</span>
+                      </td>
+                    @else
+                      <td>
+                        <a href="#" class="avatar avatar-xs d-inline-block me-2">
+                          <img src="{{ asset($comment->entity->user->avatar) }}" alt="{{ $comment->entity->user->app_id }}" class="avatar-img rounded-circle">
+                        </a>
+                        <span>{{ $comment->entity->user->nickname ?: 'NULL' }}</span>
+                      </td>
+                    @endif
                     <td><span data-bs-toggle="tooltip" title="{{ $comment->content }}">{{ \Illuminate\Support\Str::limit($comment->content, 50) }}</span></td>
+                    <td>{{ $comment->thumb_up_num }} / {{ $comment->comment_num }}</td>
                     <td><span data-bs-toggle="tooltip" title="{{ $comment->created_at->diffForHumans() }}">{{ $comment->created_at }}</span></td>
                     <td>/</td>
                   </tr>

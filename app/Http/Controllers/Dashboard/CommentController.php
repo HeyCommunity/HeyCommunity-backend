@@ -14,6 +14,12 @@ class CommentController extends Controller
             'user' => function ($query) {
                 $query->select('id', 'avatar', 'nickname');
             },
+            'parent' => function ($query) {
+                $query->select('id', 'user_id');
+            },
+            'parent.user' => function ($query) {
+                $query->select('id', 'avatar', 'nickname');
+            },
         ])->latest()->paginate();
 
         return view('dashboard.comments.index', compact('comments'));
