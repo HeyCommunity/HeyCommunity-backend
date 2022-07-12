@@ -41,7 +41,7 @@ class VisitorLogging
         ];
 
         $user = Auth::guard('sanctum')->user();
-        if ($user) $logData['user_id'] = $user->id();
+        if ($user) $logData['user_id'] = $user->id;
 
         VisitorLog::create($logData);
 
