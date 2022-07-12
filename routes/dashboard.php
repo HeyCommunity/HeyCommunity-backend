@@ -31,4 +31,9 @@ Route::prefix('dashboard')
     Route::middleware([])->group(function () {
         Route::get('comments', 'CommentController@index')->name('dashboard.comments.index');
     });
+
+    // 点赞
+    Route::middleware([])->group(function () {
+        Route::get('thumbs', 'ThumbController@index')->name('dashboard.thumbs.index');
+    });
 });
