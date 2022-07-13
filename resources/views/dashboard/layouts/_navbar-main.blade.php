@@ -46,6 +46,6 @@
     <a class="nav-link" target="_blank" href="{{ url('/dashboard/telescope') }}"><i class="fe fe-cast"></i> Telescope</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" target="_blank" href="{{ url('/dashboard/logs') }}"><i class="fe fe-alert-octagon"></i> LogViewer</a>
+    <a class="nav-link" target="_blank" href="{{ url('/dashboard/log-viewer') }}"><i class="fe fe-alert-octagon"></i> LogViewer</a>
   </li>
 </ul>

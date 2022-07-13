@@ -51,7 +51,7 @@ return [
         'enabled'    => true,
 
         'attributes' => [
-            'prefix'     => 'dashboard/logs',
+            'prefix'     => 'dashboard/log-viewer',
 
             'middleware' => [
                 \App\Http\Middleware\HttpBasicAuthenticate::class,
