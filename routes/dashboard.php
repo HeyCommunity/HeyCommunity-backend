@@ -14,7 +14,8 @@ Route::prefix('dashboard')
     // 数据分析
     Route::prefix('analytics')->group(function () {
         Route::get('/', 'Analytics\IndexController@index')->name('dashboard.analytics.index');
-        Route::get('users', 'Analytics\UserController@index')->name('dashboard.analytics.users.index');
+        Route::get('users', 'Analytics\UserController@index')->name('dashboard.analytics.users');
+        Route::get('visitor-logs', 'Analytics\VisitorLogController@index')->name('dashboard.analytics.visitor-logs');
     });
 
     // 用户

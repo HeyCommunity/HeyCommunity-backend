@@ -24,8 +24,9 @@ class UserSeeder extends Seeder
             'email'         =>      'admin@heycommunity.com',
             'password'      =>      Hash::make('hey community'),
 
-            'created_at'    =>      $faker->dateTimeThisMonth(),
-            'updated_at'    =>      $faker->dateTimeThisMonth(),
+            'last_active_at'    =>      $faker->dateTimeThisMonth(),
+            'created_at'        =>      $faker->dateTimeThisMonth(),
+            'updated_at'        =>      $faker->dateTimeThisMonth(),
         ]);
 
         User::factory()->count(50)->create();

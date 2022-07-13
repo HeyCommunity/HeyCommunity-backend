@@ -10,7 +10,10 @@
     <div class="collapse {{ request()->routeIs('dashboard.analytics.*') ? 'show' : '' }}" id="sidebar-analytics">
       <ul class="nav nav-sm flex-column">
         <li class="nav-item">
-          <a class="nav-link {{ request()->routeIs('dashboard.analytics.users.index') ? 'active' : null }}" href="{{ route('dashboard.analytics.users.index') }}">用户数据分析</a>
+          <a class="nav-link {{ request()->routeIs('dashboard.analytics.users') ? 'active' : null }}" href="{{ route('dashboard.analytics.users') }}">用户数据分析</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {{ request()->routeIs('dashboard.analytics.visitor-logs') ? 'active' : null }}" href="{{ route('dashboard.analytics.visitor-logs') }}">访客日志</a>
         </li>
       </ul>
     </div>
