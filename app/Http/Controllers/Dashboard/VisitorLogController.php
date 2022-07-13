@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Dashboard\Analytics;
+namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Models\VisitorLog;
@@ -28,6 +28,14 @@ class VisitorLogController extends Controller
             ->latest()
             ->paginate();
 
-        return view('dashboard.analytics.visitor-logs.index', compact('visitorLogs'));
+        return view('dashboard.visitor-logs.index', compact('visitorLogs'));
+    }
+
+    /**
+     * 分析页面
+     */
+    public function analytics()
+    {
+        return view('dashboard.visitor-logs.analytics');
     }
 }

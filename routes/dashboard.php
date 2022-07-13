@@ -18,6 +18,12 @@ Route::prefix('dashboard')
         Route::get('visitor-logs', 'Analytics\VisitorLogController@index')->name('dashboard.analytics.visitor-logs');
     });
 
+    // 访客日志
+    Route::prefix('visitor-logs')->group(function () {
+        Route::get('/', 'VisitorLogController@index')->name('dashboard.visitor-logs.index');
+        Route::get('analytics', 'VisitorLogController@analytics')->name('dashboard.visitor-logs.analytics');
+    });
+
     // 用户
     Route::prefix('users')->group(function () {
         Route::get('/', 'UserController@index')->name('dashboard.users.index');

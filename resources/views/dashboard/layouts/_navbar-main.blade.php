@@ -7,13 +7,16 @@
     <a class="nav-link" href="#sidebar-analytics" data-bs-toggle="collapse">
       <i class="fe fe-bar-chart-2"></i> 数据分析
     </a>
-    <div class="collapse {{ request()->routeIs('dashboard.analytics.*') ? 'show' : '' }}" id="sidebar-analytics">
+    <div class="collapse {{ request()->routeIs(['dashboard.analytics.*', 'dashboard.visitor-logs.*']) ? 'show' : '' }}" id="sidebar-analytics">
       <ul class="nav nav-sm flex-column">
         <li class="nav-item">
           <a class="nav-link {{ request()->routeIs('dashboard.analytics.users') ? 'active' : null }}" href="{{ route('dashboard.analytics.users') }}">用户数据分析</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link {{ request()->routeIs('dashboard.analytics.visitor-logs') ? 'active' : null }}" href="{{ route('dashboard.analytics.visitor-logs') }}">访客日志</a>
+          <a class="nav-link {{ request()->routeIs('dashboard.visitor-logs.analytics') ? 'active' : null }}" href="{{ route('dashboard.visitor-logs.analytics') }}">访客数据分析</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {{ request()->routeIs('dashboard.visitor-logs.index') ? 'active' : null }}" href="{{ route('dashboard.visitor-logs.index') }}">访客日志</a>
         </li>
       </ul>
     </div>
