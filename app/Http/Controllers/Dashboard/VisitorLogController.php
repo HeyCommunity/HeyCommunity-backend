@@ -43,7 +43,7 @@ class VisitorLogController extends Controller
 
         if (! $request->has('date')) return redirect()->route($request->route()->getName(), ['date' => date('Y-m-d')]);
 
-        $visitorLogs = VisitorLog::query()
+        $result = VisitorLog::query()
             ->select([
                 'user_id',
                 DB::raw('COUNT(*) as total_num'),
@@ -61,7 +61,7 @@ class VisitorLogController extends Controller
             ->paginate()
             ->appends(['date' => $request->get('date')]);
 
-        return view('dashboard.visitor-logs.date', compact('visitorLogs'));
+        return view('dashboard.visitor-logs.date', compact('result'));
     }
 
     /**

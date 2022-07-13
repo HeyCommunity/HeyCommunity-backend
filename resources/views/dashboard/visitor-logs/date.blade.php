@@ -8,7 +8,10 @@
       <div class="col-12">
         <div class="card" data-list='{"valueNames": ["name"]}'>
           <div class="card-header">
-            <h4 class="card-header-title">{{ \Carbon\Carbon::parse(request()->get('date'))->format('Y/m/d') }}</h4>
+            <h4 class="card-header-title">
+              {{ \Carbon\Carbon::parse(request()->get('date'))->format('Y/m/d') }}
+              <span>用户访问汇总</span>
+            </h4>
 
             <form class="me-3">
               <select disabled class="form-select form-select-sm form-control-flush" data-choices='{"searchEnabled": false}'>
@@ -23,7 +26,7 @@
               <table class="table table-sm table-nowrap card-table">
                 <thead>
                 <tr>
-                  <th class="text-center">#</th>
+                  <th class="text-center">UID</th>
                   <th>用户</th>
                   <th>访问次数</th>
                   <th>访问时间</th>
@@ -33,21 +36,21 @@
                 </tr>
                 </thead>
                 <tbody>
-                @if (! $visitorLogs->count())
+                @if (! $result->count())
                   <tr><td colspan="100">无数据</td></tr>
                 @endif
 
-                @foreach ($visitorLogs as $visitorLog)
+                @foreach ($result as $resultItem)
                   <tr>
-                    <td class="text-center" rowspan="2">{{ $visitorLog->id }}</td>
+                    <td class="text-center" rowspan="2">{{ $resultItem->user_id }}</td>
 
                     <!-- 用户 -->
                     <td>
-                      @if ($visitorLog->user)
-                        <a href="{{ route('dashboard.users.show', $visitorLog->user)  }}" class="avatar avatar-xs d-inline-block me-2">
-                          <img src="{{ asset($visitorLog->user->avatar) }}" alt="{{ $visitorLog->user->app_id }}" class="avatar-img rounded-circle">
+                      @if ($resultItem->user)
+                        <a href="{{ route('dashboard.users.show', $resultItem->user)  }}" class="avatar avatar-xs d-inline-block me-2">
+                          <img src="{{ asset($resultItem->user->avatar) }}" alt="{{ $resultItem->user->app_id }}" class="avatar-img rounded-circle">
                         </a>
-                        <a class="text-black" href="{{ route('dashboard.users.show', $visitorLog->user) }}">{{ $visitorLog->user->nickname ?: 'NULL' }}</a>
+                        <a class="text-black" href="{{ route('dashboard.users.show', $resultItem->user) }}">{{ $resultItem->user->nickname ?: 'NULL' }}</a>
                       @else
                         <a class="avatar avatar-xs d-inline-block me-2">
                           <img src="{{ asset('images/users/default-avatar.jpg') }}" class="avatar-img rounded-circle">
@@ -56,23 +59,23 @@
                       @endif
                     </td>
 
-                    <td>{{ $visitorLog->total_num }}</td>
+                    <td>{{ $resultItem->total_num }}</td>
                     <td>
-                      {{ \Carbon\Carbon::parse($visitorLog->start_time)->format('H:i:s') }}
-                      - {{ \Carbon\Carbon::parse($visitorLog->end_time)->format('H:i:s') }}
+                      {{ \Carbon\Carbon::parse($resultItem->start_time)->format('H:i:s') }}
+                      - {{ \Carbon\Carbon::parse($resultItem->end_time)->format('H:i:s') }}
                     </td>
-                    <td>{{ $visitorLog->devices }}</td>
-                    <td>{{ $visitorLog->locales }}</td>
+                    <td>{{ $resultItem->devices }}</td>
+                    <td>{{ $resultItem->locales }}</td>
 
                     <td>
                       <button type="button" class="btn btn-sm btn-outline-light text-gray-800 d-inline-block"
-                              data-bs-toggle="collapse" data-bs-target="#someDateLogTable-u{{ $visitorLog->user_id }}">
+                              data-bs-toggle="collapse" data-bs-target="#someDateLogTable-u{{ $resultItem->user_id }}">
                         <i class="fe fe-chevrons-down"></i> 展开
                       </button>
                     </td>
                   </tr>
                   <tr>
-                    <td colspan="100" style="padding:0 !important;" id="someDateLogTable-u{{ $visitorLog->user_id }}" class="collapse">
+                    <td colspan="100" style="padding:0 !important;" id="someDateLogTable-u{{ $resultItem->user_id }}" class="collapse">
                       <div class="table-responsive">
                         <table class="mb-0 table table-sm table-nowrap">
                           <thead>
@@ -84,7 +87,7 @@
                             </tr>
                           </thead>
                           <tbody>
-                            @foreach ($visitorLog->someUserLogs as $log)
+                            @foreach ($resultItem->someUserLogs as $log)
                             <tr>
                               <td>{{ $log->id }}</td>
                               <td>{{ $log->request_uri }}</td>
@@ -105,7 +108,7 @@
         </div>
 
         <div class="mb-5">
-          {{ $visitorLogs->links() }}
+          {{ $result->links() }}
         </div>
       </div>
     </div>
