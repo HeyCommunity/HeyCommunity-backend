@@ -22,7 +22,12 @@ class VisitorLogging
         $response = $next($request);
 
         // dashboard not logging
-        if (! $request->is('/dashboard*')) {
+        if (! $request->is([
+            '_debugbar*',
+            'dashboard*',
+            // 'dashboard/telescope*',
+            // 'dashboard/log-viewer*',
+        ])) {
             $logData = [
                 'route_type'        =>  $this->getRouteType($request),
                 'route_name'        =>  $request->route() ? $request->route()->getName() : null,
