@@ -10,9 +10,8 @@ class VisitorLog extends Model
      * @var string[]
      */
     protected $casts = [
-        'request_get_data'  =>  'array',
-        'request_post_data' =>  'array',
-        'request_cookies'   =>  'array',
-        'request_headers'   =>  'array',
+        'visitor_ip_info'       =>  'array',
+        'visitor_agent_info'    =>  'array',
+        'request_data'          =>  'array',
     ];
 }
