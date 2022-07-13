@@ -1,18 +1,7 @@
 @extends('dashboard.layouts.default')
 
 @section('mainBody')
-  <div class="header">
-    <div class="container-fluid">
-      <div class="header-body">
-        <div class="row align-items-end">
-          <div class="col">
-            <h6 class="header-pretitle">Visitor Log</h6>
-            <h1 class="header-title">访客日志</h1>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  @include('dashboard.visitor-logs._header')
 
   <div class="container-fluid">
     <div class="row">

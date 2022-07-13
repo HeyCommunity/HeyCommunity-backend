@@ -21,6 +21,7 @@ Route::prefix('dashboard')
     // 访客日志
     Route::prefix('visitor-logs')->group(function () {
         Route::get('/', 'VisitorLogController@index')->name('dashboard.visitor-logs.index');
+        Route::get('date', 'VisitorLogController@date')->name('dashboard.visitor-logs.date');
         Route::get('analytics', 'VisitorLogController@analytics')->name('dashboard.visitor-logs.analytics');
     });
 
