@@ -49,9 +49,13 @@
   </li>
 
   <li class="nav-item">
-    <a class="nav-link" target="_blank" href="{{ url('/dashboard/telescope') }}"><i class="fe fe-cast"></i> Telescope</a>
+    <a class="nav-link d-none d-md-inline-block {{ request()->routeIs('dashboard.iframes.telescope') ? 'active' : '' }}"
+       href="{{ route('dashboard.iframes.telescope') }}"><i class="fe fe-cast"></i> Telescope</a>
+    <a class="nav-link d-inline-block d-md-none" target="_blank" href="{{ url('/dashboard/telescope') }}"><i class="fe fe-cast"></i> Telescope</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" target="_blank" href="{{ url('/dashboard/log-viewer') }}"><i class="fe fe-alert-octagon"></i> LogViewer</a>
+    <a class="nav-link d-none d-md-inline-block {{ request()->routeIs('dashboard.iframes.log-viewer') ? 'active' : '' }}"
+       href="{{ route('dashboard.iframes.log-viewer') }}"><i class="fe fe-alert-octagon"></i> LogViewer</a>
+    <a class="nav-link d-inline-block d-md-none" target="_blank" href="{{ url('/dashboard/log-viewer') }}"><i class="fe fe-alert-octagon"></i> LogViewer</a>
   </li>
 </ul>

@@ -46,4 +46,15 @@ Route::prefix('dashboard')
     Route::middleware([])->group(function () {
         Route::get('thumbs', 'ThumbController@index')->name('dashboard.thumbs.index');
     });
+
+    // 其他
+    Route::middleware([])->group(function () {
+        Route::get('iframes/telescope', function () {
+            return view('dashboard.iframes.iframe', ['iframeUrl' => 'dashboard/telescope']);
+        })->name('dashboard.iframes.telescope');
+
+        Route::get('iframes/log-viewer', function () {
+            return view('dashboard.iframes.iframe', ['iframeUrl' => 'dashboard/log-viewer']);
+        })->name('dashboard.iframes.log-viewer');
+    });
 });
