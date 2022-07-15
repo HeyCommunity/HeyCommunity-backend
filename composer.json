@@ -72,10 +72,7 @@
         "laravel": {
             "dont-discover": [
                 "laravel/telescope",
-                "itsgoingd/clockwork",
-                "arcanedev/log-viewer",
-                "barryvdh/laravel-debugbar",
-                "barryvdh/laravel-ide-helper"
+                "arcanedev/log-viewer"
             ]
         }
     },

@@ -54,8 +54,5 @@ jobs:
     - name: Composer Require Phpunit
       run: composer require phpunit/phpunit --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist  --dev
 
-    - name: Laravel Artisan Test
-      run: php artisan test
-
     - name: Execute tests (Unit and Feature tests) via PHPUnit
       run: vendor/bin/phpunit
