@@ -14,9 +14,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        // TeleScope just only for local
-        // if ($this->app->isLocal()) $this->app->register(\Laravel\Telescope\TelescopeServiceProvider::class);
-        $this->app->register(\Laravel\Telescope\TelescopeServiceProvider::class);           // TeleScope for all
+        // Telescope for all. You can turn it off if you don't need it
+        $this->app->register(\Laravel\Telescope\TelescopeServiceProvider::class);
+
+        if ($this->app->isLocal()) {
+            $this->app->register(\Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class);
+            $this->app->register(\Laravel\Telescope\TelescopeServiceProvider::class);
+        }
     }
 
     /**
@@ -26,6 +30,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        // 使用 bootstrap 风格的分页
         \Illuminate\Pagination\Paginator::useBootstrap();
 
         // 中国手机号码验证器

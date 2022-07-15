@@ -56,7 +56,9 @@
     "scripts": {
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
-            "@php artisan package:discover --ansi"
+            "@php artisan package:discover --ansi",
+            "@php artisan ide-helper:generate" ,
+            "@php artisan ide-helper:meta"
         ],
         "post-root-package-install": [
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
@@ -68,7 +70,8 @@
     "extra": {
         "laravel": {
             "dont-discover": [
-                "laravel/telescope"
+                "laravel/telescope",
+                "barryvdh/laravel-ide-helper"
             ]
         }
     },
