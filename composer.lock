@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2062bb6e0bb26b1174194c9beb26aea2",
+    "content-hash": "4a2b048e895c116fb11f567941be4cdf",
     "packages": [
         {
             "name": "arcanedev/log-viewer",
@@ -1744,16 +1744,16 @@
         },
         {
             "name": "itbdw/ip-database",
-            "version": "3.0.0",
+            "version": "3.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/itbdw/ip-database.git",
-                "reference": "1bcd17b78e8cd5366f068c4cdd19717ca52fe6f6"
+                "reference": "22456372327c1f54a2c2a49999721d11d631862e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/itbdw/ip-database/zipball/1bcd17b78e8cd5366f068c4cdd19717ca52fe6f6",
-                "reference": "1bcd17b78e8cd5366f068c4cdd19717ca52fe6f6",
+                "url": "https://api.github.com/repos/itbdw/ip-database/zipball/22456372327c1f54a2c2a49999721d11d631862e",
+                "reference": "22456372327c1f54a2c2a49999721d11d631862e",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -1766,7 +1766,7 @@
                 "ext-iconv": "*",
                 "ext-json": "*",
                 "ext-mbstring": "*",
-                "php": "~5.4|~7.0"
+                "php": "*"
             },
             "type": "library",
             "autoload": {
@@ -1789,21 +1789,19 @@
                     "role": "Developer"
                 }
             ],
-            "description": "IP位置数据库（解析为国家、省、市、县、运营商）",
+            "description": "IP数据库 IPV4 IPV6（解析为国家、省、市、县、运营商）",
             "keywords": [
                 "China",
                 "Chinese",
                 "IP",
+                "IP数据库",
                 "database",
                 "location",
-                "位置",
-                "地区",
-                "数据库",
-                "纯真"
+                "数据库"
             ],
             "support": {
                 "issues": "https://github.com/itbdw/ip-database/issues",
-                "source": "https://github.com/itbdw/ip-database/tree/3.0.0"
+                "source": "https://github.com/itbdw/ip-database/tree/3.x"
             },
             "funding": [
                 {
@@ -1811,7 +1809,7 @@
                     "type": "custom"
                 }
             ],
-            "time": "2021-04-09T16:22:33+00:00"
+            "time": "2021-04-09T17:07:26+00:00"
         },
         {
             "name": "jaybizzle/crawler-detect",
@@ -11171,5 +11169,5 @@
         "php": "^7.4|^8.0"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.1.0"
+    "plugin-api-version": "2.2.0"
 }
