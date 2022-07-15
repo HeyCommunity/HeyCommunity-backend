@@ -17,6 +17,7 @@ return [
     'enabled' => env('DEBUGBAR_ENABLED', null),
     'except' => [
         '*telescope*',
+        '*log-viewer*',
         'horizon*',
     ],
 

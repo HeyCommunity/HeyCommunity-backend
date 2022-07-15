@@ -98,6 +98,9 @@ return [
 
     'ignore_paths' => [
         'nova-api*',
+        'dashboard/iframes*',
+        '*log-viewer*',
+        '*clockwork*',
     ],
 
     'ignore_commands' => [
