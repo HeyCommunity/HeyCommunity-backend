@@ -51,5 +51,11 @@ jobs:
         DB_DATABASE: database/database.sqlite
       run: php artisan migrate:refresh --no-interaction --env=testing
 
+    - name: Composer Require Phpunit
+      run: composer require phpunit/phpunit --dev
+
+    - name: Laravel Artisan Test
+      run: php artisan test
+
     - name: Execute tests (Unit and Feature tests) via PHPUnit
       run: vendor/bin/phpunit
