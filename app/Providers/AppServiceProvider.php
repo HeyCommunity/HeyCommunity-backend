@@ -14,12 +14,17 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        // Telescope for all. You can turn it off if you don't need it
+        // Telescope and LogViewer for Ops debugging. You can turn it off if you don't need it
         $this->app->register(\Laravel\Telescope\TelescopeServiceProvider::class);
+        $this->app->register(\Arcanedev\LogViewer\LogViewerServiceProvider::class);
+        $this->app->register(\Arcanedev\LogViewer\Providers\DeferredServicesProvider::class);
 
+        // providers for local development
         if ($this->app->isLocal()) {
             $this->app->register(\Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class);
             $this->app->register(\Laravel\Telescope\TelescopeServiceProvider::class);
+            $this->app->register(\Barryvdh\Debugbar\ServiceProvider::class);
+            $this->app->register(\Clockwork\Support\Laravel\ClockworkServiceProvider::class);
         }
     }
 
