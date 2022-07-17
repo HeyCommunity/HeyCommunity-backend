@@ -17,26 +17,28 @@ class NoticeResource extends JsonResource
     {
         $data = parent::toArray($request);
 
-        $data['sender']                     =   $this->sender;
-        $data['created_at_for_humans']      =   $this->created_at_for_humans;
-        $data['type_name']                  =   $this->getNoticeTypeName();
-        list($data['content'], $data['wxapp_redirect_url']) = $this->getNoticeData();
+        $data['sender'] = $this->sender;
+        $data['created_at_for_humans'] = $this->created_at_for_humans;
+        $data['type_name'] = $this->getNoticeTypeName();
+        [$data['content'], $data['wxapp_redirect_url']] = $this->getNoticeData();
 
         return $data;
     }
 
     /**
-     * Get notice type name
+     * Get notice type name.
      */
     protected function getNoticeTypeName()
     {
-        if (isset(Notice::$types[$this->type])) return Notice::$types[$this->type];
+        if (isset(Notice::$types[$this->type])) {
+            return Notice::$types[$this->type];
+        }
 
         return '未知';
     }
 
     /**
-     * Get notice data
+     * Get notice data.
      */
     protected function getNoticeData()
     {
@@ -49,25 +51,27 @@ class NoticeResource extends JsonResource
             case 'post_thumb_up':
                 $content = $this->entity->entity->content;
                 $postId = $this->entity->entity->id;
-                $wxappRedirectUrl = $postDetailPageUrl . '?id=' . $postId;
+                $wxappRedirectUrl = $postDetailPageUrl.'?id='.$postId;
                 break;
             case 'post_comment_thumb_up':
                 $content = $this->entity->entity->content;
                 $postId = $this->entity->entity->entity->id;
-                $wxappRedirectUrl = $postDetailPageUrl . '?id=' . $postId;
+                $wxappRedirectUrl = $postDetailPageUrl.'?id='.$postId;
                 break;
             case 'post_comment':
             case 'post_comment_reply':
                 $content = $this->entity->content;
                 $postId = $this->entity->entity->id;
-                $wxappRedirectUrl = $postDetailPageUrl . '?id=' . $postId;
+                $wxappRedirectUrl = $postDetailPageUrl.'?id='.$postId;
                 break;
             default:
                 $content = '未知消息内容';
                 break;
         }
 
-        if (! $content) $content = '未知消息内容';
+        if (! $content) {
+            $content = '未知消息内容';
+        }
 
         return [$content, $wxappRedirectUrl];
     }

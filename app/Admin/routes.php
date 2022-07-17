@@ -8,10 +8,12 @@ Route::group([
     'prefix'        => config('admin.route.prefix'),
     'namespace'     => config('admin.route.namespace'),
     'middleware'    => config('admin.route.middleware'),
-    'as'            => config('admin.route.prefix') . '.',
+    'as'            => config('admin.route.prefix').'.',
 ], function (Router $router) {
     // $router->get('/', 'HomeController@index')->name('home');
-    $router->get('/', function () { return redirect()->to('/admin/posts'); });
+    $router->get('/', function () {
+        return redirect()->to('/admin/posts');
+    });
 
     $router->resource('users', UserController::class);
     $router->resource('posts', PostController::class);

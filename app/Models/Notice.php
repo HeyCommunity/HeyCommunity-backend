@@ -13,7 +13,7 @@ class Notice extends Model
     ];
 
     /**
-     * Related User
+     * Related User.
      */
     public function sender()
     {
@@ -21,7 +21,7 @@ class Notice extends Model
     }
 
     /**
-     * Related EntityModel
+     * Related EntityModel.
      */
     public function entity()
     {

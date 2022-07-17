@@ -26,7 +26,7 @@ return [
 
     'stubs' => [
         'enabled' => false,
-        'path' => base_path() . '/vendor/nwidart/laravel-modules/src/Commands/stubs',
+        'path' => base_path().'/vendor/nwidart/laravel-modules/src/Commands/stubs',
         'files' => [
             'routes/web' => 'Routes/web.php',
             'routes/api' => 'Routes/api.php',
@@ -242,7 +242,7 @@ return [
     'register' => [
         'translations' => true,
         /**
-         * load files on boot or register method
+         * load files on boot or register method.
          *
          * Note: boot not compatible with asgardcms
          *

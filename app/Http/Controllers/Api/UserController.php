@@ -15,7 +15,7 @@ use Illuminate\Support\Str;
 class UserController extends Controller
 {
     /**
-     * User ping
+     * User ping.
      */
     public function ping(Request $request)
     {
@@ -33,7 +33,7 @@ class UserController extends Controller
     }
 
     /**
-     * User login
+     * User login.
      */
     public function login(Request $request)
     {
@@ -53,12 +53,16 @@ class UserController extends Controller
             $wxUserInfo = json_decode($request->get('user_info'), true);
             if ($wxUserInfo) {
                 $data['wx_user_info'] = $wxUserInfo;
-                if (isset($wxUserInfo['nickName']) && !$user->nickname) $data['nickname'] = $wxUserInfo['nickName'];
-                if (isset($wxUserInfo['gender']) && !$user->gender) $data['gender'] = $wxUserInfo['gender'];
-                if (isset($wxUserInfo['avatarUrl']) && (!$user->avatar || $user->getRawOriginal('avatar') === 'images/users/default-avatar.jpg')) {
+                if (isset($wxUserInfo['nickName']) && ! $user->nickname) {
+                    $data['nickname'] = $wxUserInfo['nickName'];
+                }
+                if (isset($wxUserInfo['gender']) && ! $user->gender) {
+                    $data['gender'] = $wxUserInfo['gender'];
+                }
+                if (isset($wxUserInfo['avatarUrl']) && (! $user->avatar || $user->getRawOriginal('avatar') === 'images/users/default-avatar.jpg')) {
                     $client = new Client();
                     $avatarData = $client->request('get', $wxUserInfo['avatarUrl'])->getBody()->getContents();
-                    $avatarPath = 'uploads/users/avatars/' . Str::random(40) . '.jpg';
+                    $avatarPath = 'uploads/users/avatars/'.Str::random(40).'.jpg';
                     Storage::put($avatarPath, $avatarData);
                     $data['avatar'] = $avatarPath;
                 }
@@ -81,7 +85,7 @@ class UserController extends Controller
     }
 
     /**
-     * User logout
+     * User logout.
      */
     public function logout(Request $request)
     {
@@ -92,7 +96,7 @@ class UserController extends Controller
     }
 
     /**
-     * 用户信息
+     * 用户信息.
      */
     public function show(Request $request, User $user)
     {
@@ -100,7 +104,7 @@ class UserController extends Controller
     }
 
     /**
-     * 我的信息
+     * 我的信息.
      */
     public function mineShow(Request $request)
     {
@@ -112,7 +116,7 @@ class UserController extends Controller
     }
 
     /**
-     * 更新我的资料
+     * 更新我的资料.
      */
     public function mineUpdate(Request $request)
     {
@@ -134,7 +138,7 @@ class UserController extends Controller
     }
 
     /**
-     * 更新我的头像
+     * 更新我的头像.
      */
     public function mineAvatarUpdate(Request $request)
     {
@@ -161,7 +165,7 @@ class UserController extends Controller
     }
 
     /**
-     * 更新我的封面
+     * 更新我的封面.
      */
     public function mineCoverUpdate(Request $request)
     {
@@ -188,7 +192,7 @@ class UserController extends Controller
     }
 
     /**
-     * 同步微信的用户资料
+     * 同步微信的用户资料.
      */
     public function mineSyncWxProfile(Request $request)
     {
@@ -206,12 +210,16 @@ class UserController extends Controller
         if ($request->get('avatarUrl')) {
             $client = new Client();
             $avatarData = $client->request('get', $request->get('avatarUrl'))->getBody()->getContents();
-            $avatarPath = 'uploads/users/avatars/' . Str::random(40) . '.jpg';
+            $avatarPath = 'uploads/users/avatars/'.Str::random(40).'.jpg';
             Storage::put($avatarPath, $avatarData);
             $data['avatar'] = $avatarPath;
         }
-        if ($request->get('nickName')) $data['nickname'] = $request->get('nickName');
-        if ($request->get('gender')) $data['gender'] = $request->get('gender');
+        if ($request->get('nickName')) {
+            $data['nickname'] = $request->get('nickName');
+        }
+        if ($request->get('gender')) {
+            $data['gender'] = $request->get('gender');
+        }
 
         if ($data) {
             $user->update($data);

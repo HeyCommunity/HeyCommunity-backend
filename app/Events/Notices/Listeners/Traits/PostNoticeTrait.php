@@ -7,7 +7,7 @@ use Illuminate\Support\Str;
 trait PostNoticeTrait
 {
     /**
-     * 发送动态点赞通知
+     * 发送动态点赞通知.
      */
     public function sendPostThumbUpNotice($notice)
     {
@@ -15,9 +15,9 @@ trait PostNoticeTrait
         $sender = $notice->sender;
         $post = $notice->entity->entity;
 
-        $page = $this->wxappPostDetailPage . '?id=' . $post->id;
+        $page = $this->wxappPostDetailPage.'?id='.$post->id;
         $data = [
-            'thing1' => ['value' => Str::limit('动态: ' . $post->content, 20)],
+            'thing1' => ['value' => Str::limit('动态: '.$post->content, 20)],
             'thing2' => ['value' => Str::limit($sender->nickname, 20)],
             'time3' => ['value' => date('Y/m/d H:i:s')],
         ];
@@ -26,7 +26,7 @@ trait PostNoticeTrait
     }
 
     /**
-     * 发送动态评论点赞通知
+     * 发送动态评论点赞通知.
      */
     public function sendPostCommentThumbUpNotice($notice)
     {
@@ -35,9 +35,9 @@ trait PostNoticeTrait
         $comment = $notice->entity->entity;
         $post = $comment->entity;
 
-        $page = $this->wxappPostDetailPage . '?id=' . $post->id;
+        $page = $this->wxappPostDetailPage.'?id='.$post->id;
         $data = [
-            'thing1' => ['value' => Str::limit('动态评论: ' . $comment->content, 20)],
+            'thing1' => ['value' => Str::limit('动态评论: '.$comment->content, 20)],
             'thing2' => ['value' => Str::limit($sender->nickname, 20)],
             'time3' => ['value' => date('Y/m/d H:i:s')],
         ];
@@ -46,7 +46,7 @@ trait PostNoticeTrait
     }
 
     /**
-     * 发送动态评论通知
+     * 发送动态评论通知.
      */
     public function sendPostCommentNotice($notice)
     {
@@ -55,9 +55,9 @@ trait PostNoticeTrait
         $comment = $notice->entity;
         $post = $comment->entity;
 
-        $page = $this->wxappPostDetailPage . '?id=' . $post->id;
+        $page = $this->wxappPostDetailPage.'?id='.$post->id;
         $data = [
-            'thing4'    =>  ['value' => Str::limit('动态: ' . $post->content, 20)],
+            'thing4'    =>  ['value' => Str::limit('动态: '.$post->content, 20)],
             'thing1'    =>  ['value' => Str::limit($comment->content, 20)],
             'thing3'    =>  ['value' => Str::limit($sender->nickname, 20)],
             'time2' => ['value' => date('Y/m/d H:i:s')],
@@ -67,7 +67,7 @@ trait PostNoticeTrait
     }
 
     /**
-     * 发送动态评论回复通知
+     * 发送动态评论回复通知.
      */
     public function sendPostCommentReplyNotice($notice)
     {
@@ -77,7 +77,7 @@ trait PostNoticeTrait
         $parentComment = $comment->parent;
         $post = $comment->entity;
 
-        $page = $this->wxappPostDetailPage . '?id=' . $post->id;
+        $page = $this->wxappPostDetailPage.'?id='.$post->id;
         $data = [
             'thing1'    =>  ['value' => Str::limit($parentComment->content, 20)],
             'thing2'    =>  ['value' => Str::limit($comment->content, 20)],

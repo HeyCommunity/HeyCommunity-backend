@@ -26,9 +26,10 @@ class CreateSettingsTable extends Migration
     }
 
     /**
-     * 初始化数据
+     * 初始化数据.
      */
-    protected function initialData() {
+    protected function initialData()
+    {
         $data = [
             [
                 'name'  =>  '关于社区 标题',

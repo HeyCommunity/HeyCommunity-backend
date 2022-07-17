@@ -7,7 +7,7 @@ use App\Models\Model;
 class PostVideo extends Model
 {
     /**
-     * newFactory
+     * newFactory.
      */
     protected static function newFactory()
     {
@@ -15,7 +15,7 @@ class PostVideo extends Model
     }
 
     /**
-     * Get file_path attribute
+     * Get file_path attribute.
      */
     public function getFilePathAttribute($value)
     {

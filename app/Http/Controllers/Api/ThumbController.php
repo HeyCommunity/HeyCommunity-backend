@@ -14,7 +14,7 @@ use Modules\Post\Entities\Post;
 class ThumbController extends Controller
 {
     /**
-     * Store
+     * Store.
      */
     public function store(Request $request)
     {
@@ -53,7 +53,7 @@ class ThumbController extends Controller
     }
 
     /**
-     * getEntity
+     * getEntity.
      */
     public function getEntity(Request $request)
     {
@@ -77,14 +77,17 @@ class ThumbController extends Controller
     }
 
     /**
-     * getNoticeType
+     * getNoticeType.
      */
     public function getNoticeType($entity)
     {
         $rootEntityTypePrefix = null;
-        if ($entity->entity) $rootEntityTypePrefix = mb_strtolower(class_basename($entity->entity)) . '_';
+        if ($entity->entity) {
+            $rootEntityTypePrefix = mb_strtolower(class_basename($entity->entity)).'_';
+        }
 
         $entityType = mb_strtolower(class_basename($entity));
-        return $rootEntityTypePrefix . $entityType . '_thumb_up';
+
+        return $rootEntityTypePrefix.$entityType.'_thumb_up';
     }
 }

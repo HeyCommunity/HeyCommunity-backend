@@ -5,7 +5,7 @@ namespace App\Models;
 class UserReport extends Model
 {
     /**
-     * Related Entity
+     * Related Entity.
      */
     public function entity()
     {
@@ -13,7 +13,7 @@ class UserReport extends Model
     }
 
     /**
-     * Get entity_content attr
+     * Get entity_content attr.
      */
     public function getEntityContentAttribute()
     {

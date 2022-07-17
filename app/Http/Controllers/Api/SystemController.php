@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class SystemController extends Controller
 {
     /**
-     * Settings
+     * Settings.
      */
     public function settings()
     {
@@ -28,12 +28,12 @@ class SystemController extends Controller
                     'text'          =>  getSettingValueByKey('wxapp_index_page_marquee_text', null),
                     'url'           =>  getSettingValueByKey('wxapp_index_page_marquee_url', null),
                 ],
-            ]
+            ],
         ];
     }
 
     /**
-     * 关于社区
+     * 关于社区.
      */
     public function about()
     {
@@ -47,7 +47,7 @@ class SystemController extends Controller
     }
 
     /**
-     * 社区准则
+     * 社区准则.
      */
     public function regulation()
     {

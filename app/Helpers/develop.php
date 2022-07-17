@@ -1,20 +1,19 @@
 <?php
 
 /**
- * Get Lorem Image Url
+ * Get Lorem Image Url.
  *
- * @param int $width
- * @param int $height
+ * @param  int  $width
+ * @param  int  $height
  * @return mixed
  */
 function getLoremImageUrl($width = 800, $height = 600)
 {
-
     $baseUrl = 'https://picsum.photos/';
-    $url = $baseUrl . $width . '/' . $height;
+    $url = $baseUrl.$width.'/'.$height;
 
     $ch = curl_init($url);
-    curl_setopt($ch, CURLOPT_HEADER, TRUE);
+    curl_setopt($ch, CURLOPT_HEADER, true);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
     curl_setopt($ch, CURLOPT_BINARYTRANSFER, 1);
 
@@ -25,21 +24,22 @@ function getLoremImageUrl($width = 800, $height = 600)
 }
 
 /**
- * Save Lorem Image
+ * Save Lorem Image.
  *
- * @param null $path
- * @param int $width
- * @param int $height
+ * @param  null  $path
+ * @param  int  $width
+ * @param  int  $height
  */
 function saveLoremImage($path = null, $width = 800, $height = 600)
 {
-    if (!$path) $path = storage_path('app/uploads/lorem-images/');
+    if (! $path) {
+        $path = storage_path('app/uploads/lorem-images/');
+    }
 
     $url = getLoremImageUrl($width, $height);
-    $fileName = $path . str_random() . '.jpg';
+    $fileName = $path.str_random().'.jpg';
 
     \Image::make($url)->save($fileName);
 
     return strstr($fileName, 'uploads/lorem-images');
 }
-

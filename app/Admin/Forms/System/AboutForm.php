@@ -17,8 +17,7 @@ class AboutForm extends Form
     /**
      * Handle the form request.
      *
-     * @param Request $request
-     *
+     * @param  Request  $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function handle(Request $request)
@@ -26,7 +25,7 @@ class AboutForm extends Form
         foreach ($request->all() as $key => $value) {
             updateSettingColumn($key, $value);
         }
-        
+
         admin_success('操作成功');
 
         return back();

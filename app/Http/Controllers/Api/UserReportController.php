@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
 class UserReportController extends Controller
 {
     /**
-     * Store
+     * Store.
      */
     public function store(Request $request)
     {

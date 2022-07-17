@@ -1,14 +1,13 @@
 <?php
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\Api\CommentController;
+use App\Http\Controllers\Api\NoticeController;
 use App\Http\Controllers\Api\SystemController;
+use App\Http\Controllers\Api\ThumbController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\UserReportController;
-use App\Http\Controllers\Api\NoticeController;
-use App\Http\Controllers\Api\CommentController;
-use App\Http\Controllers\Api\ThumbController;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,8 +20,8 @@ use App\Http\Controllers\Api\ThumbController;
 |
 */
 
-##
-## User API
+//#
+//# User API
 Route::get('/users/login', [UserController::class, 'login']);
 Route::get('/users/ping', [UserController::class, 'ping']);
 Route::get('/users/{user}', [UserController::class, 'show'])->where('user', '[0-9]+');
@@ -36,8 +35,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/users/mine-cover', [UserController::class, 'mineCoverUpdate']);
 });
 
-##
-## Notice API
+//#
+//# Notice API
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/notices', [NoticeController::class, 'index']);
     Route::post('/notices/set-isread', [NoticeController::class, 'setIsReadHandler']);
@@ -45,16 +44,16 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/notices/delete', [NoticeController::class, 'deleteHandler']);
 });
 
-##
-## Common API
+//#
+//# Common API
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('comments', [CommentController::class, 'store']);
     Route::post('comments/delete', [CommentController::class, 'destory']);
     Route::post('thumbs', [ThumbController::class, 'store']);
 });
 
-##
-## Other API
+//#
+//# Other API
 Route::get('/system/settings', [SystemController::class, 'settings']);
 Route::get('/system/about', [SystemController::class, 'about']);
 Route::get('/system/regulation', [SystemController::class, 'regulation']);

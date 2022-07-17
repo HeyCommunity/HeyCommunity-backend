@@ -40,6 +40,7 @@ class PostController extends AdminController
             $comments = $model->comments()->take(10)->latest()->get()->map(function ($comment) {
                 $data = $comment->only('id', 'content', 'created_at');
                 array_splice($data, 1, 0, ['user' => $comment->user->nickname]);
+
                 return $data;
             });
 
@@ -55,7 +56,7 @@ class PostController extends AdminController
             $actions->disableView();
         });
 
-        $grid->filter(function($filter){
+        $grid->filter(function ($filter) {
             $filter->equal('status', '状态')->select(Post::$statuses);
             $filter->like('user.nickname', '作者');
             $filter->like('content', '内容');
@@ -67,7 +68,7 @@ class PostController extends AdminController
     /**
      * Make a show builder.
      *
-     * @param mixed $id
+     * @param  mixed  $id
      * @return Show
      */
     protected function detail($id)

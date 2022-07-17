@@ -22,7 +22,7 @@ class Model extends EloquentModel
     protected $guarded = [];
 
     /**
-     * Relation User
+     * Relation User.
      */
     public function user()
     {
@@ -30,7 +30,7 @@ class Model extends EloquentModel
     }
 
     /**
-     * Relation User
+     * Relation User.
      */
     public function author()
     {
@@ -39,11 +39,11 @@ class Model extends EloquentModel
 
     public function getEntityTextForAdmin()
     {
-        return class_basename($this->entity) . '(' . $this->id . ')';
+        return class_basename($this->entity).'('.$this->id.')';
     }
 
     /**
-     * Sort Order
+     * Sort Order.
      */
     public function scopeSortOrder($query)
     {
@@ -51,7 +51,7 @@ class Model extends EloquentModel
     }
 
     /**
-     * Mine Scope
+     * Mine Scope.
      */
     public function scopeMine($query)
     {
@@ -59,7 +59,7 @@ class Model extends EloquentModel
     }
 
     /**
-     * CreatedAt In Today Scope
+     * CreatedAt In Today Scope.
      */
     public function scopeCreatedAtInToday($query)
     {
@@ -68,7 +68,7 @@ class Model extends EloquentModel
     }
 
     /**
-     * Get has thumb up
+     * Get has thumb up.
      */
     public function getHasThumbUpAttribute()
     {
@@ -85,7 +85,7 @@ class Model extends EloquentModel
     }
 
     /**
-     * Get created_at_for_humans attr
+     * Get created_at_for_humans attr.
      */
     public function getCreatedAtForHumansAttribute()
     {

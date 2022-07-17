@@ -73,7 +73,7 @@ class sendNotificationHandler implements ShouldQueue
     }
 
     /**
-     * send wechat mini program subscribe message
+     * send wechat mini program subscribe message.
      *
      * @param $type
      * @param $tmplId

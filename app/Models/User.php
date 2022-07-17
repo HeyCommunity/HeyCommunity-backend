@@ -27,7 +27,7 @@ class User extends Authenticatable
     ];
 
     /**
-     * The guarded column
+     * The guarded column.
      *
      * @var array
      */
@@ -54,7 +54,7 @@ class User extends Authenticatable
     ];
 
     /**
-     * Get avatar attribute
+     * Get avatar attribute.
      */
     public function getAvatarAttribute($value)
     {
@@ -62,7 +62,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Get cover attribute
+     * Get cover attribute.
      */
     public function getCoverAttribute($value)
     {
@@ -70,7 +70,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Related ThumbUp
+     * Related ThumbUp.
      */
     public function upThumbs()
     {
@@ -78,7 +78,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Related ThumbDown
+     * Related ThumbDown.
      */
     public function downThumbs()
     {
@@ -86,7 +86,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Related Post
+     * Related Post.
      */
     public function posts()
     {
@@ -94,7 +94,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Related Comments
+     * Related Comments.
      */
     public function comments()
     {
@@ -102,7 +102,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Related Comments
+     * Related Comments.
      */
     public function postComments()
     {
@@ -110,7 +110,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Get nickname attr
+     * Get nickname attr.
      */
     public function getNicknameAttribute($value)
     {
@@ -118,7 +118,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Get post_num attr
+     * Get post_num attr.
      */
     public function getPostNumAttribute()
     {
@@ -126,7 +126,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Get comment_num attr
+     * Get comment_num attr.
      */
     public function getCommentNumAttribute()
     {
@@ -134,7 +134,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Get post_num attr
+     * Get post_num attr.
      */
     public function getThumbUpNumAttribute()
     {
@@ -142,7 +142,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Get unread_notice_num attr
+     * Get unread_notice_num attr.
      */
     public function getUnreadNoticeNumAttribute()
     {

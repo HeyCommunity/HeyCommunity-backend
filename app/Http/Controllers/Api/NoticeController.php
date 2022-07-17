@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 class NoticeController extends Controller
 {
     /**
-     * 通知列表
+     * 通知列表.
      */
     public function index(Request $request)
     {
@@ -23,7 +23,7 @@ class NoticeController extends Controller
     }
 
     /**
-     * 设为已读
+     * 设为已读.
      */
     public function setIsReadHandler(Request $request)
     {
@@ -35,7 +35,9 @@ class NoticeController extends Controller
         $user = $request->user();
 
         // 权限校验
-        if ($notice->user_id !== $user->id) return response(['message' => '非法请求'], 403);
+        if ($notice->user_id !== $user->id) {
+            return response(['message' => '非法请求'], 403);
+        }
 
         $notice->update([
             'is_read'   =>  true,
@@ -46,7 +48,7 @@ class NoticeController extends Controller
     }
 
     /**
-     * 设为未读
+     * 设为未读.
      */
     public function setUnReadHandler(Request $request)
     {
@@ -58,7 +60,9 @@ class NoticeController extends Controller
         $user = $request->user();
 
         // 权限校验
-        if ($notice->user_id !== $user->id) return response(['message' => '非法请求'], 403);
+        if ($notice->user_id !== $user->id) {
+            return response(['message' => '非法请求'], 403);
+        }
 
         $notice->update([
             'is_read'   =>  false,
@@ -69,7 +73,7 @@ class NoticeController extends Controller
     }
 
     /**
-     * 删除
+     * 删除.
      */
     public function deleteHandler(Request $request)
     {
@@ -81,7 +85,9 @@ class NoticeController extends Controller
         $user = $request->user();
 
         // 权限校验
-        if ($notice->user_id !== $user->id) return response(['message' => '非法请求'], 403);
+        if ($notice->user_id !== $user->id) {
+            return response(['message' => '非法请求'], 403);
+        }
 
         $notice->delete();
 
