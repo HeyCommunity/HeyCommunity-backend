@@ -1,2 +1,4 @@
 preset: laravel
 version: 8.1
+enabled:
+  - binary_operator_spaces
