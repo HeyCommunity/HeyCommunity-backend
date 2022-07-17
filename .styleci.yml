@@ -1,14 +1,7 @@
-php:
-  preset: laravel
-  disabled:
-    - no_unused_imports
-  finder:
-    not-name:
-      - index.php
-      - server.php
-
-js: false
-ts: false
-css: false
-vue: false
-py: false
+preset: laravel
+disabled:
+  - no_unused_imports
+finder:
+  not-name:
+    - index.php
+    - server.php
