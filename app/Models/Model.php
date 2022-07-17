@@ -10,6 +10,24 @@ use Illuminate\Database\Eloquent\Model as EloquentModel;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 
+/**
+ * App\Models\Model
+ *
+ * @property-read \App\Models\User|null $author
+ * @property-read mixed $created_at_for_humans
+ * @property-read mixed $has_thumb_up
+ * @property-read \App\Models\User|null $user
+ * @method static \Illuminate\Database\Eloquent\Builder|Model createdAtInToday()
+ * @method static \Illuminate\Database\Eloquent\Builder|Model mine()
+ * @method static \Illuminate\Database\Eloquent\Builder|Model newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Model newQuery()
+ * @method static \Illuminate\Database\Query\Builder|Model onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Model query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Model sortOrder()
+ * @method static \Illuminate\Database\Query\Builder|Model withTrashed()
+ * @method static \Illuminate\Database\Query\Builder|Model withoutTrashed()
+ * @mixin \Eloquent
+ */
 class Model extends EloquentModel
 {
     use DefaultDatetimeFormat;
