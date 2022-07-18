@@ -9,15 +9,10 @@
   <!-- Favicon -->
   <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" type="image/x-icon"/>
 
-  <!-- Map CSS -->
-  <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.css" />
-
-  <!-- Libs CSS -->
-  <link rel="stylesheet" href="{{ asset('assets/dashkit/css/libs.bundle.css') }}" />
-
   <!-- Theme CSS -->
   <link rel="stylesheet" href="{{ asset('assets/dashkit/css/theme.bundle.css') }}" id="stylesheetLight" />
 </head>
+
 <body>
   <!-- NAVIGATION -->
   <nav class="navbar navbar-expand-lg navbar-light">
@@ -64,14 +59,10 @@
         <a class="navbar-brand me-3" href="#">HEY社区</a>
         <ul class="navbar-nav me-lg-auto">
           <li class="nav-item"><a class="nav-link" href="{{ route('web.home') }}">动态</a></li>
-          <li class="nav-item"><a class="nav-link" href="{{ route('web.home') }}">文章</a></li>
-          <li class="nav-item"><a class="nav-link" href="{{ route('web.home') }}">话题</a></li>
-          <li class="nav-item"><a class="nav-link" href="{{ route('web.home') }}">关于</a></li>
         </ul>
       </div>
     </div>
   </nav>
-
 
   <!-- MAIN CONTENT -->
   <div class="main-content">
@@ -79,9 +70,8 @@
     @yield('mainBody')
   </div>
 
-  <!-- JAVASCRIPT -->
-  <!-- Map JS -->
-  <script src='https://api.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.js'></script>
+  <!-- Libs CSS -->
+  <link rel="stylesheet" href="{{ asset('assets/dashkit/css/libs.bundle.css') }}" />
 
   <!-- Vendor JS -->
   <script src="{{ asset('assets/dashkit/js/vendor.bundle.js') }}" defer></script>

@@ -5,7 +5,7 @@
     <div class="row">
       <div class="col-12 col-md-8">
         @foreach ($posts as $post)
-          @include('web.posts._item-post-card', ['post' => $post])
+          @include('post::web._item-post-card', ['post' => $post])
         @endforeach
 
         <div id="section-pagination">
@@ -26,7 +26,7 @@
                   <div class="col">
                     <h5 class="mb-0">总数量</h5>
                   </div>
-                  <div class="col-auto">{{ $posts->count() }}</div>
+                  <div class="col-auto">{{ $posts->total() }}</div>
                 </div>
               </div>
             </div>
