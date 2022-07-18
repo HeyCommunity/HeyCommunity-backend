@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
 class CommentController extends Controller
 {
     /**
-     * Store
+     * Store.
      */
     public function store(Request $request)
     {
@@ -45,7 +45,9 @@ class CommentController extends Controller
 
         // 父评论
         $parentComment = null;
-        if ($request->get('parent_id')) $parentComment = Comment::findOrFail($request->get('parent_id'));
+        if ($request->get('parent_id')) {
+            $parentComment = Comment::findOrFail($request->get('parent_id'));
+        }
 
         $user = Auth::guard('sanctum')->user();
         $rootId = null;
@@ -69,11 +71,13 @@ class CommentController extends Controller
         ]);
 
         $entity->increment('comment_num');
-        if ($parentComment) $parentComment->increment('comment_num');
+        if ($parentComment) {
+            $parentComment->increment('comment_num');
+        }
 
         // 创建 Notice
         if (($parentComment && $parentComment->user_id != $user->id)
-            || (!$parentComment && $entity->user_id != $user->id)
+            || (! $parentComment && $entity->user_id != $user->id)
         ) {
             event(new MakeNoticeEvent(
                 $noticeType,
@@ -84,11 +88,12 @@ class CommentController extends Controller
         }
 
         $comment->refresh();
+
         return new CommentResource($comment);
     }
 
     /**
-     * Destory
+     * Destory.
      */
     public function destory(Request $request)
     {
@@ -108,6 +113,5 @@ class CommentController extends Controller
         } else {
             return response()->json(['message' => '无权执行此操作'], 403);
         }
-
     }
 }

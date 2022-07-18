@@ -3,13 +3,13 @@
 use App\Models\Setting;
 
 /**
- * Update env file
+ * Update env file.
  *
  * TODO: 如果设定的字段不存在于文件中，需要在未尾追加
  */
-function systemUpdateEnvFile($data = array())
+function systemUpdateEnvFile($data = [])
 {
-    if (!count($data)) {
+    if (! count($data)) {
         return;
     }
 
@@ -21,12 +21,12 @@ function systemUpdateEnvFile($data = array())
     foreach ($lines as $line) {
         preg_match($pattern, $line, $matches);
 
-        if (!count($matches)) {
+        if (! count($matches)) {
             $newLines[] = $line;
             continue;
         }
 
-        if (!key_exists(trim($matches[1]), $data)) {
+        if (! key_exists(trim($matches[1]), $data)) {
             $newLines[] = $line;
             continue;
         }
@@ -36,12 +36,14 @@ function systemUpdateEnvFile($data = array())
     }
 
     $newContent = implode('', $newLines);
+
     return file_put_contents($envFile, $newContent);
 }
 
 /**
- * System Update Environment Value
- * @param array $values
+ * System Update Environment Value.
+ *
+ * @param  array  $values
  * @return bool
  */
 function systemUpdateEnvironmentValue(array $values)
@@ -57,7 +59,7 @@ function systemUpdateEnvironmentValue(array $values)
             $oldLine = substr($str, $keyPosition, $endOfLinePosition - $keyPosition);
 
             // If key does not exist, add it
-            if (!$keyPosition || !$endOfLinePosition || !$oldLine) {
+            if (! $keyPosition || ! $endOfLinePosition || ! $oldLine) {
                 $str .= "{$envKey}={$envValue}\n";
             } else {
                 $str = str_replace($oldLine, "{$envKey}={$envValue}", $str);
@@ -66,12 +68,15 @@ function systemUpdateEnvironmentValue(array $values)
     }
 
     $str = substr($str, 0, -1);
-    if (!file_put_contents($envFile, $str)) return false;
+    if (! file_put_contents($envFile, $str)) {
+        return false;
+    }
+
     return true;
 }
 
 /**
- * 获取 setting value
+ * 获取 setting value.
  *
  * @param $key
  * @param $defaultValue
@@ -81,13 +86,15 @@ function getSettingValueByKey($key, $defaultValue = null)
 {
     $setting = Setting::where('key', $key)->first();
 
-    if ($setting) return $setting->value;
+    if ($setting) {
+        return $setting->value;
+    }
 
     return $defaultValue;
 }
 
 /**
- * 更新 setting
+ * 更新 setting.
  *
  * @param $key
  * @param $value

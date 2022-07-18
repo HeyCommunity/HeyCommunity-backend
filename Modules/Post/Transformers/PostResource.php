@@ -46,7 +46,7 @@ class PostResource extends JsonResource
     }
 
     /**
-     * getContentPreview
+     * getContentPreview.
      */
     protected function getContentPreview()
     {
@@ -54,7 +54,7 @@ class PostResource extends JsonResource
     }
 
     /**
-     * getComments
+     * getComments.
      */
     protected function getComments()
     {
@@ -70,7 +70,7 @@ class PostResource extends JsonResource
     }
 
     /**
-     * getThumbs
+     * getThumbs.
      */
     protected function getThumbs()
     {

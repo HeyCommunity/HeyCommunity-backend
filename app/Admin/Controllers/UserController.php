@@ -34,13 +34,16 @@ class UserController extends AdminController
         $grid->column('nickname', '昵称');
         $grid->column('gender', '性别')->using(User::$genders);
         $grid->column('province_city', '省市')->display(function () {
-            if ($this->wx_user_info) return $this->wx_user_info['province'] . $this->wx_user_info['city'];
+            if ($this->wx_user_info) {
+                return $this->wx_user_info['province'] . $this->wx_user_info['city'];
+            }
         })->default('-');
         $grid->column('bio', '一句话简介')->hide();
         $grid->column('post_num', '动态数')->expand(function ($model) {
             $posts = $model->posts()->latest()->get()->map(function ($post) {
                 return $post->only('id', 'content', 'created_at');
             });
+
             return new Table(['ID', '内容', '创建时间'], $posts->toArray());
         });
         $grid->column('thumb_up_num', '点赞数');
@@ -62,12 +65,11 @@ class UserController extends AdminController
             $actions->disableView();
         });
 
-        $grid->filter(function($filter){
+        $grid->filter(function ($filter) {
             $filter->like('nickname', '昵称');
 
             $filter->scope('has_wx_user_info', '有微信资料')->whereNotNull('wx_user_info');
             $filter->scope('today_active', '今日活跃')->whereDate('last_active_at', date('Y-m-d'));
-
         });
 
         return $grid;
@@ -76,7 +78,7 @@ class UserController extends AdminController
     /**
      * Make a show builder.
      *
-     * @param mixed $id
+     * @param  mixed  $id
      * @return Show
      */
     protected function detail($id)

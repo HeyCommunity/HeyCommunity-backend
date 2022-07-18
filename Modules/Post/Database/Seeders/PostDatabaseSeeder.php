@@ -4,8 +4,8 @@ namespace Modules\Post\Database\Seeders;
 
 use App\Models\Common\Comment;
 use App\Models\User;
-use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Seeder;
 use Modules\Post\Entities\Post;
 use Modules\Post\Entities\PostImage;
 
@@ -26,7 +26,7 @@ class PostDatabaseSeeder extends Seeder
     }
 
     /**
-     * 生成 Post 数据
+     * 生成 Post 数据.
      */
     protected function makePostData(\Faker\Generator $faker)
     {
@@ -51,7 +51,7 @@ class PostDatabaseSeeder extends Seeder
     }
 
     /**
-     * 生成 PostImage 数据
+     * 生成 PostImage 数据.
      */
     protected function makePostImageData(\Faker\Generator $faker)
     {
@@ -73,7 +73,7 @@ class PostDatabaseSeeder extends Seeder
     }
 
     /**
-     * 生成 PostComment 数据
+     * 生成 PostComment 数据.
      */
     public function makePostCommentData(\Faker\Generator $faker)
     {

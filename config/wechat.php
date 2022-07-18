@@ -25,7 +25,7 @@ return [
         'use_laravel_cache' => true,
 
         /**
-         * 日志配置
+         * 日志配置.
          *
          * level: 日志级别, 可选为：
          *         debug/info/notice/warning/error/critical/alert/emergency

@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 class Thumb extends Model
 {
     /**
-     * Related EntityModel
+     * Related EntityModel.
      */
     public function entity()
     {
@@ -17,7 +17,7 @@ class Thumb extends Model
     }
 
     /**
-     * Delete thumb Handler
+     * Delete thumb Handler.
      */
     public static function deleteThumbHandler($entity, $type, $user)
     {
@@ -25,7 +25,7 @@ class Thumb extends Model
             'user_id'       =>  $user->id,
             'entity_class'  =>  get_class($entity),
             'entity_id'     =>  $entity->id,
-            'type'          =>  $type
+            'type'          =>  $type,
         ])->delete();
 
         if ($count) {
@@ -36,7 +36,7 @@ class Thumb extends Model
     }
 
     /**
-     * Create thumb handler
+     * Create thumb handler.
      */
     public static function createThumbHandler($entity, $type)
     {
@@ -56,12 +56,16 @@ class Thumb extends Model
 
         // 删除相关的 Thumb
         $reverseType = null;
-        if ($type === 'thumb_up')  $reverseType = 'thumb_down';
-        if ($type === 'thumb_down') $reverseType = 'thumb_up';
+        if ($type === 'thumb_up') {
+            $reverseType = 'thumb_down';
+        }
+        if ($type === 'thumb_down') {
+            $reverseType = 'thumb_up';
+        }
         if ($reverseType && $count = Thumb::where([
             'entity_class'  =>  get_class($entity),
             'entity_id'     =>  $entity->id,
-            'type'          =>  $reverseType
+            'type'          =>  $reverseType,
         ])->delete()) {
             $thumb->entity->decrement(($reverseType . '_num'), $count);
         }

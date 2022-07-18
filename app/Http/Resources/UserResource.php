@@ -17,8 +17,8 @@ class UserResource extends JsonResource
     {
         $data = parent::toArray($request);
 
-        $data['got_post_comment_num']   =   $this->posts()->sum('comment_num');
-        $data['got_post_thumb_up_num']  =   $this->posts()->sum('thumb_up_num');
+        $data['got_post_comment_num'] = $this->posts()->sum('comment_num');
+        $data['got_post_thumb_up_num'] = $this->posts()->sum('thumb_up_num');
         $data['unread_notice_num'] = $this->unread_notice_num;
 
         return $data;

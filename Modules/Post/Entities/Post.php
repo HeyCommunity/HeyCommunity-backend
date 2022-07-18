@@ -9,12 +9,12 @@ use App\Models\Model;
 class Post extends Model
 {
     /**
-     * Appends
+     * Appends.
      */
     protected $appends = ['image_num'];
 
     /**
-     * Statuses
+     * Statuses.
      */
     public static $statuses = [
         0       =>  '待审核',
@@ -23,7 +23,7 @@ class Post extends Model
     ];
 
     /**
-     * newFactory
+     * newFactory.
      */
     protected static function newFactory()
     {
@@ -31,7 +31,7 @@ class Post extends Model
     }
 
     /**
-     * Related PostImage
+     * Related PostImage.
      */
     public function images()
     {
@@ -39,7 +39,7 @@ class Post extends Model
     }
 
     /**
-     * Related VideoImage
+     * Related VideoImage.
      */
     public function video()
     {
@@ -47,7 +47,7 @@ class Post extends Model
     }
 
     /**
-     * Related Thumb
+     * Related Thumb.
      */
     public function thumbs()
     {
@@ -56,7 +56,7 @@ class Post extends Model
     }
 
     /**
-     * Related Comment
+     * Related Comment.
      */
     public function comments()
     {
@@ -65,7 +65,7 @@ class Post extends Model
     }
 
     /**
-     * Get image_num attr
+     * Get image_num attr.
      */
     public function getImageNumAttribute()
     {

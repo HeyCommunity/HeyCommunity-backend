@@ -7,7 +7,7 @@ use Illuminate\Support\Str;
 trait PostNoticeTrait
 {
     /**
-     * 发送动态点赞通知
+     * 发送动态点赞通知.
      */
     public function sendPostThumbUpNotice($notice)
     {
@@ -26,7 +26,7 @@ trait PostNoticeTrait
     }
 
     /**
-     * 发送动态评论点赞通知
+     * 发送动态评论点赞通知.
      */
     public function sendPostCommentThumbUpNotice($notice)
     {
@@ -46,7 +46,7 @@ trait PostNoticeTrait
     }
 
     /**
-     * 发送动态评论通知
+     * 发送动态评论通知.
      */
     public function sendPostCommentNotice($notice)
     {
@@ -67,7 +67,7 @@ trait PostNoticeTrait
     }
 
     /**
-     * 发送动态评论回复通知
+     * 发送动态评论回复通知.
      */
     public function sendPostCommentReplyNotice($notice)
     {

@@ -12,7 +12,7 @@ use Modules\Post\Transformers\PostResource;
 class PostController extends Controller
 {
     /**
-     * Index
+     * Index.
      */
     public function index(Request $request)
     {
@@ -22,7 +22,7 @@ class PostController extends Controller
     }
 
     /**
-     * 用户的动态列表
+     * 用户的动态列表.
      */
     public function userPosts(Request $request)
     {
@@ -34,7 +34,7 @@ class PostController extends Controller
     }
 
     /**
-     * Show
+     * Show.
      */
     public function show(Request $request, Post $post)
     {
@@ -42,7 +42,7 @@ class PostController extends Controller
     }
 
     /**
-     * Store
+     * Store.
      */
     public function store(Request $request)
     {
@@ -84,11 +84,12 @@ class PostController extends Controller
         }
 
         $post->refresh();
+
         return new PostResource($post);
     }
 
     /**
-     * Hidden
+     * Hidden.
      */
     public function hidden(Request $request)
     {
@@ -110,7 +111,7 @@ class PostController extends Controller
     }
 
     /**
-     * Destroy
+     * Destroy.
      */
     public function destroy(Request $request)
     {
@@ -132,7 +133,7 @@ class PostController extends Controller
     }
 
     /**
-     * Upload video
+     * Upload video.
      */
     public function uploadVideo(Request $request)
     {
@@ -159,11 +160,11 @@ class PostController extends Controller
     }
 
     /**
-     * Upload image
+     * Upload image.
      */
     public function uploadImage(Request $request)
     {
-        $this->validate($request , [
+        $this->validate($request, [
             'file'      =>  'required|image',
         ]);
 

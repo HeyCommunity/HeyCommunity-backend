@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Is Wechat Browser Request
+ * Is Wechat Browser Request.
  */
 function isWechatBrowserRequest()
 {
@@ -9,7 +9,7 @@ function isWechatBrowserRequest()
 }
 
 /**
- * Set Nav Active
+ * Set Nav Active.
  */
 function setNavActive($match)
 {
@@ -25,7 +25,7 @@ function setNavActive($match)
 }
 
 /**
- * Set Params Active
+ * Set Params Active.
  */
 function setParamActive($paramName, $value)
 {
@@ -35,7 +35,7 @@ function setParamActive($paramName, $value)
 }
 
 /**
- * Set Disabled
+ * Set Disabled.
  */
 function setDisabled($condition)
 {
@@ -45,7 +45,7 @@ function setDisabled($condition)
 }
 
 /**
- * Is Super Admin
+ * Is Super Admin.
  */
 function isSuperAdmin()
 {
@@ -53,16 +53,17 @@ function isSuperAdmin()
 }
 
 /**
- *  String To One Line
+ *  String To One Line.
  */
 function strToOneLine($string)
 {
-    $string = preg_replace('/\s+/', ' ',$string);
+    $string = preg_replace('/\s+/', ' ', $string);
+
     return $string;
 }
 
 /**
- * Get Back To Index Route
+ * Get Back To Index Route.
  */
 function getBrandBackURL()
 {
@@ -80,7 +81,9 @@ function getBrandBackURL()
     ];
 
     if (in_array($routeRootName, $controllerNames)) {
-        if ($routeRootName == 'column') $routeRootName = 'columnist';
+        if ($routeRootName == 'column') {
+            $routeRootName = 'columnist';
+        }
 
         return route($routeRootName . '.index');
     } else {
@@ -89,7 +92,7 @@ function getBrandBackURL()
 }
 
 /**
- * Get current subtitle
+ * Get current subtitle.
  */
 function getCurrentSubtitle()
 {
@@ -114,7 +117,7 @@ function getCurrentSubtitle()
 }
 
 /**
- * Get Form Value For Model Create And Edit
+ * Get Form Value For Model Create And Edit.
  */
 function formValue($object, $key)
 {
@@ -126,11 +129,11 @@ function formValue($object, $key)
 }
 
 /**
- * CDN Asset
+ * CDN Asset.
  */
 function cdnAsset($path)
 {
-    if (!Illuminate\Support\Str::is('http*', $path)) {
+    if (! Illuminate\Support\Str::is('http*', $path)) {
         if (env('QINIU_ENABLE')) {
             return env('QINIU_DOMAIN') . '/' . $path . $params;
         }
@@ -140,11 +143,11 @@ function cdnAsset($path)
 }
 
 /**
- * Make CDN Asset Path
+ * Make CDN Asset Path.
  */
 function makeCdnAssetPath($path, $params = '?imageView2/2/w/1000')
 {
-    if (!Illuminate\Support\Str::is('http*', $path)) {
+    if (! Illuminate\Support\Str::is('http*', $path)) {
         if (env('QINIU_ENABLE')) {
             return env('QINIU_DOMAIN') . '/' . $path . $params;
         }
@@ -156,7 +159,7 @@ function makeCdnAssetPath($path, $params = '?imageView2/2/w/1000')
 }
 
 /**
- * Get Ip Info To String
+ * Get Ip Info To String.
  */
 function getIpInfoToString($ip)
 {
@@ -164,6 +167,7 @@ function getIpInfoToString($ip)
 
     try {
         $data = ($district->find($ip, 'CN'));
+
         return $data[1] . $data[2];
     } catch (Exception $e) {
         return 'unknown';
@@ -171,9 +175,10 @@ function getIpInfoToString($ip)
 }
 
 /**
- * Get Jiguang Sms Code
+ * Get Jiguang Sms Code.
  */
-function getJiGuangSmsCode($phone, $msgIdCacheKey = 'captcha-jiguang-msgId', $minutes = 10) {
+function getJiGuangSmsCode($phone, $msgIdCacheKey = 'captcha-jiguang-msgId', $minutes = 10)
+{
     $appKey = env('JIGUANG_APPKEY');
     $masterSecret = env('JIGUANG_SECRET');
     $smsTempId = env('JIGUANG_CAPTCHA_TEMPID');
@@ -191,9 +196,10 @@ function getJiGuangSmsCode($phone, $msgIdCacheKey = 'captcha-jiguang-msgId', $mi
 }
 
 /**
- * Get Jiguang Sms Code
+ * Get Jiguang Sms Code.
  */
-function checkJiGuangSmsCode($phone, $captcha, $msgIdCacheKey = 'captcha-jiguang-msgId') {
+function checkJiGuangSmsCode($phone, $captcha, $msgIdCacheKey = 'captcha-jiguang-msgId')
+{
     $appKey = env('JIGUANG_APPKEY');
     $masterSecret = env('JIGUANG_SECRET');
     $msgIdCacheKey = $msgIdCacheKey . '-' . $phone;
@@ -211,9 +217,10 @@ function checkJiGuangSmsCode($phone, $captcha, $msgIdCacheKey = 'captcha-jiguang
 }
 
 /**
- * Date For Human
+ * Date For Human.
  */
-function dateForHuman($date, $overDayNum = 7, $format = 'Y-m-d H:i:s') {
+function dateForHuman($date, $overDayNum = 7, $format = 'Y-m-d H:i:s')
+{
     $date = \Illuminate\Support\Carbon::parse($date);
     $diffDate = $date->copy()->addDays($overDayNum);
 
@@ -225,9 +232,10 @@ function dateForHuman($date, $overDayNum = 7, $format = 'Y-m-d H:i:s') {
 }
 
 /**
- * Set UiKit Notice
+ * Set UiKit Notice.
  */
-function setUkNotice($message, $status = 'default', $timeout = 3000, $position = 'top-right') {
+function setUkNotice($message, $status = 'default', $timeout = 3000, $position = 'top-right')
+{
     session()->flash('uk-notice', [
         'message'   =>  $message,
         'status'    =>  $status,
@@ -237,8 +245,9 @@ function setUkNotice($message, $status = 'default', $timeout = 3000, $position =
 }
 
 /**
- * Get UiKit Notice
+ * Get UiKit Notice.
  */
-function getUkNotice() {
+function getUkNotice()
+{
     return session('uk-notice');
 }

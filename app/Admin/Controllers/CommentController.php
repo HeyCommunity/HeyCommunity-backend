@@ -49,7 +49,7 @@ class CommentController extends AdminController
             $actions->disableView();
         });
 
-        $grid->filter(function($filter){
+        $grid->filter(function ($filter) {
             $filter->equal('status', '状态')->select(Comment::$statuses);
             $filter->like('user.nickname', '作者');
             $filter->like('content', '内容');
@@ -61,7 +61,7 @@ class CommentController extends AdminController
     /**
      * Make a show builder.
      *
-     * @param mixed $id
+     * @param  mixed  $id
      * @return Show
      */
     protected function detail($id)

@@ -11,12 +11,13 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 
 /**
- * App\Models\Model
+ * App\Models\Model.
  *
  * @property-read \App\Models\User|null $author
  * @property-read mixed $created_at_for_humans
  * @property-read mixed $has_thumb_up
  * @property-read \App\Models\User|null $user
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|Model createdAtInToday()
  * @method static \Illuminate\Database\Eloquent\Builder|Model mine()
  * @method static \Illuminate\Database\Eloquent\Builder|Model newModelQuery()
@@ -40,7 +41,7 @@ class Model extends EloquentModel
     protected $guarded = [];
 
     /**
-     * Relation User
+     * Relation User.
      */
     public function user()
     {
@@ -48,7 +49,7 @@ class Model extends EloquentModel
     }
 
     /**
-     * Relation User
+     * Relation User.
      */
     public function author()
     {
@@ -61,7 +62,7 @@ class Model extends EloquentModel
     }
 
     /**
-     * Sort Order
+     * Sort Order.
      */
     public function scopeSortOrder($query)
     {
@@ -69,7 +70,7 @@ class Model extends EloquentModel
     }
 
     /**
-     * Mine Scope
+     * Mine Scope.
      */
     public function scopeMine($query)
     {
@@ -77,7 +78,7 @@ class Model extends EloquentModel
     }
 
     /**
-     * CreatedAt In Today Scope
+     * CreatedAt In Today Scope.
      */
     public function scopeCreatedAtInToday($query)
     {
@@ -86,7 +87,7 @@ class Model extends EloquentModel
     }
 
     /**
-     * Get has thumb up
+     * Get has thumb up.
      */
     public function getHasThumbUpAttribute()
     {
@@ -103,7 +104,7 @@ class Model extends EloquentModel
     }
 
     /**
-     * Get created_at_for_humans attr
+     * Get created_at_for_humans attr.
      */
     public function getCreatedAtForHumansAttribute()
     {

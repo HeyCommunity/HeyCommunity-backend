@@ -7,7 +7,7 @@ use App\Models\Model;
 class Comment extends Model
 {
     /**
-     * Statuses
+     * Statuses.
      */
     public static $statuses = [
         0       =>  '待审核',
@@ -15,7 +15,7 @@ class Comment extends Model
     ];
 
     /**
-     * Related EntityModel
+     * Related EntityModel.
      */
     public function entity()
     {
@@ -23,7 +23,7 @@ class Comment extends Model
     }
 
     /**
-     * Related ParentComment
+     * Related ParentComment.
      */
     public function parent()
     {
@@ -31,7 +31,7 @@ class Comment extends Model
     }
 
     /**
-     * Related Thumb
+     * Related Thumb.
      */
     public function thumbs()
     {
@@ -39,7 +39,7 @@ class Comment extends Model
     }
 
     /**
-     * Related Comment
+     * Related Comment.
      */
     public function comments()
     {
