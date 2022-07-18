@@ -11,6 +11,8 @@
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
+        "itbdw/ip-database": "^3.0.1",
+        "jenssegers/agent": "^2.6",
         "jxlwqq/simditor": "^1.0",
         "laravel/framework": "^8.12",
         "laravel/sanctum": "^2.9",
@@ -25,6 +27,7 @@
         "bluemmb/faker-picsum-photos-provider": "^2.0",
         "facade/ignition": "^2.5",
         "fakerphp/faker": "^1.9.1",
+        "itsgoingd/clockwork": "^5.1",
         "laravel/sail": "^1.0.1",
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^5.10",
@@ -55,7 +58,9 @@
     "scripts": {
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
-            "@php artisan package:discover --ansi"
+            "@php artisan package:discover --ansi",
+            "@php artisan ide-helper:generate" ,
+            "@php artisan ide-helper:meta"
         ],
         "post-root-package-install": [
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
@@ -67,7 +72,8 @@
     "extra": {
         "laravel": {
             "dont-discover": [
-                "laravel/telescope"
+                "laravel/telescope",
+                "arcanedev/log-viewer"
             ]
         }
     },

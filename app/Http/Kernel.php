@@ -22,6 +22,8 @@ class Kernel extends HttpKernel
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
+
+        \App\Http\Middleware\VisitorLogging::class,                 // 访客日志
     ];
 
     /**
@@ -41,7 +43,7 @@ class Kernel extends HttpKernel
         ],
 
         'api' => [
-            \App\Http\Middleware\UserActiveRecord::class,
+            \App\Http\Middleware\UserActiveRecord::class,       // TODO: 移除 UserActiveRecord，使用 VisitorLogging 替代
             \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
             'throttle:api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
@@ -65,5 +67,7 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+
+        'heycommunity.visitorLogging' => \App\Http\Middleware\VisitorLogging::class,                 // 访客日志
     ];
 }

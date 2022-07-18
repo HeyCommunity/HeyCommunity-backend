@@ -21,5 +21,4 @@ Route::group([
     $router->resource('user-reports', UserReportController::class);
 
     $router->get('system', 'SystemController@index')->name('admin.system');
-    $router->get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
 });

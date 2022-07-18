@@ -6,6 +6,8 @@ use App\Models\Model;
 
 class Comment extends Model
 {
+    use EntityTrial;
+
     /**
      * Statuses
      */
@@ -17,9 +19,18 @@ class Comment extends Model
     /**
      * Related EntityModel
      */
+    public function commentable()
+    {
+        return $this->morphTo('commentable', 'entity_class', 'entity_id')->withTrashed();
+    }
+
+    /**
+     * Related EntityModel
+     */
     public function entity()
     {
-        return $this->belongsTo($this->entity_class, 'entity_id')->withTrashed();
+        // return $this->belongsTo($this->entity_class, 'entity_id')->withTrashed();     // TODO: 测试新的关联写法，一段时间后删除
+        return $this->morphTo('commentable', 'entity_class', 'entity_id')->withTrashed();
     }
 
     /**
@@ -27,7 +38,7 @@ class Comment extends Model
      */
     public function parent()
     {
-        return $this->belongsTo(get_class($this), 'parent_id')->with('user');
+        return $this->belongsTo(self::class, 'parent_id')->with('user');
     }
 
     /**
@@ -35,7 +46,7 @@ class Comment extends Model
      */
     public function thumbs()
     {
-        return $this->hasMany(Thumb::class, 'entity_id')->where('entity_class', get_class($this));
+        return $this->morphMany(Thumb::class, 'thumbable', 'entity_class', 'entity_id');
     }
 
     /**
@@ -43,6 +54,6 @@ class Comment extends Model
      */
     public function comments()
     {
-        return $this->hasMany(get_class($this), 'parent_id', 'id');
+        return $this->hasMany(self::class, 'parent_id', 'id');
     }
 }
