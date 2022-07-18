@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
+use Modules\Post\Entities\Post;
 
 class HomeController extends Controller
 {
@@ -11,6 +12,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('web.home.index');
+        $posts = Post::latest()->paginate();
+
+        return view('web.home.index', compact('posts'));
     }
 }
