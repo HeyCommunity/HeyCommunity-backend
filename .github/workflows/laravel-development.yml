@@ -14,6 +14,14 @@ jobs:
         operating-system: ['ubuntu-20.04', 'ubuntu-18.04']
         php-versions: ['7.4', '8.0', '8.1']
 
+    ## 环境变量
+    env:
+      APP_ENV: local
+      APP_DEBUG: true
+      DB_DATABASE: prod_heycommunity
+      DB_USERNAME: root
+      DB_PASSWORD: password
+
     ## 服务
     services:
       mysql:
@@ -59,6 +67,25 @@ jobs:
 
     - name: 数据库迁移和生成种子数据
       run: php artisan migrate:refresh --seed --no-interaction
+      env:
+        DB_PORT: ${{ job.services.mysql.ports['3306'] }}
+
+    - name: 执行 Laravel 测试
+      run: php artisan test
+      env:
+        DB_PORT: ${{ job.services.mysql.ports['3306'] }}
+
+    ### 模拟生产环境测试
+    - name: 开始模拟生产环境测试
+
+    - name: 更新依赖 (Composer Update --no-dev)
+      run: composer update --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist --no-dev
+
+    - name: 安装 PHPUnit
+      run: composer require phpunit/phpunit --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist --dev
+
+    - name: 数据库迁移
+      run: php artisan migrate:refresh --no-interaction
       env:
         DB_PORT: ${{ job.services.mysql.ports['3306'] }}
 
