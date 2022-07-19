@@ -60,7 +60,7 @@ jobs:
       run: chmod -R 777 storage bootstrap/cache
 
     - name: Database Migrate With Seeds
-      run: php artisan migrate:refresh --seed --no-interaction --env=testing
+      run: php artisan migrate:refresh --seed --no-interaction
 
     - name: Execute tests (Unit and Feature tests) via PHPUnit
-      run: php artisan test --env=testing
+      run: php artisan test
