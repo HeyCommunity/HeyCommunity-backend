@@ -13,13 +13,30 @@ jobs:
         operating-system: ['ubuntu-20.04', 'ubuntu-18.04']
         php-versions: ['7.4', '8.0', '8.1']
 
+    env:
+      DB_DATABASE: prod_heycommunity
+      DB_USERNAME: root
+      DB_PASSWORD: password
+
+    services:
+      mysql:
+        image: mysql:latest
+        env:
+          MYSQL_ALLOW_EMPTY_PASSWORD: false
+          MYSQL_ROOT_PASSWORD: password
+          MYSQL_DATABASE: prod_heycommunity
+        ports:
+          - 3306/tcp
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+
     steps:
     - name: Setup PHP
       uses: shivammathur/setup-php@v2
       with:
         php-version: ${{ matrix.php-versions }}
-        ini-values: post_max_size=256M, max_execution_time=180
+        extensions: mbstring, dom, fileinfo
         coverage: xdebug
+        ini-values: post_max_size=256M, max_execution_time=180
         tools: php-cs-fixer, phpunit:${{ matrix.phpunit-versions }}
 
     - name: Checkout
@@ -43,13 +60,7 @@ jobs:
       run: chmod -R 777 storage bootstrap/cache
 
     - name: Database Migrate With Seeds
-      env:
-        DB_CONNECTION: sqlite
-        DB_DATABASE: database/database.sqlite
       run: php artisan migrate:refresh --seed --no-interaction --env=testing
 
     - name: Execute tests (Unit and Feature tests) via PHPUnit
-      env:
-        DB_CONNECTION: sqlite
-        DB_DATABASE: database/database.sqlite
       run: php artisan test --env=testing
