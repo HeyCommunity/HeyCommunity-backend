@@ -25,6 +25,12 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v3
 
+    - name: Composer Install
+      run: composer install --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+
+    - name: Composer Update
+      run: composer update --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+
     - name: Copy .env
       run: php -r "file_exists('.env') || copy('.env.example', '.env');"
 
@@ -38,12 +44,6 @@ jobs:
 
     - name: Directory Permissions
       run: chmod -R 777 storage bootstrap/cache
-
-    - name: Composer Install
-      run: composer install --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
-
-    - name: Composer Update
-      run: composer update --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
 
     - name: Database Migrate With Seeds
       env:
