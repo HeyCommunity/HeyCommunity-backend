@@ -102,7 +102,7 @@ class CommentController extends Controller
         $comment = Comment::findOrFail($request->get('id'));
 
         //  判断是作者或管理员
-        if ($comment->user_id == $user->id || $user->is_admin) {
+        if ($comment->user_id === $user->id || $user->is_admin) {
             $comment->delete();
             $comment->entity->decrement('comment_num');
 
