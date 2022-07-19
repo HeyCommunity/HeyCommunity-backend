@@ -14,14 +14,6 @@ jobs:
         operating-system: ['ubuntu-20.04', 'ubuntu-18.04']
         php-versions: ['7.4', '8.0', '8.1']
 
-    ## 环境变量
-    env:
-      APP_ENV: local
-      APP_DEBUG: true
-      DB_DATABASE: prod_heycommunity
-      DB_USERNAME: root
-      DB_PASSWORD: password
-
     ## 服务
     services:
       mysql:
