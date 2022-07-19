@@ -14,6 +14,8 @@ jobs:
         php-versions: ['7.4', '8.0', '8.1']
 
     env:
+      APP_ENV: local
+      APP_DEBUG: true
       DB_DATABASE: prod_heycommunity
       DB_USERNAME: root
       DB_PASSWORD: password
