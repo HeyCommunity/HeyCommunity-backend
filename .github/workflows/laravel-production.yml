@@ -28,9 +28,6 @@ jobs:
     - name: Composer Install
       run: composer install --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist --no-dev
 
-    - name: Composer Update
-      run: composer update --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist --no-dev
-
     - name: Copy .env
       run: php -r "file_exists('.env') || copy('.env.example', '.env');"
 
