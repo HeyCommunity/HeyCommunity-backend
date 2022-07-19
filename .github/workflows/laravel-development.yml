@@ -10,7 +10,7 @@ jobs:
 
     strategy:
       matrix:
-        operating-system: ['ubuntu-20.04', 'ubuntu-18.04']
+        operating-system: ['ubuntu-20.04', 'ubuntu-18.04', 'ubuntu-latest', 'windows-latest', 'macos-latest']
         php-versions: ['7.4', '8.0', '8.1']
 
     env:
@@ -68,3 +68,5 @@ jobs:
 
     - name: Execute tests (Unit and Feature tests) via PHPUnit
       run: php artisan test
+      env:
+        DB_PORT: ${{ job.services.mysql.ports['3306'] }}
