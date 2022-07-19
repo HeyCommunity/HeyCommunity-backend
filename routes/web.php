@@ -13,9 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
+Route::namespace('App\\Http\\Controllers\\Web')->group(function () {
+    Route::get('/', function () {
+        return redirect()->route('web.posts.index');
+    })->name('web.home');
 
-Route::get('/dev', function() {
+    Route::get('debug', 'HomeController@debug')->name('web.home.debug');
 });
