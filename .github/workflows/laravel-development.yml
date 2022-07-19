@@ -54,7 +54,7 @@ jobs:
 
     ### 更新 Composer libraries
     - name: 更新依赖 (Composer Update)
-      run: composer udpate --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+      run: composer update --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
 
     - name: Copy .env
       run: php -r "file_exists('.env') || copy('.env.example', '.env');"
