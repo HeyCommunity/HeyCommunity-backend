@@ -3,7 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\User;
-use Faker\Factory as FakerFactory;
+use Illuminate\Foundation\Testing\WithFaker;
 use Laravel\Sanctum\Sanctum;
 use Modules\Post\Entities\Post;
 use SupGeekRod\FakerZh\ZhCnDataProvider;
@@ -11,6 +11,8 @@ use Tests\TestCase;
 
 class PostTest extends TestCase
 {
+    use WithFaker;
+
     /**
      * @var string[]      Post 模型结构
      */
@@ -29,8 +31,7 @@ class PostTest extends TestCase
     {
         Sanctum::actingAs(User::factory()->create());
 
-        $faker = FakerFactory::create('zh_CN');
-        $faker->addProvider(new ZhCnDataProvider($faker));
+        $faker = $this->faker();
 
         // TODO: test 上传图片
         // TODO: test 上传视频
@@ -110,6 +111,7 @@ class PostTest extends TestCase
      * test 评论动态
      *
      * @depends testCreatePost
+     * @param $post
      * @return array
      */
     public function testCommentPost($post): array
@@ -132,6 +134,7 @@ class PostTest extends TestCase
      * test 回复动态评论
      *
      * @depends testCommentPost
+     * @param $data
      * @return array
      */
     public function testReplyPostComment($data): array
