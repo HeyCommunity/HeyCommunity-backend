@@ -1,4 +1,4 @@
-name: HeyCommunity Development
+name: HeyCommunity Commit
 
 on: ['push']
 
