@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5caf8f3639eec89237f3230e7888fcf6",
+    "content-hash": "51df0a773af41f3ad72c23e71b7c8448",
     "packages": [
         {
             "name": "arcanedev/log-viewer",
@@ -1741,6 +1741,75 @@
                 }
             ],
             "time": "2022-06-20T21:43:11+00:00"
+        },
+        {
+            "name": "itbdw/ip-database",
+            "version": "3.x-dev",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/itbdw/ip-database.git",
+                "reference": "22456372327c1f54a2c2a49999721d11d631862e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/itbdw/ip-database/zipball/22456372327c1f54a2c2a49999721d11d631862e",
+                "reference": "22456372327c1f54a2c2a49999721d11d631862e",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "ext-iconv": "*",
+                "ext-json": "*",
+                "ext-mbstring": "*",
+                "php": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "itbdw\\Ip\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "马秉尧"
+                },
+                {
+                    "name": "itbdw",
+                    "email": "itbudaoweng@gmail.com",
+                    "homepage": "http://github.com/itbdw",
+                    "role": "Developer"
+                }
+            ],
+            "description": "IP数据库 IPV4 IPV6（解析为国家、省、市、县、运营商）",
+            "keywords": [
+                "China",
+                "Chinese",
+                "IP",
+                "IP数据库",
+                "database",
+                "location",
+                "数据库"
+            ],
+            "support": {
+                "issues": "https://github.com/itbdw/ip-database/issues",
+                "source": "https://github.com/itbdw/ip-database/tree/3.x"
+            },
+            "funding": [
+                {
+                    "url": "https://wx1.sinaimg.cn/large/6b94a2e5ly1gjoqqrkup8j20u00u0wh1.jpg",
+                    "type": "custom"
+                }
+            ],
+            "time": "2021-04-09T17:07:26+00:00"
         },
         {
             "name": "jaybizzle/crawler-detect",
@@ -11152,7 +11221,7 @@
         }
     ],
     "aliases": [],
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
