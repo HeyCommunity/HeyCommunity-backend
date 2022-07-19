@@ -50,11 +50,11 @@ jobs:
 
     ### 安装 Composer libraries
     - name: 安装依赖 (Composer Install)
-      run: composer install --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+      run: composer install --no-ansi --no-interaction --no-progress --prefer-dist
 
     ### 更新 Composer libraries
     - name: 更新依赖 (Composer Update)
-      run: composer update --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+      run: composer update --no-ansi --no-interaction --no-progress --prefer-dist
 
     - name: Copy .env
       run: php -r "file_exists('.env') || copy('.env.example', '.env');"
@@ -77,6 +77,7 @@ jobs:
 
     ### 模拟生产环境测试
     - name: 开始模拟生产环境测试
+      run: echo '开始模拟生产环境测试' && date
 
     - name: 更新依赖 (Composer Update --no-dev)
       run: composer update --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist --no-dev
