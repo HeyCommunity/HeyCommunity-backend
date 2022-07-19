@@ -1,8 +1,8 @@
 {
     "name": "heycommunity/heycommunity-backend",
-    "type": "project",
     "description": "The HeyCommunity backend. See: https://www.heycommunity.com/",
     "keywords": ["HeyCommunity", "heycommunity-backend", "SNS", "Social", "Community"],
+    "type": "project",
     "license": "MIT",
     "require": {
         "php": "^7.4|^8.0",
@@ -11,7 +11,7 @@
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
-        "itbdw/ip-database": "^3.0.1",
+        "itbdw/ip-database": "^3.0.0",
         "jenssegers/agent": "^2.6",
         "jxlwqq/simditor": "^1.0",
         "laravel/framework": "^8.12",
@@ -41,11 +41,6 @@
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/",
             "Modules\\": "Modules/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Tests\\": "tests/"
         },
         "files": [
             "app/Helpers/system.php",
@@ -55,12 +50,15 @@
             "app/Helpers/faker.php"
         ]
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
     "scripts": {
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
-            "@php artisan package:discover --ansi",
-            "@php artisan ide-helper:generate" ,
-            "@php artisan ide-helper:meta"
+            "@php artisan package:discover --ansi"
         ],
         "post-root-package-install": [
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
@@ -85,6 +83,6 @@
             "easywechat-composer/easywechat-composer": true
         }
     },
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "prefer-stable": true
 }
