@@ -21,6 +21,10 @@ jobs:
       DB_DATABASE: prod_heycommunity
       DB_USERNAME: root
       DB_PASSWORD: password
+      BROADCAST_DRIVER: log
+      CACHE_DRIVER: redis
+      QUEUE_CONNECTION: redis
+      SESSION_DRIVER: redis
 
     ## 服务
     services:
@@ -33,6 +37,12 @@ jobs:
         ports:
           - 3306/tcp
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+
+      redis:
+        image: redis
+        ports:
+          - 6379/tcp
+        options: --health-cmd="redis-cli ping" --health-interval=10s --health-timeout=5s --health-retries=3
 
     ## 执行步骤
     steps:
@@ -69,11 +79,13 @@ jobs:
       run: php artisan migrate:refresh --seed --no-interaction
       env:
         DB_PORT: ${{ job.services.mysql.ports['3306'] }}
+        REDIS_PORT: ${{ job.services.redis.ports['6379'] }}
 
     - name: 执行 Laravel 测试
       run: php artisan test
       env:
         DB_PORT: ${{ job.services.mysql.ports['3306'] }}
+        REDIS_PORT: ${{ job.services.redis.ports['6379'] }}
 
     ### 模拟生产环境测试
     - name: 开始模拟生产环境测试
@@ -89,8 +101,10 @@ jobs:
       run: php artisan migrate:refresh --no-interaction
       env:
         DB_PORT: ${{ job.services.mysql.ports['3306'] }}
+        REDIS_PORT: ${{ job.services.redis.ports['6379'] }}
 
     - name: 执行 Laravel 测试
       run: php artisan test
       env:
         DB_PORT: ${{ job.services.mysql.ports['3306'] }}
+        REDIS_PORT: ${{ job.services.redis.ports['6379'] }}
