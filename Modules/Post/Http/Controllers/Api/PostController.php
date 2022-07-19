@@ -53,14 +53,17 @@ class PostController extends Controller
         ]);
 
         // 小程序 内容安全检测
-        $app = app('wechat.mini_program');
-        $result = $app->content_security->checkText($request->get('content'));
-        if ($result['errcode'] === 87014) {
-            return response([
-                'errcode'   =>  $result['errcode'],
-                'errmsg'    =>  $result['errmsg'],
-                'message'   =>  '动态内容包含违规敏感信息',
-            ], 403);
+        // TODO: 封闭在工具函数中
+        if (config('wechat.mini_program.default.app_id') && config('wechat.mini_program.default.app_id')) {
+            $app = app('wechat.mini_program');
+            $result = $app->content_security->checkText($request->get('content'));
+            if ($result['errcode'] === 87014) {
+                return response([
+                    'errcode'   =>  $result['errcode'],
+                    'errmsg'    =>  $result['errmsg'],
+                    'message'   =>  '动态内容包含违规敏感信息',
+                ], 403);
+            }
         }
 
         $user = $request->user();
