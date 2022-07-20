@@ -21,12 +21,12 @@ jobs:
       DB_DATABASE: prod_heycommunity
       DB_USERNAME: root
       DB_PASSWORD: password
-      DB_PORT: ${{ job.services.mysql.ports['3306'] }}
-      REDIS_PORT: ${{ job.services.redis.ports['6379'] }}
-      BROADCAST_DRIVER: log
+      DB_PORT: 33306
+      REDIS_PORT: 33977
       CACHE_DRIVER: redis
       QUEUE_CONNECTION: redis
       SESSION_DRIVER: redis
+      BROADCAST_DRIVER: log
 
     ## 服务
     services:
@@ -37,13 +37,13 @@ jobs:
           MYSQL_ROOT_PASSWORD: password
           MYSQL_DATABASE: prod_heycommunity
         ports:
-          - 3306/tcp
+          - 33306/3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
 
       redis:
         image: redis
         ports:
-          - 6379/tcp
+          - 33977:6379
         options: --health-cmd="redis-cli ping" --health-interval=10s --health-timeout=5s --health-retries=3
 
     ## 执行步骤
