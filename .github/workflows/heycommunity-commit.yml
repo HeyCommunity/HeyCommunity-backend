@@ -21,6 +21,8 @@ jobs:
       DB_DATABASE: prod_heycommunity
       DB_USERNAME: root
       DB_PASSWORD: password
+      DB_PORT: ${{ job.services.mysql.ports['3306'] }}
+      REDIS_PORT: ${{ job.services.redis.ports['6379'] }}
       BROADCAST_DRIVER: log
       CACHE_DRIVER: redis
       QUEUE_CONNECTION: redis
