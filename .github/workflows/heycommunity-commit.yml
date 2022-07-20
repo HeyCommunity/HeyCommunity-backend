@@ -61,6 +61,9 @@ jobs:
     ### 安装 Composer libraries
     - name: 安装依赖 (Composer Install)
       run: composer install --no-ansi --no-interaction --no-progress --prefer-dist
+      env:
+        DB_PORT: ${{ job.services.mysql.ports['3306'] }}
+        REDIS_PORT: ${{ job.services.redis.ports['6379'] }}
 
     ### 更新 Composer libraries
     - name: 更新依赖 (Composer Update)
