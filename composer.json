@@ -19,7 +19,8 @@
         "laravel/telescope": "^4.4",
         "laravel/tinker": "^2.5",
         "nwidart/laravel-modules": "8.2.*",
-        "overtrue/laravel-wechat": "^6.0"
+        "overtrue/laravel-wechat": "^6.0",
+        "predis/predis": "^2.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.6",
