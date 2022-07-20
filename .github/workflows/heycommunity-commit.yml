@@ -79,15 +79,9 @@ jobs:
 
     - name: 数据库迁移和生成种子数据
       run: php artisan migrate:refresh --seed --no-interaction
-      env:
-        DB_PORT: ${{ job.services.mysql.ports['3306'] }}
-        REDIS_PORT: ${{ job.services.redis.ports['6379'] }}
 
     - name: 执行 Laravel 测试
       run: php artisan test
-      env:
-        DB_PORT: ${{ job.services.mysql.ports['3306'] }}
-        REDIS_PORT: ${{ job.services.redis.ports['6379'] }}
 
     ### 模拟生产环境测试
     - name: 开始模拟生产环境测试
@@ -101,12 +95,6 @@ jobs:
 
     - name: 数据库迁移
       run: php artisan migrate:refresh --no-interaction
-      env:
-        DB_PORT: ${{ job.services.mysql.ports['3306'] }}
-        REDIS_PORT: ${{ job.services.redis.ports['6379'] }}
 
     - name: 执行 Laravel 测试
       run: php artisan test
-      env:
-        DB_PORT: ${{ job.services.mysql.ports['3306'] }}
-        REDIS_PORT: ${{ job.services.redis.ports['6379'] }}
