@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e26fe2099a25c51656a73b0102c1aa13",
+    "content-hash": "ace523e68615388ecf84c66d9f9683ff",
     "packages": [
         {
             "name": "arcanedev/log-viewer",
@@ -1744,16 +1744,16 @@
         },
         {
             "name": "itbdw/ip-database",
-            "version": "3.0.0",
+            "version": "3.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/itbdw/ip-database.git",
-                "reference": "1bcd17b78e8cd5366f068c4cdd19717ca52fe6f6"
+                "reference": "22456372327c1f54a2c2a49999721d11d631862e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/itbdw/ip-database/zipball/1bcd17b78e8cd5366f068c4cdd19717ca52fe6f6",
-                "reference": "1bcd17b78e8cd5366f068c4cdd19717ca52fe6f6",
+                "url": "https://api.github.com/repos/itbdw/ip-database/zipball/22456372327c1f54a2c2a49999721d11d631862e",
+                "reference": "22456372327c1f54a2c2a49999721d11d631862e",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -1766,7 +1766,7 @@
                 "ext-iconv": "*",
                 "ext-json": "*",
                 "ext-mbstring": "*",
-                "php": "~5.4|~7.0"
+                "php": "*"
             },
             "type": "library",
             "autoload": {
@@ -1789,21 +1789,19 @@
                     "role": "Developer"
                 }
             ],
-            "description": "IP位置数据库（解析为国家、省、市、县、运营商）",
+            "description": "IP数据库 IPV4 IPV6（解析为国家、省、市、县、运营商）",
             "keywords": [
                 "China",
                 "Chinese",
                 "IP",
+                "IP数据库",
                 "database",
                 "location",
-                "位置",
-                "地区",
-                "数据库",
-                "纯真"
+                "数据库"
             ],
             "support": {
                 "issues": "https://github.com/itbdw/ip-database/issues",
-                "source": "https://github.com/itbdw/ip-database/tree/3.0.0"
+                "source": "https://github.com/itbdw/ip-database/tree/3.x"
             },
             "funding": [
                 {
@@ -1811,7 +1809,7 @@
                     "type": "custom"
                 }
             ],
-            "time": "2021-04-09T16:22:33+00:00"
+            "time": "2021-04-09T17:07:26+00:00"
         },
         {
             "name": "jaybizzle/crawler-detect",
@@ -2339,16 +2337,16 @@
         },
         {
             "name": "laravel/telescope",
-            "version": "v4.9.0",
+            "version": "v4.9.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/telescope.git",
-                "reference": "d0cf8d6a54a1831dbe189a1f194e8271a4a5435a"
+                "reference": "93d6a2f7b7e39407389a505abdfeceda09709f71"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/telescope/zipball/d0cf8d6a54a1831dbe189a1f194e8271a4a5435a",
-                "reference": "d0cf8d6a54a1831dbe189a1f194e8271a4a5435a",
+                "url": "https://api.github.com/repos/laravel/telescope/zipball/93d6a2f7b7e39407389a505abdfeceda09709f71",
+                "reference": "93d6a2f7b7e39407389a505abdfeceda09709f71",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -2407,9 +2405,9 @@
             ],
             "support": {
                 "issues": "https://github.com/laravel/telescope/issues",
-                "source": "https://github.com/laravel/telescope/tree/v4.9.0"
+                "source": "https://github.com/laravel/telescope/tree/v4.9.1"
             },
-            "time": "2022-04-19T15:48:51+00:00"
+            "time": "2022-07-18T14:49:11+00:00"
         },
         {
             "name": "laravel/tinker",
@@ -3878,6 +3876,83 @@
                 "source": "https://github.com/silexphp/Pimple/tree/v3.5.0"
             },
             "time": "2021-10-28T11:13:42+00:00"
+        },
+        {
+            "name": "predis/predis",
+            "version": "v2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/predis/predis.git",
+                "reference": "99c253733dee9447d26257dc669d33d5ac84713d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/predis/predis/zipball/99c253733dee9447d26257dc669d33d5ac84713d",
+                "reference": "99c253733dee9447d26257dc669d33d5ac84713d",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "php": "^7.2 || ^8.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^8.0 || ~9.4.4"
+            },
+            "suggest": {
+                "ext-curl": "Allows access to Webdis when paired with phpiredis",
+                "ext-phpiredis": "Allows faster serialization and deserialization of the Redis protocol"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "2.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Predis\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Daniele Alessandri",
+                    "email": "suppakilla@gmail.com",
+                    "homepage": "http://clorophilla.net",
+                    "role": "Creator & Maintainer"
+                },
+                {
+                    "name": "Till Krüss",
+                    "homepage": "https://till.im",
+                    "role": "Maintainer"
+                }
+            ],
+            "description": "A flexible and feature-complete Redis client for PHP.",
+            "homepage": "http://github.com/predis/predis",
+            "keywords": [
+                "nosql",
+                "predis",
+                "redis"
+            ],
+            "support": {
+                "issues": "https://github.com/predis/predis/issues",
+                "source": "https://github.com/predis/predis/tree/v2.0.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/sponsors/tillkruss",
+                    "type": "github"
+                }
+            ],
+            "time": "2022-06-08T13:14:56+00:00"
         },
         {
             "name": "psr/cache",
@@ -11223,7 +11298,7 @@
         }
     ],
     "aliases": [],
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,

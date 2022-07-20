@@ -11,7 +11,7 @@
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
-        "itbdw/ip-database": "^3.0.0",
+        "itbdw/ip-database": "^3.0.1",
         "jenssegers/agent": "^2.6",
         "jxlwqq/simditor": "^1.0",
         "laravel/framework": "^8.12",
@@ -19,7 +19,8 @@
         "laravel/telescope": "^4.4",
         "laravel/tinker": "^2.5",
         "nwidart/laravel-modules": "8.2.*",
-        "overtrue/laravel-wechat": "^6.0"
+        "overtrue/laravel-wechat": "^6.0",
+        "predis/predis": "^2.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.6",
@@ -83,6 +84,6 @@
             "easywechat-composer/easywechat-composer": true
         }
     },
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "prefer-stable": true
 }
