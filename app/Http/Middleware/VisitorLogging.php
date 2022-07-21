@@ -4,18 +4,24 @@ namespace App\Http\Middleware;
 
 use App\Models\VisitorLog;
 use Closure;
+use Exception;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use itbdw\Ip\IpLocation;
+use Jenssegers\Agent\Agent;
 
 class VisitorLogging
 {
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
-     * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
+     * @param Request $request
+     * @param Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
+     * @return Response|RedirectResponse
+     * @throws Exception
      */
     public function handle(Request $request, Closure $next)
     {
@@ -25,18 +31,17 @@ class VisitorLogging
         if (! $request->is([
             '_debugbar*',
             'dashboard*',
-            // 'dashboard/telescope*',
-            // 'dashboard/log-viewer*',
         ])) {
             $logData = [
                 'route_type'        =>  $this->getRouteType($request),
                 'route_name'        =>  $request->route() ? $request->route()->getName() : null,
 
+                'request_method'    =>  $request->method(),
                 'request_path'      =>  Str::limit($request->path(), 255, null),
                 'request_uri'       =>  Str::limit($request->server('REQUEST_URI'), 255, null),
                 'request_url'       =>  Str::limit($request->fullUrl(), 255, null),
                 'request_domain'    =>  $request->getHttpHost(),
-                'request_method'    =>  $request->method(),
+                'referer_url'       =>  Str::limit($request->server('HTTP_REFERER'), 255, null),
 
                 'visitor_ip'            =>  $request->ip(),
                 'visitor_ip_locale'     =>  $this->getIpInfo($request->ip(), 'locale'),
@@ -56,7 +61,7 @@ class VisitorLogging
 
             // 记录 user_id
             $user = Auth::guard('sanctum')->user();
-            if ($user) $logData['user_id'] = $user->id;
+            if ($user) $logData['user_id'] = $user->getAttribute('id');
 
             VisitorLog::create($logData);
         }
@@ -70,7 +75,7 @@ class VisitorLogging
      * @param Request $request
      * @return string|null
      */
-    protected function getRouteType(Request $request)
+    protected function getRouteType(Request $request): ?string
     {
         if ($request->is('/api*')) return 'api';
         if ($request->routeIs('web.*')) return 'web';
@@ -83,27 +88,32 @@ class VisitorLogging
      * @param $ip
      * @param null $item
      * @return array|mixed|string|string[]
-     * @throws \Exception
+     * @throws Exception
      */
     protected function getIpInfo($ip, $item = null)
     {
-        $ipInfo = \itbdw\Ip\IpLocation::getLocation($ip);
+        $ipInfo = IpLocation::getLocation($ip);
 
         if (isset($item)) {
             switch ($item) {
                 case 'locale':
                     return $ipInfo['city'] ?: ($ipInfo['province'] ?: $ipInfo['country']);
                 default:
-                    throw new \Exception('The item of getIpInfo is illegal');
+                    throw new Exception('The item of getIpInfo is illegal');
             }
         }
 
         return $ipInfo;
     }
 
+    /**
+     * @param null $item
+     * @return array|bool|string|null
+     * @throws Exception
+     */
     protected function getAgentInfo($item = null)
     {
-        $agent = new \Jenssegers\Agent\Agent();
+        $agent = new Agent();
 
         if (isset($item)) {
             switch ($item) {
@@ -115,7 +125,7 @@ class VisitorLogging
                     if ($agent->isPhone()) return 'phone';
                     return null;
                 default:
-                    throw new \Exception('The item of getAgentInfo is illegal');
+                    throw new Exception('The item of getAgentInfo is illegal');
             }
         }
 

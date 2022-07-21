@@ -18,31 +18,25 @@ class CreateVisitorLogsTable extends Migration
             $table->biginteger('user_id')->index()->unsigned()->nullable()->comment('User ID');
             $table->foreign('user_id')->references('id')->on('users');
 
-            $table->string('route_type', 30)->index()->nullable();
-            $table->string('route_name', 50)->index()->nullable();
+            $table->string('route_type', 30)->index()->nullable()->comment('路由类型');
+            $table->string('route_name', 50)->index()->nullable()->comment('路由名称');
 
-            $table->string('request_path');
-            $table->string('request_uri');
-            $table->string('request_url');
-            $table->string('request_domain');
-            $table->string('request_method', 10);
+            $table->string('request_method', 10)->comment('请求方法');
+            $table->string('request_path')->comment('请求路径');
+            $table->string('request_uri')->comment('请求 URI');
+            $table->string('request_url')->comment('请求 URL');
+            $table->string('request_domain')->comment('请求域名');
+            $table->string('referer_url')->nullable()->comment('来源 URL');
 
-            $table->string('visitor_ip', 50);
-            $table->string('visitor_ip_locale', 20);
-            $table->json('visitor_ip_info');
+            $table->string('visitor_ip', 50)->comment('访客 IP');
+            $table->string('visitor_ip_locale', 20)->comment('访客 IP 归属城市或国家');
+            $table->json('visitor_ip_info')->comment('访客 IP 信息');
 
-            $table->string('visitor_agent_device', 20)->nullable();
-            $table->enum('visitor_agent_device_type', ['desktop', 'tablet', 'phone'])->nullable();
-            $table->json('visitor_agent_info')->nullable();
+            $table->string('visitor_agent_device', 20)->nullable()->comment('访客设备');
+            $table->enum('visitor_agent_device_type', ['desktop', 'tablet', 'phone'])->nullable()->comment('访客设备类型');
+            $table->json('visitor_agent_info')->nullable()->comment('访客设备信息');
 
-            /*
-            $table->string('visitor_device', 20)->nullable();
-            $table->string('visitor_platform', 20)->nullable();
-            $table->string('visitor_browser', 20)->nullable();
-            $table->string('visitor_language', 10)->nullable();
-            */
-
-            $table->json('request_data')->nullable();
+            $table->json('request_data')->nullable()->comment('Laravel Request Object');
 
             $table->timestamps();
             $table->softDeletes();
