@@ -12,9 +12,11 @@
         <li class="nav-item">
           <a class="nav-link {{ request()->routeIs('dashboard.analytics.users') ? 'active' : null }}" href="{{ route('dashboard.analytics.users') }}">用户数据分析</a>
         </li>
+        {{--
         <li class="nav-item">
           <a class="nav-link {{ request()->routeIs('dashboard.visitor-logs.analytics') ? 'active' : null }}" href="{{ route('dashboard.visitor-logs.analytics') }}">访客数据分析</a>
         </li>
+        --}}
         <li class="nav-item">
           <a class="nav-link {{ request()->routeIs('dashboard.visitor-logs.index') ? 'active' : null }}" href="{{ route('dashboard.visitor-logs.index') }}">访客日志</a>
         </li>
