@@ -99,20 +99,25 @@ class VisitorLogging
      */
     protected function getIpInfo($ip): array
     {
-        $geoReader = new GeoIp2Render(base_path('vendor/GeoIP/GeoLite2-City.mmdb'), ['zh-CN', 'en']);
-
+        $ip = '114.114.114.114';
         $ipInfo['ip'] = $ip;
 
-        try {
-            $geoCityResult = $geoReader->city($ip);
+        $geoLite2CityFilePath = base_path('vendor/MaxMind-GeoIP/GeoLite2-City.mmdb');
 
-            $ipInfo['country']  =   $geoCityResult->country->name;
-            $ipInfo['province'] =   $geoCityResult->mostSpecificSubdivision->name;
-            $ipInfo['city']     =   $geoCityResult->city->name;
+        if (file_exists($geoLite2CityFilePath)) {
+            $geoReader = new GeoIp2Render($geoLite2CityFilePath, ['zh-CN', 'en']);
 
-            $ipInfo['country_iso_code']     =   $geoCityResult->country->isoCode;
-            $ipInfo['province_iso_code']    =   $geoCityResult->mostSpecificSubdivision->isoCode;
-        } catch (Exception $exception) {
+            try {
+                $geoCityResult = $geoReader->city($ip);
+
+                $ipInfo['country']  =   $geoCityResult->country->name;
+                $ipInfo['province'] =   $geoCityResult->mostSpecificSubdivision->name;
+                $ipInfo['city']     =   $geoCityResult->city->name;
+
+                $ipInfo['country_iso_code']     =   $geoCityResult->country->isoCode;
+                $ipInfo['province_iso_code']    =   $geoCityResult->mostSpecificSubdivision->isoCode;
+            } catch (Exception $exception) {
+            }
         }
 
         return $ipInfo;
