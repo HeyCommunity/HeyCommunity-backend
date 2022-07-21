@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Dashboard\Analytics;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\VisitorLog;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -33,11 +34,27 @@ class UserController extends Controller
             ->get()
             ->pluck('count', 'date')->toArray();
 
+        $userActiveData = VisitorLog::query()
+            ->whereNotNull('user_id')
+            ->select([
+                DB::raw('DATE(created_at) as date'),
+                DB::raw('COUNT(DISTINCT user_id) as count'),
+            ])
+            ->where('created_at', '>=', $startDate)
+            ->groupBy('date')->orderBy('date')
+            ->get()
+            ->pluck('count', 'date')->toArray();
+
+
         $chartData = [
             'labels'    =>  $labels,
             'datasets'  =>  [[
-                'label' =>  '活跃',
+                'label' =>  '新增',
                 'data'  =>  $this->serializeData($dateList, $userCreateData),
+            ], [
+                'label' =>  '活跃',
+                'data'  =>  $this->serializeData($dateList, $userActiveData),
+                'borderColor' =>    '#39afd1',
             ]]
         ];
 
