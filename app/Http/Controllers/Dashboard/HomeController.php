@@ -19,7 +19,7 @@ class HomeController extends Controller
         $totalCommentNum = Comment::count();
         $totalThumbUpNum = Thumb::where('type', 'thumb_up')->count();
 
-        $startDate = now()->subDays(30);
+        $startDate = now()->subDays(31);
         $endDate = now();
 
         $mainLineChartConfigure = AnalyticsBase::makeLineChartConfigure($startDate, $endDate, [

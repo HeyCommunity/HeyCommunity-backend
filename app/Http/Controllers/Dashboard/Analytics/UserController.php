@@ -11,7 +11,7 @@ class UserController extends Controller
 {
     public function index()
     {
-        $startDate = now()->subDays(30);
+        $startDate = now()->subDays(31);
         $endDate = now();
 
         // 用户图表配置
