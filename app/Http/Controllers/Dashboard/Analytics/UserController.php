@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Analytics\AnalyticsBase;
 use App\Models\User;
 use App\Models\VisitorLog;
-use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -19,7 +18,7 @@ class UserController extends Controller
         $userChartConfigure = AnalyticsBase::makeChartConfigure($startDate, $endDate, [
             User::class => ['name' => '用户增长', 'color' => '#264653'],
             VisitorLog::class => [
-                'name'          => '活跃活跃',
+                'name'          => '用户活跃',
                 'color'         => '#2a9d8f',
                 'count_column'  =>  'DISTINCT user_id',
             ],
@@ -38,15 +37,5 @@ class UserController extends Controller
         })();
 
         return view('dashboard.analytics.users.index', compact('userChartConfigure', 'user7DaysActiveData'));
-    }
-
-    protected function serializeData($dateList, $data)
-    {
-        $result = [];
-        foreach ($dateList as $index => $date) {
-            $result[$date] = $data[$date] ?? 0;
-        }
-
-        return array_values($result);
     }
 }

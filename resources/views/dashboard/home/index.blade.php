@@ -82,7 +82,7 @@
         <div class="card-header">
           <h4 class="card-header-title">主要数据趋势</h4>
           <ul class="nav nav-tabs nav-tabs-sm card-header-tabs">
-            @foreach (\Illuminate\Support\Arr::pluck($mainChartConfigure['datasets'], 'label') as $labelName)
+            @foreach (\Illuminate\Support\Arr::pluck($mainChartConfigure['data']['datasets'], 'label') as $labelName)
               <li class="nav-item"><a class="nav-link active">{{ $labelName }}</a></li>
             @endforeach
           </ul>
@@ -93,10 +93,7 @@
           @section('pageScript')
             <script>
               document.addEventListener('DOMContentLoaded', function () {
-                new Chart(document.getElementById('mainChartCanvas'), {
-                  type: 'line',
-                  data: {!! json_encode($mainChartConfigure) !!},
-                });
+                new Chart(document.getElementById('mainChartCanvas'), {!! json_encode($mainChartConfigure) !!});
               });
             </script>
           @append
@@ -109,7 +106,7 @@
         <div class="card-header">
           <h4 class="card-header-title">点赞/评论趋势</h4>
           <ul class="nav nav-tabs nav-tabs-sm card-header-tabs">
-            @foreach (\Illuminate\Support\Arr::pluck($thumbAndCommentChartConfigure['datasets'], 'label') as $labelName)
+            @foreach (\Illuminate\Support\Arr::pluck($thumbAndCommentChartConfigure['data']['datasets'], 'label') as $labelName)
               <li class="nav-item"><a class="nav-link active">{{ $labelName }}</a></li>
             @endforeach
           </ul>
@@ -120,10 +117,7 @@
           @section('pageScript')
             <script>
               document.addEventListener('DOMContentLoaded', function () {
-                new Chart(document.getElementById('thumbAndCommentChartCanvas'), {
-                  type: 'line',
-                  data: {!! json_encode($thumbAndCommentChartConfigure) !!},
-                });
+                new Chart(document.getElementById('thumbAndCommentChartCanvas'), {!! json_encode($thumbAndCommentChartConfigure) !!});
               });
             </script>
           @append

@@ -8,7 +8,6 @@ use App\Models\Common\Comment;
 use App\Models\Common\Thumb;
 use App\Models\User;
 use App\Models\VisitorLog;
-use Illuminate\Http\Request;
 use Modules\Post\Entities\Post;
 
 class HomeController extends Controller
@@ -23,19 +22,17 @@ class HomeController extends Controller
         $startDate = now()->subDays(30);
         $endDate = now();
 
-        $mainChartConfigure = AnalyticsBase::makeChartConfigure($startDate, $endDate, [
-            User::class => ['name' => '用户增长', 'color' => '#264653'],
-            VisitorLog::class => [
-                'name'          => '活跃活跃',
-                'color'         => '#2a9d8f',
-                'count_column'  =>  'DISTINCT user_id',
-            ],
-            Post::class => ['name' => '动态数', 'color' => '#ffb703'],
+        $mainChartConfigure = AnalyticsBase::makeLineChartConfigure($startDate, $endDate, [
+            ['name' => '用户增长', 'class' => User::class, 'color' => '#264653'],
+            [ 'name' => '用户活跃', 'class' => VisitorLog::class,
+                'color' => '#2a9d8f', 'count_column' => 'DISTINCT user_id'],
+            ['name' => '动态增长', 'class' => Post::class, 'color' => '#ffb703'],
+            ['name' => '动态活跃', 'class' => Post::class, 'color' => '#ffb703', 'date_column' => 'updated_at'],
         ]);
 
-        $thumbAndCommentChartConfigure = AnalyticsBase::makeChartConfigure($startDate, $endDate, [
-            Thumb::class => ['name' => '点赞', 'color' => '#6e84a3'],
-            Comment::class => ['name' => '评论', 'color' => '#39afd1'],
+        $thumbAndCommentChartConfigure = AnalyticsBase::makeLineChartConfigure($startDate, $endDate, [
+            ['name' => '点赞', 'class' => Thumb::class, 'color' => '#6e84a3'],
+            ['name' => '评论', 'class' => Comment::class, 'color' => '#39afd1'],
         ]);
 
         return view('dashboard.home.index', compact(

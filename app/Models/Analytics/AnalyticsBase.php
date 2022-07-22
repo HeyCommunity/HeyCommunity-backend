@@ -7,20 +7,23 @@ use Illuminate\Support\Facades\DB;
 class AnalyticsBase
 {
     /**
-     * 生成 Chart 配置
+     * 生成 LineChart 配置
      *
      * @param $startDate
      * @param $endDate
      * @param $items
      * @return array
      */
-    public static function makeChartConfigure($startDate, $endDate, $items): array
+    public static function makeLineChartConfigure($startDate, $endDate, $items): array
     {
         $analyticsBase = new self();
 
         return [
-            'labels'    =>  $analyticsBase->makeDateList($startDate, $endDate, 'n/j'),
-            'datasets'  =>  $analyticsBase->makeDatasets($startDate, $endDate, $items),
+            'type'  =>  'line',
+            'data'  =>  [
+                'labels'    =>  $analyticsBase->makeDateList($startDate, $endDate, 'n/j'),
+                'datasets'  =>  $analyticsBase->makeDatasets($startDate, $endDate, $items),
+            ],
         ];
     }
 
@@ -45,14 +48,14 @@ class AnalyticsBase
     {
         $datasets = [];
 
-        foreach ($labels as $labelClassName => $labelConfig) {
-            $labelConfig['date_column'] ??= 'created_at';
-            $labelConfig['count_column'] ??= '*';
+        foreach ($labels as $label) {
+            $label['date_column'] ??= 'created_at';
+            $label['count_column'] ??= '*';
 
-            $labelData = (new $labelClassName())->query()
+            $labelData = (new $label['class']())->query()
                 ->select([
-                    DB::raw('DATE(' . $labelConfig['date_column'] . ') as date'),
-                    DB::raw('COUNT(' . $labelConfig['count_column'] . ') as count'),
+                    DB::raw('DATE(' . $label['date_column'] . ') as date'),
+                    DB::raw('COUNT(' . $label['count_column'] . ') as count'),
                 ])
                 ->where('created_at', '>=', $startDate)
                 ->groupBy('date')->orderBy('date')
@@ -60,15 +63,15 @@ class AnalyticsBase
                 ->pluck('count', 'date')->toArray();
 
             $dataset = [
-                'label' =>  $labelConfig['name'],
+                'label' =>  $label['name'],
                 'data'  =>  $this->fillDataForDate(
                     $this->makeDateList($startDate, $endDate, 'Y-m-d'),
                     $labelData,
                 ),
             ];
 
-            if (isset($labelConfig['color'])) {
-                $dataset['borderColor'] = $labelConfig['color'];
+            if (isset($label['color'])) {
+                $dataset['borderColor'] = $label['color'];
             }
 
             $datasets[] = $dataset;
