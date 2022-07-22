@@ -37,27 +37,16 @@ class VisitorLogController extends Controller
      */
     public function date(Request $request)
     {
-        \Illuminate\Support\Facades\Validator::make($request->all(), [
+        $request->validate([
             'date'      =>  'date_format:Y-m-d',
-        ])->validate();
+        ]);
 
-        if (! $request->has('date')) return redirect()->route($request->route()->getName(), ['date' => date('Y-m-d')]);
+        // 如果没有指定 date，则把 date 指定为当天
+        if (! $request->has('date')) {
+            return redirect()->route($request->route()->getName(), ['date' => date('Y-m-d')]);
+        }
 
-        $result = VisitorLog::query()
-            ->select([
-                'user_id',
-                DB::raw('COUNT(*) as total_num'),
-                DB::raw('MIN(created_at) as start_time'),
-                DB::raw('MAX(created_at) as end_time'),
-                DB::raw('GROUP_CONCAT(DISTINCT visitor_ip_locale) as locales'),
-                DB::raw('GROUP_CONCAT(DISTINCT visitor_agent_device) as devices'),
-            ])
-            ->with(['sameUserLogs' => function ($query) use ($request) {
-                $query->whereDate('created_at', $request->get('date'));
-            }])
-            ->whereNotNull('user_id')
-            ->whereDate('created_at', $request->get('date'))
-            ->groupBy('user_id')
+        $result = VisitorLog::activeUserOfDate($request->get('date'))
             ->paginate()
             ->appends(['date' => $request->get('date')]);
 
