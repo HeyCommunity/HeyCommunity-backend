@@ -8,7 +8,15 @@
         </div>
 
         <div class="col-auto">
-          <button type="button" class="btn btn-light"><i class="fe fe-calendar"></i> 选择日期</button>
+          <a class="btn btn-light" href="{{ route('dashboard.visitor-logs.date', ['date' => \Illuminate\Support\Carbon::parse(request()->get('date'))->addDay()->format('Y-m-d')]) }}">
+            <i class="fe fe-chevron-left"></i>
+            {{ \Illuminate\Support\Carbon::parse(request()->get('date'))->addDay()->format('m/d') }}
+          </a>
+          <a class="btn btn-light" href="{{ route('dashboard.visitor-logs.date', ['date' => \Illuminate\Support\Carbon::parse(request()->get('date'))->subDay()->format('Y-m-d')]) }}">
+            {{ \Illuminate\Support\Carbon::parse(request()->get('date'))->subDay()->format('m/d') }}
+            <i class="fe fe-chevron-right"></i>
+          </a>
+          <button disabled type="button" class="btn btn-light"><i class="fe fe-calendar"></i> 选择日期</button>
         </div>
       </div>
 

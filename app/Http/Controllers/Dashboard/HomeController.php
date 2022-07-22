@@ -7,7 +7,7 @@ use App\Models\Analytics\AnalyticsBase;
 use App\Models\Common\Comment;
 use App\Models\Common\Thumb;
 use App\Models\User;
-use Illuminate\Http\Request;
+use App\Models\VisitorLog;
 use Modules\Post\Entities\Post;
 
 class HomeController extends Controller
@@ -19,21 +19,29 @@ class HomeController extends Controller
         $totalCommentNum = Comment::count();
         $totalThumbUpNum = Thumb::where('type', 'thumb_up')->count();
 
-        $startDate = now()->subDays(30);
+        $startDate = now()->subDays(31);
         $endDate = now();
 
-        $userChartConfigure = AnalyticsBase::makeChartConfigure($startDate, $endDate, [User::class => ['name' => '增长']]);
-        $contentChartConfigure = AnalyticsBase::makeChartConfigure($startDate, $endDate, [
-            Post::class => ['name' => '动态', 'color' => '#39afd1'],
+        $mainLineChartConfigure = AnalyticsBase::makeLineChartConfigure($startDate, $endDate, [
+            ['name' => '用户增长', 'class' => User::class, 'color' => '#2c7be5'],
+            [ 'name' => '用户活跃', 'class' => VisitorLog::class,
+                'color' => '#2a9d8f', 'count_column' => 'DISTINCT user_id'],
+            ['name' => '动态增长', 'class' => Post::class, 'color' => '#ffb703'],
+            ['name' => '动态活跃', 'class' => Post::class, 'color' => '#f77f00', 'date_column' => 'updated_at'],
         ]);
-        $commonChartConfigure = AnalyticsBase::makeChartConfigure($startDate, $endDate, [
-            Comment::class => ['name' => '评论', 'color' => '#39afd1'],
-            Thumb::class => ['name' => '点赞', 'color' => '#6e84a3'],
+
+        $thumbAndCommentLineChartConfigure = AnalyticsBase::makeLineChartConfigure($startDate, $endDate, [
+            ['name' => '点赞', 'class' => Thumb::class, 'color' => '#6e84a3'],
+            ['name' => '评论', 'class' => Comment::class, 'color' => '#39afd1'],
         ]);
 
         return view('dashboard.home.index', compact(
-            'totalUserNum', 'totalPostNum', 'totalCommentNum', 'totalThumbUpNum',
-            'userChartConfigure', 'contentChartConfigure', 'commonChartConfigure',
+            'totalUserNum',
+            'totalPostNum',
+            'totalCommentNum',
+            'totalThumbUpNum',
+            'mainLineChartConfigure',
+            'thumbAndCommentLineChartConfigure',
         ));
     }
 

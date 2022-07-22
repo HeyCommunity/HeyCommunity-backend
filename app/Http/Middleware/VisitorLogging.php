@@ -4,46 +4,63 @@ namespace App\Http\Middleware;
 
 use App\Models\VisitorLog;
 use Closure;
+use Exception;
+use GeoIp2\Database\Reader as GeoIp2Render;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use Jenssegers\Agent\Agent;
 
 class VisitorLogging
 {
     /**
+     * 忽略的路径
+     *
+     * @var array|string[]
+     */
+    protected array $ignorePaths = [
+        'dashboard*',
+        '_debugbar*',
+        '__clockwork*', 'clockwork*',
+    ];
+
+    /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
-     * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
+     * @param Request $request
+     * @param Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
+     * @return Response|RedirectResponse
+     * @throws Exception
      */
     public function handle(Request $request, Closure $next)
     {
         $response = $next($request);
 
+        $visitorIpInfo = $this->getIpInfo($request->ip());      // IP 信息
+        $visitorAgentInfo = $this->getAgentInfo();              // 设备信息
+
         // dashboard not logging
-        if (! $request->is([
-            '_debugbar*',
-            'dashboard*',
-            // 'dashboard/telescope*',
-            // 'dashboard/log-viewer*',
-        ])) {
+        if (! $request->is($this->ignorePaths)) {
             $logData = [
                 'route_type'        =>  $this->getRouteType($request),
                 'route_name'        =>  $request->route() ? $request->route()->getName() : null,
 
-                'request_path'      =>  Str::limit($request->path(), 255, null),
-                'request_uri'       =>  Str::limit($request->server('REQUEST_URI'), 255, null),
-                'request_url'       =>  Str::limit($request->fullUrl(), 255, null),
-                'request_domain'    =>  $request->getHttpHost(),
-                'request_method'    =>  $request->method(),
+                'response_status_code'  =>  $response->status(),
+                'request_method'        =>  $request->method(),
+                'request_path'          =>  Str::limit($request->path(), 255, null),
+                'request_uri'           =>  Str::limit($request->server('REQUEST_URI'), 255, null),
+                'request_url'           =>  Str::limit($request->fullUrl(), 255, null),
+                'request_domain'        =>  $request->getHttpHost(),
+                'referer_url'           =>  Str::limit($request->server('HTTP_REFERER'), 255, null),
 
                 'visitor_ip'            =>  $request->ip(),
-                'visitor_ip_locale'     =>  $this->getIpInfo($request->ip(), 'locale'),
-                'visitor_ip_info'       =>  $this->getIpInfo($request->ip()),
-                'visitor_agent_device'          =>  $this->getAgentInfo('device'),
-                'visitor_agent_device_type'     =>  $this->getAgentInfo('deviceType'),
-                'visitor_agent_info'            =>  $this->getAgentInfo(),
+                'visitor_ip_locale'     =>  $visitorIpInfo['city'] ?? 'UNKNOWN',
+                'visitor_ip_info'       =>  $visitorIpInfo,
+                'visitor_agent_device'          =>  $visitorAgentInfo['device'],
+                'visitor_agent_device_type'     =>  $visitorAgentInfo['device_type'],
+                'visitor_agent_info'            =>  $visitorAgentInfo,
 
                 'request_data'      =>  [
                     'get'       =>  $request->query(),
@@ -56,7 +73,9 @@ class VisitorLogging
 
             // 记录 user_id
             $user = Auth::guard('sanctum')->user();
-            if ($user) $logData['user_id'] = $user->id;
+            if ($user) {
+                $logData['user_id'] = $user->getAttribute('id');
+            }
 
             VisitorLog::create($logData);
         }
@@ -70,54 +89,59 @@ class VisitorLogging
      * @param Request $request
      * @return string|null
      */
-    protected function getRouteType(Request $request)
+    protected function getRouteType(Request $request): ?string
     {
-        if ($request->is('/api*')) return 'api';
-        if ($request->routeIs('web.*')) return 'web';
-        if ($request->is('/dashboard*')) return 'dashboard';
+        if ($request->is('/api*')) {
+            return 'api';
+        } elseif ($request->routeIs('web.*')) {
+            return 'web';
+        } elseif ($request->is('/dashboard*')) {
+            return 'dashboard';
+        }
 
         return null;
     }
 
     /**
+     * 获取 IP 信息
+     *
      * @param $ip
-     * @param null $item
-     * @return array|mixed|string|string[]
-     * @throws \Exception
+     * @return string[]
+     * @throws \MaxMind\Db\Reader\InvalidDatabaseException
      */
-    protected function getIpInfo($ip, $item = null)
+    protected function getIpInfo($ip): array
     {
-        $ipInfo = \itbdw\Ip\IpLocation::getLocation($ip);
+        $ipInfo['ip'] = $ip;
 
-        if (isset($item)) {
-            switch ($item) {
-                case 'locale':
-                    return $ipInfo['city'] ?: ($ipInfo['province'] ?: $ipInfo['country']);
-                default:
-                    throw new \Exception('The item of getIpInfo is illegal');
+        $geoLite2CityFilePath = base_path('vendor/MaxMind-GeoIP/GeoLite2-City.mmdb');
+
+        if (file_exists($geoLite2CityFilePath)) {
+            $geoReader = new GeoIp2Render($geoLite2CityFilePath, ['zh-CN', 'en']);
+
+            try {
+                $geoCityResult = $geoReader->city($ip);
+
+                $ipInfo['country']  =   $geoCityResult->country->name;
+                $ipInfo['province'] =   $geoCityResult->mostSpecificSubdivision->name;
+                $ipInfo['city']     =   $geoCityResult->city->name;
+
+                $ipInfo['country_iso_code']     =   $geoCityResult->country->isoCode;
+                $ipInfo['province_iso_code']    =   $geoCityResult->mostSpecificSubdivision->isoCode;
+            } catch (Exception $exception) {
             }
         }
 
         return $ipInfo;
     }
 
-    protected function getAgentInfo($item = null)
+    /**
+     * 获取设备信息
+     *
+     * @return array
+     */
+    protected function getAgentInfo(): array
     {
-        $agent = new \Jenssegers\Agent\Agent();
-
-        if (isset($item)) {
-            switch ($item) {
-                case 'device':
-                    return $agent->device();
-                case 'deviceType':
-                    if ($agent->isDesktop()) return 'desktop';
-                    if ($agent->isTablet()) return 'tablet';
-                    if ($agent->isPhone()) return 'phone';
-                    return null;
-                default:
-                    throw new \Exception('The item of getAgentInfo is illegal');
-            }
-        }
+        $agent = new Agent();
 
         return [
             'languages'             =>  $agent->languages(),
@@ -126,6 +150,7 @@ class VisitorLogging
             'browser'               =>  $agent->browser(),
             'browser_version'       =>  $agent->version($agent->browser()),
             'device'                =>  $agent->device(),
+            'device_type'           =>  $agent->deviceType(),
         ];
     }
 }

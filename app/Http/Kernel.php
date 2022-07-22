@@ -67,7 +67,5 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
-
-        'heycommunity.visitorLogging' => \App\Http\Middleware\VisitorLogging::class,                 // 访客日志
     ];
 }

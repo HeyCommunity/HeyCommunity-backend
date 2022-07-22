@@ -3,54 +3,36 @@
 namespace App\Http\Controllers\Dashboard\Analytics;
 
 use App\Http\Controllers\Controller;
+use App\Models\Analytics\AnalyticsBase;
 use App\Models\User;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use App\Models\VisitorLog;
 
 class UserController extends Controller
 {
     public function index()
     {
-        $startDate = now()->subDays(30);
+        $startDate = now()->subDays(31);
         $endDate = now();
 
-        $labelDate = $startDate->clone();
-        $dateList = [];
-        $labels = [];
-        do {
-            $dateList[] = $labelDate->format('Y-m-d');
-            $labels[] = $labelDate->format('n/j');
-        } while ($labelDate->addDay() <= $endDate);
+        // 用户图表配置
+        $userLineChartConfigure = AnalyticsBase::makeLineChartConfigure($startDate, $endDate, [
+            ['name' => '用户增长', 'class' => User::class, 'color' => '#2c7be5'],
+            ['name' => '用户活跃', 'class' => VisitorLog::class,
+                'color' => '#2a9d8f', 'count_column' => 'DISTINCT user_id'],
+        ]);
 
-        // 用户新增数据
-        $userCreateData = User::query()
-            ->select([
-                DB::raw('DATE(created_at) as date'),
-                DB::raw('COUNT(*) as count'),
-            ])
-            ->where('created_at', '>=', $startDate)
-            ->groupBy('date')->orderBy('date')
-            ->get()
-            ->pluck('count', 'date')->toArray();
+        // 最近 7 天活跃用户，每页 100 用户
+        $user7DaysActiveData = (function () {
+            $result = [];
 
-        $chartData = [
-            'labels'    =>  $labels,
-            'datasets'  =>  [[
-                'label' =>  '活跃',
-                'data'  =>  $this->serializeData($dateList, $userCreateData),
-            ]]
-        ];
+            foreach (range(0, 6) as $subDayNum) {
+                $date = now()->subDays($subDayNum);
+                $result[$date->format('Y-m-d')] = VisitorLog::activeUserOfDate($date)->paginate(100);
+            }
 
-        return view('dashboard.analytics.users.index', compact('chartData'));
-    }
+            return $result;
+        })();
 
-    protected function serializeData($dateList, $data)
-    {
-        $result = [];
-        foreach ($dateList as $index => $date) {
-            $result[$date] = $data[$date] ?? 0;
-        }
-
-        return array_values($result);
+        return view('dashboard.analytics.users.index', compact('userLineChartConfigure', 'user7DaysActiveData'));
     }
 }
