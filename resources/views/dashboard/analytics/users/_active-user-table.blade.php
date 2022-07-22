@@ -37,8 +37,10 @@
 
         <td>{{ $resultItem->total_num }}</td>
         <td>
-          {{ \Carbon\Carbon::parse($resultItem->start_time)->format('H:i:s') }}
-          - {{ \Carbon\Carbon::parse($resultItem->end_time)->format('H:i:s') }}
+          {{ \Carbon\Carbon::parse($resultItem->start_time)->format('H:i') }}
+          @if (\Carbon\Carbon::parse($resultItem->start_time)->diffInMinutes(\Carbon\Carbon::parse($resultItem->end_time)))
+            - {{ \Carbon\Carbon::parse($resultItem->end_time)->format('H:i') }}
+          @endif
         </td>
         <td>{{ $resultItem->devices }}</td>
         <td>{{ $resultItem->locales }}</td>
