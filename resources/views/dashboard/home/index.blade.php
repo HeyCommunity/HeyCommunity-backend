@@ -82,18 +82,18 @@
         <div class="card-header">
           <h4 class="card-header-title">主要数据趋势</h4>
           <ul class="nav nav-tabs nav-tabs-sm card-header-tabs">
-            @foreach (\Illuminate\Support\Arr::pluck($mainChartConfigure['data']['datasets'], 'label') as $labelName)
+            @foreach (\Illuminate\Support\Arr::pluck($mainLineChartConfigure['data']['datasets'], 'label') as $labelName)
               <li class="nav-item"><a class="nav-link active">{{ $labelName }}</a></li>
             @endforeach
           </ul>
         </div>
         <div class="card-body">
-          <div class="chart"><canvas id="mainChartCanvas" class="chart-canvas"></canvas></div>
+          <div class="chart"><canvas id="mainLineChartCanvas" class="chart-canvas"></canvas></div>
 
           @section('pageScript')
             <script>
               document.addEventListener('DOMContentLoaded', function () {
-                new Chart(document.getElementById('mainChartCanvas'), {!! json_encode($mainChartConfigure) !!});
+                new Chart(document.getElementById('mainLineChartCanvas'), {!! json_encode($mainLineChartConfigure) !!});
               });
             </script>
           @append
@@ -106,18 +106,18 @@
         <div class="card-header">
           <h4 class="card-header-title">点赞/评论趋势</h4>
           <ul class="nav nav-tabs nav-tabs-sm card-header-tabs">
-            @foreach (\Illuminate\Support\Arr::pluck($thumbAndCommentChartConfigure['data']['datasets'], 'label') as $labelName)
+            @foreach (\Illuminate\Support\Arr::pluck($thumbAndCommentLineChartConfigure['data']['datasets'], 'label') as $labelName)
               <li class="nav-item"><a class="nav-link active">{{ $labelName }}</a></li>
             @endforeach
           </ul>
         </div>
         <div class="card-body">
-          <div class="chart"><canvas id="thumbAndCommentChartCanvas" class="chart-canvas"></canvas></div>
+          <div class="chart"><canvas id="thumbAndCommentLineChartCanvas" class="chart-canvas"></canvas></div>
 
           @section('pageScript')
             <script>
               document.addEventListener('DOMContentLoaded', function () {
-                new Chart(document.getElementById('thumbAndCommentChartCanvas'), {!! json_encode($thumbAndCommentChartConfigure) !!});
+                new Chart(document.getElementById('thumbAndCommentLineChartCanvas'), {!! json_encode($thumbAndCommentLineChartConfigure) !!});
               });
             </script>
           @append

@@ -15,13 +15,10 @@ class UserController extends Controller
         $endDate = now();
 
         // 用户图表配置
-        $userChartConfigure = AnalyticsBase::makeChartConfigure($startDate, $endDate, [
-            User::class => ['name' => '用户增长', 'color' => '#264653'],
-            VisitorLog::class => [
-                'name'          => '用户活跃',
-                'color'         => '#2a9d8f',
-                'count_column'  =>  'DISTINCT user_id',
-            ],
+        $userLineChartConfigure = AnalyticsBase::makeLineChartConfigure($startDate, $endDate, [
+            ['name' => '用户增长', 'class' => User::class, 'color' => '#2c7be5'],
+            ['name' => '用户活跃', 'class' => VisitorLog::class,
+                'color' => '#2a9d8f', 'count_column' => 'DISTINCT user_id'],
         ]);
 
         // 最近 7 天活跃用户，每页 100 用户
@@ -36,6 +33,6 @@ class UserController extends Controller
             return $result;
         })();
 
-        return view('dashboard.analytics.users.index', compact('userChartConfigure', 'user7DaysActiveData'));
+        return view('dashboard.analytics.users.index', compact('userLineChartConfigure', 'user7DaysActiveData'));
     }
 }

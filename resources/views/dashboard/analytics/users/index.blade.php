@@ -24,7 +24,7 @@
         <div class="card-header">
           <h4 class="card-header-title">用户增长和活跃趋势</h4>
           <ul class="nav nav-tabs nav-tabs-sm card-header-tabs">
-            @foreach (\Illuminate\Support\Arr::pluck($userChartConfigure['datasets'], 'label') as $labelName)
+            @foreach (\Illuminate\Support\Arr::pluck($userLineChartConfigure['data']['datasets'], 'label') as $labelName)
               <li class="nav-item"><a class="nav-link active">{{ $labelName }}</a></li>
             @endforeach
           </ul>
@@ -35,10 +35,7 @@
           @section('pageScript')
             <script>
               document.addEventListener('DOMContentLoaded', function () {
-                new Chart(document.getElementById('chartCanvas'), {
-                  type: 'line',
-                  data: {!! json_encode($userChartConfigure) !!},
-                });
+                new Chart(document.getElementById('chartCanvas'), {!! json_encode($userLineChartConfigure) !!});
               });
             </script>
           @append

@@ -22,15 +22,15 @@ class HomeController extends Controller
         $startDate = now()->subDays(30);
         $endDate = now();
 
-        $mainChartConfigure = AnalyticsBase::makeLineChartConfigure($startDate, $endDate, [
-            ['name' => '用户增长', 'class' => User::class, 'color' => '#264653'],
+        $mainLineChartConfigure = AnalyticsBase::makeLineChartConfigure($startDate, $endDate, [
+            ['name' => '用户增长', 'class' => User::class, 'color' => '#2c7be5'],
             [ 'name' => '用户活跃', 'class' => VisitorLog::class,
                 'color' => '#2a9d8f', 'count_column' => 'DISTINCT user_id'],
             ['name' => '动态增长', 'class' => Post::class, 'color' => '#ffb703'],
-            ['name' => '动态活跃', 'class' => Post::class, 'color' => '#ffb703', 'date_column' => 'updated_at'],
+            ['name' => '动态活跃', 'class' => Post::class, 'color' => '#f77f00', 'date_column' => 'updated_at'],
         ]);
 
-        $thumbAndCommentChartConfigure = AnalyticsBase::makeLineChartConfigure($startDate, $endDate, [
+        $thumbAndCommentLineChartConfigure = AnalyticsBase::makeLineChartConfigure($startDate, $endDate, [
             ['name' => '点赞', 'class' => Thumb::class, 'color' => '#6e84a3'],
             ['name' => '评论', 'class' => Comment::class, 'color' => '#39afd1'],
         ]);
@@ -40,8 +40,8 @@ class HomeController extends Controller
             'totalPostNum',
             'totalCommentNum',
             'totalThumbUpNum',
-            'mainChartConfigure',
-            'thumbAndCommentChartConfigure',
+            'mainLineChartConfigure',
+            'thumbAndCommentLineChartConfigure',
         ));
     }
 
