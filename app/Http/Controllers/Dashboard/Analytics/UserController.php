@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Dashboard\Analytics;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\VisitorLog;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
@@ -58,7 +57,20 @@ class UserController extends Controller
             ]]
         ];
 
-        return view('dashboard.analytics.users.index', compact('chartData'));
+
+        // 最近 7 天活跃用户，每页 100 用户
+        $user7DaysActiveData = (function () {
+            $result = [];
+
+            foreach (range(0, 6) as $subDayNum) {
+                $date = now()->subDays($subDayNum);
+                $result[$date->format('Y-m-d')] = VisitorLog::activeUserOfDate($date)->paginate(100);
+            }
+
+            return $result;
+        })();
+
+        return view('dashboard.analytics.users.index', compact('chartData', 'user7DaysActiveData'));
     }
 
     protected function serializeData($dateList, $data)

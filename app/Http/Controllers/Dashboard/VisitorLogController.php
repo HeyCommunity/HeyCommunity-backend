@@ -52,7 +52,7 @@ class VisitorLogController extends Controller
                 DB::raw('GROUP_CONCAT(DISTINCT visitor_ip_locale) as locales'),
                 DB::raw('GROUP_CONCAT(DISTINCT visitor_agent_device) as devices'),
             ])
-            ->with(['someUserLogs' => function ($query) use ($request) {
+            ->with(['sameUserLogs' => function ($query) use ($request) {
                 $query->whereDate('created_at', $request->get('date'));
             }])
             ->whereNotNull('user_id')
