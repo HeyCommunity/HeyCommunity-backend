@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard\Analytics;
 
 use App\Http\Controllers\Controller;
+use App\Models\Analytics\AnalyticsBase;
 use App\Models\User;
 use App\Models\VisitorLog;
 use Illuminate\Support\Facades\DB;
@@ -14,49 +15,15 @@ class UserController extends Controller
         $startDate = now()->subDays(30);
         $endDate = now();
 
-        $labelDate = $startDate->clone();
-        $dateList = [];
-        $labels = [];
-        do {
-            $dateList[] = $labelDate->format('Y-m-d');
-            $labels[] = $labelDate->format('n/j');
-        } while ($labelDate->addDay() <= $endDate);
-
-        // 用户新增数据
-        $userCreateData = User::query()
-            ->select([
-                DB::raw('DATE(created_at) as date'),
-                DB::raw('COUNT(*) as count'),
-            ])
-            ->where('created_at', '>=', $startDate)
-            ->groupBy('date')->orderBy('date')
-            ->get()
-            ->pluck('count', 'date')->toArray();
-
-        $userActiveData = VisitorLog::query()
-            ->whereNotNull('user_id')
-            ->select([
-                DB::raw('DATE(created_at) as date'),
-                DB::raw('COUNT(DISTINCT user_id) as count'),
-            ])
-            ->where('created_at', '>=', $startDate)
-            ->groupBy('date')->orderBy('date')
-            ->get()
-            ->pluck('count', 'date')->toArray();
-
-
-        $chartData = [
-            'labels'    =>  $labels,
-            'datasets'  =>  [[
-                'label' =>  '新增',
-                'data'  =>  $this->serializeData($dateList, $userCreateData),
-            ], [
-                'label' =>  '活跃',
-                'data'  =>  $this->serializeData($dateList, $userActiveData),
-                'borderColor' =>    '#39afd1',
-            ]]
-        ];
-
+        // 用户图表配置
+        $userChartConfigure = AnalyticsBase::makeChartConfigure($startDate, $endDate, [
+            User::class => ['name' => '用户增长', 'color' => '#264653'],
+            VisitorLog::class => [
+                'name'          => '活跃活跃',
+                'color'         => '#2a9d8f',
+                'count_column'  =>  'DISTINCT user_id',
+            ],
+        ]);
 
         // 最近 7 天活跃用户，每页 100 用户
         $user7DaysActiveData = (function () {
@@ -70,7 +37,7 @@ class UserController extends Controller
             return $result;
         })();
 
-        return view('dashboard.analytics.users.index', compact('chartData', 'user7DaysActiveData'));
+        return view('dashboard.analytics.users.index', compact('userChartConfigure', 'user7DaysActiveData'));
     }
 
     protected function serializeData($dateList, $data)

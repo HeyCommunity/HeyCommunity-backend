@@ -7,6 +7,7 @@ use App\Models\Analytics\AnalyticsBase;
 use App\Models\Common\Comment;
 use App\Models\Common\Thumb;
 use App\Models\User;
+use App\Models\VisitorLog;
 use Illuminate\Http\Request;
 use Modules\Post\Entities\Post;
 
@@ -22,18 +23,28 @@ class HomeController extends Controller
         $startDate = now()->subDays(30);
         $endDate = now();
 
-        $userChartConfigure = AnalyticsBase::makeChartConfigure($startDate, $endDate, [User::class => ['name' => '增长']]);
-        $contentChartConfigure = AnalyticsBase::makeChartConfigure($startDate, $endDate, [
-            Post::class => ['name' => '动态', 'color' => '#39afd1'],
+        $mainChartConfigure = AnalyticsBase::makeChartConfigure($startDate, $endDate, [
+            User::class => ['name' => '用户增长', 'color' => '#264653'],
+            VisitorLog::class => [
+                'name'          => '活跃活跃',
+                'color'         => '#2a9d8f',
+                'count_column'  =>  'DISTINCT user_id',
+            ],
+            Post::class => ['name' => '动态数', 'color' => '#ffb703'],
         ]);
-        $commonChartConfigure = AnalyticsBase::makeChartConfigure($startDate, $endDate, [
-            Comment::class => ['name' => '评论', 'color' => '#39afd1'],
+
+        $thumbAndCommentChartConfigure = AnalyticsBase::makeChartConfigure($startDate, $endDate, [
             Thumb::class => ['name' => '点赞', 'color' => '#6e84a3'],
+            Comment::class => ['name' => '评论', 'color' => '#39afd1'],
         ]);
 
         return view('dashboard.home.index', compact(
-            'totalUserNum', 'totalPostNum', 'totalCommentNum', 'totalThumbUpNum',
-            'userChartConfigure', 'contentChartConfigure', 'commonChartConfigure',
+            'totalUserNum',
+            'totalPostNum',
+            'totalCommentNum',
+            'totalThumbUpNum',
+            'mainChartConfigure',
+            'thumbAndCommentChartConfigure',
         ));
     }
 

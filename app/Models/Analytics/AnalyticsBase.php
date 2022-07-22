@@ -6,22 +6,53 @@ use Illuminate\Support\Facades\DB;
 
 class AnalyticsBase
 {
-    public static function makeChartConfigure($startDate, $endDate, $items)
+    /**
+     * 生成 Chart 配置
+     *
+     * @param $startDate
+     * @param $endDate
+     * @param $items
+     * @return array
+     */
+    public static function makeChartConfigure($startDate, $endDate, $items): array
     {
-        $labelDate = $startDate->clone();
-        $dateList = [];
-        $labels = [];
-        do {
-            $dateList[] = $labelDate->format('Y-m-d');
-            $labels[] = $labelDate->format('m/d');
-        } while ($labelDate->addDay() <= $endDate);
+        $analyticsBase = new self();
 
+        return [
+            'labels'    =>  $analyticsBase->makeDateList($startDate, $endDate, 'n/j'),
+            'datasets'  =>  $analyticsBase->makeDatasets($startDate, $endDate, $items),
+        ];
+    }
+
+    /**
+     * 生成 datasets
+     *
+     * $labels = [
+     *  'labelClassName' => [
+     *      'name'          =>  '用户增长',
+     *      'color'         =>  '2c7be5',         // 选填，默认 #2c7be5
+     *      'date_column'   =>  'created_at',     // 选填，默认 created_at
+     *      'count_column'  =>  '*',              // 选填，默认 *
+     *  ]
+     * ]
+     *
+     * @param $startDate
+     * @param $endDate
+     * @param $labels
+     * @return array
+     */
+    protected function makeDatasets($startDate, $endDate, $labels): array
+    {
         $datasets = [];
-        foreach ($items as $labelModel => $labelConfig) {
-            $labelData = (new $labelModel)->query()
+
+        foreach ($labels as $labelClassName => $labelConfig) {
+            $labelConfig['date_column'] ??= 'created_at';
+            $labelConfig['count_column'] ??= '*';
+
+            $labelData = (new $labelClassName())->query()
                 ->select([
-                    DB::raw('DATE(created_at) as date'),
-                    DB::raw('COUNT(*) as count'),
+                    DB::raw('DATE(' . $labelConfig['date_column'] . ') as date'),
+                    DB::raw('COUNT(' . $labelConfig['count_column'] . ') as count'),
                 ])
                 ->where('created_at', '>=', $startDate)
                 ->groupBy('date')->orderBy('date')
@@ -30,23 +61,53 @@ class AnalyticsBase
 
             $dataset = [
                 'label' =>  $labelConfig['name'],
-                'data'  =>  self::serializeData($dateList, $labelData),
+                'data'  =>  $this->fillDataForDate(
+                    $this->makeDateList($startDate, $endDate, 'Y-m-d'),
+                    $labelData,
+                ),
             ];
-            if (isset($labelConfig['color'])) $dataset['borderColor'] = $labelConfig['color'];
+
+            if (isset($labelConfig['color'])) {
+                $dataset['borderColor'] = $labelConfig['color'];
+            }
 
             $datasets[] = $dataset;
         }
 
-        return [
-            'labels'    =>  $labels,
-            'datasets'  =>  $datasets,
-        ];
+        return $datasets;
     }
 
-    public static function serializeData($dateList, $data)
+    /**
+     * 按指定的格式生成从开始时间到结束时间的连续日期列表，如 ['2022-02-22', '2022-02-23', '...', '2022-02-30']
+     *
+     * @param $startDate
+     * @param $endDate
+     * @param string $format
+     * @return array
+     */
+    protected function makeDateList($startDate, $endDate, string $format = 'Y-m-d'): array
+    {
+        $labelDate = $startDate->clone();
+        $dateList = [];
+
+        do {
+            $dateList[] = $labelDate->format($format);
+        } while ($labelDate->addDay() <= $endDate);
+
+        return $dateList;
+    }
+
+    /**
+     * 为日期填充数据
+     *
+     * @param $dateList     ['2022-02-20', '2022-02-21', '2022-02-22']
+     * @param $data         ['2022-02-22' => 123]
+     * @return array        ['2022-02-20' => 0, '2022-02-21' => 0, '2022-02-22' => 123]
+     */
+    protected function fillDataForDate($dateList, $data): array
     {
         $result = [];
-        foreach ($dateList as $index => $date) {
+        foreach ($dateList as $date) {
             $result[$date] = $data[$date] ?? 0;
         }
 

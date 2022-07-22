@@ -52,10 +52,10 @@
         <div class="card-body">
           <div class="row align-items-center gx-0">
             <div class="col">
-              <h6 class="text-uppercase text-muted mb-2">评论</h6>
-              <span class="h2 mb-0">{{ $totalCommentNum }}</span>
+              <h6 class="text-uppercase text-muted mb-2">点赞</h6>
+              <span class="h2 mb-0">{{ $totalThumbUpNum }}</span>
             </div>
-            <div class="col-auto"><span class="h2 fe fe-message-square text-muted mb-0"></span></div>
+            <div class="col-auto"><span class="h2 fe fe-thumbs-up text-muted mb-0"></span></div>
           </div>
         </div>
       </div>
@@ -66,10 +66,10 @@
         <div class="card-body">
           <div class="row align-items-center gx-0">
             <div class="col">
-              <h6 class="text-uppercase text-muted mb-2">点赞</h6>
-              <span class="h2 mb-0">{{ $totalThumbUpNum }}</span>
+              <h6 class="text-uppercase text-muted mb-2">评论</h6>
+              <span class="h2 mb-0">{{ $totalCommentNum }}</span>
             </div>
-            <div class="col-auto"><span class="h2 fe fe-thumbs-up text-muted mb-0"></span></div>
+            <div class="col-auto"><span class="h2 fe fe-message-square text-muted mb-0"></span></div>
           </div>
         </div>
       </div>
@@ -80,14 +80,26 @@
     <div class="col-12">
       <div class="card">
         <div class="card-header">
-          <h4 class="card-header-title">用户趋势</h4>
+          <h4 class="card-header-title">主要数据趋势</h4>
           <ul class="nav nav-tabs nav-tabs-sm card-header-tabs">
-            <li class="nav-item"><a class="nav-link active" href="#" data-bs-toggle="tab">新增</a></li>
-            <li class="nav-item"><a class="nav-link disabled" href="#" data-bs-toggle="tab">活跃</a></li>
+            @foreach (\Illuminate\Support\Arr::pluck($mainChartConfigure['datasets'], 'label') as $labelName)
+              <li class="nav-item"><a class="nav-link active">{{ $labelName }}</a></li>
+            @endforeach
           </ul>
         </div>
         <div class="card-body">
-          <div class="chart"><canvas id="canvas-userChart" class="chart-canvas"></canvas></div>
+          <div class="chart"><canvas id="mainChartCanvas" class="chart-canvas"></canvas></div>
+
+          @section('pageScript')
+            <script>
+              document.addEventListener('DOMContentLoaded', function () {
+                new Chart(document.getElementById('mainChartCanvas'), {
+                  type: 'line',
+                  data: {!! json_encode($mainChartConfigure) !!},
+                });
+              });
+            </script>
+          @append
         </div>
       </div>
     </div>
@@ -95,53 +107,29 @@
     <div class="col-12">
       <div class="card">
         <div class="card-header">
-          <h4 class="card-header-title">内容增长趋势</h4>
+          <h4 class="card-header-title">点赞/评论趋势</h4>
           <ul class="nav nav-tabs nav-tabs-sm card-header-tabs">
-            <li class="nav-item"><a class="nav-link active">动态</a></li>
-            <li class="nav-item"><a class="nav-link active">文章</a></li>
+            @foreach (\Illuminate\Support\Arr::pluck($thumbAndCommentChartConfigure['datasets'], 'label') as $labelName)
+              <li class="nav-item"><a class="nav-link active">{{ $labelName }}</a></li>
+            @endforeach
           </ul>
         </div>
         <div class="card-body">
-          <div class="chart"><canvas id="canvas-contentChart" class="chart-canvas"></canvas></div>
-        </div>
-      </div>
-    </div>
+          <div class="chart"><canvas id="thumbAndCommentChartCanvas" class="chart-canvas"></canvas></div>
 
-    <div class="col-12">
-      <div class="card">
-        <div class="card-header">
-          <h4 class="card-header-title">评论/点赞增长趋势</h4>
-          <ul class="nav nav-tabs nav-tabs-sm card-header-tabs">
-            <li class="nav-item"><a class="nav-link active">评论</a></li>
-            <li class="nav-item"><a class="nav-link active">点赞</a></li>
-          </ul>
-        </div>
-        <div class="card-body">
-          <div class="chart"><canvas id="canvas-commonChart" class="chart-canvas"></canvas></div>
+          @section('pageScript')
+            <script>
+              document.addEventListener('DOMContentLoaded', function () {
+                new Chart(document.getElementById('thumbAndCommentChartCanvas'), {
+                  type: 'line',
+                  data: {!! json_encode($thumbAndCommentChartConfigure) !!},
+                });
+              });
+            </script>
+          @append
         </div>
       </div>
     </div>
   </div>
 </div>
-@endsection
-
-@section('pageScript')
-<script>
-  window.onload = function() {
-    new Chart(document.getElementById('canvas-userChart'), {
-      type: 'line',
-      data: {!! json_encode($userChartConfigure) !!},
-    });
-
-    new Chart(document.getElementById('canvas-contentChart'), {
-      type: 'line',
-      data: {!! json_encode($contentChartConfigure) !!},
-    });
-
-    new Chart(document.getElementById('canvas-commonChart'), {
-      type: 'line',
-      data: {!! json_encode($commonChartConfigure) !!},
-    });
-  }
-</script>
 @endsection

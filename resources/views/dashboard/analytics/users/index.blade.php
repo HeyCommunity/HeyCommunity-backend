@@ -22,14 +22,26 @@
     <div class="col-12">
       <div class="card">
         <div class="card-header">
-          <h4 class="card-header-title">用户趋势</h4>
+          <h4 class="card-header-title">用户增长和活跃趋势</h4>
           <ul class="nav nav-tabs nav-tabs-sm card-header-tabs">
-            <li class="nav-item"><a class="nav-link active" href="#" data-bs-toggle="tab">新增</a></li>
-            <li class="nav-item"><a class="nav-link disabled" href="#" data-bs-toggle="tab">活跃</a></li>
+            @foreach (\Illuminate\Support\Arr::pluck($userChartConfigure['datasets'], 'label') as $labelName)
+              <li class="nav-item"><a class="nav-link active">{{ $labelName }}</a></li>
+            @endforeach
           </ul>
         </div>
         <div class="card-body">
-          <div class="chart"><canvas id="userChart" class="chart-canvas"></canvas></div>
+          <div class="chart"><canvas id="chartCanvas" class="chart-canvas"></canvas></div>
+
+          @section('pageScript')
+            <script>
+              document.addEventListener('DOMContentLoaded', function () {
+                new Chart(document.getElementById('chartCanvas'), {
+                  type: 'line',
+                  data: {!! json_encode($userChartConfigure) !!},
+                });
+              });
+            </script>
+          @append
         </div>
       </div>
     </div>
@@ -62,16 +74,4 @@
     </div>
   </div>
 </div>
-@endsection
-
-@section('pageScript')
-<script>
-  window.onload = function() {
-    const userChartCanvas = document.getElementById('userChart');
-    new Chart(userChartCanvas, {
-      type: 'line',
-      data: {!! json_encode($chartData) !!},
-    });
-  }
-</script>
 @endsection
