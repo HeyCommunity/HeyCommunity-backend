@@ -21,6 +21,7 @@ class CreateVisitorLogsTable extends Migration
             $table->string('route_type', 30)->index()->nullable()->comment('路由类型');
             $table->string('route_name', 50)->index()->nullable()->comment('路由名称');
 
+            $table->smallInteger('response_status_code')->comment('返回状态码');
             $table->string('request_method', 10)->comment('请求方法');
             $table->string('request_path')->comment('请求路径');
             $table->string('request_uri')->comment('请求 URI');

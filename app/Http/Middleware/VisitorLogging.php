@@ -16,6 +16,17 @@ use Jenssegers\Agent\Agent;
 class VisitorLogging
 {
     /**
+     * 忽略的路径
+     *
+     * @var array|string[]
+     */
+    protected array $ignorePaths = [
+        'dashboard*',
+        '_debugbar*',
+        '__clockwork*', 'clockwork*',
+    ];
+
+    /**
      * Handle an incoming request.
      *
      * @param Request $request
@@ -31,17 +42,18 @@ class VisitorLogging
         $visitorAgentInfo = $this->getAgentInfo();              // 设备信息
 
         // dashboard not logging
-        if (! $request->is(['_debugbar*', 'dashboard*'])) {
+        if (! $request->is($this->ignorePaths)) {
             $logData = [
                 'route_type'        =>  $this->getRouteType($request),
                 'route_name'        =>  $request->route() ? $request->route()->getName() : null,
 
-                'request_method'    =>  $request->method(),
-                'request_path'      =>  Str::limit($request->path(), 255, null),
-                'request_uri'       =>  Str::limit($request->server('REQUEST_URI'), 255, null),
-                'request_url'       =>  Str::limit($request->fullUrl(), 255, null),
-                'request_domain'    =>  $request->getHttpHost(),
-                'referer_url'       =>  Str::limit($request->server('HTTP_REFERER'), 255, null),
+                'response_status_code'  =>  $response->status(),
+                'request_method'        =>  $request->method(),
+                'request_path'          =>  Str::limit($request->path(), 255, null),
+                'request_uri'           =>  Str::limit($request->server('REQUEST_URI'), 255, null),
+                'request_url'           =>  Str::limit($request->fullUrl(), 255, null),
+                'request_domain'        =>  $request->getHttpHost(),
+                'referer_url'           =>  Str::limit($request->server('HTTP_REFERER'), 255, null),
 
                 'visitor_ip'            =>  $request->ip(),
                 'visitor_ip_locale'     =>  $visitorIpInfo['city'] ?? 'UNKNOWN',
@@ -99,7 +111,6 @@ class VisitorLogging
      */
     protected function getIpInfo($ip): array
     {
-        $ip = '114.114.114.114';
         $ipInfo['ip'] = $ip;
 
         $geoLite2CityFilePath = base_path('vendor/MaxMind-GeoIP/GeoLite2-City.mmdb');
