@@ -1,9 +1,0 @@
-preset: laravel
-version: 8
-disabled:
-  - no_unused_imports
-  - concat_without_spaces
-finder:
-  not-name:
-    - index.php
-    - server.php
