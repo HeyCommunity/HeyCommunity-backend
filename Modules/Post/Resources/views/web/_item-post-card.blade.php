@@ -23,7 +23,7 @@
               <i class="fe fe-more-vertical"></i>
             </a>
             <div class="dropdown-menu dropdown-menu-end">
-              <a href="#!" class="dropdown-item text-muted">No Operations</a>
+              <a href="{{ route('web.posts.show', $post) }}" class="dropdown-item">查看详情</a>
             </div>
           </div>
         </div>
@@ -46,10 +46,16 @@
     <div class="mt-3">
       <div class="row">
         <div class="col">
-          <a href="#!" class="btn btn-sm btn-white">😬 1</a>
-          <a href="#!" class="btn btn-sm btn-white">👍 2</a>
-          <a href="#!" class="btn btn-sm btn-white">Add Reaction</a>
+          <a class="btn btn-sm btn-white">
+            <i class="fe fe-thumbs-up"></i> {{ $post->thumb_up_num ?: null }}
+          </a>
+          <a class="btn btn-sm btn-white">
+            <i class="fe fe-message-square"></i> {{ $post->comment_num ?: null }}
+          </a>
+          <a class="btn btn-sm btn-white">添加评论</a>
         </div>
+
+        {{--
         <div class="col-auto me-n3">
           <div class="avatar-group d-none d-sm-flex">
             <a href="profile-posts.html" class="avatar avatar-xs" data-bs-toggle="tooltip" title="Ab Hadley">
@@ -64,11 +70,15 @@
             <a href="profile-posts.html" class="avatar avatar-xs" data-bs-toggle="tooltip" title="Miyah Myles">
               <img src="/assets/dashkit/img/avatars/profiles/avatar-5.jpg" alt="..." class="avatar-img rounded-circle">
             </a>
+            <div class="avatar avatar-xs">
+              <div class="avatar-title rounded-circle">+7</div>
+            </div>
           </div>
         </div>
+        --}}
 
         <div class="col-auto">
-          <a href="#!" class="btn btn-sm btn-white">Share</a>
+          <a href="{{ route('web.posts.show', $post) }}" class="btn btn-sm btn-white">详情</a>
         </div>
       </div>
     </div>
