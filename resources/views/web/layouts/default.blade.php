@@ -3,8 +3,9 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>HEY社区</title>
-  <meta name="description" content="HeyCommunity Dashboard" />
+  <title>{{ config('app.name') }}</title>
+  <!-- TODO: Website description -->
+  <meta name="description" content="{{ config('app.name') }}" />
 
   <!-- Favicon -->
   <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" type="image/x-icon"/>
@@ -17,7 +18,7 @@
   <!-- NAVIGATION -->
   <nav class="navbar navbar-expand-lg navbar-light">
     <div class="container">
-      <button class="navbar-toggler me-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler me-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbar">
         <span class="navbar-toggler-icon"></span>
       </button>
 
@@ -33,13 +34,13 @@
       <div class="navbar-user">
         <div class="dropdown">
           <a href="#" class="dropdown-toggle" role="button" data-bs-toggle="dropdown">
-            <div class="avatar avatar-sm avatar-online">
-              <img src="{{ asset('images/logo.png') }}" class="avatar-img rounded-circle">
+            <div class="avatar avatar-sm avatar-offline">
+              <img src="{{ asset('images/users/default-avatar.jpg') }}" class="avatar-img rounded-circle">
             </div>
           </a>
 
           <!-- Menu -->
-          <div class="dropdown-menu dropdown-menu-end">
+          <div class="dropdown-menu dropdown-menu-end mt-2">
             <a href="#" class="disabled dropdown-item">注册</a>
             <a href="#" class="disabled dropdown-item">登录</a>
             <hr class="dropdown-divider">
@@ -56,19 +57,16 @@
         </form>
 
         <!-- Navigation -->
-        <a class="navbar-brand me-3" href="#">HEY社区</a>
+        <a class="navbar-brand me-3" href="{{ route('web.home') }}">{{ config('app.name') }}</a>
         <ul class="navbar-nav me-lg-auto">
-          <li class="nav-item"><a class="nav-link" href="{{ route('web.home') }}">动态</a></li>
+          <li class="nav-item"><a class="nav-link {{ routeActive('web.posts*') }}" href="{{ route('web.home') }}">动态</a></li>
         </ul>
       </div>
     </div>
   </nav>
 
   <!-- MAIN CONTENT -->
-  <div class="main-content">
-    <!-- MainBody -->
-    @yield('mainBody')
-  </div>
+  @yield('mainContent')
 
   <!-- Libs CSS -->
   <link rel="stylesheet" href="{{ asset('assets/dashkit/css/libs.bundle.css') }}" />

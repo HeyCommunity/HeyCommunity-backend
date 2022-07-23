@@ -16,4 +16,12 @@ class PostController extends Controller
 
         return view('post::web.index', compact('posts'));
     }
+
+    /**
+     * 详情页面
+     */
+    public function show(Post $post)
+    {
+        return view('post::web.show', compact('post'));
+    }
 }
