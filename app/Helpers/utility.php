@@ -1,6 +1,22 @@
 <?php
 
 /**
+ * 路径活跃状态
+ */
+function pathActive($patterns, $activeClassName = 'active', $unactiveClassName = '')
+{
+    return request()->is($patterns) ? $activeClassName : $unactiveClassName;
+}
+
+/**
+ * 路由活跃状态
+ */
+function routeActive($patterns, $activeClassName = 'active', $unactiveClassName = '')
+{
+    return request()->routeIs($patterns) ? $activeClassName : $unactiveClassName;
+}
+
+/**
  * Is Wechat Browser Request
  */
 function isWechatBrowserRequest()
