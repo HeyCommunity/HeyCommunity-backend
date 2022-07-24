@@ -19,7 +19,6 @@
         "laravel/telescope": "^4.4",
         "laravel/tinker": "^2.5",
         "nwidart/laravel-modules": "8.2.*",
-        "overtrue/laravel-lang": "~5.0",
         "overtrue/laravel-wechat": "^6.0",
         "predis/predis": "^2.0"
     },
@@ -32,7 +31,8 @@
         "laravel/sail": "^1.0.1",
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^5.10",
-        "phpunit/phpunit": "^9.5.10",
+        "overtrue/laravel-lang": "~5.0",
+        "phpunit/phpunit": "^9.5",
         "squizlabs/php_codesniffer": "^3.7",
         "supgeek-rod/faker-zh": "^0.1.0"
     },
@@ -71,6 +71,8 @@
     "extra": {
         "laravel": {
             "dont-discover": [
+                "barryvdh/laravel-debugbar",
+                "laravel/telescope"
             ]
         }
     },
