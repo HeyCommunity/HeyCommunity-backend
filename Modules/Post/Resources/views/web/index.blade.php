@@ -10,7 +10,12 @@
           @endforeach
 
           <div id="section-pagination">
-            {{ $posts->links() }}
+            <div class="d-none d-sm-block">
+              {{ $posts->links() }}
+            </div>
+            <div class="d-sm-none d-flex justify-content-center">
+              {{ $posts->links('pagination::simple-bootstrap-4') }}
+            </div>
           </div>
         </div>
 
