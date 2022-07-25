@@ -16,11 +16,12 @@
   <link rel="stylesheet" href="{{ asset('assets/dashkit/css/theme.bundle.css') }}" id="stylesheetLight" />
   <link rel="stylesheet" href="{{ asset('assets/dashkit/css/theme-dark.bundle.css') }}" id="stylesheetDark" />
 
-  <style>body { display: none; }</style>
+  <style></style>
   <style rel="stylesheet">
-    img {
-      display: inline-block;
-    }
+    body { display: none; }
+    img { display: inline-block; }
+    .main-content table a { color: #12263f; }
+    .main-content table a:hover { color: #12263f; text-decoration: underline; }
   </style>
 
   <!-- 设置页面布局 -->
