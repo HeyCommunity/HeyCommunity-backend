@@ -1,6 +1,7 @@
 @extends('dashboard.layouts.default')
 
-@section('mainBody')
+@section('mainContent')
+<div class="main-content">
   @include('dashboard.visitor-logs._header')
 
   <div class="container-fluid">
@@ -18,4 +19,5 @@
       </div>
     </div>
   </div>
+</div>
 @endsection

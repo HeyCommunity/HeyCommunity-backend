@@ -1,6 +1,7 @@
 @extends('dashboard.layouts.default')
 
-@section('mainBody')
+@section('mainContent')
+<div class="main-content">
   <div class="header bg-dark pb-5">
     <div class="container-fluid">
       <div class="header-body">
@@ -732,9 +733,8 @@
             </table>
           </div>
         </div>
-
       </div>
-    </div> <!-- / .row -->
+    </div>
   </div>
-
+</div>
 @endsection

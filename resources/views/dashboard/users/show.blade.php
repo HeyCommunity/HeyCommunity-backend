@@ -1,6 +1,7 @@
 @extends('dashboard.layouts.default')
 
-@section('mainBody')
+@section('mainContent')
+<div class="main-content">
   <div class="header">
     <div class="bg-cover header-img-top" style="background-image:url({{ asset($user->cover) }}); height:260px"></div>
 
@@ -95,4 +96,5 @@
       </div>
     </div>
   </div>
+</div>
 @endsection

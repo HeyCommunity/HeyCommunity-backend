@@ -7,10 +7,7 @@
   <meta name="description" content="HeyCommunity Dashboard" />
 
   <!-- Favicon -->
-  <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" type="image/x-icon"/>
-
-  <!-- Map CSS -->
-  <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.css" />
+  <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
 
   <!-- Libs CSS -->
   <link rel="stylesheet" href="{{ asset('assets/dashkit/css/libs.bundle.css') }}" />
@@ -102,17 +99,9 @@
   </nav>
 
   <!-- MAIN CONTENT -->
-  <div class="main-content">
-    <!-- MainContent Navbar -->
-    @include('dashboard.layouts._main-content-navbar')
-
-    <!-- MainBody -->
-    @yield('mainBody')
-  </div>
+  @yield('mainContent')
 
   <!-- JAVASCRIPT -->
-  <!-- Map JS -->
-  <script src='https://api.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.js'></script>
 
   <!-- Vendor JS -->
   <script src="{{ asset('assets/dashkit/js/vendor.bundle.js') }}" defer></script>
