@@ -16,7 +16,7 @@ class VisitorLogController extends Controller
     {
         $visitorLogs = VisitorLog::query()
             ->select([
-                'id', 'user_id',
+                'id', 'user_id', 'response_status_code',
                 'route_name', 'request_method', 'request_uri',
                 'visitor_ip_locale', 'visitor_ip', 'visitor_agent_device',
                 'created_at',
