@@ -56,7 +56,7 @@
                       @elseif ($thumb->entity_class === \App\Models\Common\Comment::class)
                         @if ($thumb->entity->entity_class === \Modules\Post\Entities\Post::class)
                           <a class="d-block" href="{{ route('dashboard.posts.show', $thumb->entity->entity_id) }}">{{ $thumb->entity->entity_name }}(ID:{{ $thumb->entity->entity_id }})</a>
-                          <a href="{{ route('dashboard.posts.show', $thumb->entity->entity_id) }}">{{ $thumb->entity_name }}(ID:{{ $thumb->entity_id }})</a>
+                          <a href="{{ route('dashboard.comments.show', $thumb->entity->id) }}">{{ $thumb->entity_name }}(ID:{{ $thumb->entity_id }})</a>
                         @else
                           <span>{{ $thumb->entity_name }}(ID:{{ $thumb->entity_id }})</span>
                         @endif

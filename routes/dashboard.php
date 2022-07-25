@@ -32,8 +32,9 @@ Route::prefix('dashboard')
     });
 
     // 评论
-    Route::middleware([])->group(function () {
-        Route::get('comments', 'CommentController@index')->name('dashboard.comments.index');
+    Route::prefix('comments')->group(function () {
+        Route::get('/', 'CommentController@index')->name('dashboard.comments.index');
+        Route::get('{comment}', 'CommentController@show')->name('dashboard.comments.show')->where('comment', '[0-9]+');
     });
 
     // 点赞

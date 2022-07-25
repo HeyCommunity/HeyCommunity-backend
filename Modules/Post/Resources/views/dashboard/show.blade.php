@@ -7,7 +7,7 @@
       <div class="header-body">
         <div class="row align-items-end">
           <div class="col">
-            <h6 class="header-pretitle">Posts Detail</h6>
+            <h6 class="header-pretitle">Post Detail</h6>
             <h1 class="header-title">动态详情</h1>
           </div>
           <div class="col-auto">

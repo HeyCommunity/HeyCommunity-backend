@@ -8,6 +8,9 @@ use Illuminate\Http\Request;
 
 class CommentController extends Controller
 {
+    /**
+     * 首页面
+     */
     public function index()
     {
         $comments = Comment::with([
@@ -29,5 +32,15 @@ class CommentController extends Controller
         ])->latest()->paginate();
 
         return view('dashboard.comments.index', compact('comments'));
+    }
+
+    /**
+     * 详情页面
+     */
+    public function show(Comment $comment)
+    {
+        $post = $comment->entity;
+
+        return view('dashboard.comments.show', compact('comment', 'post'));
     }
 }
