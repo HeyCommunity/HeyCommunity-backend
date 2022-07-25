@@ -31,12 +31,6 @@ Route::prefix('dashboard')
         Route::get('{user}', 'UserController@show')->name('dashboard.users.show')->where('user', '[0-9]+');
     });
 
-    // 动态
-    Route::prefix('posts')->group(function () {
-        Route::get('/', 'PostController@index')->name('dashboard.posts.index');
-        Route::get('{post}', 'PostController@show')->name('dashboard.posts.show');
-    });
-
     // 评论
     Route::middleware([])->group(function () {
         Route::get('comments', 'CommentController@index')->name('dashboard.comments.index');

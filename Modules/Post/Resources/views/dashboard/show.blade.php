@@ -21,7 +21,7 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-12 col-xl-8">
-        @include('dashboard.posts._item-post-card', ['post' => $post])
+        @include('post::dashboard._item-post-card', ['post' => $post])
       </div>
 
       <div class="col-12 col-xl-4">

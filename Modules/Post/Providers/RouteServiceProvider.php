@@ -36,6 +36,10 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapApiRoutes();
 
         $this->mapWebRoutes();
+
+        Route::middleware('web')
+            ->namespace($this->moduleNamespace . '\Dashboard')
+            ->group(module_path('Post', '/Routes/dashboard.php'));
     }
 
     /**
