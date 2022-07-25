@@ -26,11 +26,9 @@
         <div class="row align-items-center">
           <div class="col">
             <ul class="nav nav-tabs nav-overflow header-tabs">
-              <li class="nav-item"><a href="#" class="nav-link active">概览</a></li>
-              <li class="nav-item"><a href="#" class="nav-link">动态</a></li>
-              <li class="nav-item"><a href="#" class="nav-link">评论</a></li>
-              <li class="nav-item"><a href="#" class="nav-link">点赞</a></li>
-              </li>
+              <li class="nav-item"><a href="#" class="nav-link active">动态</a></li>
+              <li class="nav-item"><a href="#" class="nav-link disabled">评论</a></li>
+              <li class="nav-item"><a href="#" class="nav-link disabled">点赞</a></li>
             </ul>
           </div>
         </div>
@@ -42,7 +40,7 @@
     <div class="row">
       <div class="col-12 col-xl-8 order-2 order-md-1">
         @foreach ($user->posts as $post)
-          @include('dashboard.posts._item-post-card', ['post' => $post])
+          @include('post::dashboard._item-post-card', ['post' => $post])
         @endforeach
       </div>
 
