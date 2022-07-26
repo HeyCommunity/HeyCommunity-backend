@@ -18,23 +18,23 @@
         </li>
         --}}
         <li class="nav-item">
-          <a class="nav-link {{ request()->routeIs('dashboard.visitor-logs.index') ? 'active' : null }}" href="{{ route('dashboard.visitor-logs.index') }}">访客日志</a>
+          <a class="nav-link {{ request()->routeIs('dashboard.visitor-logs.*') ? 'active' : null }}" href="{{ route('dashboard.visitor-logs.index') }}">访客日志</a>
         </li>
       </ul>
     </div>
   </li>
 
   <li class="nav-item">
-    <a class="nav-link {{ request()->routeIs('dashboard.users.index') ? 'active' : null }}" href="{{ route('dashboard.users.index') }}"><i class="fe fe-users"></i> 用户管理</a>
+    <a class="nav-link {{ request()->routeIs('dashboard.users.*') ? 'active' : null }}" href="{{ route('dashboard.users.index') }}"><i class="fe fe-users"></i> 用户管理</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link {{ request()->routeIs('dashboard.posts.index') ? 'active' : null }}" href="{{ route('dashboard.posts.index') }}"><i class="fe fe-rss"></i> 动态管理</a>
+    <a class="nav-link {{ request()->routeIs('dashboard.posts.*') ? 'active' : null }}" href="{{ route('dashboard.posts.index') }}"><i class="fe fe-rss"></i> 动态管理</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link {{ request()->routeIs('dashboard.comments.index') ? 'active' : null }}" href="{{ route('dashboard.comments.index') }}"><i class="fe fe-message-square"></i> 评论管理</a>
+    <a class="nav-link {{ request()->routeIs('dashboard.comments.*') ? 'active' : null }}" href="{{ route('dashboard.comments.index') }}"><i class="fe fe-message-square"></i> 评论管理</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link {{ request()->routeIs('dashboard.thumbs.index') ? 'active' : null }}" href="{{ route('dashboard.thumbs.index') }}"><i class="fe fe-thumbs-up"></i> 点赞管理</a>
+    <a class="nav-link {{ request()->routeIs('dashboard.thumbs.*') ? 'active' : null }}" href="{{ route('dashboard.thumbs.index') }}"><i class="fe fe-thumbs-up"></i> 点赞管理</a>
   </li>
 </ul>
 
