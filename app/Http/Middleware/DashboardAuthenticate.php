@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardAuthenticate
 {
@@ -16,13 +17,12 @@ class DashboardAuthenticate
      */
     public function handle(Request $request, Closure $next)
     {
-        $authUser = 'heycommunity';
-        $authPassword = 'please-change-this-password';              // TODO: 请修改这个密码
+        if (Auth::guard('web')->check()
+            && in_array(Auth::guard('web')->id(), config('heycommunity.dashboard.admin_ids'))) {
 
-        if ($request->getUser() !== $authUser || $request->getPassword() !== $authPassword) {
-            return response('Unauthorized', 401, ['WWW-Authenticate' => 'Basic']);
+            return $next($request);
         }
 
-        return $next($request);
+        return abort(401, 'Unauthorized');
     }
 }
