@@ -72,7 +72,7 @@
                   </div>
                   <div class="col-auto">
                     <time class="small text-muted" datetime="{{ $user->last_active_at }}"
-                          data-bs-toggle="tooltip" title="{{ $user->last_active_at->diffForHumans() }}">{{ $user->last_active_at }}</time>
+                          data-bs-toggle="tooltip" title="{{ optional($user->last_active_at)->diffForHumans() }}">{{ $user->last_active_at ?? 'NULL' }}</time>
                   </div>
                 </div>
               </div>

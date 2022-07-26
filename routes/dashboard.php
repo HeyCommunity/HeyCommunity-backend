@@ -9,7 +9,9 @@ Route::prefix('dashboard')->group(function () {
 
     // 数据分析
     Route::prefix('analytics')->group(function () {
-        Route::get('/', 'Analytics\IndexController@index')->name('dashboard.analytics.index');
+        Route::get('/', function () {
+            return redirect()->route('dashboard.analytics.users');
+        })->name('dashboard.analytics.index');
         Route::get('users', 'Analytics\UserController@index')->name('dashboard.analytics.users');
         Route::get('visitor-logs', 'VisitorLogController@index')->name('dashboard.analytics.visitor-logs');
     });
