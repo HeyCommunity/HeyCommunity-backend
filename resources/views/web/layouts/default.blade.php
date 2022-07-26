@@ -53,7 +53,10 @@
                 <a href="{{ route('web.users.show', Auth::id()) }}">{{ Auth::user()->nickname }}</a>
               </span>
               <hr class="dropdown-divider">
-              <a href="{{ route('web.logout') }}" class="dropdown-item">登出</a>
+              <form method="POST" action="{{ route('web.logout-handler') }}">
+                {{ csrf_field() }}
+                <button type="submit" class="dropdown-item">登出</button>
+              </form>
             @else
               <a href="{{ route('web.login') }}" class="dropdown-item">登录</a>
             @endif

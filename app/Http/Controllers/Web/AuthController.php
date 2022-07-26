@@ -27,12 +27,21 @@ class AuthController extends Controller
         ]);
 
         if (Auth::attempt($request->only(['phone', 'password']), true)) {
-            // $request->session()->regenerate();       // 更新 session id
-            return redirect()->back();
+            return redirect()->intended('/');
         } else {
             return back()->withInput()->withErrors([
                 'phone' =>  '手机号码或密码不正确',
             ]);
         }
+    }
+
+    /**
+     * 登出处理
+     */
+    public function logoutHandler()
+    {
+        Auth::logout();
+
+        return redirect()->back();
     }
 }
