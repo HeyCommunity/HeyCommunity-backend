@@ -9,6 +9,10 @@ Route::namespace('App\\Http\\Controllers\\Web')->group(function () {
         return redirect()->route('web.posts.index');
     })->name('web.home');
 
+    Route::get('login', 'AuthController@login')->name('web.login');
+    Route::post('login', 'AuthController@loginHandler')->name('web.login-handler');
+    Route::get('logout', 'AuthController@logout')->name('web.logout');
+
     Route::get('debug', 'HomeController@debug')->name('web.home.debug');
 });
 
