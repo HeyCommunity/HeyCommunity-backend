@@ -4,11 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 //
 // 管理平台
-Route::prefix('dashboard')
-    ->middleware(\App\Http\Middleware\HttpBasicAuthenticate::class)
-    ->namespace('App\\Http\\Controllers\\Dashboard')
-    ->group(function () {
-
+Route::prefix('dashboard')->group(function () {
     Route::get('/', 'HomeController@index')->name('dashboard.index');
 
     // 数据分析

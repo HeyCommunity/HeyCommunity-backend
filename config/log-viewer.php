@@ -54,7 +54,7 @@ return [
             'prefix'     => 'dashboard/log-viewer',
 
             'middleware' => [
-                \App\Http\Middleware\HttpBasicAuthenticate::class,
+                \App\Http\Middleware\DashboardAuthenticate::class,
             ],
         ],
     ],

@@ -55,7 +55,6 @@ class TelescopeServiceProvider extends TelescopeApplicationServiceProvider
 
     /**
      * 在 config/telescope.php 文件中定义中间件以做权限校验
-     * \App\Http\Middleware\HttpBasicAuthenticate::class
      */
     protected function authorization()
     {
