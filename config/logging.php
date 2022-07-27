@@ -41,9 +41,15 @@ return [
             'ignore_exceptions' => false,
         ],
 
+        'heycommunity' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/heycommunity.log'),
+            'level' => 'debug',
+        ],
+
         'hc' => [
             'driver' => 'daily',
-            'path' => storage_path('logs/hc/hc.log'),
+            'path' => storage_path('logs/heycommunity/hc.log'),
             'level' => env('LOG_LEVEL', 'debug'),
             'days' => 14,
         ],
