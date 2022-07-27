@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\HeartBeat;
 use App\Http\Middleware\UserActiveRecord;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -23,6 +24,7 @@ class Kernel extends HttpKernel
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
 
+        \App\Http\Middleware\HeartBeat::class,
         \App\Http\Middleware\VisitorLogging::class,                 // 访客日志
     ];
 
