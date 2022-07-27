@@ -9,6 +9,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Laravel\Sanctum\HasApiTokens;
 use Modules\Post\Entities\Post;
@@ -149,5 +150,21 @@ class User extends Authenticatable
     public function getUnreadNoticeNumAttribute()
     {
         return Notice::where(['user_id' => $this->id, 'is_read' => false])->count();
+    }
+
+    /**
+     * 用户活跃天数
+     * TODO: 字段加到表中
+     */
+    public function getActiveDayNumAttribute()
+    {
+        return VisitorLog::query()
+            ->where('user_id', $this->id)
+            ->select([
+                DB::raw('DATE(created_at) as date'),
+                DB::raw('COUNT(*) as total_num'),
+            ])
+            ->groupBy('date')
+            ->get()->count();
     }
 }

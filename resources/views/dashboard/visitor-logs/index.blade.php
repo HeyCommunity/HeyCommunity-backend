@@ -1,6 +1,7 @@
 @extends('dashboard.layouts.default')
 
-@section('mainBody')
+@section('mainContent')
+<div class="main-content">
   @include('dashboard.visitor-logs._header')
 
   <div class="container-fluid">
@@ -37,13 +38,26 @@
                         </a>
                         <a class="text-black" href="{{ route('dashboard.users.show', $visitorLog->user) }}">{{ $visitorLog->user->nickname ?: 'NULL' }}</a>
                       @else
-                        <a class="avatar avatar-xs d-inline-block me-2">
+                        <span class="avatar avatar-xs d-inline-block me-2">
                           <img src="{{ asset('images/users/default-avatar.jpg') }}" class="avatar-img rounded-circle">
-                        </a>
+                        </span>
+                        <span class="text-black">匿名</span>
                       @endif
                     </td>
 
-                    <td><span data-bs-toggle="tooltip" title="{{ $visitorLog->route_name }}">{{ $visitorLog->request_method }}: {{ $visitorLog->request_uri }}</span></td>
+                    <td>
+                      <span data-bs-toggle="tooltip" title="{{ $visitorLog->route_name }}">
+                        @if (substr($visitorLog->response_status_code, 0, 1) == 3)
+                          <span class="text-warning fw-bold">{{ $visitorLog->response_status_code }}</span>
+                        @elseif (substr($visitorLog->response_status_code, 0, 1) == 4)
+                          <span class="text-danger fw-bold">{{ $visitorLog->response_status_code }}</span>
+                        @elseif (substr($visitorLog->response_status_code, 0, 1) == 2)
+                          <span class="text-success fw-bold">{{ $visitorLog->response_status_code }}</span>
+                        @endif
+                        {{ $visitorLog->request_method }}: {{ Str::limit($visitorLog->request_uri, 40) }}
+                      </span>
+                    </td>
+
                     <td>{{ $visitorLog->visitor_ip_locale }} /<i>{{ $visitorLog->visitor_ip }}</i></td>
 
                     <td>{{ $visitorLog->visitor_agent_device }}</td>
@@ -62,4 +76,5 @@
       </div>
     </div>
   </div>
+</div>
 @endsection

@@ -78,7 +78,7 @@ return [
     'middleware' => [
         'web',
         Authorize::class,
-        \App\Http\Middleware\HttpBasicAuthenticate::class,
+        \App\Http\Middleware\DashboardAuthenticate::class,
     ],
 
     /*

@@ -44,9 +44,4 @@ class HomeController extends Controller
             'thumbAndCommentLineChartConfigure',
         ));
     }
-
-    public function starTrack()
-    {
-        return view('dashboard.home.star-track');
-    }
 }

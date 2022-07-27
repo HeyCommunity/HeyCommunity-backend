@@ -1,6 +1,6 @@
 name: HeyCommunity Commit
 
-on: ['push']
+on: ['push', 'pull_request']
 
 jobs:
   laravel-tests:

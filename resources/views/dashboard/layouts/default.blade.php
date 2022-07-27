@@ -7,10 +7,7 @@
   <meta name="description" content="HeyCommunity Dashboard" />
 
   <!-- Favicon -->
-  <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" type="image/x-icon"/>
-
-  <!-- Map CSS -->
-  <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.css" />
+  <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
 
   <!-- Libs CSS -->
   <link rel="stylesheet" href="{{ asset('assets/dashkit/css/libs.bundle.css') }}" />
@@ -19,11 +16,12 @@
   <link rel="stylesheet" href="{{ asset('assets/dashkit/css/theme.bundle.css') }}" id="stylesheetLight" />
   <link rel="stylesheet" href="{{ asset('assets/dashkit/css/theme-dark.bundle.css') }}" id="stylesheetDark" />
 
-  <style>body { display: none; }</style>
+  <style></style>
   <style rel="stylesheet">
-    img {
-      display: inline-block;
-    }
+    body { display: none; }
+    img { display: inline-block; }
+    .main-content table a { color: #12263f; }
+    .main-content table a:hover { color: #12263f; text-decoration: underline; }
   </style>
 
   <!-- 设置页面布局 -->
@@ -57,11 +55,18 @@
           </a>
 
           <!-- Menu -->
-          <div class="dropdown-menu dropdown-menu-end">
-            <a href="#" class="disabled dropdown-item">Profile</a>
-            <a href="#" class="disabled dropdown-item">Settings</a>
-            <hr class="dropdown-divider">
-            <a href="#" class="disabled dropdown-item">Logout</a>
+          <div class="dropdown-menu dropdown-menu-end mt-2">
+            @section('AuthUserDropdownMenuItems')
+              <span class="dropdown-item">
+                  <small>{{ now()->meridiem() }}好,</small>
+                  <a target="_blank" href="{{ route('web.users.show', Auth::id()) }}">{{ Auth::user()->nickname }}</a>
+                </span>
+              <hr class="dropdown-divider">
+              <form method="POST" action="{{ route('web.logout-handler') }}">
+                {{ csrf_field() }}
+                <button type="submit" class="dropdown-item">登出</button>
+              </form>
+            @show
           </div>
         </div>
       </div>
@@ -81,15 +86,12 @@
           <div class="dropup">
             <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown">
               <div class="avatar avatar-sm avatar-online">
-                <img src="{{ asset('images/logo.png') }}" class="avatar-img rounded-circle">
+                <img src="{{ asset(Auth::user()->avatar) }}" class="avatar-img rounded-circle">
               </div>
             </a>
 
             <div class="dropdown-menu">
-              <a href="#" class="disabled dropdown-item">Profile</a>
-              <a href="#" class="disabled dropdown-item">Settings</a>
-              <hr class="dropdown-divider">
-              <a href="#" class="disabled dropdown-item">Logout</a>
+              @yield('AuthUserDropdownMenuItems')
             </div>
           </div>
 
@@ -102,23 +104,11 @@
   </nav>
 
   <!-- MAIN CONTENT -->
-  <div class="main-content">
-    <!-- MainContent Navbar -->
-    @include('dashboard.layouts._main-content-navbar')
-
-    <!-- MainBody -->
-    @yield('mainBody')
-  </div>
+  @yield('mainContent')
 
   <!-- JAVASCRIPT -->
-  <!-- Map JS -->
-  <script src='https://api.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.js'></script>
-
-  <!-- Vendor JS -->
-  <script src="{{ asset('assets/dashkit/js/vendor.bundle.js') }}" defer></script>
-
-  <!-- Theme JS -->
-  <script src="{{ asset('assets/dashkit/js/theme.bundle.js') }}" defer></script>
+  <script src="{{ asset('assets/dashkit/js/vendor.bundle.js') }}" defer></script>     <!-- Vendor JS -->
+  <script src="{{ asset('assets/dashkit/js/theme.bundle.js') }}" defer></script>      <!-- Theme JS -->
 
   <!-- Page Script -->
   @yield('pageScript')

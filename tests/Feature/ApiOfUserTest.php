@@ -6,7 +6,7 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
-class UserTest extends TestCase
+class ApiOfUserTest extends TestCase
 {
     use WithFaker;
 

@@ -1,6 +1,7 @@
 @extends('dashboard.layouts.default')
 
-@section('mainBody')
+@section('mainContent')
+<div class="main-content">
   <div class="header">
     <div class="container-fluid">
       <div class="header-body">
@@ -26,6 +27,7 @@
                   <th>昵称</th>
                   <th>动态</th>
                   <th>点赞/评论</th>
+                  <th>活跃天数</th>
                   @include('dashboard.layouts.utils._table-sort-th', ['name' => '最近活跃', 'orderBy' => 'last_active_at'])
                   @include('dashboard.layouts.utils._table-sort-th', ['name' => '注册时间', 'orderBy' => 'created_at'])
                   <th>操作</th>
@@ -37,14 +39,15 @@
                     <td>{{ $user->id }}</td>
                     <td>
                       @if ($user->avatar)
-                        <a href="#" class="avatar avatar-xs d-inline-block me-2">
+                        <a href="{{ route('dashboard.users.show', $user) }}" class="avatar avatar-xs d-inline-block me-2">
                           <img src="{{ asset($user->avatar) }}" alt="{{ $user->app_id }}" class="avatar-img rounded-circle">
                         </a>
                       @endif
-                      <span>{{ $user->nickname ?: 'NULL' }}</span>
+                      <a href="{{ route('dashboard.users.show', $user) }}">{{ $user->nickname ?: 'NULL' }}</a>
                     </td>
                     <td>{{ $user->post_num }}</td>
                     <td>{{ $user->thumb_up_num }} / {{ $user->comment_num }}</td>
+                    <td>{{ $user->active_day_num }}</td>
                     @if (empty($user->last_active_at))
                       <td>-</td>
                     @else
@@ -74,4 +77,5 @@
       </div>
     </div>
   </div>
+</div>
 @endsection

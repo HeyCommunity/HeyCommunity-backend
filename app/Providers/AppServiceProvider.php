@@ -31,7 +31,7 @@ class AppServiceProvider extends ServiceProvider
 
         // 中国手机号码验证器
         Validator::extend('phone', function ($attribute, $value, $parameters, $validator) {
-            return $validator->validateRegex($attribute, $value, ['/^((13[0-9])|(14[5,7])|(15[0-3,5-9])|(17[0,3,5-8])|(18[0-9])|166|198|199|(147))\d{8}$/']);
-        });
+            return $validator->validateRegex($attribute, $value, ['/^1[3456789]\d{9}$/']);
+        }, '手机号码格式不正确');
     }
 }

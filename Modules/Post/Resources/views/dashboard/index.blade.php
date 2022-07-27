@@ -1,6 +1,7 @@
 @extends('dashboard.layouts.default')
 
-@section('mainBody')
+@section('mainContent')
+<div class="main-content">
   <div class="header">
     <div class="container-fluid">
       <div class="header-body">
@@ -37,19 +38,32 @@
                   <tr>
                     <td>{{ $post->id }}</td>
                     <td>
-                      <a href="#" class="avatar avatar-xs d-inline-block me-2">
+                      <a href="{{ route('dashboard.users.show', $post->user) }}" class="avatar avatar-xs d-inline-block me-2">
                         <img src="{{ asset($post->user->avatar) }}" alt="{{ $post->user->nickname }}" class="avatar-img rounded-circle">
                       </a>
-                      <span>{{ $post->user->nickname ?: 'NULL' }}</span>
+                      <a href="{{ route('dashboard.users.show', $post->user) }}">{{ $post->user->nickname ?: 'NULL' }}</a>
                     </td>
-                    <td><span data-bs-toggle="tooltip" title="{{ $post->content }}">{{ \Illuminate\Support\Str::limit($post->content, 50) }}</span></td>
+
+                    <!-- 内容 -->
+                    <td>
+                      @if (Str::length($post->content) > 100)
+                        <span class="d-inline-block text-wrap" style="min-width:30em;">{{ Str::limit($post->content, 100 * 2) }}</span>
+                      @else
+                        <span>{{ $post->content }}</span>
+                      @endif
+                    </td>
+
                     <td>
                       @if ($post->video)
-                        <video src="{{ $post->video->file_path }}" style="margin:-10px 0; height:60px;"></video>
+                        <a target="_blank" href="{{ $post->video->file_path }}">
+                          <video src="{{ $post->video->file_path }}" style="margin:-10px 0; height:60px;"></video>
+                        </a>
                       @endif
                       @if ($post->images)
                         @foreach ($post->images as $image)
-                            <img src="{{ asset($image->file_path) }}" class="" style="height:40px; margin:-10px 0;">
+                          <a target="_blank" href="{{ $image->file_path }}">
+                            <img src="{{ asset($image->file_path) }}" style="height:40px; margin:-10px 0;">
+                          </a>
                         @endforeach
                       @endif
                     </td>
@@ -80,4 +94,5 @@
       </div>
     </div>
   </div>
+</div>
 @endsection

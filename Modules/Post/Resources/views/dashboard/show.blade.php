@@ -1,12 +1,13 @@
 @extends('dashboard.layouts.default')
 
-@section('mainBody')
+@section('mainContent')
+<div class="main-content">
   <div class="header">
     <div class="container-fluid">
       <div class="header-body">
         <div class="row align-items-end">
           <div class="col">
-            <h6 class="header-pretitle">Posts Detail</h6>
+            <h6 class="header-pretitle">Post Detail</h6>
             <h1 class="header-title">动态详情</h1>
           </div>
           <div class="col-auto">
@@ -20,7 +21,7 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-12 col-xl-8">
-        @include('dashboard.posts._item-post-card', ['post' => $post])
+        @include('post::dashboard._item-post-card', ['post' => $post])
       </div>
 
       <div class="col-12 col-xl-4">
@@ -84,4 +85,5 @@
       </div>
     </div>
   </div>
+</div>
 @endsection

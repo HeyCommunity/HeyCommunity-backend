@@ -46,29 +46,12 @@
     <div class="mt-3">
       <div class="row">
         <div class="col">
-          <a href="#!" class="btn btn-sm btn-white">😬 1</a>
-          <a href="#!" class="btn btn-sm btn-white">👍 2</a>
-          <a href="#!" class="btn btn-sm btn-white">Add Reaction</a>
-        </div>
-        <div class="col-auto me-n3">
-          <div class="avatar-group d-none d-sm-flex">
-            <a href="profile-posts.html" class="avatar avatar-xs" data-bs-toggle="tooltip" title="Ab Hadley">
-              <img src="/assets/dashkit/img/avatars/profiles/avatar-2.jpg" alt="..." class="avatar-img rounded-circle">
-            </a>
-            <a href="profile-posts.html" class="avatar avatar-xs" data-bs-toggle="tooltip" title="Adolfo Hess">
-              <img src="/assets/dashkit/img/avatars/profiles/avatar-3.jpg" alt="..." class="avatar-img rounded-circle">
-            </a>
-            <a href="profile-posts.html" class="avatar avatar-xs" data-bs-toggle="tooltip" title="Daniela Dewitt">
-              <img src="/assets/dashkit/img/avatars/profiles/avatar-4.jpg" alt="..." class="avatar-img rounded-circle">
-            </a>
-            <a href="profile-posts.html" class="avatar avatar-xs" data-bs-toggle="tooltip" title="Miyah Myles">
-              <img src="/assets/dashkit/img/avatars/profiles/avatar-5.jpg" alt="..." class="avatar-img rounded-circle">
-            </a>
-          </div>
-        </div>
-
-        <div class="col-auto">
-          <a href="#!" class="btn btn-sm btn-white">Share</a>
+          <a class="btn btn-sm btn-white">
+            <i class="fe fe-thumbs-up"></i> {{ $post->thumb_up_num ?: null }}
+          </a>
+          <a class="btn btn-sm btn-white">
+            <i class="fe fe-message-square"></i> {{ $post->comment_num ?: null }}
+          </a>
         </div>
       </div>
     </div>

@@ -4,16 +4,14 @@ use Illuminate\Support\Facades\Route;
 
 //
 // 管理平台
-Route::prefix('dashboard')
-    ->middleware(\App\Http\Middleware\HttpBasicAuthenticate::class)
-    ->namespace('App\\Http\\Controllers\\Dashboard')
-    ->group(function () {
-
+Route::prefix('dashboard')->group(function () {
     Route::get('/', 'HomeController@index')->name('dashboard.index');
 
     // 数据分析
     Route::prefix('analytics')->group(function () {
-        Route::get('/', 'Analytics\IndexController@index')->name('dashboard.analytics.index');
+        Route::get('/', function () {
+            return redirect()->route('dashboard.analytics.users');
+        })->name('dashboard.analytics.index');
         Route::get('users', 'Analytics\UserController@index')->name('dashboard.analytics.users');
         Route::get('visitor-logs', 'VisitorLogController@index')->name('dashboard.analytics.visitor-logs');
     });
@@ -31,15 +29,10 @@ Route::prefix('dashboard')
         Route::get('{user}', 'UserController@show')->name('dashboard.users.show')->where('user', '[0-9]+');
     });
 
-    // 动态
-    Route::prefix('posts')->group(function () {
-        Route::get('/', 'PostController@index')->name('dashboard.posts.index');
-        Route::get('{post}', 'PostController@show')->name('dashboard.posts.show');
-    });
-
     // 评论
-    Route::middleware([])->group(function () {
-        Route::get('comments', 'CommentController@index')->name('dashboard.comments.index');
+    Route::prefix('comments')->group(function () {
+        Route::get('/', 'CommentController@index')->name('dashboard.comments.index');
+        Route::get('{comment}', 'CommentController@show')->name('dashboard.comments.show')->where('comment', '[0-9]+');
     });
 
     // 点赞

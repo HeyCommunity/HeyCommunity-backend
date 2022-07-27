@@ -41,7 +41,7 @@
     <div class="row">
       <div class="col-12 col-xl-8 order-2 order-md-1">
         @foreach ($user->posts as $post)
-          @include('dashboard.posts._item-post-card', ['post' => $post])
+          @include('post::web._item-post-card', ['post' => $post])
         @endforeach
       </div>
 
@@ -73,7 +73,7 @@
                   </div>
                   <div class="col-auto">
                     <time class="small text-muted" datetime="{{ $user->last_active_at }}"
-                          data-bs-toggle="tooltip" title="{{ $user->last_active_at->diffForHumans() }}">{{ $user->last_active_at }}</time>
+                          data-bs-toggle="tooltip" title="{{ optional($user->last_active_at)->diffForHumans() }}">{{ $user->last_active_at ?? 'NULL' }}</time>
                   </div>
                 </div>
               </div>

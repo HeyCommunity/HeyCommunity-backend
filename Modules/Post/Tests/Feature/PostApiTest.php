@@ -1,15 +1,14 @@
 <?php
 
-namespace Tests\Feature;
+namespace Modules\Post\Tests\Feature;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\WithFaker;
 use Laravel\Sanctum\Sanctum;
 use Modules\Post\Entities\Post;
-use SupGeekRod\FakerZh\ZhCnDataProvider;
 use Tests\TestCase;
 
-class PostTest extends TestCase
+class PostApiTest extends TestCase
 {
     use WithFaker;
 

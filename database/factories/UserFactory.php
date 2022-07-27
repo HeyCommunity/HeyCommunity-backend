@@ -36,7 +36,7 @@ class UserFactory extends Factory
             'phone'         =>      $this->faker->phoneNumber(),
             'email'         =>      $this->faker->email(),
             'cover'         =>      $this->faker->imageUrl(1528, 675, true),
-            'password'      =>      Hash::make('HeyCommunity'),
+            'password'      =>      Hash::make('HeyCommunity' . Str::random()),
 
             'last_active_at'    =>      $this->faker->dateTimeThisMonth(),
             'created_at'        =>      $this->faker->dateTimeThisMonth(),

@@ -23,7 +23,7 @@
                     <h5 class="mb-0">发布人</h5>
                   </div>
                   <div class="col-auto">
-                    <a class="small" href="{{ route('dashboard.users.show', $post->user) }}">{{ $post->user->nickname }}</a>
+                    <a class="small" href="{{ route('web.users.show', $post->user) }}">{{ $post->user->nickname }}</a>
                   </div>
                 </div>
               </div>
