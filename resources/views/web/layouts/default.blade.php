@@ -53,6 +53,9 @@
                 <a href="{{ route('web.users.show', Auth::id()) }}">{{ Auth::user()->nickname }}</a>
               </span>
               <hr class="dropdown-divider">
+              @if (in_array(Auth::id(), config('heycommunity.dashboard.admin_ids')))
+                <a class="dropdown-item" href="{{ route('dashboard.index') }}">管理后台</a>
+              @endif
               <form method="POST" action="{{ route('web.logout-handler') }}">
                 {{ csrf_field() }}
                 <button type="submit" class="dropdown-item">登出</button>
