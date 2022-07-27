@@ -45,7 +45,7 @@ class HeartBeat
 
                 $client = new Client();
                 $promise = $client->getAsync($requestUri, [
-                    'timeout'       =>  '0.1',
+                    'timeout'       =>  '1',
                     'query'   =>  $data
                 ]);
 
