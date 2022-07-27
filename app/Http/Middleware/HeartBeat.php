@@ -23,7 +23,7 @@ class HeartBeat
             'app_env'       =>  config('app.env'),
             'app_name'      =>  config('app.name'),
             'app_url'       =>  config('app.url'),
-            'domain'        =>  $_SERVER['HTTP_HOST'],
+            'domain'        =>  $_SERVER['HTTP_HOST'] ?? NULL,
             'datetime'      =>  date('Y-m-d H:i:s'),
         ];
 

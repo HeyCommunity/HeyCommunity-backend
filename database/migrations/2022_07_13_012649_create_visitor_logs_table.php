@@ -34,7 +34,7 @@ class CreateVisitorLogsTable extends Migration
             $table->json('visitor_ip_info')->comment('访客 IP 信息');
 
             $table->string('visitor_agent_device', 20)->nullable()->comment('访客设备');
-            $table->enum('visitor_agent_device_type', ['desktop', 'tablet', 'phone'])->nullable()->comment('访客设备类型');
+            $table->string('visitor_agent_device_type')->nullable()->comment('访客设备类型');
             $table->json('visitor_agent_info')->nullable()->comment('访客设备信息');
 
             $table->json('request_data')->nullable()->comment('Laravel Request Object');
