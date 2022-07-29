@@ -33,8 +33,8 @@ class CreateVisitorLogsTable extends Migration
             $table->string('visitor_ip_locale', 20)->comment('访客 IP 归属城市或国家');
             $table->json('visitor_ip_info')->comment('访客 IP 信息');
 
-            $table->string('visitor_agent_device', 20)->nullable()->comment('访客设备');
-            $table->string('visitor_agent_device_type')->nullable()->comment('访客设备类型');
+            $table->string('visitor_agent_device', 30)->nullable()->comment('访客设备');
+            $table->string('visitor_agent_device_type', 20)->nullable()->comment('访客设备类型');
             $table->json('visitor_agent_info')->nullable()->comment('访客设备信息');
 
             $table->json('request_data')->nullable()->comment('Laravel Request Object');
