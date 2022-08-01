@@ -30,7 +30,7 @@ return [
      |    'pl', 'pt-BR', 'ro', 'ru', 'sv', 'th', 'tr', 'zh-TW', 'zh'
      */
 
-    'locale'        => 'zh',
+    'locale'        => 'auto',
 
     /* -----------------------------------------------------------------
      |  Theme
@@ -51,7 +51,7 @@ return [
         'enabled'    => true,
 
         'attributes' => [
-            'prefix'     => 'dashboard/log-viewer',
+            'prefix'     => 'dashboard/laravel-log-viewer',
 
             'middleware' => [
                 'web',

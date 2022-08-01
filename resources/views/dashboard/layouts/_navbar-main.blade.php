@@ -50,11 +50,6 @@
   </li>
 
   <li class="nav-item">
-    <a class="nav-link {{ request()->routeIs('dashboard.iframes.log-viewer') ? 'active' : '' }}"
-       href="{{ route('dashboard.iframes.log-viewer') }}"><i class="fe fe-alert-octagon"></i> LogViewer</a>
-  </li>
-
-  <li class="nav-item">
     <a class="nav-link" href="#sidebar-log-viewer" data-bs-toggle="collapse">
       <i class="fe fe-alert-octagon"></i> LogViewer
     </a>

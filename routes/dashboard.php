@@ -46,23 +46,12 @@ Route::prefix('dashboard')->group(function () {
             return view('dashboard.iframes.iframe', ['iframeUrl' => 'dashboard/telescope']);
         })->name('dashboard.iframes.telescope');
 
-        Route::get('iframes/log-viewer', function () {
-            return view('dashboard.iframes.iframe', ['iframeUrl' => 'dashboard/log-viewer']);
-        })->name('dashboard.iframes.log-viewer');
+        Route::get('iframes/laravel-log-viewer', function () {
+            return view('dashboard.iframes.iframe', ['iframeUrl' => 'dashboard/laravel-log-viewer']);
+        });
 
-        // LogViewer
-        Route::middleware([])->group(function () {
-            Route::get('iframes/laravel-log-viewer', function () {
-                return view('dashboard.iframes.iframe', ['iframeUrl' => url('dashboard/laravel-log-viewer')]);
-            });
-            Route::get('iframes/heycommunity-log-viewer', function () {
-                return view('dashboard.iframes.iframe', ['iframeUrl' => url('dashboard/heycommunity-log-viewer')]);
-            });
-
-            Route::namespace('LogViewer')->group(function () {
-                Route::get('laravel-log-viewer', 'LaravelLogController@index');
-                Route::get('heycommunity-log-viewer', 'HeyCommunityLogController@index');
-            });
+        Route::get('iframes/heycommunity-log-viewer', function () {
+            return view('dashboard.iframes.iframe', ['iframeUrl' => 'dashboard/heycommunity-log-viewer']);
         });
     });
 });
