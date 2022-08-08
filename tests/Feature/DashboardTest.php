@@ -142,8 +142,6 @@ class DashboardTest extends TestCase
     public function testDashboardOtherRoutes($user)
     {
         $this->get(route('dashboard.iframes.telescope'))->assertUnauthorized();
-        $this->get(route('log-viewer::dashboard'))->assertUnauthorized();
-        $this->get(route('dashboard.iframes.log-viewer'))->assertUnauthorized();
 
         if (config('telescope.enabled')) {
             $this->get('dashboard/telescope/requests')->assertUnauthorized();
@@ -154,8 +152,6 @@ class DashboardTest extends TestCase
         $this->loginAndSetAdmin($user);
 
         $this->get(route('dashboard.iframes.telescope'))->assertOk();
-        $this->get(route('log-viewer::dashboard'))->assertOk();
-        $this->get(route('dashboard.iframes.log-viewer'))->assertOk();
 
         if (config('telescope.enabled')) {
             $this->get('dashboard/telescope/requests')->assertOk();

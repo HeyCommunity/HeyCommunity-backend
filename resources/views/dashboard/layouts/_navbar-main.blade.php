@@ -48,10 +48,21 @@
     <a class="nav-link {{ request()->routeIs('dashboard.iframes.telescope') ? 'active' : '' }}"
        href="{{ route('dashboard.iframes.telescope') }}"><i class="fe fe-cast"></i> Telescope</a>
   </li>
+
   <li class="nav-item">
-    <a class="nav-link {{ request()->routeIs('dashboard.iframes.log-viewer') ? 'active' : '' }}"
-       href="{{ route('dashboard.iframes.log-viewer') }}"><i class="fe fe-alert-octagon"></i> LogViewer</a>
+    <a class="nav-link" href="#sidebar-log-viewer" data-bs-toggle="collapse">
+      <i class="fe fe-alert-octagon"></i> LogViewer
+    </a>
+    <div class="collapse {{ request()->is('*-log-viewer') ? 'show' : '' }}" id="sidebar-log-viewer">
+      <ul class="nav nav-sm flex-column">
+        <li class="nav-item">
+          <a class="nav-link {{ request()->is('*laravel-log-viewer') ? 'active' : null }}" href="{{ url('dashboard/iframes/laravel-log-viewer') }}">Laravel Logs</a>
+          <a class="nav-link {{ request()->is('*heycommunity-log-viewer') ? 'active' : null }}" href="{{ url('dashboard/iframes/heycommunity-log-viewer') }}">HeyCommunity Logs</a>
+        </li>
+      </ul>
+    </div>
   </li>
+
   <li class="nav-item">
     <a class="nav-link" target="_blank" href="{{ route('web.home') }}"><i class="fe fe-home"></i> {{ config('app.name') }}</a>
   </li>

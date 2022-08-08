@@ -46,8 +46,12 @@ Route::prefix('dashboard')->group(function () {
             return view('dashboard.iframes.iframe', ['iframeUrl' => 'dashboard/telescope']);
         })->name('dashboard.iframes.telescope');
 
-        Route::get('iframes/log-viewer', function () {
-            return view('dashboard.iframes.iframe', ['iframeUrl' => 'dashboard/log-viewer']);
-        })->name('dashboard.iframes.log-viewer');
+        Route::get('iframes/laravel-log-viewer', function () {
+            return view('dashboard.iframes.iframe', ['iframeUrl' => 'dashboard/laravel-log-viewer']);
+        });
+
+        Route::get('iframes/heycommunity-log-viewer', function () {
+            return view('dashboard.iframes.iframe', ['iframeUrl' => 'dashboard/heycommunity-log-viewer']);
+        });
     });
 });

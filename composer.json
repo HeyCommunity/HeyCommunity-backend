@@ -71,6 +71,7 @@
     "extra": {
         "laravel": {
             "dont-discover": [
+                "arcanedev/log-viewer",
                 "laravel/telescope"
             ]
         }
