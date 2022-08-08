@@ -19,15 +19,17 @@ class HeartBeat
      */
     public function handle(Request $request, Closure $next)
     {
-        $data = [
-            'app_env'       =>  config('app.env'),
-            'app_name'      =>  config('app.name'),
-            'app_url'       =>  config('app.url'),
-            'domain'        =>  $_SERVER['HTTP_HOST'] ?? NULL,
-            'datetime'      =>  date('Y-m-d H:i:s'),
-        ];
+        if (config('heycommunity.heartbeat.enabled')) {
+            $data = [
+                'app_env'       =>  config('app.env'),
+                'app_name'      =>  config('app.name'),
+                'app_url'       =>  config('app.url'),
+                'domain'        =>  $_SERVER['HTTP_HOST'] ?? NULL,
+                'datetime'      =>  date('Y-m-d H:i:s'),
+            ];
 
-        $this->httpRequest($data);
+            $this->httpRequest($data);
+        }
 
         return $next($request);
     }
@@ -46,7 +48,7 @@ class HeartBeat
                 $client = new Client();
                 $promise = $client->getAsync($requestUri, [
                     'timeout'       =>  '1',
-                    'query'   =>  $data
+                    'query'         =>  $data
                 ]);
 
                 $promise->wait();
