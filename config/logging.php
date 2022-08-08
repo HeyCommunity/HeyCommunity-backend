@@ -17,7 +17,7 @@ return [
     |
     */
 
-    'default' => env('LOG_CHANNEL', 'stack'),
+    'default' => env('LOG_CHANNEL', 'daily'),
 
     /*
     |--------------------------------------------------------------------------
@@ -41,12 +41,14 @@ return [
             'ignore_exceptions' => false,
         ],
 
+        // use `heycommunity` instead `hc`
         'heycommunity' => [
             'driver' => 'single',
             'path' => storage_path('logs/heycommunity.log'),
             'level' => 'debug',
         ],
 
+        // use `heycommunity` instead `hc`
         'hc' => [
             'driver' => 'daily',
             'path' => storage_path('logs/heycommunity/hc.log'),
