@@ -50,7 +50,7 @@
         <div class="dropdown">
           <a href="#" class="dropdown-toggle" role="button" data-bs-toggle="dropdown">
             <div class="avatar avatar-sm avatar-online">
-              <img src="{{ asset('images/logo.png') }}" class="avatar-img rounded-circle">
+              <img src="{{ asset('images/heycommunity/logo.png') }}" class="avatar-img rounded-circle">
             </div>
           </a>
 
