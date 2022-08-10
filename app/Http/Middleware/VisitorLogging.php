@@ -111,9 +111,7 @@ class VisitorLogging
      */
     protected function getIpInfo($ip): array
     {
-        $ipInfo['ip'] = $ip;
-
-        $geoLite2CityFilePath = base_path('vendor/MaxMind-GeoIP/GeoLite2-City.mmdb');
+        $geoLite2CityFilePath = storage_path('MaxMind-GeoIP/GeoLite2-City.mmdb');
 
         if (file_exists($geoLite2CityFilePath)) {
             $geoReader = new GeoIp2Render($geoLite2CityFilePath, ['zh-CN', 'en']);
@@ -130,6 +128,8 @@ class VisitorLogging
             } catch (Exception $exception) {
             }
         }
+
+        $ipInfo['ip'] = $ip;
 
         return $ipInfo;
     }
