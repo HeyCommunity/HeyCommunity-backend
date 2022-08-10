@@ -17,7 +17,7 @@ class UserSeeder extends Seeder
     public function run(Faker $faker)
     {
         User::create([
-            'avatar'        =>      'images/logo.png',
+            'avatar'        =>      'images/heycommunity/logo.png',
             'nickname'      =>      'Admin',
             'gender'        =>      1,
             'bio'           =>      'I\'m Admin',
