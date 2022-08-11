@@ -1,6 +1,6 @@
 <div class="card">
   <div class="card-header">
-    <h4 class="card-header-title">近 7 天评论增长</h4>
+    <h4 class="card-header-title">近 7 天新增评论</h4>
   </div>
   <div class="card-body p-0">
     <div class="table-responsive mb-0">
@@ -26,7 +26,7 @@
                 <a href="{{ route('dashboard.users.show', $comment->user) }}" class="avatar avatar-xs d-inline-block me-2">
                   <img src="{{ asset($comment->user->avatar) }}" alt="{{ $comment->user->app_id }}" class="avatar-img rounded-circle">
                 </a>
-                <a href="{{ route('dashboard.users.show', $comment->user) }}">{{ $comment->user->nickname ?: 'NULL' }}</a>
+                <a class="text-reset" href="{{ route('dashboard.users.show', $comment->user) }}">{{ $comment->user->nickname ?: 'NULL' }}</a>
               </td>
 
               <!-- 目标用户 -->
@@ -34,22 +34,22 @@
                 <a href="{{ route('dashboard.users.show', $comment->commentable->user) }}" class="avatar avatar-xs d-inline-block me-2">
                   <img src="{{ asset($comment->commentable->user->avatar) }}" alt="{{ $comment->commentable->user->app_id }}" class="avatar-img rounded-circle">
                 </a>
-                <a href="{{ route('dashboard.users.show', $comment->commentable->user) }}">{{ $comment->commentable->user->nickname ?: 'NULL' }}</span>
+                <a class="text-reset" href="{{ route('dashboard.users.show', $comment->commentable->user) }}">{{ $comment->commentable->user->nickname ?: 'NULL' }}</a>
               </td>
 
               <!-- 目标实体 -->
               <td>
                 @if ($comment->entity_class === \Modules\Post\Entities\Post::class)
-                  <a class="d-block" href="{{ route('dashboard.posts.show', $comment->entity_id) }}">{{ $comment->entity_name }}(ID:{{ $comment->entity_id }})</a>
+                  <a class="text-reset d-block" href="{{ route('dashboard.posts.show', $comment->entity_id) }}">{{ $comment->entity_name }}(ID:{{ $comment->entity_id }})</a>
                 @else
-                  <span class="d-block">{{ $comment->entity_name }}(ID:{{ $comment->entity_id }})</span>
+                  <span class="text-reset d-block">{{ $comment->entity_name }}(ID:{{ $comment->entity_id }})</span>
                 @endif
 
                 @if ($comment->parent)
                   @if ($comment->parent->entity_class === \Modules\Post\Entities\Post::class)
-                    <a class="d-block mt-1" href="{{ route('dashboard.comments.show', $comment->parent->id) }}">评论(ID:{{ $comment->parent->id }})</a>
+                    <a class="text-reset d-block mt-1" href="{{ route('dashboard.comments.show', $comment->parent->id) }}">评论(ID:{{ $comment->parent->id }})</a>
                   @else
-                    <a class="d-block mt-1" href="{{ route('dashboard.comments.show', $comment->parent->id) }}">评论(ID:{{ $comment->parent->id }})</a>
+                    <a class="text-reset d-block mt-1" href="{{ route('dashboard.comments.show', $comment->parent->id) }}">评论(ID:{{ $comment->parent->id }})</a>
                   @endif
                 @endif
               </td>
@@ -63,8 +63,8 @@
                 @endif
               </td>
 
-              <td>{{ $comment->thumb_up_num }} / {{ $comment->comment_num }}</td>
-              <td><span data-bs-toggle="tooltip" title="{{ $comment->created_at->diffForHumans() }}">{{ $comment->created_at }}</span></td>
+              <td><span class="badge bg-light">{{ $comment->thumb_up_num }} / {{ $comment->comment_num }}</span></td>
+              <td><span data-bs-toggle="tooltip" title="{{ $comment->created_at }}">{{ $comment->created_at->diffForHumans() }}</span></td>
               <td>
                 <a href="{{ route('dashboard.comments.show', $comment) }}" class="btn btn-sm btn-light d-inline-block">详情</a>
               </td>

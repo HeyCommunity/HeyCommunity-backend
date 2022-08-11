@@ -1,6 +1,6 @@
 <div class="card">
   <div class="card-header">
-    <h4 class="card-header-title">近 7 天动态增长</h4>
+    <h4 class="card-header-title">近 7 天新增动态</h4>
   </div>
   <div class="card-body p-0">
     <div class="table-responsive mb-0">
@@ -13,7 +13,6 @@
             <th>内容</th>
             <th>图片/视频</th>
             <th>点赞/评论</th>
-            <th>更新时间</th>
             <th>发布时间</th>
             <th>操作</th>
           </tr>
@@ -46,9 +45,10 @@
                   @endforeach
                 @endif
               </td>
-              <td>{{ $post->thumb_up_num }} / {{ $post->comment_num }}</td>
-              <td><span data-bs-toggle="tooltip" title="{{ $post->updated_at->diffForHumans() }}">{{ $post->updated_at }}</span></td>
-              <td><span data-bs-toggle="tooltip" title="{{ $post->created_at->diffForHumans() }}">{{ $post->created_at }}</span></td>
+
+              <td><span class="badge bg-light">{{ $post->thumb_up_num }} / {{ $post->comment_num }}</span></td>
+              <td><span data-bs-toggle="tooltip" title="{{ $post->created_at }}">{{ $post->created_at->diffForHumans() }}</span></td>
+
               <!-- 操作 -->
               <td>
                 <a href="{{ route('dashboard.posts.show', $post) }}" class="btn btn-sm btn-light d-inline-block">详情</a>

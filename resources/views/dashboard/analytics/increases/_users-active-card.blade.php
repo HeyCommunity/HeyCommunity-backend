@@ -1,6 +1,6 @@
 <div class="card">
   <div class="card-header">
-    <h4 class="card-header-title">近 7 天新增用户</h4>
+    <h4 class="card-header-title">近 7 天活跃用户</h4>
   </div>
   <div class="card-body p-0">
     <div class="table-responsive mb-0">

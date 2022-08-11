@@ -2,7 +2,7 @@
 
 @section('mainContent')
 <div class="main-content">
-  <div class="header">
+  <div class="header sticky-lg-top bg-light-soft">
     <div class="container-fluid">
       <div class="header-body">
         <div class="row align-items-end">
@@ -14,14 +14,14 @@
             <ul class="nav nav-tabs header-tabs">
               <li class="nav-item">
                 <a href="#userActiveCard" class="nav-link text-center active" data-bs-toggle="tab">
-                  <h6 class="header-pretitle text-secondary">+{{ $userActiveData->count() }}</h6>
+                  <h6 class="header-pretitle text-secondary">{{ $userActiveData->count() }}</h6>
                   <h3 class="mb-0">活跃用户</h3>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="#userIncreaseCard" class="nav-link text-center" data-bs-toggle="tab">
                   <h6 class="header-pretitle text-secondary">+{{ $userIncreaseData->count() }}</h6>
-                  <h3 class="mb-0">新用户</h3>
+                  <h3 class="mb-0">用户</h3>
                 </a>
               </li>
               <li class="nav-item">
@@ -55,7 +55,7 @@
       <div class="col-12">
         <div class="tab-content">
           <div id="userActiveCard" class="tab-pane fade active show">
-            @include('dashboard.analytics.increases._users-card', ['users' => $userActiveData])
+            @include('dashboard.analytics.increases._users-active-card', ['users' => $userActiveData])
           </div>
           <div id="userIncreaseCard" class="tab-pane fade">
             @include('dashboard.analytics.increases._users-card', ['users' => $userIncreaseData])
