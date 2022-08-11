@@ -8,7 +8,7 @@
         <div class="row align-items-end">
           <div class="col">
             <h6 class="header-pretitle">Increases</h6>
-            <h1 class="header-title">数据增长</h1>
+            <h1 class="header-title">数据增长明细 <sup><span class="badge bg-light">近 7 天</span></sup></h1>
           </div>
           <div class="col-auto">
             <ul class="nav nav-tabs header-tabs">
