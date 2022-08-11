@@ -20,8 +20,6 @@
   <style rel="stylesheet">
     body { display: none; }
     img { display: inline-block; }
-    .main-content table a { color: #12263f; }
-    .main-content table a:hover { color: #12263f; text-decoration: underline; }
   </style>
 
   <!-- 设置页面布局 -->

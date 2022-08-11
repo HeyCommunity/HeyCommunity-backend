@@ -12,6 +12,9 @@ Route::prefix('dashboard')->group(function () {
         Route::get('/', function () {
             return redirect()->route('dashboard.analytics.users');
         })->name('dashboard.analytics.index');
+
+        Route::get('increases', 'Analytics\IncreaseController@index')->name('dashboard.analytics.increases');
+
         Route::get('users', 'Analytics\UserController@index')->name('dashboard.analytics.users');
         Route::get('visitor-logs', 'VisitorLogController@index')->name('dashboard.analytics.visitor-logs');
     });
