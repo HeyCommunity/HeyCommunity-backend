@@ -14,6 +14,11 @@ class HomeController extends Controller
 {
     public function index()
     {
+        return view('dashboard.home.charts');
+    }
+
+    public function index2()
+    {
         $totalUserNum = User::count();
         $totalPostNum = Post::count();
         $totalCommentNum = Comment::count();
