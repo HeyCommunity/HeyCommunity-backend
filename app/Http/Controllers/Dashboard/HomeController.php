@@ -8,6 +8,7 @@ use App\Models\Common\Comment;
 use App\Models\Common\Thumb;
 use App\Models\User;
 use App\Models\VisitorLog;
+use Illuminate\Support\Facades\DB;
 use Modules\Post\Entities\Post;
 
 class HomeController extends Controller
@@ -17,6 +18,7 @@ class HomeController extends Controller
         return view('dashboard.home.index', [
             'modelTrendData'            =>  $this->getModelTrendData(),
             'mainChartConfigure'        =>  $this->getMainChartConfigure(),
+            'userWeekActiveConfigure'   =>  $this->getUserWeekActiveChartConfigure(),
             'visitorLogChartConfigure'  =>  $this->getVisitorLogChartConfigure(),
         ]);
     }
@@ -63,6 +65,77 @@ class HomeController extends Controller
             ['name' => '点赞数', 'class' => Thumb::class, 'color' => '#6e84a3', 'hidden' => true],
             ['name' => '评论数', 'class' => Comment::class, 'color' => '#39afd1', 'hidden' => true],
         ]);
+    }
+
+    protected function getUserWeekActiveChartConfigure()
+    {
+        $labelList = [
+            [
+                'name'          =>  '本周',
+                'start_date'    =>  now()->startOfWeek()->format('Y-m-d'),
+                'end_date'      =>  now()->endOfWeek()->format('Y-m-d'),
+            ],
+        ];
+
+        foreach (range(1, 11) as $item) {
+            array_unshift($labelList, [
+                'name'          =>  '前' . $item . '周',
+                'start_date'    =>  now()->subWeeks($item)->startOfWeek()->format('Y-m-d'),
+                'end_date'      =>  now()->subWeeks($item)->endOfWeek()->format('Y-m-d'),
+            ]);
+        }
+
+        $labels = collect($labelList)->pluck('name')->toArray();
+
+        $visitorLogs = VisitorLog::query()
+            ->select([
+                'user_id',
+                DB::raw('DATE(created_at) as date'),
+                DB::raw('COUNT(*) as count'),
+            ])
+            ->groupBy('user_id', 'date')
+            ->with('user', function ($query) {
+                $query->select(['id', 'created_at']);
+            })
+            ->whereNotNull('user_id')
+            ->whereDate('created_at', '>=', $labelList[0]['start_date'])
+            ->get();
+
+        $getDatasetDataFn = function ($onlyNewUser = false) use ($labelList, $visitorLogs) {
+            foreach ($labelList as $label) {
+                $query = $visitorLogs
+                    ->where('date', '>=', $label['start_date'])
+                    ->where('date', '<=', $label['end_date']);
+
+                if ($onlyNewUser) {
+                    $query = $query->where('user.created_at', '>=', $label['start_date'])
+                        ->where('user.created_at', '<=', $label['end_date']);
+                }
+
+                $data[$label['name']] = $query->count();
+            }
+
+            return $data;
+        };
+
+        return [
+            'type'  =>  'bar',
+            'data'  =>  [
+                'labels'    =>  $labels,
+                'datasets'  =>  [
+                    [
+                        'label'             =>  '全部',
+                        'data'              =>  $getDatasetDataFn(),
+                    ],
+                    [
+                        'label'             =>  '新用户',
+                        'data'              =>  $getDatasetDataFn(true),
+                        'backgroundColor'   =>  '#d2ddec',
+                        'hidden'            =>  'true'
+                    ],
+                ],
+            ],
+        ];
     }
 
     protected function getVisitorLogChartConfigure()

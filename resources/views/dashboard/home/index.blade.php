@@ -88,13 +88,30 @@
             <h4 class="card-header-title">周活用户</h4>
             <span class="text-muted me-3">新用户:</span>
             <div class="form-check form-switch">
-              <input class="form-check-input" type="checkbox" id="cardToggle" data-toggle="chart" data-target="#ordersChart" data-trigger="change" data-action="add" data-dataset="1" />
-              <label class="form-check-label" for="cardToggle"></label>
+              <input class="form-check-input" type="checkbox" onchange="toggleChartDatasets('#userWeekActiveChart', [1])">
             </div>
           </div>
           <div class="card-body">
             <div class="chart">
-              <canvas id="ordersChart" class="chart-canvas"></canvas>
+              <canvas id="userWeekActiveChart" class="chart-canvas"></canvas>
+
+              @section('pageScript')
+                <script>
+                  document.addEventListener('DOMContentLoaded', function () {
+                    new Chart(document.getElementById('userWeekActiveChart'), {!! json_encode($userWeekActiveConfigure) !!});
+                  });
+
+                  function toggleChartDatasets(selector, datasets) {
+                    let thisChart = Chart.getChart(document.getElementById(selector.substring(1)));
+
+                    datasets.forEach(function(datasetIndex) {
+                      thisChart.data.datasets[datasetIndex].hidden = ! thisChart.data.datasets[datasetIndex].hidden;
+                    });
+
+                    thisChart.update();
+                  }
+                </script>
+              @append
             </div>
           </div>
         </div>
