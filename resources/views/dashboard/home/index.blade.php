@@ -13,7 +13,7 @@
           </div>
           <div class="col-auto">
             <ul class="nav nav-tabs header-tabs">
-              <li class="nav-item" onclick="showMainChartDatasets([0, 1])">
+              <li class="nav-item" onclick="onlyShowChartDataset('#mainChart', [0, 1])">
                 <a href="#" class="nav-link text-center active" data-bs-toggle="tab">
                   <h6 class="header-pretitle text-secondary">
                     +{{ collect($mainChartConfigure['data']['datasets'][0]['data'])->sum() }}
@@ -22,7 +22,7 @@
                   <h3 class="text-white mb-0">用户趋势</h3>
                 </a>
               </li>
-              <li class="nav-item" onclick="showMainChartDatasets([2])">
+              <li class="nav-item" onclick="onlyShowChartDataset('#mainChart', [2])">
                 <a href="#" class="nav-link text-center" data-bs-toggle="tab">
                   @if (($visitorLogNum = collect($mainChartConfigure['data']['datasets'][2]['data'])->sum()) < 1000)
                     <h6 class="header-pretitle text-secondary">{{ $visitorLogNum }}</h6>
@@ -32,13 +32,13 @@
                   <h3 class="text-white mb-0">请求数</h3>
                 </a>
               </li>
-              <li class="nav-item" onclick="showMainChartDatasets([3])">
+              <li class="nav-item" onclick="onlyShowChartDataset('#mainChart', [3])">
                 <a href="#" class="nav-link text-center" data-bs-toggle="tab">
                   <h6 class="header-pretitle text-secondary">{{ collect($mainChartConfigure['data']['datasets'][3]['data'])->sum() }}</h6>
                   <h3 class="text-white mb-0">动态</h3>
                 </a>
               </li>
-              <li class="nav-item" onclick="showMainChartDatasets([4, 5])">
+              <li class="nav-item" onclick="onlyShowChartDataset('#mainChart', [4, 5])">
                 <a href="#" class="nav-link text-center" data-bs-toggle="tab">
                   <h6 class="header-pretitle text-secondary">
                     {{ collect($mainChartConfigure['data']['datasets'][4]['data'])->sum() }}
@@ -55,26 +55,6 @@
       <div class="header-footer">
         <div class="chart">
           <canvas id="mainChart" class="chart-canvas"></canvas>
-
-          @section('pageScript')
-            <script>
-              document.addEventListener('DOMContentLoaded', function () {
-                new Chart(document.getElementById('mainChart'), {!! json_encode($mainChartConfigure) !!});
-              });
-
-              function showMainChartDatasets(datasets) {
-                let mainChart = Chart.getChart(document.getElementById('mainChart'));
-
-                mainChart.data.datasets.forEach(function(dataset, index) {
-                  dataset.hidden = true;
-
-                  if (datasets.includes(index)) dataset.hidden = false;
-                });
-
-                mainChart.update();
-              }
-            </script>
-          @append
         </div>
       </div>
     </div>
@@ -88,30 +68,12 @@
             <h4 class="card-header-title">周活用户</h4>
             <span class="text-muted me-3">新用户:</span>
             <div class="form-check form-switch">
-              <input class="form-check-input" type="checkbox" onchange="toggleChartDatasets('#userWeekActiveChart', [1])">
+              <input class="form-check-input" type="checkbox" onchange="toggleChartDataset('#userWeekActiveChart', [1])">
             </div>
           </div>
           <div class="card-body">
             <div class="chart">
               <canvas id="userWeekActiveChart" class="chart-canvas"></canvas>
-
-              @section('pageScript')
-                <script>
-                  document.addEventListener('DOMContentLoaded', function () {
-                    new Chart(document.getElementById('userWeekActiveChart'), {!! json_encode($userWeekActiveConfigure) !!});
-                  });
-
-                  function toggleChartDatasets(selector, datasets) {
-                    let thisChart = Chart.getChart(document.getElementById(selector.substring(1)));
-
-                    datasets.forEach(function(datasetIndex) {
-                      thisChart.data.datasets[datasetIndex].hidden = ! thisChart.data.datasets[datasetIndex].hidden;
-                    });
-
-                    thisChart.update();
-                  }
-                </script>
-              @append
             </div>
           </div>
         </div>
@@ -122,10 +84,10 @@
           <div class="card-header">
             <h4 class="card-header-title">访客请求 <small class="text-muted ms-1">近 1 个月</small></h4>
             <ul class="nav nav-tabs nav-tabs-sm card-header-tabs">
-              <li class="nav-item" onclick="showChartDatasets('#visitorLogChart', [0])">
+              <li class="nav-item" onclick="onlyShowChartDataset('#visitorLogChart', [0])">
                 <a href="#" class="nav-link active" data-bs-toggle="tab">全部</a>
               </li>
-              <li class="nav-item" onclick="showChartDatasets('#visitorLogChart', [1])">
+              <li class="nav-item" onclick="onlyShowChartDataset('#visitorLogChart', [1])">
                 <a href="#" class="nav-link" data-bs-toggle="tab">仅用户</a>
               </li>
             </ul>
@@ -136,26 +98,6 @@
               <canvas id="visitorLogChart" class="chart-canvas" data-toggle="legend" data-target="#visitorLogChartLegend"></canvas>
             </div>
             <div id="visitorLogChartLegend" class="chart-legend"></div>
-
-            @section('pageScript')
-              <script>
-                document.addEventListener('DOMContentLoaded', function () {
-                  new Chart(document.getElementById('visitorLogChart'), {!! json_encode($visitorLogChartConfigure) !!});
-                });
-
-                function showChartDatasets(selector, datasets) {
-                  let thisChart = Chart.getChart(document.getElementById(selector.substring(1)));
-
-                  thisChart.data.datasets.forEach(function(dataset, index) {
-                    dataset.hidden = true;
-
-                    if (datasets.includes(index)) dataset.hidden = false;
-                  });
-
-                  thisChart.update();
-                }
-              </script>
-            @append
           </div>
         </div>
       </div>
@@ -244,4 +186,36 @@
     </div>
   </div>
 </div>
+
+  @section('pageScript')
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        new Chart(document.getElementById('mainChart'), {!! json_encode($mainChartConfigure) !!});
+        new Chart(document.getElementById('userWeekActiveChart'), {!! json_encode($userWeekActiveConfigure) !!});
+        new Chart(document.getElementById('visitorLogChart'), {!! json_encode($visitorLogChartConfigure) !!});
+      });
+
+      function toggleChartDataset(selector, datasets) {
+        let theChart = Chart.getChart(document.getElementById(selector.substring(1)));
+
+        datasets.forEach(function(datasetIndex) {
+          theChart.data.datasets[datasetIndex].hidden = ! theChart.data.datasets[datasetIndex].hidden;
+        });
+
+        theChart.update();
+      }
+
+      function onlyShowChartDataset(selector, datasets) {
+        let thisChart = Chart.getChart(document.getElementById(selector.substring(1)));
+
+        thisChart.data.datasets.forEach(function(dataset, index) {
+          dataset.hidden = true;
+
+          if (datasets.includes(index)) dataset.hidden = false;
+        });
+
+        thisChart.update();
+      }
+    </script>
+  @append
 @endsection
