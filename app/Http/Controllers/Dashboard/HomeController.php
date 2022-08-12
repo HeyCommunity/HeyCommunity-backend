@@ -31,7 +31,7 @@ class HomeController extends Controller
             ['name' => '评论数', 'class' => Comment::class, 'color' => '#39afd1', 'hidden' => true],
         ]);
 
-        return view('dashboard.home.charts', compact(
+        return view('dashboard.home.index', compact(
             'totalUserNum',
             'totalPostNum',
             'totalCommentNum',
