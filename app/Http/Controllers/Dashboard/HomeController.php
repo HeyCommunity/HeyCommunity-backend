@@ -70,12 +70,12 @@ class HomeController extends Controller
         $startDate = now()->subMonth()->subDay();
 
         $visitorLogTotal = VisitorLog::whereDate('created_at', '>=', $startDate)->count();
-        $wxappVisitorLogTotal = VisitorLog::whereDate('created_at', '>=', $startDate)->where('request_path', 'like', '/api/%')->count();
+        $wxappVisitorLogTotal = VisitorLog::whereDate('created_at', '>=', $startDate)->where('request_path', 'like', 'api/%')->count();
         $webVisitorLogTotal = VisitorLog::whereDate('created_at', '>=', $startDate)->where('route_name', 'like', 'web.%')->count();
         $otherVisitorLogTotal = $visitorLogTotal - $wxappVisitorLogTotal - $webVisitorLogTotal;
 
         $userVisitorLogTotal = VisitorLog::whereNotNull('user_id')->whereDate('created_at', '>=', $startDate)->count();
-        $userWxappVisitorLogTotal = VisitorLog::whereNotNull('user_id')->whereDate('created_at', '>=', $startDate)->where('request_path', 'like', '/api/%')->count();
+        $userWxappVisitorLogTotal = VisitorLog::whereNotNull('user_id')->whereDate('created_at', '>=', $startDate)->where('request_path', 'like', 'api/%')->count();
         $userWebVisitorLogTotal = VisitorLog::whereNotNull('user_id')->whereDate('created_at', '>=', $startDate)->where('route_name', 'like', 'web.%')->count();
         $userOtherVisitorLogTotal = $userVisitorLogTotal - $userWxappVisitorLogTotal - $userWebVisitorLogTotal;
 
