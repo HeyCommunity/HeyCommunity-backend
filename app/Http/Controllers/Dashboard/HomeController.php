@@ -58,8 +58,8 @@ class HomeController extends Controller
         $endDate = now();
 
         return AnalyticsBase::makeLineChartConfigure($startDate, $endDate, [
-            ['name' => '用户增长', 'class' => User::class, 'color' => '#2c7be5'],
             ['name' => '用户活跃', 'class' => VisitorLog::class, 'color' => '#2a9d8f', 'count_column' => 'DISTINCT user_id'],
+            ['name' => '用户增长', 'class' => User::class, 'color' => '#2c7be5'],
             ['name' => '访客请求', 'class' => VisitorLog::class, 'hidden' => true],
             ['name' => '动态增长', 'class' => Post::class, 'color' => '#ffb703', 'hidden' => true],
             ['name' => '点赞数', 'class' => Thumb::class, 'color' => '#6e84a3', 'hidden' => true],
