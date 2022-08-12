@@ -13,75 +13,76 @@
           </div>
           <div class="col-auto">
             <ul class="nav nav-tabs header-tabs">
-              <li class="nav-item" data-toggle="chart" data-target="#audienceChart" data-trigger="click" data-action="toggle" data-dataset="0">
-                <a href="#" class="nav-link text-center active" data-bs-toggle="tab">
-                  <h6 class="header-pretitle text-secondary">用户趋势</h6>
-                  <h3 class="text-white mb-0">+11 / 31</h3>
+              <li class="nav-item">
+                <a href="{{ route('dashboard.analytics.increases') }}" class="nav-link text-center">
+                  <h6 class="header-pretitle text-secondary">&nbsp;</h6>
+                  <h3 class="text-white mb-0">数据增长明细</h3>
                 </a>
               </li>
-              <li class="nav-item" data-toggle="chart" data-target="#audienceChart" data-trigger="click" data-action="toggle" data-dataset="0">
+
+              <li class="nav-item" onclick="showMainLineChartDatasets([0, 1])">
                 <a href="#" class="nav-link text-center active" data-bs-toggle="tab">
-                  <h6 class="header-pretitle text-secondary">访客请求</h6>
-                  <h3 class="text-white mb-0">1111</h3>
+                  <h6 class="header-pretitle text-secondary">
+                    +{{ collect($mainLineChartConfigure['data']['datasets'][0]['data'])->sum() }}
+                    / {{ collect($mainLineChartConfigure['data']['datasets'][1]['data'])->sum() }}
+                  </h6>
+                  <h3 class="text-white mb-0">用户趋势</h3>
                 </a>
               </li>
-              <li class="nav-item" data-toggle="chart" data-target="#audienceChart" data-trigger="click" data-action="toggle" data-dataset="0">
-                <a href="#" class="nav-link text-center active" data-bs-toggle="tab">
-                  <h6 class="header-pretitle text-secondary">动态</h6>
-                  <h3 class="text-white mb-0">1111</h3>
+              <li class="nav-item" onclick="showMainLineChartDatasets([2])">
+                <a href="#" class="nav-link text-center" data-bs-toggle="tab">
+                  @if (($visitorLogNum = collect($mainLineChartConfigure['data']['datasets'][2]['data'])->sum()) < 1000)
+                    <h6 class="header-pretitle text-secondary">{{ $visitorLogNum }}</h6>
+                  @else
+                    <h6 class="header-pretitle text-secondary">{{ round($visitorLogNum / 1000, 1) }}k</h6>
+                  @endif
+                  <h3 class="text-white mb-0">请求数</h3>
                 </a>
               </li>
-              <li class="nav-item" data-toggle="chart" data-target="#audienceChart" data-trigger="click" data-action="toggle" data-dataset="0">
-                <a href="#" class="nav-link text-center active" data-bs-toggle="tab">
-                  <h6 class="header-pretitle text-secondary">点赞/评论</h6>
-                  <h3 class="text-white mb-0">1111</h3>
+              <li class="nav-item" onclick="showMainLineChartDatasets([3])">
+                <a href="#" class="nav-link text-center" data-bs-toggle="tab">
+                  <h6 class="header-pretitle text-secondary">{{ collect($mainLineChartConfigure['data']['datasets'][3]['data'])->sum() }}</h6>
+                  <h3 class="text-white mb-0">动态</h3>
+                </a>
+              </li>
+              <li class="nav-item" onclick="showMainLineChartDatasets([4, 5])">
+                <a href="#" class="nav-link text-center" data-bs-toggle="tab">
+                  <h6 class="header-pretitle text-secondary">
+                    {{ collect($mainLineChartConfigure['data']['datasets'][4]['data'])->sum() }}
+                    / {{ collect($mainLineChartConfigure['data']['datasets'][5]['data'])->sum() }}
+                  </h6>
+                  <h3 class="text-white mb-0">点赞/评论</h3>
                 </a>
               </li>
             </ul>
-
-            <!-- Nav -->
-            <ul class="nav nav-tabs header-tabs d-none">
-              <li class="nav-item" data-toggle="chart" data-target="#audienceChart" data-trigger="click" data-action="toggle" data-dataset="0">
-                <a href="#" class="nav-link text-center active" data-bs-toggle="tab">
-                  <h6 class="header-pretitle text-secondary">
-                    Customers
-                  </h6>
-                  <h3 class="text-white mb-0">
-                    73.2k
-                  </h3>
-                </a>
-              </li>
-              <li class="nav-item" data-toggle="chart" data-target="#audienceChart" data-trigger="click" data-action="toggle" data-dataset="1">
-                <a href="#" class="nav-link text-center" data-bs-toggle="tab">
-                  <h6 class="header-pretitle text-secondary">
-                    Sessions
-                  </h6>
-                  <h3 class="text-white mb-0">
-                    92.1k
-                  </h3>
-                </a>
-              </li>
-              <li class="nav-item" data-toggle="chart" data-target="#audienceChart" data-trigger="click" data-action="toggle" data-dataset="2">
-                <a href="#" class="nav-link text-center" data-bs-toggle="tab">
-                  <h6 class="header-pretitle text-secondary">
-                    Conversion
-                  </h6>
-                  <h3 class="text-white mb-0">
-                    50.2%
-                  </h3>
-                </a>
-              </li>
-            </ul>
-
           </div>
-        </div><!-- / .row -->
-      </div> <!-- / .header-body -->
+        </div>
+      </div>
 
       <!-- Footer -->
       <div class="header-footer">
-        <!-- Chart -->
         <div class="chart">
-          <canvas id="audienceChart" class="chart-canvas"></canvas>
+          <canvas id="mainLineChart" class="chart-canvas"></canvas>
+
+          @section('pageScript')
+            <script>
+              document.addEventListener('DOMContentLoaded', function () {
+                new Chart(document.getElementById('mainLineChart'), {!! json_encode($mainLineChartConfigure) !!});
+              });
+
+              function showMainLineChartDatasets(datasets) {
+                let mainLineChart = Chart.getChart(document.getElementById('mainLineChart'));
+
+                mainLineChart.data.datasets.forEach(function(dataset, index) {
+                  dataset.hidden = true;
+
+                  if (datasets.includes(index)) dataset.hidden = false;
+                });
+
+                mainLineChart.update();
+              }
+            </script>
+          @append
         </div>
       </div>
     </div>

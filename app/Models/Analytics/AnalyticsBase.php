@@ -74,6 +74,8 @@ class AnalyticsBase
                 $dataset['borderColor'] = $label['color'];
             }
 
+            $dataset['hidden'] = $label['hidden'] ?? false;
+
             $datasets[] = $dataset;
         }
 

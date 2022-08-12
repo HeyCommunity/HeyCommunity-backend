@@ -14,39 +14,29 @@ class HomeController extends Controller
 {
     public function index()
     {
-        return view('dashboard.home.charts');
-    }
-
-    public function index2()
-    {
         $totalUserNum = User::count();
         $totalPostNum = Post::count();
         $totalCommentNum = Comment::count();
         $totalThumbUpNum = Thumb::where('type', 'thumb_up')->count();
 
-        $startDate = now()->subDays(31);
+        $startDate = now()->subDays(26);
         $endDate = now();
 
         $mainLineChartConfigure = AnalyticsBase::makeLineChartConfigure($startDate, $endDate, [
             ['name' => '用户增长', 'class' => User::class, 'color' => '#2c7be5'],
-            [ 'name' => '用户活跃', 'class' => VisitorLog::class,
-                'color' => '#2a9d8f', 'count_column' => 'DISTINCT user_id'],
-            ['name' => '动态增长', 'class' => Post::class, 'color' => '#ffb703'],
-            ['name' => '动态活跃', 'class' => Post::class, 'color' => '#f77f00', 'date_column' => 'updated_at'],
+            ['name' => '用户活跃', 'class' => VisitorLog::class, 'color' => '#2a9d8f', 'count_column' => 'DISTINCT user_id'],
+            ['name' => '访客请求', 'class' => VisitorLog::class, 'hidden' => true],
+            ['name' => '动态增长', 'class' => Post::class, 'color' => '#ffb703', 'hidden' => true],
+            ['name' => '点赞数', 'class' => Thumb::class, 'color' => '#6e84a3', 'hidden' => true],
+            ['name' => '评论数', 'class' => Comment::class, 'color' => '#39afd1', 'hidden' => true],
         ]);
 
-        $thumbAndCommentLineChartConfigure = AnalyticsBase::makeLineChartConfigure($startDate, $endDate, [
-            ['name' => '点赞', 'class' => Thumb::class, 'color' => '#6e84a3'],
-            ['name' => '评论', 'class' => Comment::class, 'color' => '#39afd1'],
-        ]);
-
-        return view('dashboard.home.index', compact(
+        return view('dashboard.home.charts', compact(
             'totalUserNum',
             'totalPostNum',
             'totalCommentNum',
             'totalThumbUpNum',
             'mainLineChartConfigure',
-            'thumbAndCommentLineChartConfigure',
         ));
     }
 }
