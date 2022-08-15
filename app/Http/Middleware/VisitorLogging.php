@@ -12,6 +12,7 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Jenssegers\Agent\Agent;
+use Laravel\Sanctum\PersonalAccessToken;
 
 class VisitorLogging
 {
@@ -72,7 +73,7 @@ class VisitorLogging
             ];
 
             // 记录 user_id
-            $user = Auth::guard('sanctum')->user();
+            $user = Auth::guard('sanctum')->user() ?: optional(PersonalAccessToken::findToken($request->header('TrackToken')))->tokenable;
             if ($user) {
                 $logData['user_id'] = $user->getAttribute('id');
             }
