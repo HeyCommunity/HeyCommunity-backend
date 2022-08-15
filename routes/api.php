@@ -23,6 +23,8 @@ use App\Http\Controllers\Api\ThumbController;
 
 ##
 ## User API
+Route::get('/users/login', [UserController::class, 'login']);
+
 Route::get('/users/ping', [UserController::class, 'ping']);
 Route::post('/users/wxapp-signup', [UserController::class, 'wxappSignup']);
 Route::post('/users/wxapp-restore-login', [UserController::class, 'wxappRestoreLogin']);
