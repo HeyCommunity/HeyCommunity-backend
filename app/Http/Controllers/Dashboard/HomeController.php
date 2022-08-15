@@ -131,7 +131,6 @@ class HomeController extends Controller
                         'label'             =>  '新用户',
                         'data'              =>  $getDatasetDataFn(true),
                         'backgroundColor'   =>  '#d2ddec',
-                        'hidden'            =>  'true'
                     ],
                 ],
             ],

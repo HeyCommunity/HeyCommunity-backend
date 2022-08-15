@@ -72,9 +72,9 @@
         <div class="card">
           <div class="card-header">
             <h4 class="card-header-title">周活用户</h4>
-            <span class="text-muted me-3">新用户:</span>
+            <span class="text-muted">新用户：</span>
             <div class="form-check form-switch">
-              <input class="form-check-input" type="checkbox" onchange="toggleChartDataset('#userWeekActiveChart', [1])">
+              <input class="form-check-input" type="checkbox" checked onchange="toggleChartDataset('#userWeekActiveChart', [1])">
             </div>
           </div>
           <div class="card-body">
