@@ -15,7 +15,8 @@
             <ul class="nav nav-tabs header-tabs">
               <li class="nav-item" onclick="onlyShowChartDataset('#mainChart', [0, 1])">
                 <a href="#" class="nav-link text-center active" data-bs-toggle="tab">
-                  <h6 class="header-pretitle text-secondary">
+                  <h6 class="header-pretitle text-secondary" data-bs-toggle="tooltip" data-bs-html="true" data-bs-placement="left"
+                      title="近期新增用户: {{ collect($mainChartConfigure['data']['datasets'][0]['data'])->sum() }}<br>近期活跃用户: {{ collect($mainChartConfigure['data']['datasets'][1]['data'])->sum() }}">
                     +{{ collect($mainChartConfigure['data']['datasets'][0]['data'])->sum() }}
                     / {{ collect($mainChartConfigure['data']['datasets'][1]['data'])->sum() }}
                   </h6>
@@ -24,25 +25,30 @@
               </li>
               <li class="nav-item" onclick="onlyShowChartDataset('#mainChart', [2])">
                 <a href="#" class="nav-link text-center" data-bs-toggle="tab">
-                  @if (($visitorLogNum = collect($mainChartConfigure['data']['datasets'][2]['data'])->sum()) < 1000)
-                    <h6 class="header-pretitle text-secondary">{{ $visitorLogNum }}</h6>
-                  @else
-                    <h6 class="header-pretitle text-secondary">{{ round($visitorLogNum / 1000, 1) }}k</h6>
-                  @endif
+                  <h6 class="header-pretitle text-secondary" data-bs-toggle="tooltip" data-bs-placement="left" title="近期请求总数: {{ collect($mainChartConfigure['data']['datasets'][2]['data'])->sum() }}">
+                    @if (($visitorLogNum = collect($mainChartConfigure['data']['datasets'][2]['data'])->sum()) < 1000)
+                      +{{ $visitorLogNum }}
+                    @else
+                      +{{ round($visitorLogNum / 1000, 1) }}k
+                    @endif
+                  </h6>
                   <h3 class="text-white mb-0">请求数</h3>
                 </a>
               </li>
               <li class="nav-item" onclick="onlyShowChartDataset('#mainChart', [3])">
                 <a href="#" class="nav-link text-center" data-bs-toggle="tab">
-                  <h6 class="header-pretitle text-secondary">{{ collect($mainChartConfigure['data']['datasets'][3]['data'])->sum() }}</h6>
+                  <h6 class="header-pretitle text-secondary" data-bs-toggle="tooltip" data-bs-placement="left" title="近期新增动态: {{ collect($mainChartConfigure['data']['datasets'][3]['data'])->sum() }}">
+                    +{{ collect($mainChartConfigure['data']['datasets'][3]['data'])->sum() }}
+                  </h6>
                   <h3 class="text-white mb-0">动态</h3>
                 </a>
               </li>
               <li class="nav-item" onclick="onlyShowChartDataset('#mainChart', [4, 5])">
                 <a href="#" class="nav-link text-center" data-bs-toggle="tab">
-                  <h6 class="header-pretitle text-secondary">
-                    {{ collect($mainChartConfigure['data']['datasets'][4]['data'])->sum() }}
-                    / {{ collect($mainChartConfigure['data']['datasets'][5]['data'])->sum() }}
+                  <h6 class="header-pretitle text-secondary" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-html="true"
+                      title="近期新增点赞: {{ collect($mainChartConfigure['data']['datasets'][4]['data'])->sum() }}<br>近期新增评论: {{ collect($mainChartConfigure['data']['datasets'][5]['data'])->sum() }}">
+                    +{{ collect($mainChartConfigure['data']['datasets'][4]['data'])->sum() }}
+                    / +{{ collect($mainChartConfigure['data']['datasets'][5]['data'])->sum() }}
                   </h6>
                   <h3 class="text-white mb-0">点赞/评论</h3>
                 </a>

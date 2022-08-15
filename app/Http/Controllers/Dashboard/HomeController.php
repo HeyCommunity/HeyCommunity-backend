@@ -54,7 +54,7 @@ class HomeController extends Controller
 
     protected function getMainChartConfigure()
     {
-        $startDate = now()->subDays(26);
+        $startDate = now()->subDays(27);
         $endDate = now();
 
         return AnalyticsBase::makeLineChartConfigure($startDate, $endDate, [
