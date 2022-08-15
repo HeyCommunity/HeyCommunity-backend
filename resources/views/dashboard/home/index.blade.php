@@ -117,7 +117,8 @@
               <div class="col">
                 <h6 class="text-uppercase text-muted mb-2">用户</h6>
                 <span class="h2 mb-0">{{ $modelTrendData['user']['total'] }}</span>
-                <span class="mt-n1 badge bg-light-soft text-secondary">
+                <span class="mt-n1 badge bg-light-soft text-secondary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true"
+                      title="近 1 周新增: {{ $modelTrendData['user']['week_num'] }}<br>近 1 月新增: {{ $modelTrendData['user']['month_num'] }}">
                   +{{ $modelTrendData['user']['week_num'] }} / +{{ $modelTrendData['user']['month_num'] }}
                 </span>
               </div>
@@ -134,7 +135,8 @@
               <div class="col">
                 <h6 class="text-uppercase text-muted mb-2">动态</h6>
                 <span class="h2 mb-0">{{ $modelTrendData['post']['total'] }}</span>
-                <span class="mt-n1 badge bg-light-soft text-secondary">
+                <span class="mt-n1 badge bg-light-soft text-secondary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true"
+                      title="近 1 周新增: {{ $modelTrendData['post']['week_num'] }}<br>近 1 月新增: {{ $modelTrendData['post']['month_num'] }}">
                   +{{ $modelTrendData['post']['week_num'] }} / +{{ $modelTrendData['post']['month_num'] }}
                 </span>
               </div>
@@ -151,7 +153,8 @@
               <div class="col">
                 <h6 class="text-uppercase text-muted mb-2">点赞</h6>
                 <span class="h2 mb-0">{{ $modelTrendData['thumb_up']['total'] }}</span>
-                <span class="mt-n1 badge bg-light-soft text-secondary">
+                <span class="mt-n1 badge bg-light-soft text-secondary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true"
+                      title="近 1 周新增: {{ $modelTrendData['thumb_up']['week_num'] }}<br>近 1 月新增: {{ $modelTrendData['thumb_up']['month_num'] }}">
                   +{{ $modelTrendData['thumb_up']['week_num'] }} / +{{ $modelTrendData['thumb_up']['month_num'] }}
                 </span>
               </div>
@@ -168,7 +171,8 @@
               <div class="col">
                 <h6 class="text-uppercase text-muted mb-2">评论</h6>
                 <span class="h2 mb-0">{{ $modelTrendData['comment']['total'] }}</span>
-                <span class="mt-n1 badge bg-light-soft text-secondary">
+                <span class="mt-n1 badge bg-light-soft text-secondary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true"
+                      title="近 1 周新增: {{ $modelTrendData['comment']['week_num'] }}<br>近 1 月新增: {{ $modelTrendData['comment']['month_num'] }}">
                   +{{ $modelTrendData['comment']['week_num'] }} / +{{ $modelTrendData['comment']['month_num'] }}
                 </span>
               </div>
