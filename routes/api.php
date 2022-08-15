@@ -27,7 +27,6 @@ Route::get('/users/ping', [UserController::class, 'ping']);
 Route::post('/users/wxapp-signup', [UserController::class, 'wxappSignup']);
 Route::post('/users/wxapp-restore-login', [UserController::class, 'wxappRestoreLogin']);
 Route::post('/users/wxapp-login', [UserController::class, 'wxappLogin']);
-Route::get('/users/login', [UserController::class, 'login']);
 Route::get('/users/{user}', [UserController::class, 'show'])->where('user', '[0-9]+');
 Route::get('/users/{user}/posts', [UserController::class, 'posts'])->where('user', '[0-9]+');
 Route::middleware(['auth:sanctum'])->group(function () {
