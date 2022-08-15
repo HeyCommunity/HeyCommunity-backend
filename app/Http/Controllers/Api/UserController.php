@@ -15,24 +15,6 @@ use Illuminate\Support\Str;
 class UserController extends Controller
 {
     /**
-     * User ping
-     */
-    public function ping(Request $request)
-    {
-        $user = Auth::guard('sanctum')->user();
-
-        if ($user) {
-            return [
-                'data'  =>  [
-                    'unread_notice_num'     =>  $user->unread_notice_num,
-                ],
-            ];
-        }
-
-        return ['message' => 'OK'];
-    }
-
-    /**
      * User login
      */
     public function login(Request $request)
@@ -81,6 +63,112 @@ class UserController extends Controller
     }
 
     /**
+     * User ping
+     */
+    public function ping(Request $request)
+    {
+        $user = Auth::guard('sanctum')->user();
+
+        if ($user) {
+            return [
+                'data'  =>  [
+                    'unread_notice_num'     =>  $user->unread_notice_num,
+                ],
+            ];
+        }
+
+        return ['message' => 'OK'];
+    }
+
+    /**
+     * 微信小程序用户 Signup
+     *
+     * 打开小程序后请求此 API，用于追踪用户访问
+     * 如果未注册，则进行初步注册: status = 0
+     */
+    public function wxappSignup(Request $request)
+    {
+        $request->validate([
+            'code'      =>  'required|string',
+        ]);
+
+        $miniProgram = \EasyWeChat::miniProgram();
+        $wxRes = $miniProgram->auth->session($request->code);
+
+        if (isset($wxRes['openid'])) {
+            $user = User::firstOrCreate(['wx_open_id' => $wxRes['openid']]);
+            $user->token = $user->createToken('token')->plainTextToken;
+
+            Log::channel('hc')->info('[wxappUserSignup-success] 操作成功', ['wxRes' => $wxRes, 'user' => $user->getAttributes(), 'headers' => $request->server]);
+            return new UserResource($user);
+        } else {
+            Log::channel('hc')->warning('[wxappUserSignup-fail] 操作失败', ['wxRes' => $wxRes, 'headers' => $request->server]);
+            return response()->json(['message' => $wxRes['errmsg']], 500);
+        }
+    }
+
+    /**
+     * 微信小程序恢复登录
+     */
+    public function wxappRestoreLogin(Request $request)
+    {
+        $user = Auth::guard('sanctum')->user();
+
+        if ($user) {
+            return new UserResource($user);
+        } else {
+            return response()->json(['message' => 'Forbidden'], 403);
+        }
+    }
+
+    /**
+     * 微信小程序用户登录
+     */
+    public function wxappLogin(Request $request)
+    {
+        $request->validate([
+            'code'      =>  'required|string',
+            'user_info' =>  'required|array',
+        ]);
+
+        $miniProgram = \EasyWeChat::miniProgram();
+        $wxRes = $miniProgram->auth->session($request->code);
+
+        if (isset($wxRes['openid'])) {
+            $user = User::firstOrCreate(['wx_open_id' => $wxRes['openid']]);
+
+            // 更新用户资料
+            if ($user->status === 0) {
+                $wxUserInfo = $request->get('user_info');
+
+                // 把用户头像保存在本地
+                $client = new Client();
+                $avatarData = $client->request('get', $wxUserInfo['avatarUrl'])->getBody()->getContents();
+                $avatarPath = 'uploads/users/avatars/' . Str::random(40) . '.jpg';
+                Storage::put($avatarPath, $avatarData);
+
+                $user->update([
+                    'nickname'  =>  $wxUserInfo['nickName'],
+                    'gender'    =>  $wxUserInfo['gender'],
+                    'avatar'    =>  $avatarPath,
+
+                    'wx_user_info'  =>  $wxUserInfo,
+                    'status'    =>  1,
+                ]);
+            }
+
+            $user->token = $user->createToken('token')->plainTextToken;
+
+            Log::channel('hc')->info('[wxappUserLogin-success] 用户登录成功', ['wxRes' => $wxRes, 'user' => $user->getAttributes(), 'headers' => $request->server]);
+            return new UserResource($user);
+        } else {
+            Log::channel('hc')->warning('[wxappUserLogin-fail] 用户登录失败', ['wxRes' => $wxRes, 'headers' => $request->server]);
+            return response()->json(['message' => $wxRes['errmsg']], 500);
+        }
+
+    }
+
+    /**
      * User logout
      */
     public function logout(Request $request)
@@ -105,8 +193,6 @@ class UserController extends Controller
     public function mineShow(Request $request)
     {
         $user = $request->user();
-
-        // $this->timProfileUpdate($patient);
 
         return new UserResource($user);
     }
