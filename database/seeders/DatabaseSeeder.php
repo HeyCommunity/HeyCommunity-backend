@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Feed;
 use Illuminate\Database\Seeder;
 use Modules\Activity\Database\Seeders\ActivityDatabaseSeeder;
 use Modules\Article\Database\Seeders\ArticleDatabaseSeeder;
@@ -26,5 +27,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ActivityDatabaseSeeder::class);
 
         $this->call(CommonSeeder::class);
+
+        $this->call(FeedSeeder::class);
     }
 }
