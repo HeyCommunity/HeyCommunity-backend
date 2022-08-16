@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Modules\Activity\Database\Seeders\ActivityDatabaseSeeder;
 use Modules\Article\Database\Seeders\ArticleDatabaseSeeder;
 use Modules\Post\Database\Seeders\PostDatabaseSeeder;
 
@@ -22,6 +23,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call(PostDatabaseSeeder::class);
         $this->call(ArticleDatabaseSeeder::class);
+        $this->call(ActivityDatabaseSeeder::class);
 
         $this->call(CommonSeeder::class);
     }
