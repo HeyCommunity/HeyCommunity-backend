@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Feed;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Collection;
 use Modules\Post\Entities\Post;
 
 class FeedFactory extends Factory
@@ -15,6 +16,20 @@ class FeedFactory extends Factory
      */
     protected $model = Feed::class;
 
+    public function __construct(
+        $count = null,
+        ?Collection $states = null,
+        ?Collection $has = null,
+        ?Collection $for = null,
+        ?Collection $afterMaking = null,
+        ?Collection $afterCreating = null,
+        $connection = null
+    ) {
+        parent::__construct($count, $states, $has, $for, $afterMaking, $afterCreating, $connection);
+
+        $this->entities = $this->getEntities();
+    }
+
     /**
      * Define the model's default state.
      *
@@ -22,11 +37,11 @@ class FeedFactory extends Factory
      */
     public function definition()
     {
-        $entities = $this->getEntities();
+        $entity = $this->faker->randomElement($this->entities);
 
         return [
-            'entity_id'         =>  $this->faker->randomElement($entities)->id,
-            'entity_class'      =>  get_class($this->faker->randomElement($entities)),
+            'entity_id'         =>  $entity->id,
+            'entity_class'      =>  get_class($entity),
         ];
     }
 

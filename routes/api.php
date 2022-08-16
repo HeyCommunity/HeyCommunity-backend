@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\Api\FeedController;
 use App\Http\Controllers\Api\SystemController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\UserReportController;
@@ -40,6 +40,14 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/users/mine-cover', [UserController::class, 'mineCoverUpdate']);
 });
 
+
+##
+## Feed Api
+Route::prefix('feeds')->group(function () {
+    Route::get('/', [FeedController::class, 'index']);
+});
+
+
 ##
 ## Notice API
 Route::middleware(['auth:sanctum'])->group(function () {
@@ -49,6 +57,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/notices/delete', [NoticeController::class, 'deleteHandler']);
 });
 
+
 ##
 ## Common API
 Route::middleware(['auth:sanctum'])->group(function () {
@@ -56,6 +65,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('comments/delete', [CommentController::class, 'destory']);
     Route::post('thumbs', [ThumbController::class, 'store']);
 });
+
 
 ##
 ## Other API
