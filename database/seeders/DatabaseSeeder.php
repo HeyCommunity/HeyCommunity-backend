@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Modules\Article\Database\Seeders\ArticleDatabaseSeeder;
 use Modules\Post\Database\Seeders\PostDatabaseSeeder;
 
 class DatabaseSeeder extends Seeder
@@ -18,7 +19,10 @@ class DatabaseSeeder extends Seeder
         $faker->addProvider(new \SupGeekRod\FakerZh\ZhCnDataProvider($faker));
 
         $this->call(UserSeeder::class);
+
         $this->call(PostDatabaseSeeder::class);
+        $this->call(ArticleDatabaseSeeder::class);
+
         $this->call(CommonSeeder::class);
     }
 }
