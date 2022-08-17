@@ -13,6 +13,7 @@ class PostWebTest extends TestCase
     public function testPostRoutes()
     {
         $this->get(route('web.posts.index'))->assertOk();
+
         if ($post = Post::inRandomOrder()->first()) {
             $this->get(route('web.posts.show', $post))->assertOk();
         } else {
