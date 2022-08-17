@@ -24,8 +24,6 @@ use App\Http\Controllers\Api\ThumbController;
 ##
 ## User API
 Route::prefix('users')->group(function () {
-    Route::get('login', [UserController::class, 'login'])->name('api.users.login');
-
     Route::get('ping', [UserController::class, 'ping'])->name('api.users.ping');
     Route::post('wxapp-signup', [UserController::class, 'wxappSignup'])->name('api.users.wxapp-signup');
     Route::post('wxapp-restore-login', [UserController::class, 'wxappRestoreLogin'])->name('api.users.wxapp-restore-login');
@@ -65,7 +63,7 @@ Route::prefix('notices')->middleware(['auth:sanctum'])->group(function () {
 ## Common API
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('comments', [CommentController::class, 'store'])->name('api.comments.store');
-    Route::post('comments/delete', [CommentController::class, 'destory'])->name('api.comments.destroy');
+    Route::post('comments/delete', [CommentController::class, 'destroy'])->name('api.comments.destroy');
     Route::post('thumbs', [ThumbController::class, 'store'])->name('api.thumbs.store');
 });
 
