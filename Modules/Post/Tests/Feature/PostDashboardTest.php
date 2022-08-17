@@ -39,6 +39,8 @@ class PostDashboardTest extends TestCase
      */
     public function testDashboardPostRoutes($user)
     {
+        dd(route('dashboard.posts.index'));
+
         $post = Post::inRandomOrder()->first();
 
         $this->get(route('dashboard.posts.index'))->assertUnauthorized();

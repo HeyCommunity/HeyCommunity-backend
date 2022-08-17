@@ -37,6 +37,8 @@ class ActivityDashboardTest extends TestCase
      */
     public function testDashboardActivityRoutes($user)
     {
+        dd(route('dashboard.activities.index'));
+
         $activity = Activity::inRandomOrder()->first();
 
         $this->get(route('dashboard.activities.index'))->assertUnauthorized();
