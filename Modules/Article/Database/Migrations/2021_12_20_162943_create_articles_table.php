@@ -15,6 +15,8 @@ class CreateArticlesTable extends Migration
     {
         Schema::create('articles', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('user_id')->index()->unsigned()->comment('User ID');
+            $table->foreign('user_id')->references('id')->on('users');
 
             $table->string('title')->comment('标题');
             $table->string('intro')->comment('简介');
@@ -32,7 +34,7 @@ class CreateArticlesTable extends Migration
             $table->tinyInteger('status')->default(0)->comment('Status');
 
             $table->dateTime('published_at')->comment('发布时间');
-            
+
             $table->timestamps();
             $table->softDeletes();
         });

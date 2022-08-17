@@ -2,6 +2,7 @@
 
 namespace Modules\Article\Database\Seeders;
 
+use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
@@ -21,8 +22,7 @@ class ArticleDatabaseSeeder extends Seeder
     public function run(\Faker\Generator $faker)
     {
         $faker->addProvider(new \Bluemmb\Faker\PicsumPhotosProvider($faker));
-
-        Model::unguard();
+        $faker->addProvider(new \SupGeekRod\FakerZh\ZhCnDataProvider($faker));
 
         $this->makeArticleData($faker);
         $this->makeArticleCategoryData($faker);
@@ -34,10 +34,14 @@ class ArticleDatabaseSeeder extends Seeder
      */
     protected function makeArticleData(\Faker\Generator $faker)
     {
+        $userIds = User::pluck('id')->toArray();
+
         $data = [];
 
         foreach (range(1, 100) as $index) {
             $data[] = [
+                'user_id'   =>  $faker->randomElement($userIds),
+
                 'title'         =>  $faker->sentence(),
                 'intro'         =>  Str::limit($faker->paragraph, 200),
                 'content'       =>  $faker->text(random_int(100, 500))

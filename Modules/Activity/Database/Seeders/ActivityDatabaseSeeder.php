@@ -14,20 +14,19 @@ class ActivityDatabaseSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(\Faker\Generator $faker)
     {
-        Model::unguard();
+        $faker->addProvider(new \Bluemmb\Faker\PicsumPhotosProvider($faker));
+        $faker->addProvider(new \SupGeekRod\FakerZh\ZhCnDataProvider($faker));
 
-        $this->makeActivities();
+        $this->makeActivities($faker);
     }
 
     /**
      * 创建活动
      */
-    protected function makeActivities()
+    protected function makeActivities(\Faker\Generator $faker)
     {
-        $faker = \Faker\Factory::create();
-        $faker->addProvider(new \Bluemmb\Faker\PicsumPhotosProvider($faker));
         $userIds = User::pluck('id')->toArray();
 
         $data = [];

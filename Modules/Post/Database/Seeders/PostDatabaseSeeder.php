@@ -18,7 +18,8 @@ class PostDatabaseSeeder extends Seeder
      */
     public function run(\Faker\Generator $faker)
     {
-        Model::unguard();
+        $faker->addProvider(new \Bluemmb\Faker\PicsumPhotosProvider($faker));
+        $faker->addProvider(new \SupGeekRod\FakerZh\ZhCnDataProvider($faker));
 
         $this->makePostData($faker);
         $this->makePostImageData($faker);
