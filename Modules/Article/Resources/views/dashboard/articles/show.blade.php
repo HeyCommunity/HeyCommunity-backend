@@ -1,6 +1,7 @@
 @extends('dashboard.layouts.default')
 
-@section('mainBody')
+@section('mainContent')
+<div class="main-content">
   <div class="container-fluid">
     <div class="row justify-content-center">
       <div class="col-12 col-lg-10 col-xl-8">
@@ -28,4 +29,5 @@
       </div>
     </div>
   </div>
+</div>
 @endsection
