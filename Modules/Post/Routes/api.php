@@ -1,27 +1,18 @@
 <?php
 
-use Illuminate\Http\Request;
 use Modules\Post\Http\Controllers\Api\PostController;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
+Route::prefix('api/posts')->group(function () {
+    Route::get('/', [PostController::class, 'index']);
+    Route::get('user-posts', [PostController::class, 'userPosts']);
+    Route::get('{post}', [PostController::class, 'show'])->where('post', '[0-9]+');
 
-Route::get('posts', [PostController::class, 'index']);
-Route::get('posts/user-posts', [PostController::class, 'userPosts']);
-Route::get('posts/{post}', [PostController::class, 'show'])->where('post', '[0-9]+');
-Route::middleware(['auth:sanctum'])->group(function () {
-    Route::post('posts', [PostController::class, 'store']);
-    Route::post('posts/delete', [PostController::class, 'destroy']);
-    Route::post('posts/hidden', [PostController::class, 'hidden']);
+    Route::middleware(['auth:sanctum'])->group(function () {
+        Route::post('/', [PostController::class, 'store']);
+        Route::post('delete', [PostController::class, 'destroy']);
+        Route::post('hidden', [PostController::class, 'hidden']);
 
-    Route::post('posts/upload-image', [PostController::class, 'uploadImage']);
-    Route::post('posts/upload-video', [PostController::class, 'uploadVideo']);
+        Route::post('upload-image', [PostController::class, 'uploadImage']);
+        Route::post('upload-video', [PostController::class, 'uploadVideo']);
+    });
 });

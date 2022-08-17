@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Activity\Http\Controllers\API;
+namespace Modules\Activity\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
