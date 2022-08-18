@@ -94,7 +94,7 @@ jobs:
       run: composer require phpunit/phpunit --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist --dev
 
     - name: 数据库迁移
-      run: php artisan migrate:refresh --seed --no-interaction
+      run: php artisan migrate:refresh --no-interaction
 
     - name: 执行 Laravel 测试
       run: php artisan test

@@ -3,9 +3,8 @@
 namespace Modules\Article\Database\Seeders;
 
 use App\Models\User;
+use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Database\Seeder;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Str;
 use Modules\Article\Entities\Article;
 use Modules\Article\Entities\ArticleCategory;
 use Modules\Article\Entities\ArticleCategoryMap;
@@ -34,32 +33,17 @@ class ArticleDatabaseSeeder extends Seeder
      */
     protected function makeArticleData(\Faker\Generator $faker)
     {
-        $userIds = User::pluck('id')->toArray();
-
-        $data = [];
-
-        foreach (range(1, 100) as $index) {
-            $data[] = [
-                'user_id'   =>  $faker->randomElement($userIds),
-
-                'title'         =>  $faker->sentence(),
-                'intro'         =>  Str::limit($faker->paragraph, 200),
-                'content'       =>  $faker->text(random_int(100, 500))
-                                        . '<br><br>' . $faker->text(random_int(100, 500))
-                                        . '<br><br>' . $faker->text(random_int(100, 500)),
-                'cover'         =>  $faker->imageUrl(480, 360, true),
-
-                'author'        =>  $faker->name(),
-                'published_at'  =>  $faker->dateTimeThisMonth(),
-
-                'status'        =>  1,
-
-                'created_at'    =>  $faker->dateTimeThisMonth(),
-                'updated_at'    =>  $faker->dateTimeThisMonth(),
-            ];
+        $users = User::inRandomOrder()->limit(20)->get();
+        if ($users->empty()) {
+            $users = User::factory()->count(50)->create();
         }
 
-        Article::insert($data);
+        Article::factory()
+            ->state(new Sequence(
+                fn () => ['user_id' => $faker->randomElement($users)],
+            ))
+            ->count(50)
+            ->create();
     }
 
     /**

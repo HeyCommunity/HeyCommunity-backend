@@ -4,6 +4,7 @@ namespace Modules\Activity\Entities;
 
 use App\Models\Model;
 use App\Models\User;
+use Modules\Activity\Database\factories\ActivityFactory;
 
 class Activity extends Model
 {
@@ -13,6 +14,14 @@ class Activity extends Model
     protected $casts = [
         'started_at'    =>  'datetime',
     ];
+
+    /**
+     * newFactory
+     */
+    protected static function newFactory()
+    {
+        return ActivityFactory::new();
+    }
 
     /**
      * 关联 ActivityMember
