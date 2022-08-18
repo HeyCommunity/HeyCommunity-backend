@@ -30,6 +30,8 @@ class ActivityApiTest extends TestCase
      */
     public function testGetActivities()
     {
+        Activity::factory()->count(100)->create();
+
         $this->getJson(route('api.activities.index'))
             ->assertOk()
             ->assertJsonStructure(['data' => ['*' => $this->activityModelStructure]]);
@@ -42,7 +44,9 @@ class ActivityApiTest extends TestCase
      */
     public function testGetActivity()
     {
-        $this->getJson(route('api.activities.show', 1))
+        $activity = Activity::factory()->create();
+
+        $this->getJson(route('api.activities.show', $activity))
             ->assertOk()
             ->assertJsonStructure(['data' => $this->activityModelStructure]);
     }

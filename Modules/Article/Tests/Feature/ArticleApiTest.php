@@ -28,6 +28,8 @@ class ArticleApiTest extends TestCase
      */
     public function testGetArticles()
     {
+        Article::factory()->count(100)->create();
+
         $this->getJson(route('api.articles.index'))
             ->assertOk()
             ->assertJsonStructure(['data' => ['*' => $this->articleModelStructure]]);
@@ -40,7 +42,9 @@ class ArticleApiTest extends TestCase
      */
     public function testGetArticle()
     {
-        $this->getJson(route('api.articles.show', 1))
+        $article = Article::factory()->create();
+
+        $this->getJson(route('api.articles.show', $article))
             ->assertOk()
             ->assertJsonStructure(['data' => $this->articleModelStructure]);
     }
