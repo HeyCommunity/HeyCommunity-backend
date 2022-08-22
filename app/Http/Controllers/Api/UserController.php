@@ -96,7 +96,10 @@ class UserController extends Controller
         $wxRes = $miniProgram->auth->session($request->code);
 
         if (isset($wxRes['openid'])) {
-            $user = User::firstOrCreate(['wx_open_id' => $wxRes['openid']]);
+            $user = User::firstOrCreate([
+                'wx_open_id'        =>  $wxRes['openid'],
+                'last_active_at'    =>  now(),
+            ]);
             $user->token = $user->createToken('token')->plainTextToken;
 
             Log::channel('hc')->info('[wxappUserSignup-success] 操作成功', ['wxRes' => $wxRes, 'user' => $user->getAttributes(), 'headers' => $request->server]);
