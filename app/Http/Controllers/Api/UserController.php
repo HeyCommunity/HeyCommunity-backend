@@ -98,6 +98,7 @@ class UserController extends Controller
         if (isset($wxRes['openid'])) {
             $user = User::firstOrCreate([
                 'wx_open_id'        =>  $wxRes['openid'],
+            ], [
                 'last_active_at'    =>  now(),
             ]);
             $user->token = $user->createToken('token')->plainTextToken;
