@@ -112,5 +112,10 @@
 
   <!-- Page Script -->
   @yield('pageScript')
+
+  <!-- Laravel Notify -->
+  @notifyCss
+  @notifyJs
+  @include('notify::components.notify')
 </body>
 </html>

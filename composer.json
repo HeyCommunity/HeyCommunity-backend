@@ -17,6 +17,7 @@
         "laravel/sanctum": "^2.9",
         "laravel/telescope": "^4.4",
         "laravel/tinker": "^2.5",
+        "mckenziearts/laravel-notify": "^2.3",
         "nwidart/laravel-modules": "8.2.*",
         "overtrue/laravel-wechat": "^6.0",
         "predis/predis": "^2.0"
