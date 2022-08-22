@@ -117,8 +117,6 @@
   @include('dashboard.layouts._flash')
 
   <!-- Laravel Notify -->
-  @notifyCss
-  @notifyJs
-  @include('notify::components.notify')
+  @include('dashboard.layouts._laravel-notify')
 </body>
 </html>
