@@ -3,12 +3,14 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" type="image/x-icon"/>
+
   <title>{{ config('app.name') }}</title>
   <!-- TODO: Website description -->
   <meta name="description" content="{{ config('app.name') }}" />
 
-  <!-- Favicon -->
-  <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" type="image/x-icon"/>
+  <!-- Libs CSS -->
+  <link rel="stylesheet" href="{{ asset('assets/dashkit/css/libs.bundle.css') }}" />
 
   <!-- Theme CSS -->
   <link rel="stylesheet" href="{{ asset('assets/dashkit/css/theme.bundle.css') }}" id="stylesheetLight" />
@@ -86,14 +88,18 @@
   <!-- MAIN CONTENT -->
   @yield('mainContent')
 
-  <!-- Libs CSS -->
-  <link rel="stylesheet" href="{{ asset('assets/dashkit/css/libs.bundle.css') }}" />
-
-  <!-- Vendor JS -->
+  <!-- JAVASCRIPT -->
   <script src="{{ asset('assets/dashkit/js/vendor.bundle.js') }}" defer></script>
-
-  <!-- Theme JS -->
   <script src="{{ asset('assets/dashkit/js/theme.bundle.js') }}" defer></script>
+
+  <!-- Laravel Flash -->
+  {{-- @include('dashboard.layouts._flash') --}}
+
+  <!-- Laravel Notify -->
+  @include('dashboard.layouts._laravel-notify')
+
+  <!-- Google Analytics -->
+  @include('common._google-analytics')
 
   <!-- Page Script -->
   @yield('pageScript')

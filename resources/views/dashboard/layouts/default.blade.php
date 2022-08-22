@@ -3,11 +3,10 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
+
   <title>HEY社区</title>
   <meta name="description" content="HeyCommunity Dashboard" />
-
-  <!-- Favicon -->
-  <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
 
   <!-- Libs CSS -->
   <link rel="stylesheet" href="{{ asset('assets/dashkit/css/libs.bundle.css') }}" />
