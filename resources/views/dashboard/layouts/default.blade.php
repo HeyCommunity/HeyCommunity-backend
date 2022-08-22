@@ -113,6 +113,9 @@
   <!-- Page Script -->
   @yield('pageScript')
 
+  <!-- Laravel Flash -->
+  @include('dashboard.layouts._flash')
+
   <!-- Laravel Notify -->
   @notifyCss
   @notifyJs
