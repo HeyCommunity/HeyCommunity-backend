@@ -110,13 +110,16 @@
   <script src="{{ asset('assets/dashkit/js/vendor.bundle.js') }}" defer></script>     <!-- Vendor JS -->
   <script src="{{ asset('assets/dashkit/js/theme.bundle.js') }}" defer></script>      <!-- Theme JS -->
 
-  <!-- Page Script -->
-  @yield('pageScript')
-
   <!-- Laravel Flash -->
   {{-- @include('dashboard.layouts._flash') --}}
 
   <!-- Laravel Notify -->
   @include('dashboard.layouts._laravel-notify')
+
+  <!-- Google Analytics -->
+  @include('common._google-analytics')
+
+  <!-- Page Script -->
+  @yield('pageScript')
 </body>
 </html>
