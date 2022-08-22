@@ -81,6 +81,7 @@
         <ul class="navbar-nav me-lg-auto">
           <li class="nav-item"><a class="nav-link {{ routeActive('web.posts*') }}" href="{{ route('web.posts.index') }}">动态</a></li>
           <li class="nav-item"><a class="nav-link {{ routeActive('web.article*') }}" href="{{ route('web.articles.index') }}">文章</a></li>
+          <li class="nav-item"><a class="nav-link {{ routeActive('web.activities*') }}" href="{{ route('web.activities.index') }}">活动</a></li>
         </ul>
       </div>
     </div>
