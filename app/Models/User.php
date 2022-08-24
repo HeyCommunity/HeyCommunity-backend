@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Casts\Assert;
 use App\Models\Common\Comment;
 use App\Models\Common\Thumb;
 use Encore\Admin\Traits\DefaultDatetimeFormat;
@@ -54,23 +55,10 @@ class User extends Authenticatable
         'email_verified_at'     =>  'datetime',
         'wx_user_info'          =>  'array',
         'last_active_at'        =>  'datetime',
+
+        'avatar'                =>  Assert::class . ':imageView2/2/w/300',
+        'cover'                 =>  Assert::class,
     ];
-
-    /**
-     * Get avatar attribute
-     */
-    public function getAvatarAttribute($value)
-    {
-        return getAssetFullPath($value);
-    }
-
-    /**
-     * Get cover attribute
-     */
-    public function getCoverAttribute($value)
-    {
-        return getAssetFullPath($value);
-    }
 
     /**
      * Related ThumbUp
