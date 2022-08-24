@@ -96,7 +96,7 @@
   {{-- @include('dashboard.layouts._flash') --}}
 
   <!-- Laravel Notify -->
-  @include('dashboard.layouts._laravel-notify')
+  {{-- @include('dashboard.layouts._laravel-notify') --}}
 
   <!-- Google Analytics -->
   @include('common._google-analytics')
