@@ -15,7 +15,7 @@ class Assert implements CastsAttributes
      *
      * @param $qiniuConfig
      */
-    public function __construct($qiniuConfig)
+    public function __construct($qiniuConfig = null)
     {
         $this->qiniuConfig = $qiniuConfig;
     }
