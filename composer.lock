@@ -3992,16 +3992,16 @@
         },
         {
             "name": "overtrue/wechat",
-            "version": "5.29.0",
+            "version": "5.29.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/w7corp/easywechat.git",
-                "reference": "098f6e4a12480d0a327185bbfb8237575f9aec50"
+                "reference": "ea5bca713aa79d8d15c108265297566478439e6e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/w7corp/easywechat/zipball/098f6e4a12480d0a327185bbfb8237575f9aec50",
-                "reference": "098f6e4a12480d0a327185bbfb8237575f9aec50",
+                "url": "https://api.github.com/repos/w7corp/easywechat/zipball/ea5bca713aa79d8d15c108265297566478439e6e",
+                "reference": "ea5bca713aa79d8d15c108265297566478439e6e",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -4078,7 +4078,7 @@
             ],
             "support": {
                 "issues": "https://github.com/w7corp/easywechat/issues",
-                "source": "https://github.com/w7corp/easywechat/tree/5.29.0"
+                "source": "https://github.com/w7corp/easywechat/tree/5.29.1"
             },
             "funding": [
                 {
@@ -4087,7 +4087,7 @@
                 }
             ],
             "abandoned": "w7corp/easywechat",
-            "time": "2022-07-13T02:27:04+00:00"
+            "time": "2022-07-28T07:40:30+00:00"
         },
         {
             "name": "phpoption/phpoption",
