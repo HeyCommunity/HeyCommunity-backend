@@ -7,5 +7,9 @@ return [
 
     'heartbeat'     =>  [
         'enabled'           =>  env('HEYCOMMUNITY_HEARTBEAT_ENABLED', true),
-    ]
+    ],
+
+    'google-analytics'     =>  [
+        'enabled'           =>  env('HEYCOMMUNITY_GOOGLE_ANALYTICS_ENABLED', true),
+    ],
 ];

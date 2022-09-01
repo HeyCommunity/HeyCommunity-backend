@@ -7,17 +7,18 @@
     "require": {
         "php": "^7.4|^8.0",
         "arcanedev/log-viewer": "^8.3",
-        "encore/laravel-admin": "^1.8",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "geoip2/geoip2": "^2.12",
         "guzzlehttp/guzzle": "^7.0.1",
         "jenssegers/agent": "^2.6",
         "jxlwqq/simditor": "^1.0",
+        "laracasts/flash": "^3.2",
         "laravel/framework": "^8.12",
         "laravel/sanctum": "^2.9",
         "laravel/telescope": "^4.4",
         "laravel/tinker": "^2.5",
+        "mckenziearts/laravel-notify": "^2.3",
         "nwidart/laravel-modules": "8.2.*",
         "overtrue/laravel-wechat": "^6.0",
         "predis/predis": "^2.0"
@@ -44,11 +45,8 @@
             "Modules\\": "Modules/"
         },
         "files": [
-            "app/Helpers/system.php",
-            "app/Helpers/utility.php",
-            "app/Helpers/util.php",
-            "app/Helpers/develop.php",
-            "app/Helpers/faker.php"
+            "app/Helpers/heycommunity.php",
+            "app/Helpers/system.php"
         ]
     },
     "autoload-dev": {

@@ -31,7 +31,13 @@
     <a class="nav-link {{ request()->routeIs('dashboard.users.*') ? 'active' : null }}" href="{{ route('dashboard.users.index') }}"><i class="fe fe-users"></i> 用户管理</a>
   </li>
   <li class="nav-item">
+    <a class="nav-link {{ request()->routeIs('dashboard.articles.*') ? 'active' : null }}" href="{{ route('dashboard.articles.index') }}"><i class="fe fe-file-text"></i> 文章管理</a>
+  </li>
+  <li class="nav-item">
     <a class="nav-link {{ request()->routeIs('dashboard.posts.*') ? 'active' : null }}" href="{{ route('dashboard.posts.index') }}"><i class="fe fe-rss"></i> 动态管理</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link {{ request()->routeIs('dashboard.activities.*') ? 'active' : null }}" href="{{ route('dashboard.activities.index') }}"><i class="fe fe-flag"></i> 活动管理</a>
   </li>
   <li class="nav-item">
     <a class="nav-link {{ request()->routeIs('dashboard.comments.*') ? 'active' : null }}" href="{{ route('dashboard.comments.index') }}"><i class="fe fe-message-square"></i> 评论管理</a>

@@ -3,12 +3,14 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" type="image/x-icon"/>
+
   <title>{{ config('app.name') }}</title>
   <!-- TODO: Website description -->
   <meta name="description" content="{{ config('app.name') }}" />
 
-  <!-- Favicon -->
-  <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" type="image/x-icon"/>
+  <!-- Libs CSS -->
+  <link rel="stylesheet" href="{{ asset('assets/dashkit/css/libs.bundle.css') }}" />
 
   <!-- Theme CSS -->
   <link rel="stylesheet" href="{{ asset('assets/dashkit/css/theme.bundle.css') }}" id="stylesheetLight" />
@@ -77,7 +79,9 @@
         <!-- Navigation -->
         <a class="navbar-brand me-3" href="{{ route('web.home') }}">{{ config('app.name') }}</a>
         <ul class="navbar-nav me-lg-auto">
-          <li class="nav-item"><a class="nav-link {{ routeActive('web.posts*') }}" href="{{ route('web.home') }}">动态</a></li>
+          <li class="nav-item"><a class="nav-link {{ routeActive('web.posts*') }}" href="{{ route('web.posts.index') }}">动态</a></li>
+          <li class="nav-item"><a class="nav-link {{ routeActive('web.article*') }}" href="{{ route('web.articles.index') }}">文章</a></li>
+          <li class="nav-item"><a class="nav-link {{ routeActive('web.activities*') }}" href="{{ route('web.activities.index') }}">活动</a></li>
         </ul>
       </div>
     </div>
@@ -86,14 +90,18 @@
   <!-- MAIN CONTENT -->
   @yield('mainContent')
 
-  <!-- Libs CSS -->
-  <link rel="stylesheet" href="{{ asset('assets/dashkit/css/libs.bundle.css') }}" />
-
-  <!-- Vendor JS -->
+  <!-- JAVASCRIPT -->
   <script src="{{ asset('assets/dashkit/js/vendor.bundle.js') }}" defer></script>
-
-  <!-- Theme JS -->
   <script src="{{ asset('assets/dashkit/js/theme.bundle.js') }}" defer></script>
+
+  <!-- Laravel Flash -->
+  {{-- @include('dashboard.layouts._flash') --}}
+
+  <!-- Laravel Notify -->
+  {{-- @include('dashboard.layouts._laravel-notify') --}}
+
+  <!-- Google Analytics -->
+  @include('common._google-analytics')
 
   <!-- Page Script -->
   @yield('pageScript')

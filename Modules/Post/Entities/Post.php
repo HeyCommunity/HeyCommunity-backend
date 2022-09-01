@@ -47,22 +47,6 @@ class Post extends Model
     }
 
     /**
-     * Related Thumb
-     */
-    public function thumbs()
-    {
-        return $this->morphMany(Thumb::class, 'thumbable', 'entity_class', 'entity_id');
-    }
-
-    /**
-     * Related Comment
-     */
-    public function comments()
-    {
-        return $this->morphMany(Comment::class, 'commentable', 'entity_class', 'entity_id');
-    }
-
-    /**
      * Get image_num attr
      */
     public function getImageNumAttribute()

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Common\Comment;
 use App\Models\Common\Thumb;
 use Carbon\Carbon;
 use Encore\Admin\Traits\DefaultDatetimeFormat;
@@ -58,6 +59,22 @@ class Model extends EloquentModel
     public function getEntityTextForAdmin()
     {
         return class_basename($this->entity) . '(' . $this->id . ')';
+    }
+
+    /**
+     * 关联 Thumb
+     */
+    public function thumbs()
+    {
+        return $this->morphMany(Thumb::class, 'thumbable', 'entity_class', 'entity_id');
+    }
+
+    /**
+     * Related Comment
+     */
+    public function comments()
+    {
+        return $this->morphMany(Comment::class, 'commentable', 'entity_class', 'entity_id');
     }
 
     /**

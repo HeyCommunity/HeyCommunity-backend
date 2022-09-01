@@ -18,7 +18,8 @@ class PostDatabaseSeeder extends Seeder
      */
     public function run(\Faker\Generator $faker)
     {
-        Model::unguard();
+        $faker->addProvider(new \Bluemmb\Faker\PicsumPhotosProvider($faker));
+        $faker->addProvider(new \SupGeekRod\FakerZh\ZhCnDataProvider($faker));
 
         $this->makePostData($faker);
         $this->makePostImageData($faker);
@@ -62,8 +63,8 @@ class PostDatabaseSeeder extends Seeder
             if (random_int(1, 10) <= 8) {
                 foreach (range(1, random_int(1, 4)) as $index) {
                     $postImageData[] = [
-                        'post_id'   =>  $postId,
-                        'file_path'     =>  getImageFakerUrl(),
+                        'post_id'       =>  $postId,
+                        'file_path'     =>  $faker->imageUrl(640, 480, true),
                     ];
                 }
             }

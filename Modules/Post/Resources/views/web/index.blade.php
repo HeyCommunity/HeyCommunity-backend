@@ -8,6 +8,11 @@
           @foreach ($posts as $post)
             @include('post::web._item-post-card', ['post' => $post])
           @endforeach
+          @unless ($posts->count())
+            <div class="card">
+              <div class="card-body">暂无动态</div>
+            </div>
+          @endunless
 
           <div id="section-pagination">
             <div class="d-none d-sm-block">
@@ -27,6 +32,14 @@
             </div>
             <div class="card-body">
               <div class="list-group list-group-flush my-n3">
+                <div class="list-group-item">
+                  <div class="row align-items-center">
+                    <div class="col">
+                      <h5 class="mb-0">最近发布</h5>
+                    </div>
+                    <div class="col-auto">{{ $lastCreatePost ? $lastCreatePost->created_at->diffForHumans() : '-' }}</div>
+                  </div>
+                </div>
                 <div class="list-group-item">
                   <div class="row align-items-center">
                     <div class="col">

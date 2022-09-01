@@ -90,9 +90,9 @@ class CommentController extends Controller
     }
 
     /**
-     * Destory
+     * Destroy
      */
-    public function destory(Request $request)
+    public function destroy(Request $request)
     {
         $request->validate([
             'id'        =>  'required|integer',

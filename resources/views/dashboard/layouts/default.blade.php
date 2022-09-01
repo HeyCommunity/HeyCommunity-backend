@@ -3,11 +3,10 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
+
   <title>HEY社区</title>
   <meta name="description" content="HeyCommunity Dashboard" />
-
-  <!-- Favicon -->
-  <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
 
   <!-- Libs CSS -->
   <link rel="stylesheet" href="{{ asset('assets/dashkit/css/libs.bundle.css') }}" />
@@ -107,6 +106,15 @@
   <!-- JAVASCRIPT -->
   <script src="{{ asset('assets/dashkit/js/vendor.bundle.js') }}" defer></script>     <!-- Vendor JS -->
   <script src="{{ asset('assets/dashkit/js/theme.bundle.js') }}" defer></script>      <!-- Theme JS -->
+
+  <!-- Laravel Flash -->
+  {{-- @include('dashboard.layouts._flash') --}}
+
+  <!-- Laravel Notify -->
+  @include('dashboard.layouts._laravel-notify')
+
+  <!-- Google Analytics -->
+  @include('common._google-analytics')
 
   <!-- Page Script -->
   @yield('pageScript')

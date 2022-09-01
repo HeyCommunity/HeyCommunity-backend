@@ -14,7 +14,10 @@ class PostController extends Controller
     {
         $posts = Post::where('status', '1')->latest()->paginate();
 
-        return view('post::web.index', compact('posts'));
+        $lastCreatePost = Post::orderBy('created_at', 'desc')->first();
+        $lastUpdatePost = Post::orderBy('updated_at', 'desc')->first();
+
+        return view('post::web.index', compact('posts', 'lastCreatePost', 'lastUpdatePost'));
     }
 
     /**
