@@ -48,7 +48,7 @@ class VisitorLogging
                 'route_type'        =>  $this->getRouteType($request),
                 'route_name'        =>  $request->route() ? $request->route()->getName() : null,
 
-                'response_status_code'  =>  $response->status(),
+                'response_status_code'  =>  $response->getStatusCode(),
                 'request_method'        =>  $request->method(),
                 'request_path'          =>  Str::limit($request->path(), 255, null),
                 'request_uri'           =>  Str::limit($request->server('REQUEST_URI'), 255, null),
