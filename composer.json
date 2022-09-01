@@ -24,6 +24,7 @@
         "predis/predis": "^2.0"
     },
     "require-dev": {
+        "ext-intl": "*",
         "barryvdh/laravel-debugbar": "^3.6",
         "barryvdh/laravel-ide-helper": "^2.10",
         "bluemmb/faker-picsum-photos-provider": "^2.0",
