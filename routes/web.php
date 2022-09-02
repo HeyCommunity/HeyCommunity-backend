@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 //
 // WEB routes
-Route::namespace('App\\Http\\Controllers\\Web')->group(function () {
+Route::prefix('')->group(function () {
     Route::get('/', function () {
         return redirect()->route('web.posts.index');
     })->name('web.home');
@@ -20,6 +20,14 @@ Route::namespace('App\\Http\\Controllers\\Web')->group(function () {
 
 //
 // User routes
-Route::namespace('App\\Http\\Controllers\\Web')->group(function () {
-    Route::get('users/{user}', 'UserController@show')->name('web.users.show');
+Route::prefix('users')->group(function () {
+    Route::get('{user}', 'UserController@show')->name('web.users.show');
 });
+
+//
+// dev routes
+if (app()->environment(['local'])) {
+    Route::prefix('debug')->group(function () {
+        Route::get('/', 'DebugController@index')->name('web.debug.index');
+    });
+}

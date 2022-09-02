@@ -59,7 +59,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
 ##
 ## Other API
-Route::get('/system/settings', [SystemController::class, 'settings'])->name('api.system.settings');
-Route::get('/system/about', [SystemController::class, 'about'])->name('api.system.about');
-Route::get('/system/regulation', [SystemController::class, 'regulation'])->name('api.system.regulation');
+Route::get('system/settings', [SystemController::class, 'settings'])->name('api.system.settings');
+Route::get('system/about', [SystemController::class, 'about'])->name('api.system.about');
+Route::get('system/regulation', [SystemController::class, 'regulation'])->name('api.system.regulation');
 Route::post('user-reports', [UserReportController::class, 'store'])->name('api.user-reports.store');

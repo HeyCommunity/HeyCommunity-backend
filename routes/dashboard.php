@@ -39,12 +39,12 @@ Route::prefix('dashboard')->group(function () {
     });
 
     // 点赞
-    Route::middleware([])->group(function () {
+    Route::prefix('')->group(function () {
         Route::get('thumbs', 'ThumbController@index')->name('dashboard.thumbs.index');
     });
 
     // 其他
-    Route::middleware([])->group(function () {
+    Route::prefix('')->group(function () {
         Route::get('iframes/telescope', function () {
             return view('dashboard.iframes.iframe', ['iframeUrl' => 'dashboard/telescope']);
         })->name('dashboard.iframes.telescope');
