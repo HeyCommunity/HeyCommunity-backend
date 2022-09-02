@@ -2,7 +2,7 @@
 <div class="form-group">
   <label class="form-label mb-1">封面</label>
 
-  <small class="form-text text-muted">
+  <small class="form-text text-muted d-none">
     Please use an image no larger than 1200px * 600px.
   </small>
 

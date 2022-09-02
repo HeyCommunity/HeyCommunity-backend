@@ -79,6 +79,7 @@ class ArticleController extends Controller
             $coverPath = $request->cover->store('uploads/articles/covers');
 
             $article = Article::create([
+                'user_id'           =>  $request->user()->id,
                 'cover'             =>  $coverPath,
                 'title'             =>  $request->get('title'),
                 'author'            =>  $request->get('author'),
@@ -94,12 +95,12 @@ class ArticleController extends Controller
         } catch (\Exception $exception) {
             DB::rollBack();
 
-            notify()->error('创建文章失败', '未知错误');
+            notify()->error($exception->getMessage(), '创建文章失败');
             return redirect()->back()->withInput();
         }
 
 
-        notify()->success('创建文章', '操作成功');
+        notify()->success('创建文章成功');
         return redirect()->route('dashboard.articles.index');
     }
 
@@ -171,12 +172,12 @@ class ArticleController extends Controller
         } catch (\Exception $exception) {
             DB::rollBack();
 
-            notify()->error('更新文章失败', '未知错误');
+            notify()->error($exception->getMessage(), '更新文章失败');
             return redirect()->back()->withInput();
         }
 
 
-        notify()->success('师尊文章成功', '操作成功');
+        notify()->success('更新文章成功');
         return redirect()->route('dashboard.articles.index');
     }
 }
