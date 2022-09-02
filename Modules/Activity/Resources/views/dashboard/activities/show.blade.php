@@ -1,6 +1,12 @@
 @extends('dashboard.layouts.default')
 
 @section('mainContent')
+<style rel="stylesheet">
+  .quill-html p {
+    margin-bottom: 0 !important;
+  }
+</style>
+
 <div class="main-content">
   <div class="container-fluid">
     <div class="row justify-content-center">
@@ -22,7 +28,7 @@
               <h4 class="card-header-title">{{ $activity->title }}</h4>
             </div>
             <div class="card-body">
-              <div class="mb-3">{!! $activity->content !!}</div>
+              <div class="mb-3 quill-html">{!! $activity->content !!}</div>
             </div>
           </div>
         </div>
