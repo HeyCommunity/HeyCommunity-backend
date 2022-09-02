@@ -130,7 +130,9 @@ class UserController extends Controller
     public function logout(Request $request)
     {
         $user = $request->user();
-        $user->tokens()->where('name', 'token')->delete();
+
+        // $user->tokens()->where('name', 'token')->delete();       // 删除全部 token
+        $user->currentAccessToken()->delete();                      // 仅删除当前访问的 token
 
         return response()->noContent();
     }
