@@ -46,6 +46,7 @@ return [
             'driver' => 'single',
             'path' => storage_path('logs/heycommunity.log'),
             'level' => 'debug',
+            'permission'    =>  0666,
         ],
 
         // use `heycommunity` instead `hc`
@@ -54,12 +55,14 @@ return [
             'path' => storage_path('logs/heycommunity/hc.log'),
             'level' => env('LOG_LEVEL', 'debug'),
             'days' => 14,
+            'permission'    =>  0666,
         ],
 
         'single' => [
             'driver' => 'single',
             'path' => storage_path('logs/laravel.log'),
             'level' => env('LOG_LEVEL', 'debug'),
+            'permission'    =>  0666,
         ],
 
         'daily' => [
@@ -67,6 +70,7 @@ return [
             'path' => storage_path('logs/laravel.log'),
             'level' => env('LOG_LEVEL', 'debug'),
             'days' => 14,
+            'permission'    =>  0666,
         ],
 
         'slack' => [
