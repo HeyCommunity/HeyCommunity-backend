@@ -3,7 +3,7 @@
 @section('mainContent')
 <div class="main-content">
   <div class="header">
-    <div class="bg-cover header-img-top" style="background-image:url({{ asset($user->cover) }}); height:260px"></div>
+    <div class="bg-cover header-img-top" style="background-image:url({{ asset($user->cover) }}); background-color:#ddd; height:260px"></div>
 
     <div class="container-fluid">
       <div class="header-body mt-n5 mt-md-n6">
@@ -54,22 +54,21 @@
             <div class="list-group list-group-flush my-n3">
               <div class="list-group-item">
                 <div class="row align-items-center">
-                  <div class="col">
-                    <h5 class="mb-0">动态/点赞/评论</h5>
-                  </div>
-                  <div class="col-auto">
-                    <small class="text-muted">
-                      {{ $user->post_num }} / {{ $user->thumb_up_num }} / {{ $user->comment_num }}
-                    </small>
-                  </div>
+                  <div class="col"><h5 class="mb-0">动态/评论/点赞</h5></div>
+                  <div class="col-auto"><small class="text-muted">{{ $user->post_num }} / {{ $user->comment_num }} / {{ $user->thumb_up_num }}</small></div>
                 </div>
               </div>
 
               <div class="list-group-item">
                 <div class="row align-items-center">
-                  <div class="col">
-                    <h5 class="mb-0">最近活跃时间</h5>
-                  </div>
+                  <div class="col"><h5 class="mb-0">活跃天数</h5></div>
+                  <div class="col-auto"><small class="text-muted">{{ $user->active_day_num }}</small></div>
+                </div>
+              </div>
+
+              <div class="list-group-item">
+                <div class="row align-items-center">
+                  <div class="col"><h5 class="mb-0">最近活跃时间</h5></div>
                   <div class="col-auto">
                     <time class="small text-muted" datetime="{{ $user->last_active_at }}"
                           data-bs-toggle="tooltip" title="{{ optional($user->last_active_at)->diffForHumans() }}">{{ $user->last_active_at ?? 'NULL' }}</time>
@@ -79,9 +78,7 @@
 
               <div class="list-group-item">
                 <div class="row align-items-center">
-                  <div class="col">
-                    <h5 class="mb-0">注册时间</h5>
-                  </div>
+                  <div class="col"><h5 class="mb-0">注册时间</h5></div>
                   <div class="col-auto">
                     <time class="small text-muted" datetime="{{ $user->created_at }}"
                           data-bs-toggle="tooltip" title="{{ $user->created_at->diffForHumans() }}">{{ $user->created_at }}</time>

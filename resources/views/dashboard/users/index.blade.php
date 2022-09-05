@@ -43,7 +43,7 @@
                           <img src="{{ asset($user->avatar) }}" alt="{{ $user->app_id }}" class="avatar-img rounded-circle">
                         </a>
                       @endif
-                      <a href="{{ route('dashboard.users.show', $user) }}">{{ $user->nickname ?: 'NULL' }}</a>
+                      <a class="text-black" href="{{ route('dashboard.users.show', $user) }}">{{ $user->nickname ?: 'NULL' }}</a>
                     </td>
                     <td>{{ $user->post_num }}</td>
                     <td>{{ $user->thumb_up_num }} / {{ $user->comment_num }}</td>
@@ -55,10 +55,10 @@
                     @endif
                     <td><span data-bs-toggle="tooltip" title="{{ $user->created_at->diffForHumans() }}">{{ $user->created_at }}</span></td>
                     <td>
-                      <a href="{{ route('dashboard.users.show', $user) }}" class="btn btn-sm btn-light d-inline-block">详情</a>
+                      <a href="{{ route('dashboard.users.show', $user) }}" class="btn btn-sm btn-light d-inline-block lift">详情</a>
 
                       <div class="btn-group d-inline-block ms-2">
-                        <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-bs-toggle="dropdown"></button>
+                        <button type="button" class="btn btn-sm btn-light dropdown-toggle lift" data-bs-toggle="dropdown"></button>
                         <div class="dropdown-menu dropdown-menu-end dropdown-menu-sm">
                           <a class="dropdown-item text-muted">No Operations</a>
                         </div>
