@@ -34,4 +34,38 @@ class PostController extends Controller
     {
         return view('post::dashboard.show', compact('post'));
     }
+
+    /**
+     * 上架处理
+     */
+    public function setVisible(Post $post)
+    {
+        $post->update(['status' => 1]);
+
+        flash('动态上架成功')->success();
+        return back();
+    }
+
+
+    /**
+     * 下架处理
+     */
+    public function setHidden(Post $post)
+    {
+        $post->update(['status' => 2]);
+
+        flash('动态下架成功')->success();
+        return back();
+    }
+
+    /**
+     * 删除处理
+     */
+    public function destroy(Post $post)
+    {
+        $post->delete();
+
+        flash('动态删除成功')->success();
+        return back();
+    }
 }

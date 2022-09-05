@@ -29,7 +29,7 @@
                   <th>图片、视频</th>
                   <th>点赞/评论</th>
                   <th>更新时间</th>
-                  <th>发布时间</th>
+                  <th>状态</th>
                   <th>操作</th>
                 </tr>
               </thead>
@@ -41,16 +41,18 @@
                       <a href="{{ route('dashboard.users.show', $post->user) }}" class="avatar avatar-xs d-inline-block me-2">
                         <img src="{{ asset($post->user->avatar) }}" alt="{{ $post->user->nickname }}" class="avatar-img rounded-circle">
                       </a>
-                      <a href="{{ route('dashboard.users.show', $post->user) }}">{{ $post->user->nickname ?: 'NULL' }}</a>
+                      <a class="text-black" href="{{ route('dashboard.users.show', $post->user) }}">{{ $post->user->nickname ?: 'NULL' }}</a>
                     </td>
 
                     <!-- 内容 -->
                     <td>
-                      @if (Str::length($post->content) > 100)
-                        <span class="d-inline-block text-wrap" style="min-width:30em;">{{ Str::limit($post->content, 100 * 2) }}</span>
-                      @else
-                        <span>{{ $post->content }}</span>
-                      @endif
+                      <div class="text-wrap" style="min-width:20em; max-width:35em;">
+                        @if (Str::length($post->content) > 100)
+                          {{ Str::limit($post->content, 100 * 2) }}
+                        @else
+                          {{ $post->content }}
+                        @endif
+                      </div>
                     </td>
 
                     <td>
@@ -67,17 +69,36 @@
                         @endforeach
                       @endif
                     </td>
+
                     <td>{{ $post->thumb_up_num }} / {{ $post->comment_num }}</td>
                     <td><span data-bs-toggle="tooltip" title="{{ $post->updated_at->diffForHumans() }}">{{ $post->updated_at }}</span></td>
-                    <td><span data-bs-toggle="tooltip" title="{{ $post->created_at->diffForHumans() }}">{{ $post->created_at }}</span></td>
+
+                    <!-- 状态 -->
+                    <td>
+                      @if ($post->status === 0)
+                        <span class="badge bg-secondary-soft">{{ $post->status_name }}</span>
+                      @elseif ($post->status === 1)
+                        <span class="badge bg-success-soft">{{ $post->status_name }}</span>
+                      @elseif ($post->status === 2)
+                        <span class="badge bg-warning-soft">{{ $post->status_name }}</span>
+                      @endif
+                    </td>
+
                     <!-- 操作 -->
                     <td>
-                      <a href="{{ route('dashboard.posts.show', $post) }}" class="btn btn-sm btn-light d-inline-block">详情</a>
+                      <a href="{{ route('dashboard.posts.show', $post) }}" class="btn btn-sm btn-light d-inline-block lift">详情</a>
 
                       <div class="btn-group d-inline-block ms-2">
-                        <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-bs-toggle="dropdown"></button>
-                        <div class="dropdown-menu dropdown-menu-end dropdown-menu-sm">
-                          <a class="dropdown-item text-muted">No Operations</a>
+                        <button type="button" class="btn btn-sm btn-light dropdown-toggle lift" data-bs-toggle="dropdown"></button>
+                        <div class="mt-1 dropdown-menu dropdown-menu-end dropdown-menu-sm">
+                          <a class="dropdown-item" target="_blank" href="{{ route('web.posts.show', $post) }}">前台详情</a>
+                          <div class="dropdown-divider my-1"></div>
+                          @if ($post->status === 2)
+                            <a class="dropdown-item" href="{{ route('dashboard.posts.set-visible', $post) }}">上架</a>
+                          @elseif ($post->status === 1)
+                            <a class="dropdown-item text-danger" href="{{ route('dashboard.posts.set-hidden', $post) }}">下架</a>
+                          @endif
+                          <a class="dropdown-item text-danger" href="{{ route('dashboard.posts.destroy', $post) }}">删除</a>
                         </div>
                       </div>
                     </td>

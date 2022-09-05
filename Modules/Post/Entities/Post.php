@@ -47,7 +47,15 @@ class Post extends Model
     }
 
     /**
-     * Get image_num attr
+     * 状态名称 Attr
+     */
+    public function getStatusNameAttribute()
+    {
+        return self::$statuses[$this->getAttribute('status')] ?? '未知';
+    }
+
+    /**
+     * 图片数量 attr
      */
     public function getImageNumAttribute()
     {
