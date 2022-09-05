@@ -40,7 +40,7 @@
                     <td>
                       @if ($user->avatar)
                         <a href="{{ route('dashboard.users.show', $user) }}" class="avatar avatar-xs d-inline-block me-2">
-                          <img src="{{ asset($user->avatar) }}" alt="{{ $user->app_id }}" class="avatar-img rounded-circle">
+                          <img src="{{ asset($user->avatar) }}" alt="{{ $user->nickname }}" class="avatar-img rounded-circle">
                         </a>
                       @endif
                       <a class="text-black" href="{{ route('dashboard.users.show', $user) }}">{{ $user->nickname ?: 'NULL' }}</a>

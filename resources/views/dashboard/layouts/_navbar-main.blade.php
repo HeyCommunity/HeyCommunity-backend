@@ -31,10 +31,10 @@
     <a class="nav-link {{ request()->routeIs('dashboard.users.*') ? 'active' : null }}" href="{{ route('dashboard.users.index') }}"><i class="fe fe-users"></i> 用户管理</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link {{ request()->routeIs('dashboard.articles.*') ? 'active' : null }}" href="{{ route('dashboard.articles.index') }}"><i class="fe fe-file-text"></i> 文章管理</a>
+    <a class="nav-link {{ request()->routeIs('dashboard.posts.*') ? 'active' : null }}" href="{{ route('dashboard.posts.index') }}"><i class="fe fe-rss"></i> 动态管理</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link {{ request()->routeIs('dashboard.posts.*') ? 'active' : null }}" href="{{ route('dashboard.posts.index') }}"><i class="fe fe-rss"></i> 动态管理</a>
+    <a class="nav-link {{ request()->routeIs('dashboard.articles.*') ? 'active' : null }}" href="{{ route('dashboard.articles.index') }}"><i class="fe fe-file-text"></i> 文章管理</a>
   </li>
   <li class="nav-item">
     <a class="nav-link {{ request()->routeIs('dashboard.activities.*') ? 'active' : null }}" href="{{ route('dashboard.activities.index') }}"><i class="fe fe-flag"></i> 活动管理</a>
@@ -44,6 +44,9 @@
   </li>
   <li class="nav-item">
     <a class="nav-link {{ request()->routeIs('dashboard.thumbs.*') ? 'active' : null }}" href="{{ route('dashboard.thumbs.index') }}"><i class="fe fe-thumbs-up"></i> 点赞管理</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link {{ request()->routeIs('dashboard.user-reports.*') ? 'active' : null }}" href="{{ route('dashboard.user-reports.index') }}"><i class="fe fe-alert-octagon"></i> 用户报告</a>
   </li>
 </ul>
 

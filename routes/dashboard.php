@@ -7,6 +7,28 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('dashboard')->group(function () {
     Route::get('/', 'HomeController@index')->name('dashboard.index');
 
+    // 用户
+    Route::prefix('users')->group(function () {
+        Route::get('/', 'UserController@index')->name('dashboard.users.index');
+        Route::get('{user}', 'UserController@show')->name('dashboard.users.show')->where('user', '[0-9]+');
+    });
+
+    // 评论
+    Route::prefix('comments')->group(function () {
+        Route::get('/', 'CommentController@index')->name('dashboard.comments.index');
+        Route::get('{comment}', 'CommentController@show')->name('dashboard.comments.show')->where('comment', '[0-9]+');
+    });
+
+    // 点赞
+    Route::prefix('')->group(function () {
+        Route::get('thumbs', 'ThumbController@index')->name('dashboard.thumbs.index');
+    });
+
+    // 用户报告
+    Route::prefix('user-reports')->group(function () {
+        Route::get('/', 'UserReportController@index')->name('dashboard.user-reports.index');
+    });
+
     // 数据分析
     Route::prefix('analytics')->group(function () {
         Route::get('/', function () {
@@ -24,23 +46,6 @@ Route::prefix('dashboard')->group(function () {
         Route::get('/', 'VisitorLogController@index')->name('dashboard.visitor-logs.index');
         Route::get('date', 'VisitorLogController@date')->name('dashboard.visitor-logs.date');
         Route::get('analytics', 'VisitorLogController@analytics')->name('dashboard.visitor-logs.analytics');
-    });
-
-    // 用户
-    Route::prefix('users')->group(function () {
-        Route::get('/', 'UserController@index')->name('dashboard.users.index');
-        Route::get('{user}', 'UserController@show')->name('dashboard.users.show')->where('user', '[0-9]+');
-    });
-
-    // 评论
-    Route::prefix('comments')->group(function () {
-        Route::get('/', 'CommentController@index')->name('dashboard.comments.index');
-        Route::get('{comment}', 'CommentController@show')->name('dashboard.comments.show')->where('comment', '[0-9]+');
-    });
-
-    // 点赞
-    Route::prefix('')->group(function () {
-        Route::get('thumbs', 'ThumbController@index')->name('dashboard.thumbs.index');
     });
 
     // 其他
