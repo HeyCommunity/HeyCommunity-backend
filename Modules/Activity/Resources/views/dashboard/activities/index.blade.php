@@ -11,7 +11,7 @@
             <h1 class="header-title">活动</h1>
           </div>
           <div class="col-auto">
-            <a href="{{ route('dashboard.activities.create') }}" class="btn btn-primary lift">创建活动</a>
+            <a href="{{ route('dashboard.activities.create') }}" class="btn btn-primary lift"><i class="fe fe-plus-circle"></i> 创建活动</a>
           </div>
         </div>
       </div>

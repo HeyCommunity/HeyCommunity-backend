@@ -18,6 +18,11 @@
                 <h6 class="header-pretitle">Activity Detail</h6>
                 <h1 class="header-title">活动详情</h1>
               </div>
+
+              <div class="col-auto">
+                <a href="{{ url()->previous() }}" class="btn btn-light lift"><i class="fe fe-chevron-left"></i> 返回</a>
+                <a target="_blank" href="{{ route('web.activities.show', $activity) }}" class="btn btn-light lift"><i class="fe fe-eye"></i> 前台查看</a>
+              </div>
             </div>
           </div>
         </div>
