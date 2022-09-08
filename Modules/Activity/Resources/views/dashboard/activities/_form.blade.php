@@ -25,12 +25,14 @@
         </div>
       </div>
     </div>
-    <div class="form-group">
-      <label class="form-label">简介</label>
-      <textarea name="intro" class="form-control {{ $errors->has('intro') ? 'is-invalid' : null }}">{{ old('intro', $activity->intro) }}</textarea>
-      <div class="invalid-feedback">{{ $errors->first('intro') }}</div>
-    </div>
   </div>
+</div>
+
+<div class="form-group">
+  <label class="form-label">简介</label>
+  <textarea name="intro" class="form-control {{ $errors->has('intro') ? 'is-invalid' : null }}">{{ old('intro', $activity->intro) }}</textarea>
+  <div class="invalid-feedback">{{ $errors->first('intro') }}</div>
+</div>
 </div>
 
 <div class="form-group">
