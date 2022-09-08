@@ -1,12 +1,7 @@
 <div class="row">
   <div class="col-md-4">
     <div class="form-group">
-      <label class="form-label mb-1">封面</label>
-
-      <small class="form-text text-muted">
-        Please use an image no larger than 1200px * 600px.
-      </small>
-
+      <label class="form-label">封面</label>
       <input {{ $activity->id ? null : 'required' }} name="cover" type="file" class="form-control {{ $errors->has('cover') ? 'is-invalid' : null }}" value="{{ old('cover') }}" accept="image/*">
       <div class="invalid-feedback">{{ $errors->first('cover') }}</div>
     </div>
