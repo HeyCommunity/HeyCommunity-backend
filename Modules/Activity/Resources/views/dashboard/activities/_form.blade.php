@@ -1,30 +1,41 @@
-<div class="form-group">
-  <label class="form-label mb-1">封面</label>
+<div class="row">
+  <div class="col-md-4">
+    <div class="form-group">
+      <label class="form-label mb-1">封面</label>
 
-  <small class="form-text text-muted">
-    Please use an image no larger than 1200px * 600px.
-  </small>
+      <small class="form-text text-muted">
+        Please use an image no larger than 1200px * 600px.
+      </small>
 
-  <input {{ $activity->id ? null : 'required' }} name="cover" type="file" class="form-control {{ $errors->has('cover') ? 'is-invalid' : null }}" value="{{ old('cover') }}" accept="image/*">
-  <div class="invalid-feedback">{{ $errors->first('cover') }}</div>
-</div>
+      <input {{ $activity->id ? null : 'required' }} name="cover" type="file" class="form-control {{ $errors->has('cover') ? 'is-invalid' : null }}" value="{{ old('cover') }}" accept="image/*">
+      <div class="invalid-feedback">{{ $errors->first('cover') }}</div>
+    </div>
+  </div>
 
-<div class="form-group">
-  <label class="form-label">标题</label>
-  <input name="title" type="text" class="form-control {{ $errors->has('title') ? 'is-invalid' : null }}" value="{{ old('title', $activity->title) }}">
-  <div class="invalid-feedback">{{ $errors->first('title') }}</div>
-</div>
+  <div class="col-md-8">
+    <div class="row">
+      <div class="col-md-8">
+        <div class="form-group">
+          <label class="form-label">标题</label>
+          <input name="title" type="text" class="form-control {{ $errors->has('title') ? 'is-invalid' : null }}" value="{{ old('title', $activity->title) }}">
+          <div class="invalid-feedback">{{ $errors->first('title') }}</div>
+        </div>
+      </div>
 
-<div class="form-group">
-  <label class="form-label">用户 ID</label>
-  <input name="user_id" type="text" class="form-control {{ $errors->has('user_id') ? 'is-invalid' : null }}" value="{{ old('user_id', $activity->user_id) }}">
-  <div class="invalid-feedback">{{ $errors->first('user_id') }}</div>
-</div>
-
-<div class="form-group">
-  <label class="form-label">简介</label>
-  <textarea name="intro" class="form-control {{ $errors->has('intro') ? 'is-invalid' : null }}">{{ old('intro', $activity->intro) }}</textarea>
-  <div class="invalid-feedback">{{ $errors->first('intro') }}</div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label class="form-label">用户 ID</label>
+          <input name="user_id" type="text" class="form-control {{ $errors->has('user_id') ? 'is-invalid' : null }}" value="{{ old('user_id', $activity->user_id) }}">
+          <div class="invalid-feedback">{{ $errors->first('user_id') }}</div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">简介</label>
+      <textarea name="intro" class="form-control {{ $errors->has('intro') ? 'is-invalid' : null }}">{{ old('intro', $activity->intro) }}</textarea>
+      <div class="invalid-feedback">{{ $errors->first('intro') }}</div>
+    </div>
+  </div>
 </div>
 
 <div class="form-group">
@@ -93,24 +104,25 @@
 </div>
 
 <div class="row">
-  <div class="col-md-6">
+  <div class="col-md-4">
     <div class="form-group">
-      <label class="form-label">总票数</label>
-      <input name="total_ticket_num" type="text" class="form-control {{ $errors->has('total_ticket_num') ? 'is-invalid' : null }}" value="{{ old('total_ticket_num', $activity->total_ticket_num) }}">
-      <div class="invalid-feedback">{{ $errors->first('total_ticket_num') }}</div>
+      <label class="form-label">价格</label>
+      <input name="price" type="text" class="form-control {{ $errors->has('price') ? 'is-invalid' : null }}" value="{{ old('price', $activity->price) }}">
+      <div class="invalid-feedback">{{ $errors->first('price') }}</div>
     </div>
   </div>
-  <div class="col-md-6">
+  <div class="col-md-4">
     <div class="form-group">
       <label class="form-label">剩余票数</label>
       <input name="surplus_ticket_num" type="text" class="form-control {{ $errors->has('surplus_ticket_num') ? 'is-invalid' : null }}" value="{{ old('surplus_ticket_num', $activity->surplus_ticket_num) }}">
       <div class="invalid-feedback">{{ $errors->first('surplus_ticket_num') }}</div>
     </div>
   </div>
-</div>
-
-<div class="form-group">
-  <label class="form-label">价格</label>
-  <input name="price" type="text" class="form-control {{ $errors->has('price') ? 'is-invalid' : null }}" value="{{ old('price', $activity->price) }}">
-  <div class="invalid-feedback">{{ $errors->first('price') }}</div>
+  <div class="col-md-4">
+    <div class="form-group">
+      <label class="form-label">总票数</label>
+      <input name="total_ticket_num" type="text" class="form-control {{ $errors->has('total_ticket_num') ? 'is-invalid' : null }}" value="{{ old('total_ticket_num', $activity->total_ticket_num) }}">
+      <div class="invalid-feedback">{{ $errors->first('total_ticket_num') }}</div>
+    </div>
+  </div>
 </div>

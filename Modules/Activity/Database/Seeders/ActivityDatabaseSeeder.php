@@ -2,6 +2,7 @@
 
 namespace Modules\Activity\Database\Seeders;
 
+use App\Models\Common\Comment;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Database\Seeder;
@@ -36,6 +37,11 @@ class ActivityDatabaseSeeder extends Seeder
             ->state(new Sequence(
                 fn () => ['user_id' => $faker->randomElement($users)],
             ))
+            ->has(Comment::factory()
+                ->state(new Sequence(
+                    fn () => ['user_id' => $faker->randomElement($users)],
+                ))->count($faker->numberBetween(3, 10))
+            )
             ->count(20)
             ->create();
     }

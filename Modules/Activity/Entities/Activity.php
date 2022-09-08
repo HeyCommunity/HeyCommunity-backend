@@ -32,4 +32,12 @@ class Activity extends Model
     {
         return $this->belongsToMany(User::class, 'activity_members')->where('activity_members.status', 1);
     }
+
+    /**
+     * 已报名人数 Attr
+     */
+    public function getMemberNumAttribute()
+    {
+        return $this->members()->count();
+    }
 }

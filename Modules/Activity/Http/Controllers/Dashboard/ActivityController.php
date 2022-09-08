@@ -5,6 +5,7 @@ namespace Modules\Activity\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Modules\Activity\Entities\Activity;
+use Modules\Activity\Entities\ActivityMember;
 
 class ActivityController extends Controller
 {
@@ -32,6 +33,8 @@ class ActivityController extends Controller
     public function create()
     {
         $activity = new Activity();
+
+        $activity->setAttribute('user_id', request()->user()->id);
 
         $quillEditorConfig = json_encode([
             'placeholder'   =>  '请输入',

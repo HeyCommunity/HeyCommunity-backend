@@ -62,6 +62,22 @@ class Model extends EloquentModel
     }
 
     /**
+     * 关联 ThumbUp
+     */
+    public function upThumbs()
+    {
+        return $this->morphMany(Thumb::class, 'thumbable', 'entity_class', 'entity_id')->where('type', 'thumb_up');
+    }
+
+    /**
+     * 关联 ThumbDown
+     */
+    public function downThumbs()
+    {
+        return $this->morphMany(Thumb::class, 'thumbable', 'entity_class', 'entity_id')->where('type', 'thumb_down');
+    }
+
+    /**
      * 关联 Thumb
      */
     public function thumbs()
@@ -74,7 +90,7 @@ class Model extends EloquentModel
      */
     public function comments()
     {
-        return $this->morphMany(Comment::class, 'commentable', 'entity_class', 'entity_id');
+        return $this->morphMany(Comment::class, 'commentable', 'entity_class', 'entity_id')->latest();
     }
 
     /**
