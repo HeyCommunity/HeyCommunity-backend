@@ -35,7 +35,10 @@ class ActivityDatabaseSeeder extends Seeder
 
         Activity::factory()
             ->state(new Sequence(
-                fn () => ['user_id' => $faker->randomElement($users)],
+                fn () => [
+                    'user_id'   =>  $faker->randomElement($users),
+                    'status'    =>  $faker->randomElement(array_keys(Activity::$statuses))
+                ],
             ))
             ->has(Comment::factory()
                 ->state(new Sequence(
