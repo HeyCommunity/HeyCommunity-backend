@@ -95,11 +95,11 @@ class ArticleController extends Controller
         } catch (\Exception $exception) {
             DB::rollBack();
 
-            notify()->error($exception->getMessage(), '创建文章失败');
+            flash('创建文章失败')->error();
             return redirect()->back()->withInput();
         }
 
-        notify()->success('创建文章成功');
+        flash('创建文章成功')->success();
         return redirect()->route('dashboard.articles.index');
     }
 
@@ -171,12 +171,12 @@ class ArticleController extends Controller
         } catch (\Exception $exception) {
             DB::rollBack();
 
-            notify()->error($exception->getMessage(), '更新文章失败');
+            flash('更新文章失败')->error();
             return redirect()->back()->withInput();
         }
 
 
-        notify()->success('更新文章成功');
+        flash('更新文章成功')->success();
         return redirect()->route('dashboard.articles.index');
     }
 }
