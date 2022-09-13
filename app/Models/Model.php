@@ -41,6 +41,14 @@ class Model extends EloquentModel
     protected $guarded = [];
 
     /**
+     * 状态
+     *
+     * @var array
+     */
+    public static $statuses = [
+    ];
+
+    /**
      * Relation User
      */
     public function user()
@@ -133,6 +141,14 @@ class Model extends EloquentModel
         }
 
         return 0;
+    }
+
+    /**
+     * 状态名称 Attr
+     */
+    public function getStatusNameAttribute()
+    {
+        return $this::$statuses[$this->getAttribute('status')] ?? '未知';
     }
 
     /**

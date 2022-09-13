@@ -122,3 +122,13 @@
     </div>
   </div>
 </div>
+
+<div class="form-group">
+  <label class="form-label">状态</label>
+  <select name="status" class="form-select">
+    @foreach (\Modules\Activity\Entities\Activity::$statuses as $statusKey => $statusValue)
+      <option {{ $statusKey === old('status', $activity->status) ? 'selected' : '' }} value="{{ $statusKey }}">{{ $statusValue }}</option>
+    @endforeach
+  </select>
+  <div class="invalid-feedback">{{ $errors->first('total_ticket_num') }}</div>
+</div>

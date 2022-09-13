@@ -33,6 +33,7 @@
                   <th>开始时间</th>
                   <th>价格</th>
                   <th>报名</th>
+                  <th>状态</th>
                   <th>操作</th>
                 </tr>
               </thead>
@@ -55,9 +56,19 @@
                     <td>{{ $activity->started_at }}</td>
                     <td>{{ $activity->price }}</td>
                     <td>{{ $activity->member_num }} / {{ $activity->total_ticket_num }}</td>
+                    <!-- 状态 -->
                     <td>
-                      <a class="btn btn-light btn-sm lift" href="{{ route('dashboard.activities.edit', $activity) }}">编辑</a>
-                      <a class="btn btn-light btn-sm lift" href="{{ route('dashboard.activities.show', $activity) }}">详情</a>
+                      @if ($activity->status === 0)
+                        <span class="badge bg-secondary-soft">{{ $activity->status_name }}</span>
+                      @elseif ($activity->status === 1)
+                        <span class="badge bg-success-soft">{{ $activity->status_name }}</span>
+                      @elseif ($activity->status === 2)
+                        <span class="badge bg-warning-soft">{{ $activity->status_name }}</span>
+                      @endif
+                    </td>
+                    <td>
+                      <a class="btn btn-light btn-sm lift" href="{{ route('dashboard.activities.edit', $activity) }}"><i class="fe fe-edit"></i></a>
+                      <a class="btn btn-light btn-sm lift" href="{{ route('dashboard.activities.show', $activity) }}"><i class="fe fe-eye"></i></a>
                     </td>
                   </tr>
                 @endforeach

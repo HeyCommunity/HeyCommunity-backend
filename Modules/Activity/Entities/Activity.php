@@ -10,6 +10,15 @@ use Modules\Activity\Database\factories\ActivityFactory;
 class Activity extends Model
 {
     /**
+     * Statuses
+     */
+    public static $statuses = [
+        0       =>  '待审核',
+        1       =>  '已发布',
+        2       =>  '已下架',
+    ];
+
+    /**
      * casts
      */
     protected $casts = [

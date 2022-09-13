@@ -37,6 +37,8 @@ class CreateActivitiesTable extends Migration
             $table->integer('thumb_up_num')->default(0)->comment('活动点赞人数');
             $table->integer('comment_num')->default(0)->comment('活动点赞人数');
 
+            $table->tinyInteger('status')->default(0)->comment('Status');
+
             $table->timestamps();
             $table->softDeletes();
         });
