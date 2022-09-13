@@ -34,7 +34,22 @@
     <a class="nav-link {{ request()->routeIs('dashboard.posts.*') ? 'active' : null }}" href="{{ route('dashboard.posts.index') }}"><i class="fe fe-rss"></i> 动态管理</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link {{ request()->routeIs('dashboard.articles.*') ? 'active' : null }}" href="{{ route('dashboard.articles.index') }}"><i class="fe fe-file-text"></i> 文章管理</a>
+    <a class="nav-link" href="#sidebar-articles" data-bs-toggle="collapse">
+      <i class="fe fe-file-text"></i> 文章管理
+    </a>
+    <div id="sidebar-articles" class="collapse {{ request()->routeIs(['dashboard.articles.*']) ? 'show' : '' }}">
+      <ul class="nav nav-sm flex-column">
+        <li class="nav-item">
+          <a class="nav-link {{ request()->routeIs('dashboard.articles.*') ? 'active' : null }}" href="{{ route('dashboard.articles.index') }}">文章列表</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {{ request()->routeIs('dashboard.article-categories.*') ? 'active' : null }}" href="{{ route('dashboard.article-categories.index') }}">文章分类</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {{ request()->routeIs('dashboard.article-tags.*') ? 'active' : null }}" href="{{ route('dashboard.article-tags.index') }}">文章标签</a>
+        </li>
+      </ul>
+    </div>
   </li>
   <li class="nav-item">
     <a class="nav-link {{ request()->routeIs('dashboard.activities.*') ? 'active' : null }}" href="{{ route('dashboard.activities.index') }}"><i class="fe fe-flag"></i> 活动管理</a>

@@ -99,7 +99,6 @@ class ArticleController extends Controller
             return redirect()->back()->withInput();
         }
 
-
         notify()->success('创建文章成功');
         return redirect()->route('dashboard.articles.index');
     }
