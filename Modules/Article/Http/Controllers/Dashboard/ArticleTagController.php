@@ -2,78 +2,87 @@
 
 namespace Modules\Article\Http\Controllers\Dashboard;
 
-use Illuminate\Contracts\Support\Renderable;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
+use Modules\Article\Entities\ArticleTag;
 
 class ArticleTagController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     * @return Renderable
+     * 列表页
      */
     public function index()
     {
-        return view('article::index');
+        $articleTags = ArticleTag::paginate();
+
+        return view('article::dashboard.article-tags.index', compact('articleTags'));
     }
 
     /**
-     * Show the form for creating a new resource.
-     * @return Renderable
+     * 创建页
      */
     public function create()
     {
-        return view('article::create');
+        $articleTag = new ArticleTag();
+
+        return view('article::dashboard.article-tags.create', compact('articleTag'));
     }
 
     /**
-     * Store a newly created resource in storage.
-     * @param Request $request
-     * @return Renderable
+     * 新增处理
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'slug'          =>  'required|string',
+            'name'          =>  'required|string',
+            'description'   =>  'nullable|string',
+        ]);
+
+        $articleTag = ArticleTag::create([
+            'slug'          =>  $request->get('slug'),
+            'name'          =>  $request->get('name'),
+            'description'   =>  $request->get('description'),
+        ]);
+
+        if ($articleTag) {
+            flash('创建文章标签成功')->success();
+            return redirect()->route('dashboard.article-tags.index');
+        } else {
+            flash('创建文章标签成功')->error();
+            return back()->withInput();
+        }
     }
 
     /**
-     * Show the specified resource.
-     * @param int $id
-     * @return Renderable
+     * 编辑页
      */
-    public function show($id)
+    public function edit(ArticleTag $articleTag)
     {
-        return view('article::show');
+        return view('article::dashboard.article-tags.edit', compact('articleTag'));
     }
 
     /**
-     * Show the form for editing the specified resource.
-     * @param int $id
-     * @return Renderable
+     * 更新处理
      */
-    public function edit($id)
+    public function update(Request $request, ArticleTag $articleTag)
     {
-        return view('article::edit');
-    }
+        $request->validate([
+            'slug'          =>  'required|string',
+            'name'          =>  'required|string',
+            'description'   =>  'nullable|string',
+        ]);
 
-    /**
-     * Update the specified resource in storage.
-     * @param Request $request
-     * @param int $id
-     * @return Renderable
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+        $articleTag->setAttribute('slug', $request->get('slug'));
+        $articleTag->setAttribute('name', $request->get('name'));
+        $articleTag->setAttribute('description', $request->get('description'));
 
-    /**
-     * Remove the specified resource from storage.
-     * @param int $id
-     * @return Renderable
-     */
-    public function destroy($id)
-    {
-        //
+        if ($articleTag->save()) {
+            flash('更新文章标签成功')->success();
+            return redirect()->route('dashboard.article-tags.index');
+        } else {
+            flash('更新文章标签成功')->error();
+            return back()->withInput();
+        }
     }
 }

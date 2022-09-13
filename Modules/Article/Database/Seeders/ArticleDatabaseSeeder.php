@@ -89,7 +89,7 @@ class ArticleDatabaseSeeder extends Seeder
 
             $articleTagData[] = [
                 'sort'          =>  $index,
-                'slug'          =>  $name,
+                'slug'          =>  \Faker\Factory::create('en_US')->word(),
                 'name'          =>  $name,
                 'description'   =>  $faker->sentence(),
 

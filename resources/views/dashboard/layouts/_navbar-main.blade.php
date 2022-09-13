@@ -37,7 +37,7 @@
     <a class="nav-link" href="#sidebar-articles" data-bs-toggle="collapse">
       <i class="fe fe-file-text"></i> 文章管理
     </a>
-    <div id="sidebar-articles" class="collapse {{ request()->routeIs(['dashboard.articles.*']) ? 'show' : '' }}">
+    <div id="sidebar-articles" class="collapse {{ request()->routeIs(['dashboard.article*']) ? 'show' : '' }}">
       <ul class="nav nav-sm flex-column">
         <li class="nav-item">
           <a class="nav-link {{ request()->routeIs('dashboard.articles.*') ? 'active' : null }}" href="{{ route('dashboard.articles.index') }}">文章列表</a>
