@@ -25,7 +25,7 @@ class ThumbFactory extends Factory
         $this->faker->addProvider(new \SupGeekRod\FakerZh\ZhCnDataProvider($this->faker));
 
         return [
-            'type'              =>  'thumb_up',
+            'type'              =>  $this->faker->randomElement(['thumb_up', 'thumb_down']),
             'user_id'           =>  null,
             'entity_class'      =>  null,
             'entity_id'         =>  null,

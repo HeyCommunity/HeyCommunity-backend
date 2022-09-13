@@ -1,8 +1,10 @@
 <?php
+
 namespace Modules\Activity\Database\factories;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Modules\Activity\Entities\Activity;
 
 class ActivityFactory extends Factory
 {
@@ -38,7 +40,37 @@ class ActivityFactory extends Factory
             'price'                 =>  $this->faker->randomElement([0, 10, 20, 30, 50, 100]),
             'total_ticket_num'      =>  $this->faker->randomElement([10, 20, 50]),
             'surplus_ticket_num'    =>  fn (array $attributes) => $attributes['total_ticket_num'],
+
+            'status'        =>  $this->faker->randomElement(array_keys(Activity::$statuses)),
+            'created_at'    =>  $this->faker->dateTimeThisMonth(),
+            'updated_at'    =>  $this->faker->dateTimeThisMonth(),
         ];
+    }
+
+    /**
+     * Configure the model factory.
+     *
+     * @return $this
+     */
+    public function configure()
+    {
+        return $this->afterCreating(function (Activity $activity) {
+            $this->countingRelationNum($activity);
+        })->afterMaking(function (Activity $activity) {
+            $this->countingRelationNum($activity);
+        });
+    }
+
+    /**
+     * 计算关联模型数量
+     */
+    protected function countingRelationNum(Activity $activity)
+    {
+        $activity->update([
+            'thumb_up_num'      =>  $activity->upThumbs()->count(),
+            'thumb_down_num'    =>  $activity->downThumbs()->count(),
+            'comment_num'       =>  $activity->comments()->count(),
+        ]);
     }
 }
 

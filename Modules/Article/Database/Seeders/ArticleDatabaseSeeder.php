@@ -2,6 +2,8 @@
 
 namespace Modules\Article\Database\Seeders;
 
+use App\Models\Common\Comment;
+use App\Models\Common\Thumb;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Database\Seeder;
@@ -33,7 +35,7 @@ class ArticleDatabaseSeeder extends Seeder
      */
     protected function makeArticleData(\Faker\Generator $faker)
     {
-        $users = User::inRandomOrder()->limit(20)->get();
+        $users = User::inRandomOrder()->limit(50)->get();
         if ($users->empty()) {
             $users = User::factory()->count(50)->create();
         }
@@ -42,9 +44,18 @@ class ArticleDatabaseSeeder extends Seeder
             ->state(new Sequence(
                 fn () => [
                     'user_id'   =>  $faker->randomElement($users),
-                    'status'    =>  $faker->randomElement(array_keys(Article::$statuses)),
                 ],
             ))
+            ->has(Comment::factory()
+                ->state(new Sequence(
+                    fn () => ['user_id' => $faker->randomElement($users)],
+                ))->count($faker->numberBetween(3, 10))
+            )
+            ->has(Thumb::factory()
+                ->state(new Sequence(
+                    fn () => ['user_id' => $faker->randomElement($users)],
+                ))->count($faker->numberBetween(3, 10))
+            )
             ->count(50)
             ->create();
     }
