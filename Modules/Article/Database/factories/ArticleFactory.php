@@ -42,31 +42,5 @@ class ArticleFactory extends Factory
             'updated_at'    =>  $this->faker->dateTimeThisMonth(),
         ];
     }
-
-    /**
-     * Configure the model factory.
-     *
-     * @return $this
-     */
-    public function configure()
-    {
-        return $this->afterCreating(function (Article $article) {
-            $this->countingRelationNum($article);
-        })->afterMaking(function (Article $article) {
-            $this->countingRelationNum($article);
-        });
-    }
-
-    /**
-     * 计算关联模型数量
-     */
-    protected function countingRelationNum(Article $article)
-    {
-        $article->update([
-            'thumb_up_num'      =>  $article->upThumbs()->count(),
-            'thumb_down_num'    =>  $article->downThumbs()->count(),
-            'comment_num'       =>  $article->comments()->count(),
-        ]);
-    }
 }
 

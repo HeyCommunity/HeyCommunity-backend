@@ -57,7 +57,24 @@ class ArticleDatabaseSeeder extends Seeder
                 ))->count($faker->numberBetween(3, 10))
             )
             ->count(50)
-            ->create();
+            ->create()
+            ->each(function ($article) use ($faker, $users) {
+                if (random_int(0, 9) < 6) {
+                    $article->comments()->saveMany(Comment::factory()
+                        ->state(new Sequence(fn () => ['user_id' => $faker->randomElement($users)]))
+                        ->count(random_int(3, 10))->make());
+
+                    $article->thumbs()->saveMany(Thumb::factory()
+                        ->state(new Sequence(fn () => ['user_id' => $faker->randomElement($users)]))
+                        ->count(random_int(1, 20))->make());
+
+                    $article->update([
+                        'thumb_up_num'      =>  $article->upThumbs()->count(),
+                        'thumb_down_num'    =>  $article->downThumbs()->count(),
+                        'comment_num'       =>  $article->comments()->count(),
+                    ]);
+                }
+            });
     }
 
     /**

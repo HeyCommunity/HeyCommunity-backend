@@ -46,31 +46,5 @@ class ActivityFactory extends Factory
             'updated_at'    =>  $this->faker->dateTimeThisMonth(),
         ];
     }
-
-    /**
-     * Configure the model factory.
-     *
-     * @return $this
-     */
-    public function configure()
-    {
-        return $this->afterCreating(function (Activity $activity) {
-            $this->countingRelationNum($activity);
-        })->afterMaking(function (Activity $activity) {
-            $this->countingRelationNum($activity);
-        });
-    }
-
-    /**
-     * 计算关联模型数量
-     */
-    protected function countingRelationNum(Activity $activity)
-    {
-        $activity->update([
-            'thumb_up_num'      =>  $activity->upThumbs()->count(),
-            'thumb_down_num'    =>  $activity->downThumbs()->count(),
-            'comment_num'       =>  $activity->comments()->count(),
-        ]);
-    }
 }
 

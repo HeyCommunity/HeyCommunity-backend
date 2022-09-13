@@ -29,31 +29,5 @@ class PostFactory extends Factory
             'updated_at'    =>  $this->faker->dateTimeThisMonth(),
         ];
     }
-
-    /**
-     * Configure the model factory.
-     *
-     * @return $this
-     */
-    public function configure()
-    {
-        return $this->afterCreating(function (Post $post) {
-            $this->countingRelationNum($post);
-        })->afterMaking(function (Post $post) {
-            $this->countingRelationNum($post);
-        });
-    }
-
-    /**
-     * 计算关联模型数量
-     */
-    protected function countingRelationNum(Post $post)
-    {
-        $post->update([
-            'thumb_up_num'      =>  $post->upThumbs()->count(),
-            'thumb_down_num'    =>  $post->downThumbs()->count(),
-            'comment_num'       =>  $post->comments()->count(),
-        ]);
-    }
 }
 

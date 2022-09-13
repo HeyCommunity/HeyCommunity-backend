@@ -36,19 +36,36 @@ class PostDatabaseSeeder extends Seeder
                     'user_id'   =>  $faker->randomElement($users),
                 ],
             ))
-            ->has(Comment::factory()
-                ->state(new Sequence(
-                    fn () => ['user_id' => $faker->randomElement($users)],
-                ))->count($faker->numberBetween(3, 10))
-            )
-            ->has(Thumb::factory()
-                ->state(new Sequence(
-                    fn () => ['user_id' => $faker->randomElement($users)],
-                ))->count($faker->numberBetween(3, 10))
-            )
-            ->has(PostImage::factory()->count($faker->numberBetween(1, 9)), 'images')
-            ->has(PostVideo::factory()->count($faker->numberBetween(0, 1)), 'video')
             ->count(50)
-            ->create();
+            ->create()
+            ->each(function ($post) use ($faker, $users) {
+                if (random_int(0, 9) < 6) {
+                    $post->comments()->saveMany(Comment::factory()
+                        ->state(new Sequence(fn () => ['user_id' => $faker->randomElement($users)]))
+                        ->count(random_int(3, 10))->make());
+
+                    $post->thumbs()->saveMany(Thumb::factory()
+                        ->state(new Sequence(fn () => ['user_id' => $faker->randomElement($users)]))
+                        ->count(random_int(1, 20))->make());
+
+                    $post->update([
+                        'thumb_up_num'      =>  $post->upThumbs()->count(),
+                        'thumb_down_num'    =>  $post->downThumbs()->count(),
+                        'comment_num'       =>  $post->comments()->count(),
+                    ]);
+                }
+
+                if (random_int(0, 9) < 3) {
+                    $post->video()->saveMany(PostVideo::factory()->count(1)->make([
+                        'post_id'       =>  $post->id,
+                        'user_id'       =>  $post->user_id,
+                    ]));
+                } else {
+                    $post->images()->saveMany(PostImage::factory()->count(random_int(1, 9))->make([
+                        'post_id'       =>  $post->id,
+                        'user_id'       =>  $post->user_id,
+                    ]));
+                }
+            });
     }
 }

@@ -21,14 +21,6 @@ class ActivityDatabaseSeeder extends Seeder
         $faker->addProvider(new \Bluemmb\Faker\PicsumPhotosProvider($faker));
         $faker->addProvider(new \SupGeekRod\FakerZh\ZhCnDataProvider($faker));
 
-        $this->makeActivities($faker);
-    }
-
-    /**
-     * 创建活动
-     */
-    protected function makeActivities(\Faker\Generator $faker)
-    {
         $users = User::inRandomOrder()->limit(20)->get();
         if ($users->empty()) {
             $users = User::factory()->count(50)->create();
@@ -40,17 +32,24 @@ class ActivityDatabaseSeeder extends Seeder
                     'user_id'   =>  $faker->randomElement($users),
                 ],
             ))
-            ->has(Comment::factory()
-                ->state(new Sequence(
-                    fn () => ['user_id' => $faker->randomElement($users)],
-                ))->count($faker->numberBetween(3, 10))
-            )
-            ->has(Thumb::factory()
-                ->state(new Sequence(
-                    fn () => ['user_id' => $faker->randomElement($users)],
-                ))->count($faker->numberBetween(3, 10))
-            )
             ->count(20)
-            ->create();
+            ->create()
+            ->each(function ($activity) use ($faker, $users) {
+                if (random_int(0, 9) < 6) {
+                    $activity->comments()->saveMany(Comment::factory()
+                        ->state(new Sequence(fn () => ['user_id' => $faker->randomElement($users)]))
+                        ->count(random_int(3, 10))->make());
+
+                    $activity->thumbs()->saveMany(Thumb::factory()
+                        ->state(new Sequence(fn () => ['user_id' => $faker->randomElement($users)]))
+                        ->count(random_int(1, 20))->make());
+
+                    $activity->update([
+                        'thumb_up_num'      =>  $activity->upThumbs()->count(),
+                        'thumb_down_num'    =>  $activity->downThumbs()->count(),
+                        'comment_num'       =>  $activity->comments()->count(),
+                    ]);
+                }
+            });
     }
 }
