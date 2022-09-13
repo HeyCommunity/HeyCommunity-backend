@@ -27,10 +27,12 @@
               <thead>
                 <tr>
                   <th>ID</th>
+                  <th>封面</th>
                   <th>标题</th>
-                  <th>作者</th>
                   <th>分类</th>
                   <th>标签</th>
+                  <th>点赞 / 评论</th>
+                  <th>状态</th>
                   <th>发布时间</th>
                   <th>操作</th>
                 </tr>
@@ -39,8 +41,12 @@
                 @foreach ($articles as $article)
                   <tr>
                     <td>{{ $article->id }}</td>
+                    <td>
+                      <a target="_blank" href="{{ $article->cover }}">
+                        <img src="{{ asset($article->cover) }}" style="height:40px;">
+                      </a>
+                    </td>
                     <td>{{ $article->title }}</td>
-                    <td>{{ $article->author }}</td>
                     <td>
                       @foreach ($article->categories as $category)
                         <span class="badge bg-primary-soft">{{ $category->name }}</span>
@@ -48,13 +54,24 @@
                     </td>
                     <td>
                       @foreach ($article->tags as $tag)
-                        <span class="badge bg-info-soft">{{ $tag->name }}</span>
+                        <span class="badge bg-secondary-soft">{{ $tag->name }}</span>
                       @endforeach
                     </td>
-                    <td>{{ $article->created_at }}</td>
+                    <td>{{ $article->thumb_up_num }} / {{ $article->comment_num }}</td>
+                    <!-- 状态 -->
                     <td>
-                      <a class="btn btn-light btn-sm lift" href="{{ route('dashboard.articles.edit', $article) }}">编辑</a>
-                      <a class="btn btn-light btn-sm lift" href="{{ route('dashboard.articles.show', $article) }}">详情</a>
+                      @if ($article->status === 0)
+                        <span class="badge bg-secondary-soft">{{ $article->status_name }}</span>
+                      @elseif ($article->status === 1)
+                        <span class="badge bg-success-soft">{{ $article->status_name }}</span>
+                      @elseif ($article->status === 2)
+                        <span class="badge bg-warning-soft">{{ $article->status_name }}</span>
+                      @endif
+                    </td>
+                    <td>{{ $article->published_at }}</td>
+                    <td>
+                      <a class="btn btn-light btn-sm lift" href="{{ route('dashboard.articles.edit', $article) }}"><i class="fe fe-edit"></i></a>
+                      <a class="btn btn-light btn-sm lift" href="{{ route('dashboard.articles.show', $article) }}"><i class="fe fe-eye"></i></a>
                     </td>
                   </tr>
                 @endforeach

@@ -72,6 +72,8 @@ class ArticleController extends Controller
             'content'           =>  'required|string',
             'categories'        =>  'required|array',
             'tags'              =>  'nullable|array',
+            'status'            =>  'required|integer',
+            'published_at'      =>  'required|date',
         ]);
 
         DB::beginTransaction();
@@ -85,8 +87,8 @@ class ArticleController extends Controller
                 'author'            =>  $request->get('author'),
                 'intro'             =>  $request->get('intro'),
                 'content'           =>  $request->get('content'),
-                'published_at'      =>  now(),
-                'status'            =>  1,
+                'status'            =>  $request->get('status'),
+                'published_at'      =>  $request->get('published_at'),
             ]);
 
             $article->categories()->sync($request->get('categories'));
@@ -145,6 +147,7 @@ class ArticleController extends Controller
             'content'           =>  'required|string',
             'categories'        =>  'required|array',
             'tags'              =>  'nullable|array',
+            'status'            =>  'required|integer',
             'published_at'      =>  'required|date',
         ]);
 
@@ -155,6 +158,7 @@ class ArticleController extends Controller
                 'author'            =>  $request->get('author'),
                 'intro'             =>  $request->get('intro'),
                 'content'           =>  $request->get('content'),
+                'status'            =>  $request->get('status'),
                 'published_at'      =>  $request->get('published_at'),
             ];
 

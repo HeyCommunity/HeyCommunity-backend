@@ -35,8 +35,6 @@ class ArticleFactory extends Factory
             'author'        =>  $this->faker->name(),
             'published_at'  =>  $this->faker->dateTimeThisMonth(),
 
-            'status'        =>  1,
-
             'created_at'    =>  $this->faker->dateTimeThisMonth(),
             'updated_at'    =>  $this->faker->dateTimeThisMonth(),
         ];

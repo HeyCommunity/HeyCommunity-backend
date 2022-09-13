@@ -130,5 +130,5 @@
       <option {{ $statusKey === old('status', $activity->status) ? 'selected' : '' }} value="{{ $statusKey }}">{{ $statusValue }}</option>
     @endforeach
   </select>
-  <div class="invalid-feedback">{{ $errors->first('total_ticket_num') }}</div>
+  <div class="invalid-feedback">{{ $errors->first('status') }}</div>
 </div>

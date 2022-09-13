@@ -40,7 +40,10 @@ class ArticleDatabaseSeeder extends Seeder
 
         Article::factory()
             ->state(new Sequence(
-                fn () => ['user_id' => $faker->randomElement($users)],
+                fn () => [
+                    'user_id'   =>  $faker->randomElement($users),
+                    'status'    =>  $faker->randomElement(array_keys(Article::$statuses)),
+                ],
             ))
             ->count(50)
             ->create();
