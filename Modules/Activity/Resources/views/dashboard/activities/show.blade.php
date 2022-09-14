@@ -31,7 +31,7 @@
           <div class="row">
             <div class="col-lg-8">
               <div class="card">
-                <img class="card-img-top" src="{{ asset($activity->cover) }}" style="max-height:180px;">
+                <img class="card-img-top" src="{{ asset($activity->cover) }}" style="max-height:180px; object-fit:cover;">
                 <div class="card-header py-3" style="height:auto;">
                   <div>
                     <h2 class="card-header-title">{{ $activity->title }}</h2>
