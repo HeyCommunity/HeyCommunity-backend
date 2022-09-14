@@ -35,9 +35,9 @@ class ArticleDatabaseSeeder extends Seeder
      */
     protected function makeArticleData(\Faker\Generator $faker)
     {
-        $users = User::inRandomOrder()->limit(50)->get();
-        if ($users->empty()) {
-            $users = User::factory()->count(50)->create();
+        $users = User::inRandomOrder()->limit(20)->get();
+        if ($users->isEmpty()) {
+            $users = User::factory()->count(20)->create();
         }
 
         Article::factory()

@@ -22,8 +22,8 @@ class ActivityDatabaseSeeder extends Seeder
         $faker->addProvider(new \SupGeekRod\FakerZh\ZhCnDataProvider($faker));
 
         $users = User::inRandomOrder()->limit(20)->get();
-        if ($users->empty()) {
-            $users = User::factory()->count(50)->create();
+        if ($users->isEmpty()) {
+            $users = User::factory()->count(20)->create();
         }
 
         Activity::factory()
