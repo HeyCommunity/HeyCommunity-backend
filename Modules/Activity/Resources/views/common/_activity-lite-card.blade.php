@@ -1,11 +1,11 @@
 <div class="card">
-  <a href="{{ route('web.activities.show', $activity) }}">
+  <a href="{{ hcRoute('activities.show', $activity) }}">
     <img src="{{ $activity->cover }}" class="card-img-top" style="max-height:160px; object-fit:cover;">
   </a>
 
   <div class="card-body">
     <h4 class="mb-2 name text-nowrap overflow-hidden text-truncate">
-      <a href="{{ route('web.activities.show', $activity) }}">{{ $activity->title }}</a>
+      <a href="{{ hcRoute('activities.show', $activity) }}">{{ $activity->title }}</a>
     </h4>
 
     <div class="card-text small">

@@ -3,7 +3,7 @@
 @section('mainContent')
 <div class="main-content">
   <div class="header bg-dark pb-5">
-    <div class="container">
+    <div class="container-fluid">
       <div class="header-body">
         <div class="row align-items-end">
           <div class="col">
@@ -66,7 +66,7 @@
     </div>
   </div>
 
-  <div class="container mt-n6">
+  <div class="container-fluid mt-n6">
     <div class="row">
       <div class="col-12 col-xl-8">
         <div class="card">

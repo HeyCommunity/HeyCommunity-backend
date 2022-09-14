@@ -5,7 +5,7 @@
   <div class="header">
     <div class="bg-cover header-img-top" style="background-image:url({{ asset($user->cover) }}); background-color:#ddd; height:260px"></div>
 
-    <div class="container">
+    <div class="container-fluid">
       <div class="header-body mt-n5 mt-md-n6">
         <div class="row align-items-end">
           <div class="col-auto">

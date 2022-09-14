@@ -10,14 +10,14 @@
           <div class="list-group-item">
             <div class="row align-items-center">
               <div class="col-auto">
-                <a href="{{ route('dashboard.users.show', $user) }}" class="avatar">
+                <a href="{{ hcRoute('users.show', $user) }}" class="avatar">
                   <img src="{{ asset($user->avatar) }}" alt="{{ $user->nickname }}" class="avatar-img rounded-circle">
                 </a>
               </div>
 
               <div class="col ms-n2">
                 <div class="mb-1">
-                  <a class="h4 text-black" href="{{ route('dashboard.users.show', $user) }}">{{ $user->nickname }}</a>
+                  <a class="h4 text-black" href="{{ hcRoute('users.show', $user) }}">{{ $user->nickname }}</a>
                   <div class="float-end"><span class="text-muted fs-sm">{{ now()->diffForHumans() }}</span></div>
                 </div>
                 <p class="card-text text-muted small">{{ $user->bio }}</p>
