@@ -31,7 +31,7 @@
                     onsubmit="formSubmit(event)">
                 {{ csrf_field() }}
 
-                @include('activity::dashboard.activities._form')
+                @include('activity::dashboard._form')
 
                 <button type="submit" class="btn w-100 btn-primary">更新</button>
               </form>
