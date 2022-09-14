@@ -16,7 +16,7 @@
             @include('post::common._item-post-card', ['post' => $thumb->entity])
             @break
           @case(\Modules\Article\Entities\Article::class)
-            @include('article::common._item-article-card', ['article' => $thumb->entity])
+            @include('article::common._article-card', ['article' => $thumb->entity])
             @break
           @case(\Modules\Activity\Entities\Activity::class)
             @include('activity::common._item-activity-card', ['activity' => $thumb->entity])
