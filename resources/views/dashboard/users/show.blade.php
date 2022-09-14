@@ -43,7 +43,7 @@
       <div class="col-12 col-lg-8">
         <div id="tabs" class="tab-content">
           <style rel="stylesheet">
-            #tabs .tab-pane .card .card-body > .card {
+            #tabs .tab-pane > .card > .card-body > .card {
               margin-bottom: 0;
             }
           </style>
