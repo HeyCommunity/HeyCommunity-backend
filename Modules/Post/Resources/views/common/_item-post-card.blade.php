@@ -1,17 +1,5 @@
 @php
   if (! isset($showComments)) $showComments = true;
-
-  // users.show route name
-  if (! isset($userShowRouteName)) {
-    $userShowRouteName = 'web.users.show';
-    if (request()->routeIs('dashboard.*')) $userShowRouteName = 'dashboard.users.show';
-  }
-
-  // posts.show route name
-  if (! isset($postShowRouteName)) {
-    $postShowRouteName = 'web.posts.show';
-    if (request()->routeIs('dashboard.*')) $postShowRouteName = 'dashboard.posts.show';
-  }
 @endphp
 
 <div class="card">
@@ -20,13 +8,13 @@
     <div class="">
       <div class="row align-items-center">
         <div class="col-auto">
-          <a href="{{ route('dashboard.users.show', $post->user) }}" class="avatar">
+          <a href="{{ hcRoute('users.show', $post->user) }}" class="avatar">
             <img src="{{ $post->user->avatar }}" alt="{{ $post->user->nickname }}" class="avatar-img rounded-circle">
           </a>
         </div>
 
         <div class="col ms-n2">
-          <h4 class="mb-1"><a href="{{ route('dashboard.users.show', $post->user) }}">{{ $post->user->nickname }}</a></h4>
+          <h4 class="mb-1"><a href="{{ hcRoute('users.show', $post->user) }}">{{ $post->user->nickname }}</a></h4>
           <p class="card-text small text-muted">
             <span class="fe fe-clock"></span>
             <time datetime="{{ $post->created_at }}" data-bs-toggle="tooltip" title="{{ $post->created_at->diffForHumans() }}">{{ $post->created_at }}</time>
@@ -39,7 +27,7 @@
               <i class="fe fe-more-vertical"></i>
             </a>
             <div class="dropdown-menu dropdown-menu-end">
-              <a href="{{ route('web.posts.show', $post) }}" class="dropdown-item text-muted">详情</a>
+              <a href="{{ hcRoute('posts.show', $post) }}" class="dropdown-item text-muted">详情</a>
             </div>
           </div>
         </div>
@@ -80,7 +68,7 @@
           <div class="comment mb-0 mt-3">
             <div class="row">
               <div class="col-auto">
-                <a class="avatar" href="{{ route('dashboard.users.show', $comment->user) }}">
+                <a class="avatar" href="{{ hcRoute('users.show', $comment->user) }}">
                   <img src="{{ $comment->user->avatar }}" class="avatar-img rounded-circle">
                 </a>
               </div>
@@ -88,7 +76,7 @@
                 <div class="comment-body">
                   <div class="row">
                     <div class="col">
-                      <h5 class="comment-title"><a href="{{ route('dashboard.users.show', $comment->user) }}">{{ $comment->user->nickname }}</a></h5>
+                      <h5 class="comment-title"><a href="{{ hcRoute('users.show', $comment->user) }}">{{ $comment->user->nickname }}</a></h5>
                     </div>
                     <div class="col-auto">
                       <time class="comment-time" data-bs-toggle="tooltip" title="{{ $comment->created_at->diffForHumans() }}">{{ $comment->created_at }}</time>

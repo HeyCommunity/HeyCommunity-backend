@@ -1,8 +1,3 @@
-@php
-  if (! isset($userShowRouteName)) $userShowRouteName = 'web.users.show';
-  if (request()->routeIs('dashboard.*')) $userShowRouteName = 'dashboard.users.show';
-@endphp
-
 <div class="card">
   <div class="card-header">
     <h4 class="card-header-title">动态信息</h4>
@@ -13,7 +8,7 @@
       <div class="list-group-item py-3">
         <div class="row align-items-center">
           <div class="col"><h5 class="mb-0">发布人</h5></div>
-          <div class="col-auto"><a class="small" href="{{ route($userShowRouteName, $post->user) }}">{{ $post->user->nickname }}</a></div>
+          <div class="col-auto"><a class="small" href="{{ hcRoute('users.show', $post->user) }}">{{ $post->user->nickname }}</a></div>
         </div>
       </div>
 
