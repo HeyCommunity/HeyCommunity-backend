@@ -32,7 +32,7 @@
         <div id="section-content">
           <div class="row">
             <div class="col-12 col-lg-8">
-              @include('article::common._article-card', ['article' => $article])
+              @include('article::common._article-profile', ['article' => $article])
 
               <div class="d-block d-lg-none">
                 @include('common._up-thumbs-card', ['thumbs' => $article->upThumbs])

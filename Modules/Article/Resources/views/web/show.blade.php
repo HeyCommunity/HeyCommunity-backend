@@ -16,7 +16,7 @@
     <div class="container mt-n6">
       <div class="row">
         <div class="col-12 col-lg-8">
-          @include('article::common._article-card', ['article' => $article, 'showArticleTopCover' => false])
+          @include('article::common._article-profile', ['article' => $article, 'showArticleTopCover' => false])
 
           <div class="d-block d-lg-none">
             @include('common._up-thumbs-card', ['thumbs' => $article->upThumbs])
