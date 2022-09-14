@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-md navbar-light d-none del-d-md-flex" id="topbar">
-  <div class="container-fluid">
+  <div class="container">
     <!-- Form -->
     <form class="form-inline me-4 d-none d-md-flex">
       <div class="input-group input-group-flush input-group-merge input-group-reverse">

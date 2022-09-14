@@ -1,5 +1,5 @@
 <div class="header">
-  <div class="container-fluid">
+  <div class="container">
     <div class="header-body">
       <div class="row align-items-end">
         <div class="col">

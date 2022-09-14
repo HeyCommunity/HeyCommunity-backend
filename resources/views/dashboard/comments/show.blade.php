@@ -3,7 +3,7 @@
 @section('mainContent')
 <div class="main-content">
   <div class="header">
-    <div class="container-fluid">
+    <div class="container">
       <div class="header-body">
         <div class="row align-items-end">
           <div class="col">
@@ -18,7 +18,7 @@
     </div>
   </div>
 
-  <div class="container-fluid">
+  <div class="container">
     <div class="row">
       <div class="col-12 col-xl-8">
         <div class="card">

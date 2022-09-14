@@ -33,7 +33,7 @@
 <body>
   <!-- NAVIGATION -->
   <nav class="navbar navbar-vertical fixed-start navbar-expand-md navbar-light" id="sidebar">
-    <div class="container-fluid">
+    <div class="container">
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarCollapse"><span class="navbar-toggler-icon"></span></button>
 
       <!-- Brand -->
