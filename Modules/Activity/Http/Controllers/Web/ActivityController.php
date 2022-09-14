@@ -14,7 +14,7 @@ class ActivityController extends Controller
      */
     public function index()
     {
-        $activities = Activity::latest()->paginate();
+        $activities = Activity::latest()->paginate(12);
 
         return view('activity::web.index', compact('activities'));
     }

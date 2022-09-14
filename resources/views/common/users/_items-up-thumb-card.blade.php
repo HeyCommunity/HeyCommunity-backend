@@ -19,7 +19,7 @@
             @include('article::common._article-card', ['article' => $thumb->entity])
             @break
           @case(\Modules\Activity\Entities\Activity::class)
-            @include('activity::common._item-activity-card', ['activity' => $thumb->entity])
+            @include('activity::common._activity-profile', ['activity' => $thumb->entity])
             @break
           @default
             <div class="card">
