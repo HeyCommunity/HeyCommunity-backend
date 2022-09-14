@@ -53,7 +53,7 @@
           </div>
 
           <div id="tab-posts" class="tab-pane fade active show">
-            @include('post::common._items-post-card', ['posts' => $user->posts])
+            @include('post::common._post-list', ['posts' => $user->posts])
           </div>
 
           <div id="tab-comments" class="tab-pane fade">

@@ -13,7 +13,7 @@
             @include('common.users._item-comment-card', ['comment' => $thumb->entity])
             @break
           @case(\Modules\Post\Entities\Post::class)
-            @include('post::common._item-post-card', ['post' => $thumb->entity])
+            @include('post::common._post-profile', ['post' => $thumb->entity])
             @break
           @case(\Modules\Article\Entities\Article::class)
             @include('article::common._article-profile', ['article' => $thumb->entity])

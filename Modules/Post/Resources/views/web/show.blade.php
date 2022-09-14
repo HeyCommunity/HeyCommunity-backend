@@ -5,7 +5,7 @@
   <div class="container mt-4">
     <div class="row">
       <div class="col-12 col-lg-8">
-        @include('post::common._item-post-card', ['post' => $post, 'showComments' => false])
+        @include('post::common._post-profile', ['post' => $post, 'showComments' => false])
 
         <div class="d-block d-lg-none">
           @include('common._up-thumbs-card', ['thumbs' => $post->upThumbs])

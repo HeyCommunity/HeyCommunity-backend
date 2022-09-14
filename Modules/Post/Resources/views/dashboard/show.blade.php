@@ -22,7 +22,7 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-8">
-        @include('post::common._item-post-card', ['post' => $post, 'showComments' => false])
+        @include('post::common._post-profile', ['post' => $post, 'showComments' => false])
 
         @include('common._comments-card', ['comments' => $post->comments])
       </div>

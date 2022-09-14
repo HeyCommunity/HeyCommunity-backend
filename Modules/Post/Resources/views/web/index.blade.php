@@ -5,7 +5,7 @@
   <div class="container mt-4">
       <div class="row">
         <div class="col-lg-8">
-          @include('post::common._items-post-card', ['posts' => $posts])
+          @include('post::common._post-list', ['posts' => $posts])
 
           <div id="section-pagination">
             <div class="d-none d-sm-block">
