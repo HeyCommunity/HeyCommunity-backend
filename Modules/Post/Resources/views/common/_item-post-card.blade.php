@@ -1,3 +1,19 @@
+@php
+  if (! isset($showComments)) $showComments = true;
+
+  // users.show route name
+  if (! isset($userShowRouteName)) {
+    $userShowRouteName = 'web.users.show';
+    if (request()->routeIs('dashboard.*')) $userShowRouteName = 'dashboard.users.show';
+  }
+
+  // posts.show route name
+  if (! isset($postShowRouteName)) {
+    $postShowRouteName = 'web.posts.show';
+    if (request()->routeIs('dashboard.*')) $postShowRouteName = 'dashboard.posts.show';
+  }
+@endphp
+
 <div class="card">
   <div class="card-body">
     <!-- Header -->
@@ -13,7 +29,7 @@
           <h4 class="mb-1"><a href="{{ route('dashboard.users.show', $post->user) }}">{{ $post->user->nickname }}</a></h4>
           <p class="card-text small text-muted">
             <span class="fe fe-clock"></span>
-            <time data-bs-toggle="tooltip" title="{{ $post->created_at->diffForHumans() }}">{{ $post->created_at }}</time>
+            <time datetime="{{ $post->created_at }}" data-bs-toggle="tooltip" title="{{ $post->created_at->diffForHumans() }}">{{ $post->created_at }}</time>
           </p>
         </div>
 
@@ -23,7 +39,7 @@
               <i class="fe fe-more-vertical"></i>
             </a>
             <div class="dropdown-menu dropdown-menu-end">
-              <a href="#!" class="dropdown-item text-muted">No Operations</a>
+              <a href="{{ route('web.posts.show', $post) }}" class="dropdown-item text-muted">详情</a>
             </div>
           </div>
         </div>
@@ -55,38 +71,40 @@
         </div>
       </div>
     </div>
-    <hr>
 
     <!-- Comments -->
-    <div>
-      @foreach ($post->comments as $comment)
-        <div class="comment mb-0 mt-3">
-          <div class="row">
-            <div class="col-auto">
-              <a class="avatar" href="{{ route('dashboard.users.show', $comment->user) }}">
-                <img src="{{ $comment->user->avatar }}" class="avatar-img rounded-circle">
-              </a>
-            </div>
-            <div class="col ms-n2">
-              <div class="comment-body">
-                <div class="row">
-                  <div class="col">
-                    <h5 class="comment-title"><a href="{{ route('dashboard.users.show', $comment->user) }}">{{ $comment->user->nickname }}</a></h5>
+    @if ($showComments)
+      <hr>
+      <div>
+        @foreach ($post->comments as $comment)
+          <div class="comment mb-0 mt-3">
+            <div class="row">
+              <div class="col-auto">
+                <a class="avatar" href="{{ route('dashboard.users.show', $comment->user) }}">
+                  <img src="{{ $comment->user->avatar }}" class="avatar-img rounded-circle">
+                </a>
+              </div>
+              <div class="col ms-n2">
+                <div class="comment-body">
+                  <div class="row">
+                    <div class="col">
+                      <h5 class="comment-title"><a href="{{ route('dashboard.users.show', $comment->user) }}">{{ $comment->user->nickname }}</a></h5>
+                    </div>
+                    <div class="col-auto">
+                      <time class="comment-time" data-bs-toggle="tooltip" title="{{ $comment->created_at->diffForHumans() }}">{{ $comment->created_at }}</time>
+                    </div>
                   </div>
-                  <div class="col-auto">
-                    <time class="comment-time" data-bs-toggle="tooltip" title="{{ $comment->created_at->diffForHumans() }}">{{ $comment->created_at }}</time>
-                  </div>
+                  <p class="comment-text">{{ $comment->content }}</p>
                 </div>
-                <p class="comment-text">{{ $comment->content }}</p>
               </div>
             </div>
           </div>
-        </div>
-      @endforeach
-      @unless ($post->comments->count())
-        <div class="small text-muted">无评论</div>
-      @endunless
-    </div>
+        @endforeach
+        @unless ($post->comments->count())
+          <div class="small text-muted">无评论</div>
+        @endunless
+      </div>
+    @endif
   </div>
 </div>
 

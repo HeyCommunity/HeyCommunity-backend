@@ -41,7 +41,7 @@
     <div class="row">
       <div class="col-12 col-xl-8 order-2 order-md-1">
         @foreach ($user->posts as $post)
-          @include('post::web._item-post-card', ['post' => $post])
+          @include('post::common._item-post-card', ['post' => $post])
         @endforeach
       </div>
 

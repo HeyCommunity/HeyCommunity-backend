@@ -6,7 +6,7 @@
       <div class="row">
         <div class="col-12 col-md-8">
           @foreach ($posts as $post)
-            @include('post::web._item-post-card', ['post' => $post])
+            @include('post::common._item-post-card', ['post' => $post])
           @endforeach
           @unless ($posts->count())
             <div class="card">

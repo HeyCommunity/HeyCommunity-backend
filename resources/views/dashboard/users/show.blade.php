@@ -52,11 +52,11 @@
           </div>
 
           <div id="tab-comments" class="tab-pane fade">
-            @include('common._items-comment-card', ['comments' => $user->comments])
+            @include('common.users._items-comment-card', ['comments' => $user->comments])
           </div>
 
           <div id="tab-up-thumbs" class="tab-pane fade active show">
-            @include('common._items-up-thumb-card', ['thumbs' => $user->upThumbs])
+            @include('common.users._items-up-thumb-card', ['thumbs' => $user->upThumbs])
           </div>
         </div>
       </div>

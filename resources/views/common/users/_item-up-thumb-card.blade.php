@@ -6,7 +6,7 @@
   <div class="card-body bg-light-soft">
     @switch($thumb->entity_class)
       @case(\App\Models\Common\Comment::class)
-        @include('common._item-comment-card', ['comment' => $thumb->entity])
+        @include('common.users._item-comment-card', ['comment' => $thumb->entity])
         @break
       @case(\Modules\Post\Entities\Post::class)
         @include('post::common._item-post-card', ['post' => $thumb->entity])
