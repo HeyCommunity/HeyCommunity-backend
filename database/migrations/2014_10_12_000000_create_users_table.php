@@ -34,10 +34,11 @@ class CreateUsersTable extends Migration
             $table->integer('unread_notice_num')->default(0)->comment('未读通知数');
             $table->json('wx_user_info')->nullable()->comment('微信用户信息');
 
-            $table->rememberToken();
             $table->timestamp('last_active_at')->nullable()->comment('Last Active Time');
 
             $table->smallInteger('status')->default(0)->comment('User Status');
+
+            $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();
 

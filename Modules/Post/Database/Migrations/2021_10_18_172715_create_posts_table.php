@@ -20,12 +20,11 @@ class CreatePostsTable extends Migration
 
             $table->text('content')->comment('Post Content');
 
-            $table->integer('read_num')->default(0)->comment('Read Number');
-            $table->integer('favorite_num')->default(0)->comment('Favorite Number');
-            $table->integer('comment_num')->default(0)->comment('Comment Number');
-            $table->integer('thumb_up_num')->default(0)->comment('Thumb Up Number');
-            $table->integer('thumb_down_num')->default(0)->comment('Thumb Down Number');
-
+            $table->integer('read_num')->default(0)->comment('Read Num');
+            $table->integer('favorite_num')->default(0)->comment('Favorite Num');
+            $table->integer('thumb_up_num')->default(0)->comment('Thumb Up Num');
+            $table->integer('thumb_down_num')->default(0)->comment('Thumb Down Num');
+            $table->integer('comment_num')->default(0)->comment('Comment Num');
             $table->tinyInteger('status')->default(0)->comment('Status');
 
             $table->timestamps();

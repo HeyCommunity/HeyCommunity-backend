@@ -22,6 +22,7 @@ class CreateUserReportsTable extends Migration
 
             $table->tinyInteger('type_id')->nullable()->comment('User Report Type ID');
             $table->string('content')->nullable()->comment('User Report Content Text');
+
             $table->tinyInteger('status')->default(0)->comment('Status');
 
             $table->timestamps();

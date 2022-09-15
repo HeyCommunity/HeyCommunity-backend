@@ -25,17 +25,17 @@ class CreateArticlesTable extends Migration
             $table->string('cover')->nullable()->comment('封面');
             $table->string('author')->comment('作者');
 
-            $table->integer('read_num')->default(0)->comment('Read Number');
-            $table->integer('favorite_num')->default(0)->comment('Favorite Number');
-            $table->integer('thumb_up_num')->default(0)->comment('Thumb Up Num');
-            $table->integer('thumb_down_num')->default(0)->comment('Thumb Up Num');
-            $table->integer('comment_num')->default(0)->comment('Comment Num');
-
             $table->boolean('is_topped')->default(0)->comment('是否置顶');
             $table->boolean('is_excellent')->default(0)->comment('是否精华');
-            $table->tinyInteger('status')->default(0)->comment('Status');
 
             $table->dateTime('published_at')->comment('发布时间');
+
+            $table->integer('read_num')->default(0)->comment('Read Num');
+            $table->integer('favorite_num')->default(0)->comment('Favorite Num');
+            $table->integer('thumb_up_num')->default(0)->comment('Thumb Up Num');
+            $table->integer('thumb_down_num')->default(0)->comment('Thumb Down Num');
+            $table->integer('comment_num')->default(0)->comment('Comment Num');
+            $table->tinyInteger('status')->default(0)->comment('Status');
 
             $table->timestamps();
             $table->softDeletes();
