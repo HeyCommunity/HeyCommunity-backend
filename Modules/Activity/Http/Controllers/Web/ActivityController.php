@@ -2,10 +2,8 @@
 
 namespace Modules\Activity\Http\Controllers\Web;
 
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
 use Modules\Activity\Entities\Activity;
+use Modules\Activity\Http\Controllers\Controller;
 
 class ActivityController extends Controller
 {
@@ -14,7 +12,7 @@ class ActivityController extends Controller
      */
     public function index()
     {
-        $activities = Activity::latest()->paginate();
+        $activities = Activity::latest()->paginate(12);
 
         return view('activity::web.index', compact('activities'));
     }

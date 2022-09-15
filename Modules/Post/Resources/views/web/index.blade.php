@@ -4,15 +4,8 @@
 <div class="main-content">
   <div class="container mt-4">
       <div class="row">
-        <div class="col-12 col-md-8">
-          @foreach ($posts as $post)
-            @include('post::web._item-post-card', ['post' => $post])
-          @endforeach
-          @unless ($posts->count())
-            <div class="card">
-              <div class="card-body">暂无动态</div>
-            </div>
-          @endunless
+        <div class="col-lg-8">
+          @include('post::common._post-list', ['posts' => $posts])
 
           <div id="section-pagination">
             <div class="d-none d-sm-block">
@@ -24,8 +17,8 @@
           </div>
         </div>
 
-        <div class="col-12 col-md-4">
-          <div class="card">
+        <div class="col-lg-4">
+          <div class="card d-none d-lg-block">
             <div class="card-header">
               <h4 class="card-header-title">动态</h4>
               <span class="small text-muted">POSTS</span>

@@ -38,14 +38,12 @@ Route::prefix('dashboard')->group(function () {
         Route::get('increases', 'Analytics\IncreaseController@index')->name('dashboard.analytics.increases');
 
         Route::get('users', 'Analytics\UserController@index')->name('dashboard.analytics.users');
-        Route::get('visitor-logs', 'VisitorLogController@index')->name('dashboard.analytics.visitor-logs');
     });
 
     // 访客日志
     Route::prefix('visitor-logs')->group(function () {
         Route::get('/', 'VisitorLogController@index')->name('dashboard.visitor-logs.index');
         Route::get('date', 'VisitorLogController@date')->name('dashboard.visitor-logs.date');
-        Route::get('analytics', 'VisitorLogController@analytics')->name('dashboard.visitor-logs.analytics');
     });
 
     // 其他

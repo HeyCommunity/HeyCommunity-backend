@@ -5,7 +5,9 @@
     <div class="container mt-4">
       <div class="row">
         @foreach ($activities as $activity)
-          @include('activity::web._item-activity-card', ['activity' => $activity])
+          <div class="col-12 col-md-6 col-xl-3">
+            @include('activity::common._activity-lite-card', ['activity' => $activity])
+          </div>
         @endforeach
 
         @unless ($activities->count())

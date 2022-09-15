@@ -7,8 +7,8 @@
       <div class="header-body">
         <div class="row align-items-end">
           <div class="col">
-            <h6 class="header-pretitle">New Article</h6>
-            <h1 class="header-title">创建文章</h1>
+            <h6 class="header-pretitle">New Activity</h6>
+            <h1 class="header-title">创建活动</h1>
           </div>
         </div>
       </div>
@@ -28,12 +28,12 @@
                 }
               </script>
 
-              <form id="form-article" action="{{ route('dashboard.articles.store') }}" method="POST"
+              <form id="form" action="{{ route('dashboard.activities.store') }}" method="POST"
                     enctype="multipart/form-data"
                     onsubmit="formSubmit(event)">
                 {{ csrf_field() }}
 
-                @include('article::dashboard.articles._form')
+                @include('activity::dashboard._form')
 
                 <button type="submit" class="btn w-100 btn-primary">创建</button>
               </form>

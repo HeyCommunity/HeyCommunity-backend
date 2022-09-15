@@ -52,12 +52,4 @@ class VisitorLogController extends Controller
 
         return view('dashboard.visitor-logs.date', compact('result'));
     }
-
-    /**
-     * 分析页面
-     */
-    public function analytics()
-    {
-        return view('dashboard.visitor-logs.analytics');
-    }
 }

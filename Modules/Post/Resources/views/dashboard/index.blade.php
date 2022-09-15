@@ -55,7 +55,7 @@
                       </div>
                     </td>
 
-                    <td>
+                    <td style="max-width:240px; overflow-x:auto;">
                       @if ($post->video)
                         <a target="_blank" href="{{ $post->video->file_path }}">
                           <video src="{{ $post->video->file_path }}" style="margin:-10px 0; height:60px;"></video>
@@ -86,7 +86,7 @@
 
                     <!-- 操作 -->
                     <td>
-                      <a href="{{ route('dashboard.posts.show', $post) }}" class="btn btn-sm btn-light d-inline-block lift">详情</a>
+                      <a href="{{ route('dashboard.posts.show', $post) }}" class="btn btn-sm btn-light d-inline-block lift"><i class="fe fe-eye"></i></a>
 
                       <div class="btn-group d-inline-block ms-2">
                         <button type="button" class="btn btn-sm btn-light dropdown-toggle lift" data-bs-toggle="dropdown"></button>

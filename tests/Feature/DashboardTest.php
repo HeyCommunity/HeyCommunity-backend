@@ -55,13 +55,11 @@ class DashboardTest extends TestCase
     {
         $this->get(route('dashboard.analytics.index'))->assertUnauthorized();
         $this->get(route('dashboard.analytics.users'))->assertUnauthorized();
-        $this->get(route('dashboard.analytics.visitor-logs'))->assertUnauthorized();
 
         $this->loginAndSetAdmin($user);
 
         $this->get(route('dashboard.analytics.index'))->assertRedirect(route('dashboard.analytics.users'));
         $this->get(route('dashboard.analytics.users'))->assertOk();
-        $this->get(route('dashboard.analytics.visitor-logs'))->assertOk();
     }
 
     /**
@@ -72,13 +70,11 @@ class DashboardTest extends TestCase
     public function testDashboardVisitorLogRoutes($user)
     {
         $this->get(route('dashboard.visitor-logs.index'))->assertUnauthorized();
-        $this->get(route('dashboard.visitor-logs.analytics'))->assertUnauthorized();
         $this->get(route('dashboard.visitor-logs.date'))->assertUnauthorized();
 
         $this->loginAndSetAdmin($user);
 
         $this->get(route('dashboard.visitor-logs.index'))->assertOk();
-        $this->get(route('dashboard.visitor-logs.analytics'))->assertOk();
         $this->get(route('dashboard.visitor-logs.date'))->assertRedirect(route('dashboard.visitor-logs.date', ['date' => date('Y-m-d')]));
     }
 

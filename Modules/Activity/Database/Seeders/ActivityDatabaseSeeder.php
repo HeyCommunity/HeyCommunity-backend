@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Database\Seeder;
 use Modules\Activity\Entities\Activity;
+use Modules\Activity\Entities\ActivityMember;
 
 class ActivityDatabaseSeeder extends Seeder
 {
@@ -44,10 +45,18 @@ class ActivityDatabaseSeeder extends Seeder
                         ->state(new Sequence(fn () => ['user_id' => $faker->randomElement($users)]))
                         ->count(random_int(1, 20))->make());
 
+                    $activity->members()->attach($users->take(random_int(1, $activity->surplus_ticket_num)), [
+                        'created_at'    =>  now(),
+                        'updated_at'    =>  now(),
+                        'deleted_at'    =>  now(),
+                        'status'    =>  1,
+                    ]);
+
                     $activity->update([
                         'thumb_up_num'      =>  $activity->upThumbs()->count(),
                         'thumb_down_num'    =>  $activity->downThumbs()->count(),
                         'comment_num'       =>  $activity->comments()->count(),
+                        'surplus_ticket_num'    =>  $activity->total_ticket_num - $activity->members()->count(),
                     ]);
                 }
             });

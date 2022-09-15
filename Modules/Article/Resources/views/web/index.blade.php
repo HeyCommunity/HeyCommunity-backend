@@ -4,12 +4,12 @@
 <div class="main-content">
   <div class="container mt-4">
       <div class="row">
-        <div class="col-12 col-md-8">
+        <div class="col-12 col-lg-8">
           <div class="card">
-            <div class="card-body">
+            <div class="card-body p-0">
               <div class="list-group list-group-lg list-group-flush list-group-focus">
                 @foreach ($articles as $article)
-                  @include('article::web._item-article-card', ['article' => $article])
+                  @include('article::web._list-group-item-article-card', ['article' => $article])
                 @endforeach
               </div>
             </div>
@@ -31,7 +31,7 @@
           </div>
         </div>
 
-        <div class="col-12 col-md-4">
+        <div class="col-12 col-lg-4 d-none d-lg-block">
           <div class="card">
             <div class="card-header">
               <h4 class="card-header-title">文章</h4>

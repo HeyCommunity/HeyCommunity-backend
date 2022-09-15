@@ -2,8 +2,8 @@
 
 namespace Modules\Post\Http\Controllers\Web;
 
-use App\Http\Controllers\Controller;
 use Modules\Post\Entities\Post;
+use Modules\Post\Http\Controllers\Controller;
 
 class PostController extends Controller
 {

@@ -1,5 +1,7 @@
 @extends('web.layouts.default')
 
+@section('metaDescription', $article->intro)
+
 @section('mainContent')
   <style rel="stylesheet">
     .quill-html p {
@@ -15,11 +17,21 @@
 
     <div class="container mt-n6">
       <div class="row">
-        <div class="card">
-          <div class="card-body">
-            <h2 class="h1 card-title">{{ $article->title }}</h2>
-            <div class="card-text quill-html">{!! $article->content !!}</div>
+        <div class="col-12 col-lg-8">
+          @include('article::common._article-profile', ['article' => $article, 'showArticleTopCover' => false])
+
+          <div class="d-block d-lg-none">
+            @include('common._up-thumbs-card', ['thumbs' => $article->upThumbs])
           </div>
+
+          @include('common._comments-card', ['comments' => $article->comments])
+        </div>
+
+        <!-- 侧边栏 -->
+        <div class="col-12 col-lg-4 d-none d-lg-block">
+          @include('article::common._article-info-card', ['article' => $article])
+
+          @include('common._up-thumbs-card', ['thumbs' => $article->upThumbs])
         </div>
       </div>
     </div>

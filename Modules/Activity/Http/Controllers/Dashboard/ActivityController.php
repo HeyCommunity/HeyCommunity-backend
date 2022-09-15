@@ -16,7 +16,7 @@ class ActivityController extends Controller
     {
         $activities = Activity::latest()->paginate();
 
-        return view('activity::dashboard.activities.index', compact('activities'));
+        return view('activity::dashboard.index', compact('activities'));
     }
 
     /**
@@ -24,7 +24,7 @@ class ActivityController extends Controller
      */
     public function show(Activity $activity)
     {
-        return view('activity::dashboard.activities.show', compact('activity'));
+        return view('activity::dashboard.show', compact('activity'));
     }
 
     /**
@@ -40,7 +40,7 @@ class ActivityController extends Controller
             'placeholder'   =>  '请输入',
         ]);
 
-        return view('activity::dashboard.activities.create', compact(
+        return view('activity::dashboard.create', compact(
             'activity', 'quillEditorConfig'
         ));
     }
@@ -104,7 +104,7 @@ class ActivityController extends Controller
             'placeholder'   =>  '请输入',
         ]);
 
-        return view('activity::dashboard.activities.edit', compact('activity', 'quillEditorConfig'));
+        return view('activity::dashboard.edit', compact('activity', 'quillEditorConfig'));
     }
 
     /**
