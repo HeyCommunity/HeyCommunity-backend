@@ -7,7 +7,7 @@
 
     <!-- Navbar Brand -->
     <a class="navbar-brand d-none d-lg-inline-block order-lg-first me-3" href="{{ route('web.home') }}">{{ config('app.name') }}</a>
-    <span class="navbar-brand d-inline-block d-lg-none">{{ $moduleName ?? config('app.name') }}</span>
+    <span class="navbar-brand d-inline-block d-lg-none">@yield('pageTitle', config('app.name'))</span>
 
     <!-- Search Form -->
     <form class="form-inline me-4 d-none d-lg-flex">

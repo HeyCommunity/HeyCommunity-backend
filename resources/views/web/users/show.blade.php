@@ -1,8 +1,7 @@
 @extends('web.layouts.default')
 
-@php
-$moduleName = $user->nickname . '的主页';
-@endphp
+@section('metaDescription', $user->intro ?: $user->bio)
+@section('pageTitle', $user->nickname . '的主页')
 
 @section('mainContent')
 <div class="main-content">

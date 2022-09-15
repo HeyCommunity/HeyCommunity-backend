@@ -5,9 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" type="image/x-icon"/>
 
-  <title>{{ config('app.name') }}</title>
-  <!-- TODO: Website description -->
-  <meta name="description" content="{{ config('app.name') }}" />
+  <!-- Meta Title -->
+  @section('pageTitle', $pageTitle ?? null)
+  @hasSection('metaTitle')
+    <title>@yield('metaTitle')</title>
+  @else
+    @hasSection('pageTitle')
+      <title>@yield('pageTitle') - {{ config('app.name') }}</title>
+    @else
+      <title>{{ config('app.name') }}</title>
+    @endif
+  @endif
+
+  {{-- TODO: default description get from database --}}
+  <meta name="description" content="@yield('metaDescription', config('app.name'))" />
 
   <!-- Libs CSS -->
   <link rel="stylesheet" href="{{ asset('assets/dashkit/css/libs.bundle.css') }}" />

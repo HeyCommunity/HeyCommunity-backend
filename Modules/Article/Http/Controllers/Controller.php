@@ -11,6 +11,6 @@ class Controller extends BaseController
      */
     public function __construct()
     {
-        view()->share('moduleName', config('article.name'));
+        view()->share('pageTitle', config('article.name'));
     }
 }

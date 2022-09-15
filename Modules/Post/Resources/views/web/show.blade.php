@@ -1,5 +1,7 @@
 @extends('web.layouts.default')
 
+@section('metaDescription', $post->content)
+
 @section('mainContent')
 <div class="main-content">
   <div class="container mt-4">

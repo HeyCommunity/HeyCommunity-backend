@@ -1,5 +1,7 @@
 @extends('web.layouts.default')
 
+@section('metaDescription', $article->intro)
+
 @section('mainContent')
   <style rel="stylesheet">
     .quill-html p {
