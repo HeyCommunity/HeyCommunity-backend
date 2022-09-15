@@ -15,7 +15,6 @@
   <link rel="stylesheet" href="{{ asset('assets/dashkit/css/theme.bundle.css') }}" id="stylesheetLight" />
   <link rel="stylesheet" href="{{ asset('assets/dashkit/css/theme-dark.bundle.css') }}" id="stylesheetDark" />
 
-  <style></style>
   <style rel="stylesheet">
     body { display: none; }
     img { display: inline-block; }
