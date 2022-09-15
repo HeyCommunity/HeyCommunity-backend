@@ -1,5 +1,9 @@
 @extends('web.layouts.default')
 
+@php
+$moduleName = $user->nickname . '的主页';
+@endphp
+
 @section('mainContent')
 <div class="main-content">
   <div class="header">

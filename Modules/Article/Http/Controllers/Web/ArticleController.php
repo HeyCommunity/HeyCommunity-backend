@@ -2,8 +2,8 @@
 
 namespace Modules\Article\Http\Controllers\Web;
 
-use App\Http\Controllers\Controller;
 use Modules\Article\Entities\Article;
+use Modules\Article\Http\Controllers\Controller;
 
 class ArticleController extends Controller
 {
