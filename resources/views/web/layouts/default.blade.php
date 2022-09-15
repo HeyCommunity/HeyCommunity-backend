@@ -25,6 +25,11 @@
 
   <!-- Theme CSS -->
   <link rel="stylesheet" href="{{ asset('assets/dashkit/css/theme.bundle.css') }}" id="stylesheetLight" />
+
+  <!-- 设置页面布局 -->
+  <script>
+    localStorage.setItem('dashkitColorScheme', 'light');
+  </script>
 </head>
 
 <body>
