@@ -4,7 +4,7 @@
 
     <!-- Brand -->
     <a class="navbar-brand text-center" href="{{ route('dashboard.index') }}">
-      <span class="d-block text-primary fs-1 fw-bold">HEY社区</span>
+      <span class="d-block text-primary fs-1 fw-bold">{{ config('app.name') }}</span>
       <span class="d-block text-muted fs-5 fw-light">管理后台</span>
     </a>
 

@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
 
-  <title>HEY社区</title>
+  <title>{{ config('app.name') . '管理后台' }}</title>
   <meta name="description" content="HeyCommunity Dashboard" />
 
   <!-- Libs CSS -->
