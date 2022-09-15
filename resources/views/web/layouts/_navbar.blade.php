@@ -57,7 +57,7 @@
 
     <!-- Nav Collapse -->
     <div class="collapse navbar-collapse me-lg-auto order-lg-first" id="navbar">
-      <form class="mt-4 mb-3 d-md-none">
+      <form class="mt-4 mb-3 d-none d-md-none">
         <input readonly type="search" class="form-control form-control-rounded" placeholder="Search not available">
       </form>
 
