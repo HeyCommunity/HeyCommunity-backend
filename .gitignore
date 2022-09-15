@@ -19,6 +19,9 @@ yarn-error.log
 _ide_helper.php
 .phpstorm.meta.php
 
+database/backups
 storage/MaxMind-GeoIP
+
 public/uploads
 public/node_modules
+

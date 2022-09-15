@@ -36,7 +36,7 @@ class CreateUsersTable extends Migration
 
             $table->timestamp('last_active_at')->nullable()->comment('Last Active Time');
 
-            $table->smallInteger('status')->default(0)->comment('User Status');
+            $table->smallInteger('status')->default(0)->comment('Status');
 
             $table->rememberToken();
             $table->timestamps();
