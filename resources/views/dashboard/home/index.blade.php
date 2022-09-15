@@ -16,7 +16,7 @@
               <li class="nav-item" onclick="onlyShowChartDataset('#mainChart', [0, 1])">
                 <a href="#" class="nav-link text-center active" data-bs-toggle="tab">
                   <h6 class="header-pretitle text-secondary" data-bs-toggle="tooltip" data-bs-html="true" data-bs-placement="left"
-                      title="近期新增用户: {{ collect($mainChartConfigure['data']['datasets'][0]['data'])->sum() }}<br>近期活跃用户: {{ collect($mainChartConfigure['data']['datasets'][1]['data'])->sum() }}">
+                      title="新增用户: {{ collect($mainChartConfigure['data']['datasets'][0]['data'])->sum() }}<br>活跃用户: {{ collect($mainChartConfigure['data']['datasets'][1]['data'])->sum() }}">
                     +{{ collect($mainChartConfigure['data']['datasets'][0]['data'])->sum() }}
                     / {{ collect($mainChartConfigure['data']['datasets'][1]['data'])->sum() }}
                   </h6>
@@ -25,7 +25,7 @@
               </li>
               <li class="nav-item" onclick="onlyShowChartDataset('#mainChart', [2])">
                 <a href="#" class="nav-link text-center" data-bs-toggle="tab">
-                  <h6 class="header-pretitle text-secondary" data-bs-toggle="tooltip" data-bs-placement="left" title="近期请求总数: {{ collect($mainChartConfigure['data']['datasets'][2]['data'])->sum() }}">
+                  <h6 class="header-pretitle text-secondary" data-bs-toggle="tooltip" data-bs-placement="left" title="请求总数: {{ collect($mainChartConfigure['data']['datasets'][2]['data'])->sum() }}">
                     @if (($visitorLogNum = collect($mainChartConfigure['data']['datasets'][2]['data'])->sum()) < 1000)
                       +{{ $visitorLogNum }}
                     @else
@@ -37,7 +37,7 @@
               </li>
               <li class="nav-item" onclick="onlyShowChartDataset('#mainChart', [3])">
                 <a href="#" class="nav-link text-center" data-bs-toggle="tab">
-                  <h6 class="header-pretitle text-secondary" data-bs-toggle="tooltip" data-bs-placement="left" title="近期新增动态: {{ collect($mainChartConfigure['data']['datasets'][3]['data'])->sum() }}">
+                  <h6 class="header-pretitle text-secondary" data-bs-toggle="tooltip" data-bs-placement="left" title="新增动态: {{ collect($mainChartConfigure['data']['datasets'][3]['data'])->sum() }}">
                     +{{ collect($mainChartConfigure['data']['datasets'][3]['data'])->sum() }}
                   </h6>
                   <h3 class="text-white mb-0">动态</h3>
@@ -46,7 +46,7 @@
               <li class="nav-item" onclick="onlyShowChartDataset('#mainChart', [4, 5])">
                 <a href="#" class="nav-link text-center" data-bs-toggle="tab">
                   <h6 class="header-pretitle text-secondary" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-html="true"
-                      title="近期新增点赞: {{ collect($mainChartConfigure['data']['datasets'][4]['data'])->sum() }}<br>近期新增评论: {{ collect($mainChartConfigure['data']['datasets'][5]['data'])->sum() }}">
+                      title="新增点赞: {{ collect($mainChartConfigure['data']['datasets'][4]['data'])->sum() }}<br>新增评论: {{ collect($mainChartConfigure['data']['datasets'][5]['data'])->sum() }}">
                     +{{ collect($mainChartConfigure['data']['datasets'][4]['data'])->sum() }}
                     / +{{ collect($mainChartConfigure['data']['datasets'][5]['data'])->sum() }}
                   </h6>
@@ -118,7 +118,7 @@
                 <h6 class="text-uppercase text-muted mb-2">用户</h6>
                 <span class="h2 mb-0">{{ $modelTrendData['user']['total'] }}</span>
                 <span class="mt-n1 badge bg-light-soft text-secondary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true"
-                      title="近 1 周新增: {{ $modelTrendData['user']['week_num'] }}<br>近 1 月新增: {{ $modelTrendData['user']['month_num'] }}">
+                      title="周新增: {{ $modelTrendData['user']['week_num'] }}<br>月新增: {{ $modelTrendData['user']['month_num'] }}">
                   +{{ $modelTrendData['user']['week_num'] }} / +{{ $modelTrendData['user']['month_num'] }}
                 </span>
               </div>
@@ -136,7 +136,7 @@
                 <h6 class="text-uppercase text-muted mb-2">动态</h6>
                 <span class="h2 mb-0">{{ $modelTrendData['post']['total'] }}</span>
                 <span class="mt-n1 badge bg-light-soft text-secondary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true"
-                      title="近 1 周新增: {{ $modelTrendData['post']['week_num'] }}<br>近 1 月新增: {{ $modelTrendData['post']['month_num'] }}">
+                      title="周新增: {{ $modelTrendData['post']['week_num'] }}<br>月新增: {{ $modelTrendData['post']['month_num'] }}">
                   +{{ $modelTrendData['post']['week_num'] }} / +{{ $modelTrendData['post']['month_num'] }}
                 </span>
               </div>
@@ -154,7 +154,7 @@
                 <h6 class="text-uppercase text-muted mb-2">点赞</h6>
                 <span class="h2 mb-0">{{ $modelTrendData['thumb_up']['total'] }}</span>
                 <span class="mt-n1 badge bg-light-soft text-secondary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true"
-                      title="近 1 周新增: {{ $modelTrendData['thumb_up']['week_num'] }}<br>近 1 月新增: {{ $modelTrendData['thumb_up']['month_num'] }}">
+                      title="周新增: {{ $modelTrendData['thumb_up']['week_num'] }}<br>月新增: {{ $modelTrendData['thumb_up']['month_num'] }}">
                   +{{ $modelTrendData['thumb_up']['week_num'] }} / +{{ $modelTrendData['thumb_up']['month_num'] }}
                 </span>
               </div>
@@ -172,7 +172,7 @@
                 <h6 class="text-uppercase text-muted mb-2">评论</h6>
                 <span class="h2 mb-0">{{ $modelTrendData['comment']['total'] }}</span>
                 <span class="mt-n1 badge bg-light-soft text-secondary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true"
-                      title="近 1 周新增: {{ $modelTrendData['comment']['week_num'] }}<br>近 1 月新增: {{ $modelTrendData['comment']['month_num'] }}">
+                      title="周新增: {{ $modelTrendData['comment']['week_num'] }}<br>月新增: {{ $modelTrendData['comment']['month_num'] }}">
                   +{{ $modelTrendData['comment']['week_num'] }} / +{{ $modelTrendData['comment']['month_num'] }}
                 </span>
               </div>

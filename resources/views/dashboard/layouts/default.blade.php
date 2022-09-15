@@ -106,12 +106,10 @@
   <!-- JAVASCRIPT -->
   <script src="{{ asset('assets/dashkit/js/vendor.bundle.js') }}" defer></script>     <!-- Vendor JS -->
   <script src="{{ asset('assets/dashkit/js/theme.bundle.js') }}" defer></script>      <!-- Theme JS -->
+  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script> <!-- TODO: 优化引用 jquery -->
 
   <!-- Laravel Flash -->
-  {{-- @include('dashboard.layouts._flash') --}}
-
-  <!-- Laravel Notify -->
-  @include('dashboard.layouts._laravel-notify')
+  @include('dashboard.layouts._flash')
 
   <!-- Google Analytics -->
   @include('common._google-analytics')

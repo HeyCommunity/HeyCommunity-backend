@@ -5,6 +5,7 @@ namespace Modules\Activity\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Modules\Activity\Entities\Activity;
+use Modules\Activity\Entities\ActivityMember;
 
 class ActivityController extends Controller
 {
@@ -32,6 +33,8 @@ class ActivityController extends Controller
     public function create()
     {
         $activity = new Activity();
+
+        $activity->setAttribute('user_id', request()->user()->id);
 
         $quillEditorConfig = json_encode([
             'placeholder'   =>  '请输入',
@@ -62,11 +65,12 @@ class ActivityController extends Controller
             'total_ticket_num'  =>  'required|integer',
             'surplus_ticket_num'=>  'required|integer',
             'price'             =>  'required|integer',
+            'status'            =>  'required|integer',
         ]);
 
         $coverPath = $request->cover->store('uploads/activities/covers');
 
-        Activity::create([
+        if (Activity::create([
             'cover'             =>  $coverPath,
             'title'             =>  $request->get('title'),
             'user_id'           =>  $request->get('user_id'),
@@ -81,10 +85,14 @@ class ActivityController extends Controller
             'total_ticket_num'  =>  $request->get('total_ticket_num'),
             'surplus_ticket_num'=>  $request->get('surplus_ticket_num'),
             'price'             =>  $request->get('price'),
-        ]);
-
-        notify()->success('创建活动成功', '操作成功');
-        return redirect()->route('dashboard.activities.index');
+            'status'            =>  $request->get('status'),
+        ])) {
+            flash('创建活动成功')->success();
+            return redirect()->route('dashboard.activities.index');
+        } else {
+            flash('创建活动成功')->error();
+            return back()->withInput();
+        }
     }
 
     /**
@@ -119,6 +127,7 @@ class ActivityController extends Controller
             'total_ticket_num'  =>  'required|integer',
             'surplus_ticket_num'=>  'required|integer',
             'price'             =>  'required|integer',
+            'status'            =>  'required|integer',
         ]);
 
         $data = [
@@ -135,6 +144,7 @@ class ActivityController extends Controller
             'total_ticket_num'  =>  $request->get('total_ticket_num'),
             'surplus_ticket_num'=>  $request->get('surplus_ticket_num'),
             'price'             =>  $request->get('price'),
+            'status'            =>  $request->get('status'),
         ];
 
         if ($request->has('cover')) {
@@ -142,9 +152,12 @@ class ActivityController extends Controller
             $data['cover'] = $coverPath;
         }
 
-        $activity->update($data);
-
-        notify()->success('更新活动成功', '操作成功');
-        return redirect()->route('dashboard.activities.index');
+        if ($activity->update($data)) {
+            flash('更新活动成功')->success();
+            return redirect()->route('dashboard.activities.index');
+        } else {
+            flash('更新活动失败')->error();
+            return back()->withInput();
+        }
     }
 }

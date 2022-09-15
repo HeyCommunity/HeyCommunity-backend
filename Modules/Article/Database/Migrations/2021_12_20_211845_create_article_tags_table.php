@@ -16,7 +16,8 @@ class CreateArticleTagsTable extends Migration
         Schema::create('article_tags', function (Blueprint $table) {
             $table->id();
 
-            $table->tinyInteger('sort')->comment('排序');
+            $table->tinyInteger('sort')->nullable()->comment('排序');
+
             $table->string('slug')->comment('SLUG');
             $table->string('name')->comment('名称');
             $table->string('description')->nullable()->comment('描述');

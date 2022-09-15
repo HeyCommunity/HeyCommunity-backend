@@ -28,6 +28,7 @@
                   <th>动态</th>
                   <th>点赞/评论</th>
                   <th>活跃天数</th>
+                  <th>未读消息</th>
                   @include('dashboard.layouts.utils._table-sort-th', ['name' => '最近活跃', 'orderBy' => 'last_active_at'])
                   @include('dashboard.layouts.utils._table-sort-th', ['name' => '注册时间', 'orderBy' => 'created_at'])
                   <th>操作</th>
@@ -40,14 +41,15 @@
                     <td>
                       @if ($user->avatar)
                         <a href="{{ route('dashboard.users.show', $user) }}" class="avatar avatar-xs d-inline-block me-2">
-                          <img src="{{ asset($user->avatar) }}" alt="{{ $user->app_id }}" class="avatar-img rounded-circle">
+                          <img src="{{ asset($user->avatar) }}" alt="{{ $user->nickname }}" class="avatar-img rounded-circle">
                         </a>
                       @endif
-                      <a href="{{ route('dashboard.users.show', $user) }}">{{ $user->nickname ?: 'NULL' }}</a>
+                      <a class="text-black" href="{{ route('dashboard.users.show', $user) }}">{{ $user->nickname ?: 'NULL' }}</a>
                     </td>
                     <td>{{ $user->post_num }}</td>
                     <td>{{ $user->thumb_up_num }} / {{ $user->comment_num }}</td>
                     <td>{{ $user->active_day_num }}</td>
+                    <td>{{ $user->unread_notice_num }}</td>
                     @if (empty($user->last_active_at))
                       <td>-</td>
                     @else
@@ -55,10 +57,10 @@
                     @endif
                     <td><span data-bs-toggle="tooltip" title="{{ $user->created_at->diffForHumans() }}">{{ $user->created_at }}</span></td>
                     <td>
-                      <a href="{{ route('dashboard.users.show', $user) }}" class="btn btn-sm btn-light d-inline-block">详情</a>
+                      <a href="{{ route('dashboard.users.show', $user) }}" class="btn btn-sm btn-light d-inline-block lift"><i class="fe fe-eye"></i></a>
 
                       <div class="btn-group d-inline-block ms-2">
-                        <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-bs-toggle="dropdown"></button>
+                        <button type="button" class="btn btn-sm btn-light dropdown-toggle lift" data-bs-toggle="dropdown"></button>
                         <div class="dropdown-menu dropdown-menu-end dropdown-menu-sm">
                           <a class="dropdown-item text-muted">No Operations</a>
                         </div>

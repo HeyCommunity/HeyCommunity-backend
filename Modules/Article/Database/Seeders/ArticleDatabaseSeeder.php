@@ -2,6 +2,8 @@
 
 namespace Modules\Article\Database\Seeders;
 
+use App\Models\Common\Comment;
+use App\Models\Common\Thumb;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Database\Seeder;
@@ -34,16 +36,45 @@ class ArticleDatabaseSeeder extends Seeder
     protected function makeArticleData(\Faker\Generator $faker)
     {
         $users = User::inRandomOrder()->limit(20)->get();
-        if ($users->empty()) {
-            $users = User::factory()->count(50)->create();
+        if ($users->isEmpty()) {
+            $users = User::factory()->count(20)->create();
         }
 
         Article::factory()
             ->state(new Sequence(
-                fn () => ['user_id' => $faker->randomElement($users)],
+                fn () => [
+                    'user_id'   =>  $faker->randomElement($users),
+                ],
             ))
+            ->has(Comment::factory()
+                ->state(new Sequence(
+                    fn () => ['user_id' => $faker->randomElement($users)],
+                ))->count($faker->numberBetween(3, 10))
+            )
+            ->has(Thumb::factory()
+                ->state(new Sequence(
+                    fn () => ['user_id' => $faker->randomElement($users)],
+                ))->count($faker->numberBetween(3, 10))
+            )
             ->count(50)
-            ->create();
+            ->create()
+            ->each(function ($article) use ($faker, $users) {
+                if (random_int(0, 9) < 6) {
+                    $article->comments()->saveMany(Comment::factory()
+                        ->state(new Sequence(fn () => ['user_id' => $faker->randomElement($users)]))
+                        ->count(random_int(3, 10))->make());
+
+                    $article->thumbs()->saveMany(Thumb::factory()
+                        ->state(new Sequence(fn () => ['user_id' => $faker->randomElement($users)]))
+                        ->count(random_int(1, 20))->make());
+
+                    $article->update([
+                        'thumb_up_num'      =>  $article->upThumbs()->count(),
+                        'thumb_down_num'    =>  $article->downThumbs()->count(),
+                        'comment_num'       =>  $article->comments()->count(),
+                    ]);
+                }
+            });
     }
 
     /**
@@ -89,7 +120,7 @@ class ArticleDatabaseSeeder extends Seeder
 
             $articleTagData[] = [
                 'sort'          =>  $index,
-                'slug'          =>  $name,
+                'slug'          =>  \Faker\Factory::create('en_US')->word(),
                 'name'          =>  $name,
                 'description'   =>  $faker->sentence(),
 

@@ -16,11 +16,11 @@ class CreateArticleCategoriesTable extends Migration
         Schema::create('article_categories', function (Blueprint $table) {
             $table->id();
 
+            $table->tinyInteger('sort')->nullable()->comment('排序');
+
             $table->string('slug')->comment('SLUG');
             $table->string('name')->comment('名称');
             $table->string('description')->nullable()->comment('描述');
-
-            $table->tinyInteger('sort')->comment('排序');
 
             $table->timestamps();
             $table->softDeletes();

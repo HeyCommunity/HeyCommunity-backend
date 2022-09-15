@@ -72,6 +72,8 @@ class ArticleController extends Controller
             'content'           =>  'required|string',
             'categories'        =>  'required|array',
             'tags'              =>  'nullable|array',
+            'status'            =>  'required|integer',
+            'published_at'      =>  'required|date',
         ]);
 
         DB::beginTransaction();
@@ -79,13 +81,14 @@ class ArticleController extends Controller
             $coverPath = $request->cover->store('uploads/articles/covers');
 
             $article = Article::create([
+                'user_id'           =>  $request->user()->id,
                 'cover'             =>  $coverPath,
                 'title'             =>  $request->get('title'),
                 'author'            =>  $request->get('author'),
                 'intro'             =>  $request->get('intro'),
                 'content'           =>  $request->get('content'),
-                'published_at'      =>  now(),
-                'status'            =>  1,
+                'status'            =>  $request->get('status'),
+                'published_at'      =>  $request->get('published_at'),
             ]);
 
             $article->categories()->sync($request->get('categories'));
@@ -94,12 +97,11 @@ class ArticleController extends Controller
         } catch (\Exception $exception) {
             DB::rollBack();
 
-            notify()->error('创建文章失败', '未知错误');
+            flash('创建文章失败')->error();
             return redirect()->back()->withInput();
         }
 
-
-        notify()->success('创建文章', '操作成功');
+        flash('创建文章成功')->success();
         return redirect()->route('dashboard.articles.index');
     }
 
@@ -145,6 +147,7 @@ class ArticleController extends Controller
             'content'           =>  'required|string',
             'categories'        =>  'required|array',
             'tags'              =>  'nullable|array',
+            'status'            =>  'required|integer',
             'published_at'      =>  'required|date',
         ]);
 
@@ -155,6 +158,7 @@ class ArticleController extends Controller
                 'author'            =>  $request->get('author'),
                 'intro'             =>  $request->get('intro'),
                 'content'           =>  $request->get('content'),
+                'status'            =>  $request->get('status'),
                 'published_at'      =>  $request->get('published_at'),
             ];
 
@@ -171,12 +175,12 @@ class ArticleController extends Controller
         } catch (\Exception $exception) {
             DB::rollBack();
 
-            notify()->error('更新文章失败', '未知错误');
+            flash('更新文章失败')->error();
             return redirect()->back()->withInput();
         }
 
 
-        notify()->success('师尊文章成功', '操作成功');
+        flash('更新文章成功')->success();
         return redirect()->route('dashboard.articles.index');
     }
 }

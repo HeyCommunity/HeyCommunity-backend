@@ -3,21 +3,33 @@
 
   <style rel="stylesheet">
     #laravel-flash {
-      position: absolute;
+      position: fixed;
       top: 24px;
       right: 36px;
+      text-align: right;
+    }
+    #laravel-flash .alert {
+      margin-bottom: 10px;
+      max-width: 300px;
+      text-align: left;
+    }
+    #laravel-flash .alert.alert-important {
+      padding-right: 40px;
+    }
+    #laravel-flash .alert button.close {
+      position: absolute;
+      top: 0;
+      right: 0;
+      background-color: transparent;
+      padding: 0.75rem 1rem;
+      border: none;
     }
   </style>
 
-  <!-- TODO: 全局引用 jquery -->
-  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
   <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      // TODO: modal flash 需要调整优化
-      $('#flash-overlay-modal').modal();
-      $('#flash-overlay-modal').show();
+    // TODO flash()->overlay() 暂不可用
 
+    document.addEventListener('DOMContentLoaded', function () {
       // 自动隐藏非 important Flash
       $('#laravel-flash div.alert').not('.alert-important').delay(3000).fadeOut(650);
 

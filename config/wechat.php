@@ -40,12 +40,14 @@ return [
                     'driver' => 'single',
                     'path' => storage_path('logs/wechat/wechat.log'),
                     'level' => 'debug',
+                    'permission'    =>  0666,
                 ],
                 // 生产环境
                 'prod' => [
                     'driver' => 'daily',
                     'path' => storage_path('logs/wechat/wechat.log'),
                     'level' => 'info',
+                    'permission'    =>  0666,
                 ],
             ],
         ],

@@ -30,6 +30,6 @@ class UserSeeder extends Seeder
             'updated_at'        =>      $faker->dateTimeThisMonth(),
         ]);
 
-        User::factory()->count(50)->create();
+        User::factory()->count(20)->create();
     }
 }

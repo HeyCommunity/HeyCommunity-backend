@@ -1,9 +1,11 @@
 <?php
+
 namespace Modules\Article\Database\factories;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
+use Modules\Article\Entities\Article;
 
 class ArticleFactory extends Factory
 {
@@ -35,8 +37,7 @@ class ArticleFactory extends Factory
             'author'        =>  $this->faker->name(),
             'published_at'  =>  $this->faker->dateTimeThisMonth(),
 
-            'status'        =>  1,
-
+            'status'        =>  $this->faker->randomElement(array_keys(Article::$statuses)),
             'created_at'    =>  $this->faker->dateTimeThisMonth(),
             'updated_at'    =>  $this->faker->dateTimeThisMonth(),
         ];

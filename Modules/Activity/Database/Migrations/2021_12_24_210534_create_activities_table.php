@@ -34,8 +34,13 @@ class CreateActivitiesTable extends Migration
             $table->integer('total_ticket_num')->comment('总活动票数');
             $table->integer('surplus_ticket_num')->comment('剩余活动票数');
 
-            $table->integer('thumb_up_num')->default(0)->comment('活动点赞人数');
-            $table->integer('comment_num')->default(0)->comment('活动点赞人数');
+            $table->integer('read_num')->default(0)->comment('Read Number');
+            $table->integer('favorite_num')->default(0)->comment('Favorite Number');
+            $table->integer('thumb_up_num')->default(0)->comment('Thumb Up Num');
+            $table->integer('thumb_down_num')->default(0)->comment('Thumb Up Num');
+            $table->integer('comment_num')->default(0)->comment('Comment Num');
+
+            $table->tinyInteger('status')->default(0)->comment('Status');
 
             $table->timestamps();
             $table->softDeletes();

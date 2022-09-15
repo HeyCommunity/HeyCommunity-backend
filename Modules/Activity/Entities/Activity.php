@@ -10,6 +10,15 @@ use Modules\Activity\Database\factories\ActivityFactory;
 class Activity extends Model
 {
     /**
+     * Statuses
+     */
+    public static $statuses = [
+        0       =>  '待审核',
+        1       =>  '已发布',
+        2       =>  '已下架',
+    ];
+
+    /**
      * casts
      */
     protected $casts = [
@@ -31,5 +40,13 @@ class Activity extends Model
     public function members()
     {
         return $this->belongsToMany(User::class, 'activity_members')->where('activity_members.status', 1);
+    }
+
+    /**
+     * 已报名人数 Attr
+     */
+    public function getMemberNumAttribute()
+    {
+        return $this->members()->count();
     }
 }

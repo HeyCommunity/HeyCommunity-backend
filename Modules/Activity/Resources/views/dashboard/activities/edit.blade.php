@@ -24,15 +24,19 @@
             }
           </script>
 
-          <form id="form-article" class="mb-4" action="{{ route('dashboard.activities.update', $activity) }}" method="POST"
-                enctype="multipart/form-data"
-                onsubmit="formSubmit(event)">
-            {{ csrf_field() }}
+          <div class="card">
+            <div class="card-body">
+              <form id="form" action="{{ route('dashboard.activities.update', $activity) }}" method="POST"
+                    enctype="multipart/form-data"
+                    onsubmit="formSubmit(event)">
+                {{ csrf_field() }}
 
-            @include('activity::dashboard.activities._form')
+                @include('activity::dashboard.activities._form')
 
-            <button type="submit" class="btn w-100 btn-primary">更新</button>
-          </form>
+                <button type="submit" class="btn w-100 btn-primary">更新</button>
+              </form>
+            </div>
+          </div>
         </div>
       </div>
     </div>

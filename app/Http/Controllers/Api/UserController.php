@@ -15,54 +15,6 @@ use Illuminate\Support\Str;
 class UserController extends Controller
 {
     /**
-     * User login
-     */
-    public function login(Request $request)
-    {
-        $request->validate([
-            'code'      =>  'required|string',
-            'user_info' =>  'nullable|string',
-        ]);
-
-        $miniProgram = \EasyWeChat::miniProgram();
-        $wxRes = $miniProgram->auth->session($request->code);
-
-        if (isset($wxRes['openid'])) {
-            $user = User::firstOrCreate(['wx_open_id' => $wxRes['openid']]);
-            $user->update(['last_active_at' => now()]);
-
-            // 如果是新创建的用户，则更新头像昵称性别等资料
-            $wxUserInfo = json_decode($request->get('user_info'), true);
-            if ($wxUserInfo) {
-                $data['wx_user_info'] = $wxUserInfo;
-                if (isset($wxUserInfo['nickName']) && !$user->nickname) $data['nickname'] = $wxUserInfo['nickName'];
-                if (isset($wxUserInfo['gender']) && !$user->gender) $data['gender'] = $wxUserInfo['gender'];
-                if (isset($wxUserInfo['avatarUrl']) && (!$user->avatar || $user->getRawOriginal('avatar') === 'images/users/default-avatar.jpg')) {
-                    $client = new Client();
-                    $avatarData = $client->request('get', $wxUserInfo['avatarUrl'])->getBody()->getContents();
-                    $avatarPath = 'uploads/users/avatars/' . Str::random(40) . '.jpg';
-                    Storage::put($avatarPath, $avatarData);
-                    $data['avatar'] = $avatarPath;
-                }
-
-                $user->update($data);
-            }
-
-            $user->token = $user->createToken('token')->plainTextToken;
-
-            // logging
-            Log::channel('hc')->info('[UserLogin-success] 用户登录成功', ['wxRes' => $wxRes, 'user' => $user->getAttributes(), 'headers' => $request->server]);
-
-            return new UserResource($user);
-        } else {
-            // logging
-            Log::channel('hc')->warning('[UserLogin-fail] 用户登录失败', ['wxRes' => $wxRes, 'headers' => $request->server]);
-
-            return response()->json(['message' => $wxRes['errmsg']], 500);
-        }
-    }
-
-    /**
      * User ping
      */
     public function ping(Request $request)
@@ -178,7 +130,9 @@ class UserController extends Controller
     public function logout(Request $request)
     {
         $user = $request->user();
-        $user->tokens()->where('name', 'token')->delete();
+
+        // $user->tokens()->where('name', 'token')->delete();       // 删除全部 token
+        $user->currentAccessToken()->delete();                      // 仅删除当前访问的 token
 
         return response()->noContent();
     }
