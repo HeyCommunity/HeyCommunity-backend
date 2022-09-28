@@ -5,7 +5,6 @@ namespace App\Models;
 use App\Casts\Assert;
 use App\Models\Common\Comment;
 use App\Models\Common\Thumb;
-use Encore\Admin\Traits\DefaultDatetimeFormat;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -17,7 +16,6 @@ use Modules\Post\Entities\Post;
 
 class User extends Authenticatable
 {
-    use DefaultDatetimeFormat;
     use HasApiTokens, HasFactory, Notifiable;
 
     // TODO: post_num, comment_num, thumb_up_num 字段添加到数据表中

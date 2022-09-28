@@ -5,7 +5,6 @@ namespace App\Models;
 use App\Models\Common\Comment;
 use App\Models\Common\Thumb;
 use Carbon\Carbon;
-use Encore\Admin\Traits\DefaultDatetimeFormat;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model as EloquentModel;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -31,7 +30,6 @@ use Illuminate\Support\Facades\Auth;
  */
 class Model extends EloquentModel
 {
-    use DefaultDatetimeFormat;
     use HasFactory;
     use SoftDeletes;
 
