@@ -7,6 +7,17 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('dashboard')->group(function () {
     Route::get('/', 'HomeController@index')->name('dashboard.index');
 
+    // 焦点图
+    Route::prefix('carousels')->group(function () {
+        Route::prefix('web')->group(function () {
+            Route::get('/', 'CarouselController@index')->name('dashboard.carousels.web.index');
+        });
+
+        Route::prefix('wxapp')->group(function () {
+            Route::get('/', 'CarouselController@index')->name('dashboard.carousels.wxapp.index');
+        });
+    });
+
     // 用户
     Route::prefix('users')->group(function () {
         Route::get('/', 'UserController@index')->name('dashboard.users.index');
