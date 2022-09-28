@@ -10,6 +10,11 @@ use App\Http\Controllers\Api\NoticeController;
 use App\Http\Controllers\Api\CommentController;
 use App\Http\Controllers\Api\ThumbController;
 
+// 焦点图
+Route::prefix('carousels')->group(function () {
+    Route::get('/', 'CarouselController@index')->name('api.carousels.index');
+});
+
 ##
 ## User API
 Route::prefix('users')->group(function () {
