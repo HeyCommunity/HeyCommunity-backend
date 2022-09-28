@@ -29,10 +29,10 @@
     <div class="collapse {{ request()->routeIs('dashboard.carousels.*') ? 'show' : '' }}" id="sidebar-banners">
       <ul class="nav nav-sm flex-column">
         <li class="nav-item">
-          <a class="nav-link {{ request()->routeIs('dashboard.carousels.web.index') ? 'active' : null }}" href="{{ route('dashboard.carousels.web.index') }}">网站焦点图</a>
+          <a class="nav-link {{ request()->routeIs('dashboard.carousels.index') && request('type') === 'web' ? 'active' : null }}" href="{{ route('dashboard.carousels.index', ['type' => 'web']) }}">网站焦点图</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link {{ request()->routeIs('dashboard.carousels.wxapp.index') ? 'active' : null }}" href="{{ route('dashboard.carousels.wxapp.index') }}">小程序焦点图</a>
+          <a class="nav-link {{ request()->routeIs('dashboard.carousels.index') && request('type') === 'wxapp' ? 'active' : null }}" href="{{ route('dashboard.carousels.index', ['type' => 'wxapp']) }}">小程序焦点图</a>
         </li>
       </ul>
     </div>

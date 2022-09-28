@@ -10,6 +10,9 @@
             <h6 class="header-pretitle">Carousels</h6>
             <h1 class="header-title">焦点图</h1>
           </div>
+          <div class="col-auto">
+            <a href="{{ route('dashboard.carousels.create', ['type' => request('type')]) }}" class="btn btn-primary lift"><i class="fe fe-plus"></i> 新增</a>
+          </div>
         </div>
       </div>
     </div>
@@ -24,10 +27,13 @@
               <thead>
                 <tr>
                   <th>ID</th>
+                  <th>类型</th>
                   <th>图片</th>
                   <th>标题</th>
                   <th>链接</th>
-                  <th>创建时间</th>
+                  <th>排序</th>
+                  <th>状态</th>
+                  <th>更新时间</th>
                   <th>操作</th>
                 </tr>
               </thead>
@@ -39,16 +45,18 @@
                 @foreach ($carousels as $carousel)
                   <tr>
                     <td>{{ $carousel->id }}</td>
+                    <td>{{ \App\Models\Carousel::$types[$carousel->type] ?? '未知' }}</td>
                     <td>
-                      <a target="_blank" href="{{ $carousel->image_path }}">
+                      <a target="_blank" href="{{ asset($carousel->image_path) }}">
                         <img src="{{ asset($carousel->image_path) }}" style="height:40px;">
                       </a>
                     </td>
                     <td>{{ $carousel->title }}</td>
                     <td>{{ $carousel->link }}</td>
-                    <td>{{ $carousel->created_at }}</td>
+                    <td>{{ $carousel->sort }}</td>
+                    <td>{{ \App\Models\Carousel::$statuses[$carousel->status] ?? '未知' }}</td>
+                    <td>{{ $carousel->updated_at }}</td>
                     <td>
-                      <a href="{{ route('dashboard.carousels.show', $carousel) }}" class="btn btn-sm btn-light d-inline-block lift"><i class="fe fe-eye"></i></a>
                       <a href="{{ route('dashboard.carousels.edit', $carousel) }}" class="btn btn-sm btn-light d-inline-block lift"><i class="fe fe-edit-2"></i></a>
 
                       <div class="btn-group d-inline-block ms-2">

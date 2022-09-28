@@ -19,6 +19,7 @@ class CarouselFactory extends Factory
             'type'          =>  $this->faker->randomElement(['web', 'wxapp']),
 
             'title'         =>  $this->faker->sentence(),
+            'content'       =>  $this->faker->paragraph(),
             'image_path'    =>  $this->faker->imageUrl(480, 360, true),
             'link'          =>  function (array $attributes) {
                 if ($attributes['type'] === 'wxapp') {
