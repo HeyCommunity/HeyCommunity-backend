@@ -19,7 +19,7 @@ class CarouselController extends Controller
 
         $carousels = Carousel::where('type', $request->get('type'))
             ->orderByRaw('ISNULL(sort), sort ASC')
-            ->orderByDesc('updated_at')
+            ->orderByDesc('id')
             ->paginate();
 
         return view('dashboard.carousels.index', compact('carousels'));

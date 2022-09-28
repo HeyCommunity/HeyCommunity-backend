@@ -33,7 +33,7 @@
                   <th>链接</th>
                   <th>排序</th>
                   <th>状态</th>
-                  <th>更新时间</th>
+                  <th>创建时间</th>
                   <th>操作</th>
                 </tr>
               </thead>
@@ -55,7 +55,7 @@
                     <td>{{ $carousel->link }}</td>
                     <td>{{ $carousel->sort }}</td>
                     <td>{{ \App\Models\Carousel::$statuses[$carousel->status] ?? '未知' }}</td>
-                    <td>{{ $carousel->updated_at }}</td>
+                    <td>{{ $carousel->created_at }}</td>
                     <td>
                       <a href="{{ route('dashboard.carousels.edit', $carousel) }}" class="btn btn-sm btn-light d-inline-block lift"><i class="fe fe-edit-2"></i></a>
 
