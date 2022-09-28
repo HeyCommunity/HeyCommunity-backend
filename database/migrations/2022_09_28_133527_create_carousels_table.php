@@ -19,7 +19,7 @@ class CreateCarouselsTable extends Migration
             $table->string('type')->index()->comment('类型');
 
             $table->string('title')->comment('标题');
-            $table->string('path')->comment('路径');
+            $table->string('image_path')->comment('图片路径');
             $table->string('link')->comment('链接');
 
             $table->tinyInteger('status')->default(0)->comment('Status');

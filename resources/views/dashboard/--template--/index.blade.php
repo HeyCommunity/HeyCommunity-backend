@@ -7,8 +7,8 @@
       <div class="header-body">
         <div class="row align-items-end">
           <div class="col">
-            <h6 class="header-pretitle">Carousels</h6>
-            <h1 class="header-title">焦点图</h1>
+            <h6 class="header-pretitle">Template</h6>
+            <h1 class="header-title">模板</h1>
           </div>
         </div>
       </div>
@@ -24,32 +24,22 @@
               <thead>
                 <tr>
                   <th>ID</th>
-                  <th>图片</th>
-                  <th>标题</th>
-                  <th>链接</th>
                   <th>创建时间</th>
                   <th>操作</th>
                 </tr>
               </thead>
               <tbody>
-                @unless($carousels->count())
+                @unless($models->count())
                   <tr><td colspan="100">暂无数据</td></tr>
                 @endunless
 
-                @foreach ($carousels as $carousel)
+                @foreach ($models as $model)
                   <tr>
-                    <td>{{ $carousel->id }}</td>
+                    <td>{{ $model->id }}</td>
+                    <td>{{ $model->created_at }}</td>
                     <td>
-                      <a target="_blank" href="{{ $carousel->image_path }}">
-                        <img src="{{ asset($carousel->image_path) }}" style="height:40px;">
-                      </a>
-                    </td>
-                    <td>{{ $carousel->title }}</td>
-                    <td>{{ $carousel->link }}</td>
-                    <td>{{ $carousel->created_at }}</td>
-                    <td>
-                      <a href="{{ route('dashboard.carousels.show', $carousel) }}" class="btn btn-sm btn-light d-inline-block lift"><i class="fe fe-eye"></i></a>
-                      <a href="{{ route('dashboard.carousels.edit', $carousel) }}" class="btn btn-sm btn-light d-inline-block lift"><i class="fe fe-edit-2"></i></a>
+                      <a href="" class="btn btn-sm btn-light d-inline-block lift"><i class="fe fe-eye"></i></a>
+                      <a href="" class="btn btn-sm btn-light d-inline-block lift"><i class="fe fe-edit-2"></i></a>
 
                       <div class="btn-group d-inline-block ms-2">
                         <button type="button" class="btn btn-sm btn-light dropdown-toggle lift" data-bs-toggle="dropdown"></button>
@@ -65,7 +55,7 @@
           </div>
         </div>
 
-        <div class="mb-5">{{ $carousels->links() }}</div>
+        <div class="mb-5">{{ $models->links() }}</div>
       </div>
     </div>
   </div>

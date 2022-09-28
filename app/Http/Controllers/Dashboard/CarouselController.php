@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Models\Carousel;
 use Illuminate\Http\Request;
 
 class CarouselController extends Controller
@@ -12,7 +13,10 @@ class CarouselController extends Controller
      */
     public function index(Request $request)
     {
-        $carousels = collect();
+        $carousels = Carousel::paginate();
+
+        // return view('dashboard.--template--.index', ['models' => $carousels]);
+
         return view('dashboard.carousels.index', compact('carousels'));
     }
 }

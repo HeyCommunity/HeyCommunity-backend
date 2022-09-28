@@ -9,6 +9,9 @@ Route::prefix('dashboard')->group(function () {
 
     // 焦点图
     Route::prefix('carousels')->group(function () {
+        Route::get('{carousel}', 'CarouselController@show')->name('dashboard.carousels.show')->where('carousel', '[0-9]+');
+        Route::get('{carousel}/edit', 'CarouselController@edit')->name('dashboard.carousels.edit')->where('carousel', '[0-9]+');
+
         Route::prefix('web')->group(function () {
             Route::get('/', 'CarouselController@index')->name('dashboard.carousels.web.index');
         });
