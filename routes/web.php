@@ -3,20 +3,18 @@
 use Illuminate\Support\Facades\Route;
 
 //
-// WEB routes
-Route::prefix('')->group(function () {
-    Route::get('/', function () {
-        return redirect()->route('web.posts.index');
-    })->name('web.home');
-
-    Route::middleware(['guest'])->group(function () {
-        Route::get('login', 'AuthController@login')->name('web.login');
-        Route::post('login', 'AuthController@loginHandler')->name('web.login-handler');
-    });
-    Route::post('logout', 'AuthController@logoutHandler')->name('web.logout-handler');
-
-    Route::get('debug', 'HomeController@debug')->name('web.home.debug');
+// 登入和登出
+Route::middleware(['guest'])->group(function () {
+    Route::get('login', 'AuthController@login')->name('web.auth.login');
+    Route::post('login', 'AuthController@loginHandler')->name('web.auth.login-handler');
 });
+Route::post('logout', 'AuthController@logoutHandler')->name('web.auth.logout-handler');
+
+//
+// 首页
+Route::get('/', function () {
+    return redirect()->route('web.posts.index');
+})->name('web.home');
 
 //
 // User routes

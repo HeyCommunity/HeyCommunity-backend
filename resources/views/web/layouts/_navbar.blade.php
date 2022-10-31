@@ -43,12 +43,12 @@
             @if (in_array(Auth::id(), config('heycommunity.dashboard.admin_ids')))
               <a class="dropdown-item" href="{{ route('dashboard.index') }}">管理后台</a>
             @endif
-            <form method="POST" action="{{ route('web.logout-handler') }}">
+            <form method="POST" action="{{ route('web.auth.logout-handler') }}">
               {{ csrf_field() }}
               <button type="submit" class="dropdown-item">登出</button>
             </form>
           @else
-            <a href="{{ route('web.login') }}" class="dropdown-item">登录</a>
+            <a href="{{ route('web.auth.login') }}" class="dropdown-item">登录</a>
           @endif
         </div>
       </div>

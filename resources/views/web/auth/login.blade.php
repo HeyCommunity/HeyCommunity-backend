@@ -8,7 +8,7 @@
         <h1 class="display-4 text-center mb-3">登入</h1>
         <p class="text-muted text-center mb-5">使用手机号码和密码登入到 {{ config('app.name') }}</p>
 
-        <form method="POST" action="{{ route('web.login-handler') }}">
+        <form method="POST" action="{{ route('web.auth.login-handler') }}">
           {{ csrf_field() }}
 
           <div class="form-group">
