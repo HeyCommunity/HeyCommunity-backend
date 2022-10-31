@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Carousel;
 use App\Models\Feed;
 use Illuminate\Database\Seeder;
 use Modules\Activity\Database\Seeders\ActivityDatabaseSeeder;
@@ -19,6 +20,9 @@ class DatabaseSeeder extends Seeder
     {
         $faker->addProvider(new \Bluemmb\Faker\PicsumPhotosProvider($faker));
         $faker->addProvider(new \SupGeekRod\FakerZh\ZhCnDataProvider($faker));
+
+        // 焦点图 Carousel
+        Carousel::factory()->count(20)->create();
 
         $this->call(UserSeeder::class);
 

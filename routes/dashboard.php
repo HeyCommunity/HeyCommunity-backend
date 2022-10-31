@@ -7,6 +7,9 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('dashboard')->group(function () {
     Route::get('/', 'HomeController@index')->name('dashboard.index');
 
+    // 焦点图
+    Route::name('dashboard')->resource('carousels', 'CarouselController');
+
     // 用户
     Route::prefix('users')->group(function () {
         Route::get('/', 'UserController@index')->name('dashboard.users.index');

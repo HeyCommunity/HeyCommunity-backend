@@ -23,6 +23,22 @@
   </li>
 
   <li class="nav-item">
+    <a class="nav-link" href="#sidebar-banners" data-bs-toggle="collapse">
+      <i class="fe fe-image"></i> 焦点图管理
+    </a>
+    <div class="collapse {{ request()->routeIs('dashboard.carousels.*') ? 'show' : '' }}" id="sidebar-banners">
+      <ul class="nav nav-sm flex-column">
+        <li class="nav-item">
+          <a class="nav-link {{ request()->routeIs('dashboard.carousels.index') && request('type') === 'web' ? 'active' : null }}" href="{{ route('dashboard.carousels.index', ['type' => 'web']) }}">网站焦点图</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {{ request()->routeIs('dashboard.carousels.index') && request('type') === 'wxapp' ? 'active' : null }}" href="{{ route('dashboard.carousels.index', ['type' => 'wxapp']) }}">小程序焦点图</a>
+        </li>
+      </ul>
+    </div>
+  </li>
+
+  <li class="nav-item">
     <a class="nav-link {{ request()->routeIs('dashboard.users.*') ? 'active' : null }}" href="{{ route('dashboard.users.index') }}"><i class="fe fe-users"></i> 用户管理</a>
   </li>
   <li class="nav-item">
