@@ -71,5 +71,6 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
 
         'auth.dashboard'    =>  \App\Http\Middleware\DashboardAuthenticate::class,
+        'guest.dashboard' => \App\Http\Middleware\RedirectIfAuthenticated::class,
     ];
 }

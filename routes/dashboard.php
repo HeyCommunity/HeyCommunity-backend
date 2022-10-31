@@ -4,12 +4,13 @@ use Illuminate\Support\Facades\Route;
 
 //
 // 登入和登出
-Route::name('dashboard.auth.')->group(function () {
-    Route::middleware(['guest'])->group(function () {
-        Route::get('login', 'AuthController@login')->name('login');
-        Route::post('login', 'AuthController@loginHandler')->name('login-handler');
+Route::middleware(['web'])->group(function () {
+    Route::middleware(['guest.dashboard'])->group(function () {
+        Route::get('login', 'AuthController@login')->name('dashboard.auth.login');
+        Route::post('login', 'AuthController@loginHandler')->name('dashboard.auth.login-handler');
     });
-    Route::post('logout', 'AuthController@logoutHandler')->name('logout-handler');
+
+    Route::post('logout', 'AuthController@logoutHandler')->name('dashboard.auth.logout-handler');
 });
 
 //
