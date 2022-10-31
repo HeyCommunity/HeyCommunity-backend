@@ -1,3 +1,17 @@
+@section('AuthUserDropdownMenuItems')
+  @if (Auth::check())
+    <span class="dropdown-item">
+    <small>{{ now()->meridiem() }}好,</small>
+    <a target="_blank" href="{{ route('web.users.show', Auth::id()) }}">{{ Auth::user()->nickname }}</a>
+  </span>
+    <hr class="dropdown-divider">
+    <form method="POST" action="{{ route('dashboard.auth.logout-handler') }}">
+      {{ csrf_field() }}
+      <button type="submit" class="dropdown-item">登出</button>
+    </form>
+  @endif
+@endsection
+
 <nav class="navbar navbar-vertical fixed-start navbar-expand-md navbar-light" id="sidebar">
   <div class="container-fluid">
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarCollapse"><span class="navbar-toggler-icon"></span></button>
@@ -11,25 +25,15 @@
     <!-- User (xs) -->
     <div class="navbar-user d-md-none">
       <div class="dropdown">
-        <a href="#" class="dropdown-toggle" role="button" data-bs-toggle="dropdown">
+        <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown">
           <div class="avatar avatar-sm avatar-online">
-            <img src="{{ asset('images/heycommunity/logo.png') }}" class="avatar-img rounded-circle">
+            <img src="{{ asset(Auth::user()->avatar ?? 'images/heycommunity/logo.png') }}" class="avatar-img rounded-circle">
           </div>
         </a>
 
         <!-- Menu -->
         <div class="dropdown-menu dropdown-menu-end mt-2">
-          @section('AuthUserDropdownMenuItems')
-            <span class="dropdown-item">
-                  <small>{{ now()->meridiem() }}好,</small>
-                  <a target="_blank" href="{{ route('web.users.show', Auth::id()) }}">{{ Auth::user()->nickname }}</a>
-                </span>
-            <hr class="dropdown-divider">
-            <form method="POST" action="{{ route('web.logout-handler') }}">
-              {{ csrf_field() }}
-              <button type="submit" class="dropdown-item">登出</button>
-            </form>
-          @show
+          @yield('AuthUserDropdownMenuItems')
         </div>
       </div>
     </div>
@@ -49,10 +53,11 @@
         <div class="dropup">
           <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown">
             <div class="avatar avatar-sm avatar-online">
-              <img src="{{ asset(Auth::user()->avatar) }}" class="avatar-img rounded-circle">
+              <img src="{{ asset(Auth::user()->avatar ?? 'images/heycommunity/logo.png') }}" class="avatar-img rounded-circle">
             </div>
           </a>
 
+          <!-- Menu -->
           <div class="dropdown-menu">
             @yield('AuthUserDropdownMenuItems')
           </div>

@@ -3,8 +3,18 @@
 use Illuminate\Support\Facades\Route;
 
 //
+// 登入和登出
+Route::name('dashboard.auth.')->group(function () {
+    Route::middleware(['guest'])->group(function () {
+        Route::get('login', 'AuthController@login')->name('login');
+        Route::post('login', 'AuthController@loginHandler')->name('login-handler');
+    });
+    Route::post('logout', 'AuthController@logoutHandler')->name('logout-handler');
+});
+
+//
 // 管理平台
-Route::prefix('dashboard')->group(function () {
+Route::middleware(['web', 'auth.dashboard'])->group(function () {
     Route::get('/', 'HomeController@index')->name('dashboard.index');
 
     // 焦点图
