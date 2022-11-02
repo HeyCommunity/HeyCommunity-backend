@@ -23,6 +23,6 @@ class DashboardAuthenticate
             return $next($request);
         }
 
-        return abort(401, 'Unauthorized');
+        return redirect()->route('dashboard.auth.login');
     }
 }
