@@ -85,4 +85,16 @@ class ArticleTagController extends Controller
             return back()->withInput();
         }
     }
+
+    /**
+     * 删除处理
+     */
+    public function destroy(ArticleTag $articleTag)
+    {
+        $articleTag->articles()->detach();
+        $articleTag->delete();
+
+        flash('操作成功')->success();
+        return back();
+    }
 }

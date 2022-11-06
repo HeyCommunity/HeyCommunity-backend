@@ -1,8 +1,5 @@
 <?php
 
-use Modules\Article\Http\Controllers\Dashboard\ArticleCategoryController;
-use Modules\Article\Http\Controllers\Dashboard\ArticleTagController;
-
 Route::prefix('dashboard/articles')->group(function() {
     Route::get('/', 'ArticleController@index')->name('dashboard.articles.index');
     Route::get('{article}', 'ArticleController@show')->name('dashboard.articles.show')->where('article', '[0-9]+');
@@ -12,7 +9,10 @@ Route::prefix('dashboard/articles')->group(function() {
     Route::post('{article}', 'ArticleController@update')->name('dashboard.articles.update');
 });
 
-Route::namespace('\\')->prefix('dashboard')->name('dashboard.')->group(function () {
-    Route::resource('article-categories', ArticleCategoryController::class);
-    Route::resource('article-tags', ArticleTagController::class);
+Route::prefix('dashboard')->group(function() {
+    Route::any('article-categories/{articleCategory}/delete', 'ArticleCategoryController@destroy')->name('dashboard.article-categories.delete');
+    Route::name('dashboard')->resource('article-categories', 'ArticleCategoryController');
+
+    Route::any('article-tag/{articleTag}/delete', 'ArticleTagController@destroy')->name('dashboard.article-tags.delete');
+    Route::name('dashboard')->resource('article-tags', 'ArticleTagController');
 });

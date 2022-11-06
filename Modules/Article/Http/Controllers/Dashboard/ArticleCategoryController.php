@@ -85,4 +85,16 @@ class ArticleCategoryController extends Controller
             return back()->withInput();
         }
     }
+
+    /**
+     * 删除处理
+     */
+    public function destroy(ArticleCategory $articleCategory)
+    {
+        $articleCategory->articles()->detach();
+        $articleCategory->delete();
+
+        flash('操作成功')->success();
+        return back();
+    }
 }

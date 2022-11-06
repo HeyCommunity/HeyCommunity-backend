@@ -46,6 +46,13 @@
                     <td>{{ $category->created_at }}</td>
                     <td>
                       <a href="{{ route('dashboard.article-categories.edit', $category) }}" class="btn btn-sm btn-light lift"><i class="fe fe-edit"></i></a>
+
+                      <div class="btn-group d-inline-block ms-2">
+                        <button type="button" class="btn btn-sm btn-light dropdown-toggle lift" data-bs-toggle="dropdown"></button>
+                        <div class="dropdown-menu dropdown-menu-end dropdown-menu-sm">
+                          <a class="dropdown-item text-danger" href="{{ route('dashboard.article-categories.delete', $category) }}">删除</a>
+                        </div>
+                      </div>
                     </td>
                   </tr>
                 @endforeach
