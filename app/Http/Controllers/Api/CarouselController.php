@@ -18,7 +18,7 @@ class CarouselController extends Controller
         $carousels = Carousel::where('type', $request->get('type'))
             ->orderByRaw('ISNULL(sort), sort ASC')
             ->orderByDesc('id')
-            ->paginate();
+            ->get();
 
         return CommonResource::collection($carousels);
     }
