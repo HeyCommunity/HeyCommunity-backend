@@ -19,6 +19,7 @@ Route::middleware(['web', 'auth.dashboard'])->group(function () {
     Route::get('/', 'HomeController@index')->name('dashboard.index');
 
     // 焦点图
+    Route::any('carousels/{carousel}/delete', 'CarouselController@destroy')->name('dashboard.carousels.delete')->where('carousel', '[0-9]+');
     Route::name('dashboard')->resource('carousels', 'CarouselController');
 
     // 用户

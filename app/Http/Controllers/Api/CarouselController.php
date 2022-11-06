@@ -16,6 +16,7 @@ class CarouselController extends Controller
         }
 
         $carousels = Carousel::where('type', $request->get('type'))
+            ->where('status', 1)
             ->orderByRaw('ISNULL(sort), sort ASC')
             ->orderByDesc('id')
             ->get();

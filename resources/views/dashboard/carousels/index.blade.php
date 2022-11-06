@@ -62,7 +62,7 @@
                       <div class="btn-group d-inline-block ms-2">
                         <button type="button" class="btn btn-sm btn-light dropdown-toggle lift" data-bs-toggle="dropdown"></button>
                         <div class="dropdown-menu dropdown-menu-end dropdown-menu-sm">
-                          <a class="dropdown-item text-muted">No Operations</a>
+                          <a class="dropdown-item text-danger" href="{{ route('dashboard.carousels.delete', $carousel) }}">删除</a>
                         </div>
                       </div>
                     </td>

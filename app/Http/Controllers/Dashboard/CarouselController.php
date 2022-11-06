@@ -115,4 +115,15 @@ class CarouselController extends Controller
             return redirect()->back()->withInput();
         }
     }
+
+    /**
+     * 删除处理
+     */
+    public function destroy(Carousel $carousel)
+    {
+        $carousel->delete();
+
+        flash('操作成功')->success();
+        return redirect()->route('dashboard.carousels.index', ['type' => $carousel->type]);
+    }
 }
