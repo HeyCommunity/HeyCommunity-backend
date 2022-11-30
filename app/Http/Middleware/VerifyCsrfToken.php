@@ -12,6 +12,6 @@ class VerifyCsrfToken extends Middleware
      * @var array
      */
     protected $except = [
-        //
+        'uploads/tiny-editor-image-upload',                 // TinyEditor image upload
     ];
 }
