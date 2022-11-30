@@ -1,12 +1,6 @@
 @extends('dashboard.layouts.default')
 
 @section('mainContent')
-<style rel="stylesheet">
-  .quill-html p {
-    margin-bottom: 0 !important;
-  }
-</style>
-
 <div class="main-content">
   <div class="header">
     <div class="container-fluid">

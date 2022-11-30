@@ -24,7 +24,7 @@ if (! isset($showArticleTopCover)) $showArticleTopCover = true;
         <div>{{ $article->intro }}</div>
       </div>
     </div>
-    <div class="mb-3 quill-html">{!! $article->content !!}</div>
+    <div class="mb-3">{!! $article->content !!}</div>
   </div>
 </div>
 

@@ -21,16 +21,7 @@
         <div class="card">
           <div class="card-body">
             <div id="section-content">
-              <script type="text/javascript">
-                function formSubmit(event) {
-                  document.querySelector('#input-content').value = document.querySelector('#quill-content').firstChild.innerHTML;
-                  // event.preventDefault();
-                }
-              </script>
-
-              <form id="form-article" action="{{ route('dashboard.articles.store') }}" method="POST"
-                    enctype="multipart/form-data"
-                    onsubmit="formSubmit(event)">
+              <form id="form-article" action="{{ route('dashboard.articles.store') }}" method="POST" enctype="multipart/form-data">
                 {{ csrf_field() }}
 
                 @include('article::dashboard.articles._form')

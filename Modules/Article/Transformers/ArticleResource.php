@@ -36,6 +36,11 @@ class ArticleResource extends JsonResource
             $data['i_have_comment'] = $this->comments()->where('user_id', $user->id)->exists();
         }
 
+        // 修复图片
+        $strSearch = 'src="/uploads/';
+        $strReplace = 'src="' . request()->root() . '/uploads/';
+        $data['content'] = str_replace($strSearch, $strReplace, $data['content']);
+
         return $data;
     }
 }

@@ -3,12 +3,6 @@
 @section('metaDescription', $article->intro)
 
 @section('mainContent')
-  <style rel="stylesheet">
-    .quill-html p {
-      margin-bottom: 0 !important;
-    }
-  </style>
-
   <div class="main-content">
     <div class="header mb-0">
       <div class="bg-cover header-img-top"

@@ -62,8 +62,7 @@
 
 <div class="form-group">
   <label class="form-label mb-1">内容</label>
-  <input id="input-content" name="content" type="hidden">
-  <div id="quill-content" data-quill='{{ $quillEditorConfig }}'>{!! old('content', $article->content) !!}</div>
+  <x-forms.tiny-editor inputName="content" :inputValue="$article->content"></x-forms.tiny-editor>
   <div class="invalid-feedback d-block">{{ $errors->first('content') }}</div>
 </div>
 
